@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameScene_XROriginSetup.unity
-    guid: 304d6f6419d05704faa9cb4644140705
+    path: Assets/Scenes/GameScene_StartingLocomotion.unity
+    guid: bbc2832f9a7abf048bff90a1bd95e782
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 5cb9badbf523e224ab384cda8b73fe91, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: b096260d696933149880e6455b2a792a, type: 2}
