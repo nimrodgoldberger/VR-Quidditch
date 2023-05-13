@@ -1,0 +1,282 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5a46bda3295124c99b0e6537ac7252, type: 3}
+  m_Name: voice_commands
+  m_EditorClassIdentifier: 
+  _clientAccessToken: H57QD4OEELQB74PXKNL27TCJCUSOD7B6
+  _appInfo:
+    name: eden_app
+    id: 1562208780927741
+    lang: en
+    isPrivate: 0
+    createdAt: 2023-03-24T04:24:01-0700
+    trainingStatus: 1
+    lastTrainDuration: 19
+    lastTrainedAt: 2023-04-07T07:31:54-0700
+    nextTrainAt: 2023-04-07T07:31:35-0700
+    intents:
+    - id: 135084896175915
+      name: cube_moves
+      entities:
+      - name: direction:direction
+        id: 173600255623589
+    - id: 1822401741466975
+      name: down
+      entities: []
+    entities:
+    - name: direction
+      id: 1419260958890431
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: direction
+        id: 173600255623589
+      keywords:
+      - keyword: down
+        synonyms:
+        - down
+      - keyword: left
+        synonyms:
+        - left
+      - keyword: right
+        synonyms:
+        - right
+      - keyword: up
+        synonyms:
+        - up
+    - name: freeze_player
+      id: 607178901283353
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: freeze_player
+        id: 2929399763858939
+      keywords:
+      - keyword: freeze
+        synonyms:
+        - freeze
+        - stop
+    - name: left
+      id: 1944809412537782
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: left
+        id: 591186346401760
+      keywords:
+      - keyword: left
+        synonyms:
+        - left
+    - name: player_number
+      id: 238769965215812
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: player_number
+        id: 6207258059353472
+      keywords:
+      - keyword: five
+        synonyms:
+        - five
+      - keyword: four
+        synonyms:
+        - four
+      - keyword: one
+        synonyms:
+        - one
+      - keyword: seven
+        synonyms:
+        - seven
+      - keyword: six
+        synonyms:
+        - six
+      - keyword: three
+        synonyms:
+        - three
+      - keyword: two
+        synonyms:
+        - two
+    - name: right
+      id: 1655210661598137
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: right
+        id: 884508749289413
+      keywords:
+      - keyword: right
+        synonyms:
+        - right
+    - name: up
+      id: 1653649118416446
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: up
+        id: 228683619649995
+      keywords:
+      - keyword: up
+        synonyms:
+        - up
+    traits: []
+    voices:
+    - name: Cael
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Cam
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Carl
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Charlie
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - fast
+      - projected
+    - name: Cody
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Connor
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Cooper
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Prospector
+      locale: en_US
+      gender: male
+      styles:
+      - default
+    - name: Railey
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Rebecca
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Remi
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Rubie
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Vampire
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Colin
+      locale: en_CA
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Rosie
+      locale: en_CA
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+  _configurationId: 
+  timeoutMS: 10000
+  endpointConfiguration:
+    uriScheme: 
+    authority: 
+    port: 0
+    witApiVersion: 
+    speech: 
+    message: 
+    dictation: 
+  isDemoOnly: 0
+  useConduit: 1
+  _manifestLocalPath: ConduitManifest-b85254c1-510e-4c7e-9e7c-bcd5942bcff3.json
+  excludedAssemblies: []
+  relaxedResolution: 0
