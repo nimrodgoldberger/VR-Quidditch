@@ -222,7 +222,7 @@
                 {
                     "name": "",
                     "id": "5e5a9130-afb9-4a17-9e68-3f93e774107f",
-                    "path": "<XRController>{LeftHand}/grip",
+                    "path": "<OculusTouchController>{LeftHand}/grip",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -233,7 +233,7 @@
                 {
                     "name": "",
                     "id": "c8037654-fa65-4841-a19c-9c779186eb63",
-                    "path": "<XRController>{LeftHand}/trigger",
+                    "path": "<OculusTouchController>{LeftHand}/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -780,7 +780,7 @@
                 {
                     "name": "",
                     "id": "22b29636-7d9e-47cc-b3d0-e9d333ece01e",
-                    "path": "<XRController>{RightHand}/grip",
+                    "path": "<OculusTouchController>{RightHand}/grip",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -791,7 +791,7 @@
                 {
                     "name": "",
                     "id": "0ecdaa0c-4ecf-4acf-91b0-3036afb601e2",
-                    "path": "<XRController>{RightHand}/trigger",
+                    "path": "<OculusTouchController>{RightHand}/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
