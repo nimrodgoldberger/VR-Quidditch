@@ -6,9 +6,9 @@
             "id": "b8ae193c-6671-4469-ae52-7005dfa213b5",
             "actions": [
                 {
-                    "name": "TriggerPress",
+                    "name": "XPress",
                     "type": "Button",
-                    "id": "1b4f64b8-6f8a-4cae-a3a2-19d3efb064fc",
+                    "id": "81ac5295-d66e-4a6b-945d-204a3e81ff0c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -18,45 +18,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "d97e7cd5-3eae-4063-b4fc-0a8e5b449356",
-                    "path": "<XRController>{RightHand}/triggerButton",
+                    "id": "bf447f9c-165c-4408-849b-8c0dce33cd4c",
+                    "path": "<XRController>{LeftHand}/primaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TriggerPress",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "717ff732-cac3-4eed-b6bf-c36a681d57e1",
-                    "path": "<XRController>{LeftHand}/triggerButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TriggerPress",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "213b68bc-2e0f-48e6-afa6-050f84c9b325",
-                    "path": "<OculusTouchController>/triggerPressed",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TriggerPress",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c34cc340-be4c-4ab1-9c48-201d4984920e",
-                    "path": "*/{PrimaryTrigger}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TriggerPress",
+                    "action": "XPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
