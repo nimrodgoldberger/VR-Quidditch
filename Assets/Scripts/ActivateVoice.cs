@@ -15,7 +15,7 @@ public class ActivateVoice : MonoBehaviour
         if (wit == null)
             wit = GetComponent<Wit>();
     }
-    public void XPress(InputAction.CallbackContext context)
+    public void TriggerPressed(InputAction.CallbackContext context)
     {
         if (context.performed)
             WitActivate();
