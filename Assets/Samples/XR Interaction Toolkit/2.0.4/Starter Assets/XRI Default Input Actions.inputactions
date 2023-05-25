@@ -600,10 +600,65 @@
                     "path": "<XRController>{LeftHand}/Primary2DAxis",
                     "interactions": "",
                     "processors": "StickDeadzone",
-                    "groups": "Continuous Move",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "MyNewMoveAction",
+                    "id": "4b31f452-1162-4b6f-8d81-4f3485056021",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "359f95da-6b63-4f30-9123-72378f5abb14",
+                    "path": "<XRController>/deviceRotation/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Continuous Move",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "5d2a444c-3610-4b45-82b2-51deac8b156c",
+                    "path": "<OculusTouchController>{LeftHand}/thumbstick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Continuous Move",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "30d07365-ef08-407c-9633-e4bc3a462f32",
+                    "path": "<OculusTouchController>{LeftHand}/deviceRotation/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Continuous Move",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "fb8da635-b736-43c9-ba01-75027cc80811",
+                    "path": "<OculusTouchController>{LeftHand}/deviceRotation/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Continuous Move",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
