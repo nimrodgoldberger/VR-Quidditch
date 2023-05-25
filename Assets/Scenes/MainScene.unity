@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 432212029}
-  m_IndirectSpecularColor: {r: 0.3364176, g: 0.8158779, b: 0.93032193, a: 1}
+  m_IndirectSpecularColor: {r: 0.33655208, g: 0.8161745, b: 0.9302483, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1614,6 +1614,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &468706356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468706352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6961334054573524a844584a3dbf4629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  movementSpeed: 5
+  defaultHeight: 5
+  ovalWidth: 10
+  ovalHeight: 5
 --- !u!1 &541208849 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4931573070324122128, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
@@ -4210,6 +4227,18 @@ PrefabInstance:
     - target: {fileID: 4931573069986529196, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931573069986529196, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931573069986529196, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931573069986529196, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4931573069986529196, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
       propertyPath: m_LocalPosition.x
