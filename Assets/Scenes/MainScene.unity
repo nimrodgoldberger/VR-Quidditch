@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 432212029}
-  m_IndirectSpecularColor: {r: 0.33655208, g: 0.8161745, b: 0.9302483, a: 1}
+  m_IndirectSpecularColor: {r: 0.3366986, g: 0.8175725, b: 0.9306336, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2938,6 +2938,7 @@ GameObject:
   - component: {fileID: 1496702734}
   - component: {fileID: 1496702737}
   - component: {fileID: 1496702738}
+  - component: {fileID: 1496702739}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -2959,6 +2960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  - {fileID: -944628639613478452, guid: 8c01bdf4a849e084c90d0c6a36e2380f, type: 3}
 --- !u!114 &1496702732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3082,6 +3084,52 @@ MonoBehaviour:
   target: {fileID: 193264650}
   rotationSpeed: 5
   childCamera: {fileID: 1351978680}
+--- !u!114 &1496702739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496702729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 8c01bdf4a849e084c90d0c6a36e2380f, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 121237473}
+        m_TargetAssemblyTypeName: ActivateVoice, Assembly-CSharp
+        m_MethodName: XPress
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 5944ef27-b6d4-4a4b-a756-34be34879269
+    m_ActionName: VoiceActivation/Xpressing
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: VoiceActivation
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1532126566
 GameObject:
   m_ObjectHideFlags: 0

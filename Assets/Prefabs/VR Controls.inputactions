@@ -1,0 +1,67 @@
+{
+    "name": "VR Controls",
+    "maps": [
+        {
+            "name": "VoiceActivation",
+            "id": "c86ebaa4-d9de-4391-aa1c-050fccacad65",
+            "actions": [
+                {
+                    "name": "Xpressing",
+                    "type": "Button",
+                    "id": "5944ef27-b6d4-4a4b-a756-34be34879269",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "402b01a7-c768-466b-9ddc-2b48db69b602",
+                    "path": "<XRSimulatedController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Xpressing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92b43921-7f6c-4fae-a338-22bbe475362b",
+                    "path": "<OculusTouchController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Xpressing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21d2cf53-28e0-40b2-8465-6edb75a5285b",
+                    "path": "<OculusTouchController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Xpressing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fef79e6-504e-4d0e-b631-1ed6162c38ac",
+                    "path": "<XRSimulatedController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Xpressing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
