@@ -8,13 +8,14 @@ public enum eGuardianState { Idle = 0, Defend = 1, GoBack = 2 }
 
 public class GuardianController : MonoBehaviour
 {
-    
+
     public GameObject[] targetsToDefend;
     public GameObject[] oponents;
 
     private GameObject targetToTackle;
     private Vector3 direction;
-    public float speed = 1f;
+    public float speed;
+    private bool isMoving = false;
     private Coroutine movementCoroutine;
 
     private Vector3 startingPosition;
@@ -30,20 +31,38 @@ public class GuardianController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(eState)
+        if(!isMoving)
         {
-            case eGuardianState.Idle:
-                searchForCloseOponents();
-                break;
-            case eGuardianState.Defend:
-            case eGuardianState.GoBack:
+            if(eState == eGuardianState.Idle)
+            {
+                initializeMovement();
+            }
+            else
+            {
                 tackleTarget();
-                break;
+            }
+        }
+        
+    }
+
+    private void initializeMovement()
+    {
+        bool foundEnemy = searchForCloseOponents();
+
+        if(!foundEnemy && transform.position != startingPosition)
+        {
+            eState = eGuardianState.GoBack;
+        }
+
+        if(eState != eGuardianState.Idle)
+        {
+            tackleTarget();
         }
     }
 
-    private void searchForCloseOponents()
+    private bool searchForCloseOponents()
     {
+        bool found = false;
         foreach(GameObject target in targetsToDefend)
         {
             foreach(GameObject oponent in oponents)
@@ -52,20 +71,22 @@ public class GuardianController : MonoBehaviour
                 {
                     eState = eGuardianState.Defend;
                     targetToTackle = oponent;
+                    found = true;
                     break;
                 }
             }
+            if(found)
+            {
+                break;
+            }
         }
-    }
 
-    private void retreatToStartingPosition()
-    {
-
+        return found;
     }
 
     private bool IsOponentClose(GameObject target, GameObject oponent)
     {
-        if(Vector3.Distance(oponent.transform.position, target.transform.position) < 50)
+        if(Vector3.Distance(oponent.transform.position, target.transform.position) < 20)
         {
             return true;
         }
@@ -75,59 +96,43 @@ public class GuardianController : MonoBehaviour
 
     private void tackleTarget()
     {
+        float distance = eState == eGuardianState.Defend ? Vector3.Distance(transform.position, targetToTackle.transform.position) : Vector3.Distance(transform.position, startingPosition);
+
+        if(distance <= speed * Time.deltaTime)
+        {
+            // Target is within range, set the GameObject's position to the target position
+            transform.position = eState == eGuardianState.Defend ? targetToTackle.transform.position : startingPosition;
+        }
+        else
+        {
+            // Start moving towards the target
+            StartCoroutine(MoveToTarget());
+        }
+
         movementCoroutine = StartCoroutine(MoveToTarget());
     }
 
     private System.Collections.IEnumerator MoveToTarget()
     {
-        
+        isMoving = true;
 
-        while(true)
+        Vector3 initialPosition = transform.position;
+
+        Vector3 targetPosition = searchForCloseOponents() ? targetToTackle.transform.position : startingPosition;
+
+        float elapsedTime = 0f;
+
+        while(elapsedTime < 1f)
         {
-            // Calculate the direction towards the target
-            if(eState == eGuardianState.Defend)
-            {
-                Vector3 direction = targetToTackle.transform.position - transform.position;
-            }
-            else
-            {
-                Vector3 direction = startingPosition - transform.position;
-            }
+            // Calculate the new position using Mathf.Lerp
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime);
 
-
-            // Calculate the distance to the target
-            float distance = direction.magnitude;
-
-            // Normalize the direction to get a unit direction vector
-            Vector3 normalizedDirection = direction.normalized;
-
-            // Calculate the distance to cover in this frame based on the speed
-            float distanceToCover = speed * Time.deltaTime;
-
-            // Check if the distance to cover is greater than the remaining distance
-            if(distanceToCover >= distance)
-            {
-                // If the distance to cover is greater or equal to the remaining distance,
-                // directly move the GameObject to the target position
-                if(eState == eGuardianState.Defend)
-                {
-                    transform.position = targetToTackle.transform.position;
-                }
-                else
-                {
-                    transform.position = startingPosition;
-                }
-                break; // Exit the coroutine loop
-            }
-            else
-            {
-                // If the distance to cover is less than the remaining distance,
-                // interpolate the position of the GameObject towards the target
-                transform.position += normalizedDirection * distanceToCover;
-            }
+            // Update the elapsed time based on the speed
+            elapsedTime += Time.deltaTime * speed;
 
             yield return null; // Wait for the next frame
         }
+        eState = eGuardianState.Idle;
+        isMoving = false;
     }
-
 }

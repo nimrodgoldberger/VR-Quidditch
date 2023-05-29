@@ -3035,8 +3035,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0165375, y: 0.99999976, z: 1.0222969}
+  m_Center: {x: 0.008268748, y: 0, z: -0.011148453}
 --- !u!23 &1411522044
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3115,27 +3115,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetsToDefend:
-  - {fileID: 1448738842}
-  - {fileID: 1448738841}
-  - {fileID: 1448738840}
+  - {fileID: 4931573070464385248}
+  - {fileID: 4931573070464385245}
+  - {fileID: 4931573070464385242}
   oponents:
   - {fileID: 1496702729}
-  speed: 5
---- !u!1 &1448738840 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4931573070872730464, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
-  m_PrefabInstance: {fileID: 4931573070464385235}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1448738841 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4931573069522764747, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
-  m_PrefabInstance: {fileID: 4931573070464385235}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1448738842 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4931573070251353339, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
-  m_PrefabInstance: {fileID: 4931573070464385235}
-  m_PrefabAsset: {fileID: 0}
+  speed: 0.7
 --- !u!1 &1494664430
 GameObject:
   m_ObjectHideFlags: 0
