@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4255d18d4ae87834fa45a1db169e433d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 7931116113270434704, guid: ea3910f8ceaf81342bd45b592d99ca68, type: 3}
+  playerPrefab: {fileID: 5259008784469880801, guid: ea3910f8ceaf81342bd45b592d99ca68, type: 3}
   minX: 5
   maxX: 5
   minY: 5

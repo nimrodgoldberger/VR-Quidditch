@@ -1,5 +1,6 @@
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 
 namespace UnityEngine.XR.Interaction.Toolkit
 {
@@ -16,6 +17,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
         [SerializeField] private float gripMultiplier = 3f;
         [SerializeField] private float downGlideAngle = 35;
         [SerializeField] private Transform forwardSourceReference;
+        private PhotonView view;
 
 
 
@@ -152,6 +154,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
         void Start()
         {
             baseMoveSpeed = m_MoveSpeed;
+            view = GetComponent<PhotonView>();
         }
         protected void FixedUpdate()
         {
@@ -182,68 +185,71 @@ namespace UnityEngine.XR.Interaction.Toolkit
             //    else
             //        cooldownTimer += Time.deltaTime;
             //}
-            triggerValue = triggerPull.action.ReadValue<float>();
-            if (triggerValue > 0.1f)
+            if (view.IsMine)
             {
-                moveSpeed = triggerMultiplier * triggerValue * baseMoveSpeed;
-            }
-            else
-            {
-                moveSpeed = baseMoveSpeed;
-            }
-            //gripValue = gripPull.action.ReadValue<float>();
-            //if (gripValue > 0.1f && glidingDown == false)
-            //{
-            //    Quaternion targetRotation = Quaternion.Euler(downGlideAngle, 0f, 0f) * forwardSourceReference.rotation;
-            //    currentForwardSource.rotation = targetRotation;
-            //}
-            //else
-            //{
-            //    glidingDown = false;
-            //    currentForwardSource = forwardSourceReference;
-            //    forwardSource = forwardSourceReference;
-            //}
+                triggerValue = triggerPull.action.ReadValue<float>();
+                if (triggerValue > 0.1f)
+                {
+                    moveSpeed = triggerMultiplier * triggerValue * baseMoveSpeed;
+                }
+                else
+                {
+                    moveSpeed = baseMoveSpeed;
+                }
+                //gripValue = gripPull.action.ReadValue<float>();
+                //if (gripValue > 0.1f && glidingDown == false)
+                //{
+                //    Quaternion targetRotation = Quaternion.Euler(downGlideAngle, 0f, 0f) * forwardSourceReference.rotation;
+                //    currentForwardSource.rotation = targetRotation;
+                //}
+                //else
+                //{
+                //    glidingDown = false;
+                //    currentForwardSource = forwardSourceReference;
+                //    forwardSource = forwardSourceReference;
+                //}
 
-            m_IsMovingXROrigin = false;
+                m_IsMovingXROrigin = false;
 
-            var xrOrigin = system.xrOrigin;
-            if (xrOrigin == null)
-                return;
+                var xrOrigin = system.xrOrigin;
+                if (xrOrigin == null)
+                    return;
 
-            var input = ReadInput();
-            var translationInWorldSpace = ComputeDesiredMove(input);
+                var input = ReadInput();
+                var translationInWorldSpace = ComputeDesiredMove(input);
 
-            switch (m_GravityApplicationMode)
-            {
-                case GravityApplicationMode.Immediately:
-                    MoveRig(translationInWorldSpace);
-                    break;
-                case GravityApplicationMode.AttemptingMove:
-                    if (input != Vector2.zero || m_VerticalVelocity != Vector3.zero)
+                switch (m_GravityApplicationMode)
+                {
+                    case GravityApplicationMode.Immediately:
                         MoveRig(translationInWorldSpace);
-                    break;
-                default:
-                    Assert.IsTrue(false, $"{nameof(m_GravityApplicationMode)}={m_GravityApplicationMode} outside expected range.");
-                    break;
-            }
+                        break;
+                    case GravityApplicationMode.AttemptingMove:
+                        if (input != Vector2.zero || m_VerticalVelocity != Vector3.zero)
+                            MoveRig(translationInWorldSpace);
+                        break;
+                    default:
+                        Assert.IsTrue(false, $"{nameof(m_GravityApplicationMode)}={m_GravityApplicationMode} outside expected range.");
+                        break;
+                }
 
-            switch (locomotionPhase)
-            {
-                case LocomotionPhase.Idle:
-                case LocomotionPhase.Started:
-                    if (m_IsMovingXROrigin)
-                        locomotionPhase = LocomotionPhase.Moving;
-                    break;
-                case LocomotionPhase.Moving:
-                    if (!m_IsMovingXROrigin)
-                        locomotionPhase = LocomotionPhase.Done;
-                    break;
-                case LocomotionPhase.Done:
-                    locomotionPhase = m_IsMovingXROrigin ? LocomotionPhase.Moving : LocomotionPhase.Idle;
-                    break;
-                default:
-                    Assert.IsTrue(false, $"Unhandled {nameof(LocomotionPhase)}={locomotionPhase}");
-                    break;
+                switch (locomotionPhase)
+                {
+                    case LocomotionPhase.Idle:
+                    case LocomotionPhase.Started:
+                        if (m_IsMovingXROrigin)
+                            locomotionPhase = LocomotionPhase.Moving;
+                        break;
+                    case LocomotionPhase.Moving:
+                        if (!m_IsMovingXROrigin)
+                            locomotionPhase = LocomotionPhase.Done;
+                        break;
+                    case LocomotionPhase.Done:
+                        locomotionPhase = m_IsMovingXROrigin ? LocomotionPhase.Moving : LocomotionPhase.Idle;
+                        break;
+                    default:
+                        Assert.IsTrue(false, $"Unhandled {nameof(LocomotionPhase)}={locomotionPhase}");
+                        break;
+                }
             }
         }
 
