@@ -20,9 +20,9 @@ MonoBehaviour:
     isPrivate: 0
     createdAt: 2023-03-24T04:24:01-0700
     trainingStatus: 1
-    lastTrainDuration: 19
-    lastTrainedAt: 2023-04-07T07:31:54-0700
-    nextTrainAt: 2023-04-07T07:31:35-0700
+    lastTrainDuration: 61
+    lastTrainedAt: 2023-05-26T03:54:20-0700
+    nextTrainAt: 2023-05-26T03:53:19-0700
     intents:
     - id: 135084896175915
       name: cube_moves
@@ -33,6 +33,16 @@ MonoBehaviour:
       name: down
       entities: []
     entities:
+    - name: Broom_Boost
+      id: 1441511806680179
+      lookups:
+      - keywords
+      roles:
+      - name: Broom_Boost
+        id: 271311915315922
+      keywords:
+      - keyword: fastus
+        synonyms: []
     - name: direction
       id: 1419260958890431
       lookups:
@@ -45,6 +55,14 @@ MonoBehaviour:
       - keyword: down
         synonyms:
         - down
+      - keyword: fast
+        synonyms:
+        - accelerate
+        - acceleratus
+        - faster
+        - fastus
+        - rapid
+        - rapidus
       - keyword: left
         synonyms:
         - left
@@ -265,7 +283,7 @@ MonoBehaviour:
       - formal
       - fast
       - projected
-  _configurationId: 
+  _configurationId: 1e8d21a5-332e-40de-a6e3-d02798abff8f
   timeoutMS: 10000
   endpointConfiguration:
     uriScheme: 
