@@ -23,6 +23,9 @@ MonoBehaviour:
     lastTrainDuration: 61
     lastTrainedAt: 2023-05-26T03:54:20-0700
     nextTrainAt: 2023-05-26T03:53:19-0700
+    lastTrainDuration: 61
+    lastTrainedAt: 2023-05-26T03:54:20-0700
+    nextTrainAt: 2023-05-26T03:53:19-0700
     intents:
     - id: 135084896175915
       name: cube_moves
@@ -33,6 +36,16 @@ MonoBehaviour:
       name: down
       entities: []
     entities:
+    - name: Broom_Boost
+      id: 1441511806680179
+      lookups:
+      - keywords
+      roles:
+      - name: Broom_Boost
+        id: 271311915315922
+      keywords:
+      - keyword: fastus
+        synonyms: []
     - name: Broom_Boost
       id: 1441511806680179
       lookups:
@@ -55,6 +68,14 @@ MonoBehaviour:
       - keyword: down
         synonyms:
         - down
+      - keyword: fast
+        synonyms:
+        - accelerate
+        - acceleratus
+        - faster
+        - fastus
+        - rapid
+        - rapidus
       - keyword: fast
         synonyms:
         - accelerate
