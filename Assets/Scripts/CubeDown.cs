@@ -18,7 +18,7 @@ using UnityEngine.UI;
 
 public class CubeDown : MonoBehaviour
 {
-    public Text displayText; // Reference to the UI Text component
+    //public Text displayText; // Reference to the UI Text component
 
     /////////////////////////////////////////////////////////////////////////////////////////
     //private bool appVoiceActive = false; //for the Keyboard activation try
@@ -53,11 +53,13 @@ public class CubeDown : MonoBehaviour
     {
         Debug.Log("In SpeedBoost!"); // TEMPORARY
         float elapsedTime = 0.0f;
-        float boost = 1.5f;
+        float boost = 5f;
 
         //cubes[0].transform.position = Vector3.up * 2f;// TEST
-
-        //displayText.text = "Hello, world!"; //FOR COOL DOWN!!!! Sets the text value of the UI Text component 
+        //if (displayText != null)
+        //{
+        //    displayText.text = "In SpeedBoost!"; //FOR COOL DOWN!!!! Sets the text value of the UI Text component 
+        //}
 
         cubes[0].GetComponent<ActionBasedContinuousMoveProvider>().moveSpeed *= boost;
         while (elapsedTime < duration) //move for "duration" seconds
