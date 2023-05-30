@@ -20,6 +20,11 @@ public class ActivateVoice : MonoBehaviour
         if (context.performed)
             WitActivate();
     }
+    public void RightTriggerPress(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            WitActivate();
+    }
     public void WitActivate()
     {
         wit.Activate();

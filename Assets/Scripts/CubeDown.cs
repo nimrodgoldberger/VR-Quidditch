@@ -32,9 +32,9 @@ public class CubeDown : MonoBehaviour
     public void SetDirection(string[] directionString) // type is string[] because the string is the phrase said in the voice command which we will recognise each word
     {
         float distance = 1.5f;  // distance we want the cube to move
-        float duration = 0.5f;  //how long the cube should take to travel this distance
+        float duration = 5.0f;  //how long the cube should take to travel this distance
 
-        switch (directionString[0]) //first word in the phrase recognized in the voice command. (here we only have one word)
+        switch (directionString[0]/*.ToLower()*/) //first word in the phrase recognized in the voice command. (here we only have one word)
         {
             case "up":
                 StartCoroutine(MoveCube(Vector3.up * distance, duration)); //Vector3.up is (0,1,0)
@@ -44,7 +44,7 @@ public class CubeDown : MonoBehaviour
                 //In Unity, a coroutine is a function that can run alongside other functions in your game. When you call a coroutine function, it will start running and will continue running until it reaches a yield statement. At that point, the coroutine function will pause and allow other code to run, and then it will resume from where it left off on the next frame.
                 break;
             case "fast":
-                StartCoroutine(SpeedBoost(duration * 2));
+                StartCoroutine(SpeedBoost(duration));
                 break;
         }
     }
@@ -53,22 +53,20 @@ public class CubeDown : MonoBehaviour
     {
         Debug.Log("In SpeedBoost!"); // TEMPORARY
         float elapsedTime = 0.0f;
-        float boost = 5f;
+        float boost = 2f;
 
-        //cubes[0].transform.position = Vector3.up * 2f;// TEST
-        //if (displayText != null)
-        //{
-        //    displayText.text = "In SpeedBoost!"; //FOR COOL DOWN!!!! Sets the text value of the UI Text component 
-        //}
-
-        cubes[0].GetComponent<ActionBasedContinuousMoveProvider>().moveSpeed *= boost;
+        ActionBasedContinuousMoveProvider moveProvider = cubes[0].GetComponent<ActionBasedContinuousMoveProvider>();
+        float originalSpeed = moveProvider.moveSpeed;
+        moveProvider.moveSpeed *= boost;
+        Debug.Log(moveProvider.moveSpeed);
+        
         while (elapsedTime < duration) //move for "duration" seconds
         {
             elapsedTime += Time.deltaTime; //Time.deltaTime is the time in seconds it took for the last frame to be rendered. it creates a smooth animationand the speed is independent from frame rate so it will be identical on all machines.
+            yield return null;
         }
 
-        cubes[0].GetComponent<ActionBasedContinuousMoveProvider>().moveSpeed = cubes[0].GetComponent<ActionBasedContinuousMoveProvider>().moveSpeed / boost;
-
+        moveProvider.moveSpeed = originalSpeed;
         yield return null;
     }
 
