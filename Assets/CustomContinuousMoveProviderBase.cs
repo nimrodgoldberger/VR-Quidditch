@@ -1,4 +1,5 @@
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
 
 namespace UnityEngine.XR.Interaction.Toolkit
 {
@@ -8,6 +9,35 @@ namespace UnityEngine.XR.Interaction.Toolkit
     /// <seealso cref="LocomotionProvider"/>
     public abstract class CustomContinuousMoveProviderBase : LocomotionProvider
     {
+        [Header("Input")]
+        [SerializeField] private InputActionReference triggerPull;
+        [SerializeField] private InputActionReference gripPull;
+        [SerializeField] private float triggerMultiplier = 2f;
+        [SerializeField] private float gripMultiplier = 3f;
+        [SerializeField] private float downGlideAngle = 35;
+        [SerializeField] private Transform forwardSourceReference;
+
+
+
+        [SerializeField] private Transform playerTransform;
+
+
+        //[Header("Boost")]
+        //[SerializeField] private float boostDuration = 4f;
+        //[SerializeField] private float boostMultiplier = 2f;
+        //[SerializeField] private float boostCooldown = 10f;
+        //private bool boosting = false;
+        //private float boostTimer = 0f;
+        //private float cooldownTimer = 0f;
+        private float triggerValue = 0f;
+        private float gripValue = 0f;
+        private float baseMoveSpeed;
+        private Transform baseForwardSource;
+        private Transform currentForwardSource;
+        private bool glidingDown = false;
+
+
+
         /// <summary>
         /// Defines when gravity begins to take effect.
         /// </summary>
@@ -36,7 +66,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
 
         [SerializeField]
         [Tooltip("The speed, in units per second, to move forward.")]
-        float m_MoveSpeed = 1f;
+        float m_MoveSpeed = 15f;
         /// <summary>
         /// The speed, in units per second, to move forward.
         /// </summary>
@@ -119,8 +149,61 @@ namespace UnityEngine.XR.Interaction.Toolkit
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.
         /// </summary>
-        protected void Update()
+        void Start()
         {
+            baseMoveSpeed = m_MoveSpeed;
+        }
+        protected void FixedUpdate()
+        {
+            //if (boosting)
+            //{
+            //    boostTimer += Time.deltaTime;
+            //    if (boostTimer >= boostDuration)
+            //    {
+            //        boosting = false;
+            //        boostTimer = 0f;
+            //        cooldownTimer = 0f;
+            //        moveSpeed /= boostMultiplier;
+            //    }
+            //}
+            //else
+            //{
+            //    if (cooldownTimer >= boostCooldown && boosting == false)
+            //    {
+            //        float trigval = triggerPull.action.ReadValue<float>();
+            //        if (trigval > 0f)
+            //        {
+            //            Debug.Log("Trig val: " + trigval.ToString());
+            //            boosting = true;
+            //            // Multiply the speed by the boost multiplier
+            //            moveSpeed *= boostMultiplier;
+            //        }
+            //    }
+            //    else
+            //        cooldownTimer += Time.deltaTime;
+            //}
+            triggerValue = triggerPull.action.ReadValue<float>();
+            if (triggerValue > 0.1f)
+            {
+                moveSpeed = triggerMultiplier * triggerValue * baseMoveSpeed;
+            }
+            else
+            {
+                moveSpeed = baseMoveSpeed;
+            }
+            //gripValue = gripPull.action.ReadValue<float>();
+            //if (gripValue > 0.1f && glidingDown == false)
+            //{
+            //    Quaternion targetRotation = Quaternion.Euler(downGlideAngle, 0f, 0f) * forwardSourceReference.rotation;
+            //    currentForwardSource.rotation = targetRotation;
+            //}
+            //else
+            //{
+            //    glidingDown = false;
+            //    currentForwardSource = forwardSourceReference;
+            //    forwardSource = forwardSourceReference;
+            //}
+
             m_IsMovingXROrigin = false;
 
             var xrOrigin = system.xrOrigin;
@@ -190,7 +273,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
             var inputMove = Vector3.ClampMagnitude(new Vector3(m_EnableStrafe ? input.x : 0f, 0f, input.y), 1f);
 
             // Determine frame of reference for what the input direction is relative to
-            var forwardSourceTransform = m_ForwardSource == null ? xrOrigin.Camera.transform : m_ForwardSource;
+            var forwardSourceTransform = m_ForwardSource == null ? xrOrigin.Camera.transform : currentForwardSource;
             var inputForwardInWorldSpace = forwardSourceTransform.forward;
 
             var originTransform = xrOrigin.Origin.transform;
@@ -287,5 +370,9 @@ namespace UnityEngine.XR.Interaction.Toolkit
                 m_AttemptedGetCharacterController = true;
             }
         }
+        //private void Boost(InputAction.CallbackContext obj)
+        //{
+        //    boosting = true;
+        //}
     }
 }

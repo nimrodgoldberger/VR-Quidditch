@@ -93,7 +93,7 @@
                     "name": "Grip",
                     "type": "Value",
                     "id": "bcb01173-b678-4543-8733-4d9418ef005d",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -102,7 +102,7 @@
                     "name": "Trigger",
                     "type": "Value",
                     "id": "eac5beda-01ac-415e-9a54-a8a0d24d9d92",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -222,7 +222,7 @@
                 {
                     "name": "",
                     "id": "5e5a9130-afb9-4a17-9e68-3f93e774107f",
-                    "path": "<OculusTouchController>{LeftHand}/grip",
+                    "path": "<XRController>{LeftHand}/grip",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -233,7 +233,7 @@
                 {
                     "name": "",
                     "id": "c8037654-fa65-4841-a19c-9c779186eb63",
-                    "path": "<OculusTouchController>{LeftHand}/trigger",
+                    "path": "<XRController>{LeftHand}/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

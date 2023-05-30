@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 {
 
     [SerializeField] private InputActionReference triggerPull;
-    [SerializeField] private InputActionReference gripPull;
+    //[SerializeField] private InputActionReference gripPull;
     [SerializeField] float movementMultiplier = 3;
     [SerializeField] Transform front;
 
