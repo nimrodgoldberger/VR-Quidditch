@@ -16,7 +16,7 @@ using UnityEngine.UI;
 
 
 
-public class CubeDown : MonoBehaviour
+public class VoiceCommandHandlerScript : MonoBehaviour
 {
     //public Text displayText; // Reference to the UI Text component
 
@@ -25,10 +25,10 @@ public class CubeDown : MonoBehaviour
     //public Wit wit; //not usefull yet but will be when activating using VR key pushing
     /////////////////////////////////////////////////////////////////////////////////////////
 
-    [Header("Cubes")]
+    [Header("Objects")]
     [SerializeField]
-    public List<GameObject> cubes;//needs to be under serializefield without any spaces to recognize the list of gameobjects that is linked to the script under cubehandler.
-
+    public List<GameObject> objects;//needs to be under serializefield without any spaces to recognize the list of gameobjects that is linked to the script under cubehandler.
+    [SerializeField] private CustomMovement controller;
     public void SetDirection(string[] directionString) // type is string[] because the string is the phrase said in the voice command which we will recognise each word
     {
         float distance = 1.5f;  // distance we want the cube to move
@@ -53,12 +53,11 @@ public class CubeDown : MonoBehaviour
     {
         Debug.Log("In SpeedBoost!"); // TEMPORARY
         float elapsedTime = 0.0f;
-        float boost = 2.5f;
+        float boost = 5f;
 
-        CustomMovement moveProvider = cubes[0].GetComponent<CustomMovement>();
-        float originalSpeed = moveProvider.baseMoveSpeed;
-        moveProvider.baseMoveSpeed *= boost;
-        Debug.Log(moveProvider.moveSpeed);
+        float originalSpeed = controller.baseMoveSpeed;
+        controller.baseMoveSpeed *= boost;
+        Debug.Log(controller.moveSpeed);
         
         while (elapsedTime < duration) //move for "duration" seconds
         {
@@ -66,7 +65,7 @@ public class CubeDown : MonoBehaviour
             yield return null;
         }
 
-        moveProvider.baseMoveSpeed = originalSpeed;
+        controller.baseMoveSpeed = originalSpeed;
         yield return null;
     }
 
@@ -74,13 +73,13 @@ public class CubeDown : MonoBehaviour
     {
         float elapsedTime = 0.0f;
 
-        Vector3 startingPos = cubes[1].transform.position; //vector (x,y,z) //done on cubes[1] but could be done on any gameobject of the cubes list using a voice command that chooses the gameobject on which to do the command.
+        Vector3 startingPos = objects[1].transform.position; //vector (x,y,z) //done on cubes[1] but could be done on any gameobject of the cubes list using a voice command that chooses the gameobject on which to do the command.
         Vector3 targetPos = startingPos + direction; //vector (x,y,z) + (0,+/-distance,0) so it adds the distance to the y of the vector according to up/down
 
         while (elapsedTime < duration) //move for "duration" seconds
         {
             float t = elapsedTime / duration; //how much of the time has passed out of duration (elapsedTime = 1 , duration = 2, t = 1/2 => half the time passed)
-            cubes[1].transform.position = Vector3.Lerp(startingPos, targetPos, t); //Vector3.Lerp returns a 3D vector that corresponds to the interpolated position between start and end at time t.
+            objects[1].transform.position = Vector3.Lerp(startingPos, targetPos, t); //Vector3.Lerp returns a 3D vector that corresponds to the interpolated position between start and end at time t.
             elapsedTime += Time.deltaTime; //Time.deltaTime is the time in seconds it took for the last frame to be rendered. it creates a smooth animationand the speed is independent from frame rate so it will be identical on all machines.
             yield return null; //At that point, the coroutine function will pause and allow other code to run, and then it will resume from where it left off on the next frame.
         }

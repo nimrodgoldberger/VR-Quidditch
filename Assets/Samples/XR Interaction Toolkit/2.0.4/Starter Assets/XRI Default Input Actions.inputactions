@@ -664,6 +664,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "B Press",
+                    "type": "Value",
+                    "id": "982c1116-4f77-49bd-9b7f-3c40b3367bd2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -796,6 +805,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Trigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6a8e995-a1f2-44fe-a302-a5409a3bcf1a",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "B Press",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -580,6 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wit: {fileID: 0}
+  controller: {fileID: 380029554}
 --- !u!114 &121237474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,6 +1108,10 @@ PrefabInstance:
       propertyPath: rotationSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5259008784469880827, guid: ea3910f8ceaf81342bd45b592d99ca68, type: 3}
+      propertyPath: bPress
+      value: 
+      objectReference: {fileID: -1825898422493137587, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea3910f8ceaf81342bd45b592d99ca68, type: 3}
 --- !u!1 &380029552 stripped
@@ -1119,6 +1124,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5259008784469880805, guid: ea3910f8ceaf81342bd45b592d99ca68, type: 3}
   m_PrefabInstance: {fileID: 380029551}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &380029554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5259008784469880827, guid: ea3910f8ceaf81342bd45b592d99ca68, type: 3}
+  m_PrefabInstance: {fileID: 380029551}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380029552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a053cdb62bb414fa50eb77e049dea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &380029560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3016,7 +3032,7 @@ GameObject:
   - component: {fileID: 1813568313}
   - component: {fileID: 1813568314}
   m_Layer: 0
-  m_Name: BroomHandler
+  m_Name: VoiceCommandScriptHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3049,9 +3065,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e27416ca9ff884ebd74040dca8544b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubes:
-  - {fileID: 380029552}
+  objects:
   - {fileID: 468706352}
+  - {fileID: 468706352}
+  controller: {fileID: 380029554}
 --- !u!64 &1886116615
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -13,16 +13,14 @@ namespace UnityEngine.XR.Interaction.Toolkit
         [Header("Input")]
         [SerializeField] private InputActionReference triggerPull;
         [SerializeField] private InputActionReference gripPull;
+        [SerializeField] private InputActionReference bPress;
         [SerializeField] private float triggerMultiplier = 2f;
         [SerializeField] private float gripMultiplier = 3f;
         [SerializeField] private float downGlideAngle = 35;
         [SerializeField] private Transform forwardSourceReference;
         private PhotonView view;
 
-
-
         [SerializeField] private Transform playerTransform;
-
 
         //[Header("Boost")]
         //[SerializeField] private float boostDuration = 4f;
@@ -37,7 +35,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
         private Transform baseForwardSource;
         private Transform currentForwardSource;
         private bool glidingDown = false;
-
+        public bool bIsPressed = false;
 
 
         /// <summary>
@@ -187,6 +185,14 @@ namespace UnityEngine.XR.Interaction.Toolkit
             //}
             //if (view.IsMine)
             //{
+                if(bPress.action.ReadValue<float>() > 0)
+                {
+                    bIsPressed = true;
+                    Debug.Log("B pressed");
+                }
+                else
+                    bIsPressed = false;
+
                 triggerValue = triggerPull.action.ReadValue<float>();
                 if (triggerValue > 0.1f)
                 {

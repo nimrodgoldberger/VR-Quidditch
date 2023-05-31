@@ -110,7 +110,7 @@ public class BludgerLogic : MonoBehaviour
             // The object has collided with a player
             Debug.Log("Object collided with a player!");
             // Perform any additional actions you want here
-            audioSource.PlayOneShot(hitSound);
+            //audioSource.PlayOneShot(hitSound);
             // Stop the object's movement
             rb.velocity = Vector3.zero;
             // Optionally, you can disable the script or destroy the object
