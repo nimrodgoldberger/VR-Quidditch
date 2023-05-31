@@ -185,8 +185,8 @@ namespace UnityEngine.XR.Interaction.Toolkit
             //    else
             //        cooldownTimer += Time.deltaTime;
             //}
-            if (view.IsMine)
-            {
+            //if (view.IsMine)
+            //{
                 triggerValue = triggerPull.action.ReadValue<float>();
                 if (triggerValue > 0.1f)
                 {
@@ -250,7 +250,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
                         Assert.IsTrue(false, $"Unhandled {nameof(LocomotionPhase)}={locomotionPhase}");
                         break;
                 }
-            }
+            //}
         }
 
         /// <summary>
