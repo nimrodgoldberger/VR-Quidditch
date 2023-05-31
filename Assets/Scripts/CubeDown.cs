@@ -53,11 +53,11 @@ public class CubeDown : MonoBehaviour
     {
         Debug.Log("In SpeedBoost!"); // TEMPORARY
         float elapsedTime = 0.0f;
-        float boost = 2f;
+        float boost = 2.5f;
 
-        ActionBasedContinuousMoveProvider moveProvider = cubes[0].GetComponent<ActionBasedContinuousMoveProvider>();
-        float originalSpeed = moveProvider.moveSpeed;
-        moveProvider.moveSpeed *= boost;
+        CustomMovement moveProvider = cubes[0].GetComponent<CustomMovement>();
+        float originalSpeed = moveProvider.baseMoveSpeed;
+        moveProvider.baseMoveSpeed *= boost;
         Debug.Log(moveProvider.moveSpeed);
         
         while (elapsedTime < duration) //move for "duration" seconds
@@ -66,7 +66,7 @@ public class CubeDown : MonoBehaviour
             yield return null;
         }
 
-        moveProvider.moveSpeed = originalSpeed;
+        moveProvider.baseMoveSpeed = originalSpeed;
         yield return null;
     }
 

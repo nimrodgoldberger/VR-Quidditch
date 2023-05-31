@@ -26,7 +26,7 @@
                 {
                     "name": "Bpressing",
                     "type": "Button",
-                    "id": "0d7272d9-0b54-4f98-928d-291331a6837a",
+                    "id": "fb23087e-ee2d-42cb-82b7-59a8a85f5b20",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -124,8 +124,8 @@
                 },
                 {
                     "name": "",
-                    "id": "6552b2f2-8581-4dc6-a49e-92b1047716ad",
-                    "path": "<XRController>{RightHand}/secondaryTouched",
+                    "id": "ac71b479-2173-429e-86ad-75533f3edea6",
+                    "path": "<XRSimulatedController>/secondaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -135,29 +135,7 @@
                 },
                 {
                     "name": "",
-                    "id": "51acfd92-8130-44ac-a5b3-406ca7ef032a",
-                    "path": "<XRController>{RightHand}/secondaryButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Bpressing",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "030b717a-6c0b-43db-9ee7-f10d7d68ac7c",
-                    "path": "<XRController>{RightHand}/secondaryTouch",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Bpressing",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "17f96e45-bcc6-4641-9618-8a02895400c5",
+                    "id": "3eb666e5-0122-45b2-a7a5-a044af08e154",
                     "path": "<OculusTouchController>{RightHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
@@ -168,8 +146,8 @@
                 },
                 {
                     "name": "",
-                    "id": "74c1c436-c4ce-497f-a234-f62165938f19",
-                    "path": "<OculusTouchController>{RightHand}/secondaryTouched",
+                    "id": "b5bac6e8-f6a8-41c1-9d10-53557d2d41af",
+                    "path": "<OculusTouchController>/secondaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -179,19 +157,8 @@
                 },
                 {
                     "name": "",
-                    "id": "a10a9e1b-3ccd-4fd0-a3ad-020c94dc58ff",
-                    "path": "<XRSimulatedController>{RightHand}/secondaryButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Bpressing",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a136a843-e684-4aa4-b359-ebe5010554a6",
-                    "path": "<XRSimulatedController>{RightHand}/secondaryTouch",
+                    "id": "100ffc22-8ca4-4620-801c-7b551327216e",
+                    "path": "<XRSimulatedController>{LeftHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
