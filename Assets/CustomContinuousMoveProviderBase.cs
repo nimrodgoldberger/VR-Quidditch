@@ -185,8 +185,8 @@ namespace UnityEngine.XR.Interaction.Toolkit
             //    else
             //        cooldownTimer += Time.deltaTime;
             //}
-            if (view.IsMine)
-            {
+            //if (view.IsMine)
+            //{
                 triggerValue = triggerPull.action.ReadValue<float>();
                 if (triggerValue > 0.1f)
                 {
@@ -250,7 +250,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
                         Assert.IsTrue(false, $"Unhandled {nameof(LocomotionPhase)}={locomotionPhase}");
                         break;
                 }
-            }
+            //}
         }
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
             var inputMove = Vector3.ClampMagnitude(new Vector3(m_EnableStrafe ? input.x : 0f, 0f, input.y), 1f);
 
             // Determine frame of reference for what the input direction is relative to
-            var forwardSourceTransform = m_ForwardSource == null ? xrOrigin.Camera.transform : currentForwardSource;
+            var forwardSourceTransform = m_ForwardSource == null ? xrOrigin.Camera.transform : m_ForwardSource;
             var inputForwardInWorldSpace = forwardSourceTransform.forward;
 
             var originTransform = xrOrigin.Origin.transform;
