@@ -20,9 +20,9 @@ MonoBehaviour:
     isPrivate: 0
     createdAt: 2023-03-24T04:24:01-0700
     trainingStatus: 1
-    lastTrainDuration: 61
-    lastTrainedAt: 2023-05-26T03:54:20-0700
-    nextTrainAt: 2023-05-26T03:53:19-0700
+    lastTrainDuration: 53
+    lastTrainedAt: 2023-05-31T05:33:23-0700
+    nextTrainAt: 2023-05-31T05:32:30-0700
     intents:
     - id: 135084896175915
       name: cube_moves
@@ -59,9 +59,13 @@ MonoBehaviour:
         synonyms:
         - accelerate
         - acceleratus
+        - fast
         - faster
         - fastus
+        - fest
+        - rapi
         - rapid
+        - rapidos
         - rapidus
       - keyword: left
         synonyms:
