@@ -21,7 +21,7 @@ public class SnitchLogic : MonoBehaviour
 
 
     private AudioSource audioSource;
-    public AudioClip howlLoop;
+    public AudioClip whirrLoop;
 
     private Rigidbody rb;
     private Vector3 direction, targetPosition, verticalCenter;
@@ -31,17 +31,22 @@ public class SnitchLogic : MonoBehaviour
     [SerializeField]
     Transform rotationCenter;
 
-    private float deltaY, posX, posZ, angle = 0f;
+    private float currY, deltaY, posX, posZ, angle = 0f;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         state = State.Roam;
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = whirrLoop;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        //if (transform.position.y < 5f)
+        //    StartVertical();
         if (state == State.Roam && Random.Range(0, (1000 - (int)(verticalTimer * 10))) == 0)
         {
             StartVertical();
@@ -83,7 +88,9 @@ public class SnitchLogic : MonoBehaviour
         {
             posX = verticalCenter.x + Mathf.Cos(angle) * verticalRadius;
             posZ = verticalCenter.z + Mathf.Sin(angle) * verticalRadius;
-            targetPosition = new Vector3(posX, posY, posZ);
+            if (currY < posY)
+                currY += 1f;
+            targetPosition = new Vector3(posX, currY, posZ);
             angle += Time.deltaTime * movementSpeed / verticalRadius;
             if (angle > Mathf.PI * 2f)
             {
@@ -108,19 +115,22 @@ public class SnitchLogic : MonoBehaviour
         state = State.Vertical;
         verticalTimer = 0f;
         verticalCenter = transform.position;
+        currY = verticalCenter.y;
+        posY = currY;
         deltaY = Random.Range(0f, maxDeltaY);
-        if (posY < 25f)
+        if (currY < 25f || currY < deltaY || currY < 5f)
             posY += deltaY;
-        else if (posY > 250f)
+        else if (posY > 300f)
         {
             posY -= deltaY;
         }
         else
         {
-            if (deltaY > maxDeltaY/2f)
+            if (deltaY > maxDeltaY/2f) // random 50/50 coin flip OR if delta will send us underground
                 posY += deltaY;
-            else
+            else 
                 posY -= deltaY;
         }
+        Debug.Log("pos Y is" + currY.ToString() + "delta " + deltaY.ToString() + "curr " + currY.ToString());
     }
 }
