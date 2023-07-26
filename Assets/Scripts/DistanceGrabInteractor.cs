@@ -6,21 +6,19 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class DistanceGrabInteractor : XRBaseControllerInteractor
 {
-    #region member variables
-
     List<XRBaseInteractable> m_ValidTargets = new List<XRBaseInteractable>();
     XRBaseInteractable m_CurrentNearestObject;
 
-    //settings
-    [SerializeField] private float maxDistance = 20f;
+    [SerializeField] private float quaffleMaxDistance = 20f;
+    [SerializeField] private float snitchMaxDistance = 3f;
+    private float maxDistance = 20f;
     public float m_grabbingThreshold = .8f;
     public GameObject m_cursor;
     public Transform m_fwdVector;
 
     private List<XRBaseInteractable> m_grabbableItems;
     private SphereCollider m_coll;
-
-    #endregion
+    private string snitchTag = "Snitch";
 
     private new void Start()
     {
@@ -59,6 +57,14 @@ public class DistanceGrabInteractor : XRBaseControllerInteractor
             Vector3 dir = (obj.transform.position - m_fwdVector.position).normalized;
             float currentGuess = Vector3.Dot(m_fwdVector.forward, dir);
             float distance = Vector3.Distance(obj.transform.position, m_fwdVector.position);
+            if (obj.gameObject.CompareTag(snitchTag))
+            {
+                maxDistance = snitchMaxDistance;
+            }
+            else
+            {
+                maxDistance = quaffleMaxDistance;
+            }
 
             if (currentGuess > m_grabbingThreshold && currentGuess > bestGuess && distance < maxDistance)
             {

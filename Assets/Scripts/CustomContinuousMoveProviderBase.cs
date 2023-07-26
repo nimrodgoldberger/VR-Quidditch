@@ -17,6 +17,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
         [SerializeField] private float gripMultiplier = 3f;
         [SerializeField] private float downGlideAngle = 35;
         [SerializeField] private Transform forwardSourceReference;
+        [SerializeField] private float accelerationTime = 2.0f; 
         private PhotonView view;
 
 
@@ -31,8 +32,9 @@ namespace UnityEngine.XR.Interaction.Toolkit
         //private bool boosting = false;
         //private float boostTimer = 0f;
         //private float cooldownTimer = 0f;
+        private float targetSpeed;
         private float triggerValue = 0f;
-        private float gripValue = 0f;
+        //private float gripValue = 0f;
         public float baseMoveSpeed;
         private Transform baseForwardSource;
         private Transform currentForwardSource;
@@ -187,69 +189,68 @@ namespace UnityEngine.XR.Interaction.Toolkit
             //}
             //if (view.IsMine)
             //{
-                triggerValue = triggerPull.action.ReadValue<float>();
-                if (triggerValue > 0.1f)
-                {
-                    moveSpeed = triggerMultiplier * triggerValue * baseMoveSpeed;
-                }
-                else
-                {
-                    moveSpeed = baseMoveSpeed;
-                }
-                //gripValue = gripPull.action.ReadValue<float>();
-                //if (gripValue > 0.1f && glidingDown == false)
-                //{
-                //    Quaternion targetRotation = Quaternion.Euler(downGlideAngle, 0f, 0f) * forwardSourceReference.rotation;
-                //    currentForwardSource.rotation = targetRotation;
-                //}
-                //else
-                //{
-                //    glidingDown = false;
-                //    currentForwardSource = forwardSourceReference;
-                //    forwardSource = forwardSourceReference;
-                //}
+            triggerValue = triggerPull.action.ReadValue<float>();
+            if (triggerValue > 0.1f)
+            {
+                targetSpeed = triggerMultiplier * triggerValue * baseMoveSpeed;
+            }
+            else
+            {
+                targetSpeed = baseMoveSpeed;
+            }
+            moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime / accelerationTime);
+            //gripValue = gripPull.action.ReadValue<float>();
+            //if (gripValue > 0.1f && glidingDown == false)
+            //{
+            //    Quaternion targetRotation = Quaternion.Euler(downGlideAngle, 0f, 0f) * forwardSourceReference.rotation;
+            //    currentForwardSource.rotation = targetRotation;
+            //}
+            //else
+            //{
+            //    glidingDown = false;
+            //    currentForwardSource = forwardSourceReference;
+            //    forwardSource = forwardSourceReference;
+            //}
+            m_IsMovingXROrigin = false;
+            var xrOrigin = system.xrOrigin;
+            if (xrOrigin == null)
+                return;
 
-                m_IsMovingXROrigin = false;
+            var input = ReadInput();
+            var translationInWorldSpace = ComputeDesiredMove(input);
 
-                var xrOrigin = system.xrOrigin;
-                if (xrOrigin == null)
-                    return;
-
-                var input = ReadInput();
-                var translationInWorldSpace = ComputeDesiredMove(input);
-
-                switch (m_GravityApplicationMode)
-                {
-                    case GravityApplicationMode.Immediately:
+            switch (m_GravityApplicationMode)
+            {
+                case GravityApplicationMode.Immediately:
+                    MoveRig(translationInWorldSpace);
+                    break;
+                case GravityApplicationMode.AttemptingMove:
+                    if (input != Vector2.zero || m_VerticalVelocity != Vector3.zero)
                         MoveRig(translationInWorldSpace);
-                        break;
-                    case GravityApplicationMode.AttemptingMove:
-                        if (input != Vector2.zero || m_VerticalVelocity != Vector3.zero)
-                            MoveRig(translationInWorldSpace);
-                        break;
-                    default:
-                        Assert.IsTrue(false, $"{nameof(m_GravityApplicationMode)}={m_GravityApplicationMode} outside expected range.");
-                        break;
-                }
+                    break;
+                default:
+                    Assert.IsTrue(false, $"{nameof(m_GravityApplicationMode)}={m_GravityApplicationMode} outside expected range.");
+                    break;
+            }
 
-                switch (locomotionPhase)
-                {
-                    case LocomotionPhase.Idle:
-                    case LocomotionPhase.Started:
-                        if (m_IsMovingXROrigin)
-                            locomotionPhase = LocomotionPhase.Moving;
-                        break;
-                    case LocomotionPhase.Moving:
-                        if (!m_IsMovingXROrigin)
-                            locomotionPhase = LocomotionPhase.Done;
-                        break;
-                    case LocomotionPhase.Done:
-                        locomotionPhase = m_IsMovingXROrigin ? LocomotionPhase.Moving : LocomotionPhase.Idle;
-                        break;
-                    default:
-                        Assert.IsTrue(false, $"Unhandled {nameof(LocomotionPhase)}={locomotionPhase}");
-                        break;
-                }
+            switch (locomotionPhase)
+            {
+                case LocomotionPhase.Idle:
+                case LocomotionPhase.Started:
+                    if (m_IsMovingXROrigin)
+                        locomotionPhase = LocomotionPhase.Moving;
+                    break;
+                case LocomotionPhase.Moving:
+                    if (!m_IsMovingXROrigin)
+                        locomotionPhase = LocomotionPhase.Done;
+                    break;
+                case LocomotionPhase.Done:
+                    locomotionPhase = m_IsMovingXROrigin ? LocomotionPhase.Moving : LocomotionPhase.Idle;
+                    break;
+                default:
+                    Assert.IsTrue(false, $"Unhandled {nameof(LocomotionPhase)}={locomotionPhase}");
+                    break;
+            }
             //}
         }
 
