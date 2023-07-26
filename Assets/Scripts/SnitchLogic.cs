@@ -27,7 +27,7 @@ public class SnitchLogic : MonoBehaviour
     private Vector3 direction, targetPosition, verticalCenter;
 
     [SerializeField]
-    float posY = 10f, verticalRadius =3f, rotationRadius = 370f, angularSpeed = 1f, ovalWidth = 3f, movementSpeed = 50f, maxSleepTime = 6f;
+    float posY = 10f, verticalRadius =1f, rotationRadius = 370f, angularSpeed = 3f, ovalWidth = 2.5f, movementSpeed = 50f, maxSleepTime = 6f, maxPosY = 300f, minPosY = 5f;
     [SerializeField]
     Transform rotationCenter;
 
@@ -45,6 +45,9 @@ public class SnitchLogic : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 currentPosition = transform.position;
+        currentPosition.y = Mathf.Clamp(currentPosition.y, 0f, maxPosY);
+
         //if (transform.position.y < 5f)
         //    StartVertical();
         if (state == State.Roam && Random.Range(0, (1000 - (int)(verticalTimer * 10))) == 0)
@@ -75,13 +78,20 @@ public class SnitchLogic : MonoBehaviour
                 direction = targetPosition - transform.position;
                 direction.Normalize();
                 rb.velocity = direction * movementSpeed;
-                if (Vector3.Distance(targetPosition, transform.position) < 15f)
+                if (direction != Vector3.zero)
                 {
-                    if (rand < 0.5f)
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, angularSpeed * Time.deltaTime);
+                }
+                if (Vector3.Distance(targetPosition, transform.position) < 3f)
+                {
+                    rand = Random.value;
+                    if (rand < 0.5f) //50/50 
                         StartVertical();
                     else
                         StartRoam();
                 }
+                
             }
         }
         else if (state == State.Vertical)
@@ -90,13 +100,22 @@ public class SnitchLogic : MonoBehaviour
             posZ = verticalCenter.z + Mathf.Sin(angle) * verticalRadius;
             if (currY < posY)
                 currY += 1f;
+            else
+                currY -= 1f;
             targetPosition = new Vector3(posX, currY, posZ);
-            angle += Time.deltaTime * movementSpeed / verticalRadius;
+            angle += Time.deltaTime * angularSpeed / verticalRadius;
             if (angle > Mathf.PI * 2f)
             {
                 angle -= Mathf.PI * 2f;
             }
-            if (transform.position.y - posY < 5f)
+            direction = targetPosition - transform.position;
+            rb.velocity = direction * movementSpeed;
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, angularSpeed * Time.deltaTime);
+            }
+            if (transform.position.y - currY < 5f)
                 StartRoam();
         }
     }
@@ -116,11 +135,11 @@ public class SnitchLogic : MonoBehaviour
         verticalTimer = 0f;
         verticalCenter = transform.position;
         currY = verticalCenter.y;
+        deltaY = Random.Range(5f, maxDeltaY); //delta y is in absolute value, will substract to go down and add to go up
         posY = currY;
-        deltaY = Random.Range(0f, maxDeltaY);
-        if (currY < 25f || currY < deltaY || currY < 5f)
+        if (currY < 30f || currY < deltaY)
             posY += deltaY;
-        else if (posY > 300f)
+        else if (posY > maxPosY) //when too high go down
         {
             posY -= deltaY;
         }
@@ -131,6 +150,7 @@ public class SnitchLogic : MonoBehaviour
             else 
                 posY -= deltaY;
         }
-        Debug.Log("pos Y is" + currY.ToString() + "delta " + deltaY.ToString() + "curr " + currY.ToString());
+        posY = Mathf.Clamp(posY, minPosY, maxPosY);
+        Debug.Log("target pos Y is " + posY.ToString() + " delta " + deltaY.ToString() + " curr " + currY.ToString());
     }
 }

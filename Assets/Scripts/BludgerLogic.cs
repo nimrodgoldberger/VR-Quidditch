@@ -85,7 +85,6 @@ public class BludgerLogic : MonoBehaviour
                         else
                             posY -= deltaY;
                     }
-                    Debug.Log(posY.ToString());
                 }
                 posX = rotationCenter.position.x + Mathf.Cos(angle) * rotationRadius / ovalWidth;
                 posZ = rotationCenter.position.z + Mathf.Sin(angle) * rotationRadius;

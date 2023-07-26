@@ -17,7 +17,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
         [SerializeField] private float gripMultiplier = 3f;
         [SerializeField] private float downGlideAngle = 35;
         [SerializeField] private Transform forwardSourceReference;
-        [SerializeField] private float accelerationTime = 2.0f; 
+        [SerializeField] private float accelerationTime = 1.0f; 
         private PhotonView view;
 
 
@@ -178,7 +178,6 @@ namespace UnityEngine.XR.Interaction.Toolkit
             //        float trigval = triggerPull.action.ReadValue<float>();
             //        if (trigval > 0f)
             //        {
-            //            Debug.Log("Trig val: " + trigval.ToString());
             //            boosting = true;
             //            // Multiply the speed by the boost multiplier
             //            moveSpeed *= boostMultiplier;
