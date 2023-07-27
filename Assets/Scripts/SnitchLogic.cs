@@ -159,7 +159,7 @@ public class SnitchLogic : MonoBehaviour
             targetPosition.x = Random.Range(-72f, 72f);
             targetPosition.z = Random.Range(-219f, 219f);
 
-        } while(!TargetsSpawnArea.IsInsidePlayableArea(targetPosition) || Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn*3);
+        } while(!TargetsSpawnArea.IsInsidePlayableArea(targetPosition) || Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn*2);
 
         target.transform.position = targetPosition;
     }
