@@ -485,6 +485,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlytherinPlayer Variant (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1829620465975050728, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
 --- !u!1 &73860455
@@ -856,31 +860,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1310493281134189394, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
   m_PrefabInstance: {fileID: 2145438028}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &142562895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142562893}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 370
-  angularSpeed: 100
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &142562897
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -892,7 +871,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -909,9 +888,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
+  state: 0
   target: {fileID: 0}
-  movementSpeed: 30
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1 &148023584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,6 +1323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GryffindorKeeper Variant (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2544430351266171650, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1410,6 +1395,10 @@ PrefabInstance:
     - target: {fileID: 2544430351266171650, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
       propertyPath: m_Name
       value: GryffindorKeeper Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544430351266171650, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
       propertyPath: m_RootOrder
@@ -1670,6 +1659,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GryffindorKeeper Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2544430351266171650, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1738,6 +1731,10 @@ PrefabInstance:
     - target: {fileID: 2544430351266171650, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
       propertyPath: m_Name
       value: GryffindorKeeper Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544430351266171650, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
       propertyPath: m_RootOrder
@@ -1883,6 +1880,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlytherinPlayer Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1829620465975050728, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
 --- !u!1001 &357781625
@@ -1951,6 +1952,10 @@ PrefabInstance:
     - target: {fileID: 1829620465975050728, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
       propertyPath: m_Name
       value: SlytherinPlayer Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829620465975050728, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
@@ -3334,31 +3339,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
   m_PrefabInstance: {fileID: 744231280}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &704995342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 704995340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 222
-  angularSpeed: 1
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &704995344
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3370,11 +3350,28 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &704995345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704995340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  target: {fileID: 0}
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1 &738273406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,31 +3413,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
   m_PrefabInstance: {fileID: 312761488}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &742453629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742453627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 222
-  angularSpeed: 1
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &742453631
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3452,11 +3424,28 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &742453632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742453627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  target: {fileID: 0}
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1001 &744231280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3467,6 +3456,10 @@ PrefabInstance:
     - target: {fileID: 2544430351266171650, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
       propertyPath: m_Name
       value: GryffindorKeeper Variant (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544430351266171650, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
       propertyPath: m_RootOrder
@@ -3570,18 +3563,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  targets: []
+  target: {fileID: 1705636744}
+  RotationSpeed: 3
+  minDistanceToRespawn: 8
   whirrLoop: {fileID: 8300000, guid: 4e2e36cd2ef8de04a8b08ecc44f65e94, type: 3}
-  posY: 20
-  verticalRadius: 3
-  rotationRadius: 370
-  angularSpeed: 1
-  ovalWidth: 2.5
   movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 30
-  rotationCenter: {fileID: 244899532}
 --- !u!54 &744472420
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3593,7 +3579,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
@@ -9074,6 +9060,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlytherinPlayer Variant (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1829620465975050728, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
 --- !u!1 &892589202
@@ -9400,31 +9390,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1310493281134189394, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
   m_PrefabInstance: {fileID: 856369757}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1084904196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1084904194}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 370
-  angularSpeed: 100
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &1084904198
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9436,7 +9401,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -9453,9 +9418,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
+  state: 0
   target: {fileID: 0}
-  movementSpeed: 30
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1 &1094706914
 GameObject:
   m_ObjectHideFlags: 0
@@ -9497,31 +9464,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1310493281134189394, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
   m_PrefabInstance: {fileID: 357781625}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1108618768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108618766}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 370
-  angularSpeed: 100
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &1108618770
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9533,7 +9475,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -9550,9 +9492,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
+  state: 0
   target: {fileID: 0}
-  movementSpeed: 30
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1 &1143367333 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8652829213511017028, guid: 8e7f16de93403f84ea865905c4567417, type: 3}
@@ -10083,31 +10027,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
   m_PrefabInstance: {fileID: 265045549}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1182714661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182714659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 222
-  angularSpeed: 1
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &1182714663
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10119,11 +10038,28 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1182714664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182714659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  target: {fileID: 0}
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1001 &1192699213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10366,31 +10302,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1310493281134189394, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
   m_PrefabInstance: {fileID: 341694325}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1261083628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1261083626}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 370
-  angularSpeed: 1
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &1261083630
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10402,7 +10313,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -10419,9 +10330,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
+  state: 0
   target: {fileID: 0}
-  movementSpeed: 30
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!4 &1265970642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4931573069831609228, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
@@ -10437,31 +10350,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
   m_PrefabInstance: {fileID: 302032444}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1281695107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281695105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 222
-  angularSpeed: 1
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &1281695109
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10473,11 +10361,28 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1281695110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281695105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  target: {fileID: 0}
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1 &1288518562
 GameObject:
   m_ObjectHideFlags: 0
@@ -11168,31 +11073,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1310493281134189394, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
   m_PrefabInstance: {fileID: 66822256}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1493567773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493567771}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 370
-  angularSpeed: 100
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &1493567775
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11204,7 +11084,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -11221,9 +11101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
+  state: 0
   target: {fileID: 0}
-  movementSpeed: 30
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1 &1502797922
 GameObject:
   m_ObjectHideFlags: 0
@@ -11810,31 +11692,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1310493281134189394, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
   m_PrefabInstance: {fileID: 566628064}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1561951020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1561951018}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 370
-  angularSpeed: 100
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &1561951022
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11863,9 +11720,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
+  state: 0
   target: {fileID: 0}
-  movementSpeed: 30
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1001 &1578889885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12199,6 +12058,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1705636744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1705636745}
+  m_Layer: 6
+  m_Name: SnitchTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1705636745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705636744}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 37.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1730285398
 GameObject:
   m_ObjectHideFlags: 0
@@ -12424,56 +12314,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 67e590e1939328e4ea7d87c6899fa517, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7db0ba6f1048874baab8c398d6a3f78, type: 3}
---- !u!1 &1877373980
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1877373981}
-  - component: {fileID: 1877373982}
-  m_Layer: 0
-  m_Name: GameLimitsVerifier
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1877373981
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877373980}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 53.282547, y: 141.6173, z: 63.97986}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1877373982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877373980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b8d2b9ec195084ab5dec2f63aca768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ElipseValueOfA: 219
-  ElipseValueOfB: 72
-  minHeight: 10
-  maxHeight: 120
-  center: {x: 0, y: 0, z: 0}
-  spawnArea: {x: 0, y: 0, z: 0}
 --- !u!64 &1886116615
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17899,31 +17739,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2883554185146601912, guid: 55d183ec513fedd41bd936fe2c84474d, type: 3}
   m_PrefabInstance: {fileID: 264367284}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2092329357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2092329355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b885caef0f035e14f8e71b1c05c12804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targets: []
-  whirrLoop: {fileID: 0}
-  posY: 10
-  verticalRadius: 1
-  rotationRadius: 222
-  angularSpeed: 1
-  ovalWidth: 2.5
-  movementSpeed: 50
-  maxSleepTime: 6
-  maxPosY: 300
-  minPosY: 5
-  rotationCenter: {fileID: 1180805282}
 --- !u!54 &2092329359
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17935,11 +17750,28 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2092329360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092329355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5b596167ecb89488be8980b320e97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  target: {fileID: 0}
+  RotationSpeed: 3
+  whirrLoop: {fileID: 0}
+  movementSpeed: 50
 --- !u!1 &2098402580
 GameObject:
   m_ObjectHideFlags: 0
@@ -18110,9 +17942,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1559784578375711931, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1829620465975050728, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
       propertyPath: m_Name
       value: SlytherinPlayer Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829620465975050728, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 416d688ca11e7ca4ab02c604805d4cca, type: 3}
