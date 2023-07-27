@@ -66,7 +66,12 @@ public class SnitchLogic : MonoBehaviour
         StartRotating();
         targetTime -= Time.deltaTime;
         //TODO  need to add on collision only with this specific target
-        if(targetTime <= 0 || Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn)
+        if(Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn)
+        {
+            RespawnTarget();
+            targetTime = Random.Range(3, 5);
+        }
+        else if(targetTime <= 0)
         {
             RespawnTarget();
             targetTime = Random.Range(3, 5);
@@ -159,7 +164,7 @@ public class SnitchLogic : MonoBehaviour
             targetPosition.x = Random.Range(-72f, 72f);
             targetPosition.z = Random.Range(-219f, 219f);
 
-        } while(!TargetsSpawnArea.IsInsidePlayableArea(targetPosition) || Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn*2);
+        } while(!TargetsSpawnArea.IsInsidePlayableArea(targetPosition) /*|| Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn*2*/);
 
         target.transform.position = targetPosition;
     }
