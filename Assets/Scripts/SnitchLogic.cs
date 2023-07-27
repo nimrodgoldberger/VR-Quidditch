@@ -16,7 +16,9 @@ public class SnitchLogic : MonoBehaviour
 
     public Transform[] targets;
     private bool setNewPosition;
-    private Transform target;
+    //private Transform target;
+    [SerializeField] private GameObject target;
+
     private float verticalTimer = 0f, sleepTimer = 0f, maxDeltaY = 20f, rand, randSleep;
 
 
@@ -32,94 +34,100 @@ public class SnitchLogic : MonoBehaviour
     Transform rotationCenter;
 
     private float currY, deltaY, posX, posZ, angle = 0f;
+
+
+    private float targetTime;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        state = State.Roam;
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = whirrLoop;
-        audioSource.loop = true;
-        audioSource.Play();
+        targetTime = TargetsSpawnArea.TargetManager(target, 0f);
+        //rb = GetComponent<Rigidbody>();
+        //state = State.Roam;
+        //audioSource = GetComponent<AudioSource>();
+        //audioSource.clip = whirrLoop;
+        //audioSource.loop = true;
+        //audioSource.Play();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 currentPosition = transform.position;
-        currentPosition.y = Mathf.Clamp(currentPosition.y, 0f, maxPosY);
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.deltaTime);
+        targetTime = TargetsSpawnArea.TargetManager(target, targetTime);
 
-        //if (transform.position.y < 5f)
+        //Vector3 currentPosition = transform.position;
+        //currentPosition.y = Mathf.Clamp(currentPosition.y, 0f, maxPosY);
+
+
+        //if (state == State.Roam && Random.Range(0, (1000 - (int)(verticalTimer * 10))) == 0)
+        //{
         //    StartVertical();
-        if (state == State.Roam && Random.Range(0, (1000 - (int)(verticalTimer * 10))) == 0)
-        {
-            StartVertical();
-        }
-        if (state == State.Roam)
-        {
-            if (sleepTimer < randSleep)
-            {
-                sleepTimer += Time.deltaTime;
-            }
-            else
-            {
-                if (setNewPosition)
-                {
-                    rand = Random.value;
-                    posX = (rotationCenter.position.x + Mathf.Cos(angle) * rotationRadius / ovalWidth) * rand;
-                    posZ = (rotationCenter.position.z + Mathf.Sin(angle) * rotationRadius) * rand;
-                    targetPosition = new Vector3(posX, posY, posZ);
-                    angle += Time.deltaTime * movementSpeed / ovalWidth;
-                    if (angle > Mathf.PI * 2f)
-                    {
-                        angle -= Mathf.PI * 2f;
-                    }
-                    setNewPosition = false;
-                }
-                direction = targetPosition - transform.position;
-                direction.Normalize();
-                rb.velocity = direction * movementSpeed;
-                if (direction != Vector3.zero)
-                {
-                    Quaternion targetRotation = Quaternion.LookRotation(direction);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, angularSpeed * Time.deltaTime);
-                }
-                if (Vector3.Distance(targetPosition, transform.position) < 3f)
-                {
-                    rand = Random.value;
-                    if (rand < 0.5f) //50/50 
-                        StartVertical();
-                    else
-                        StartRoam();
-                }
-                
-            }
-        }
-        else if (state == State.Vertical)
-        {
-            posX = verticalCenter.x + Mathf.Cos(angle) * verticalRadius;
-            posZ = verticalCenter.z + Mathf.Sin(angle) * verticalRadius;
-            if (currY < posY)
-                currY += 1f;
-            else
-                currY -= 1f;
-            targetPosition = new Vector3(posX, currY, posZ);
-            angle += Time.deltaTime * angularSpeed / verticalRadius;
-            if (angle > Mathf.PI * 2f)
-            {
-                angle -= Mathf.PI * 2f;
-            }
-            direction = targetPosition - transform.position;
-            rb.velocity = direction * movementSpeed;
-            if (direction != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, angularSpeed * Time.deltaTime);
-            }
-            if (transform.position.y - currY < 5f)
-                StartRoam();
-        }
-    }
+        //}
+        //if (state == State.Roam)
+        //{
+        //    if (sleepTimer < randSleep)
+        //    {
+        //        sleepTimer += Time.deltaTime;
+        //    }
+        //    else
+        //    {
+        //        if (setNewPosition)
+        //        {
+        //            rand = Random.value;
+        //            posX = (rotationCenter.position.x + Mathf.Cos(angle) * rotationRadius / ovalWidth) * rand;
+        //            posZ = (rotationCenter.position.z + Mathf.Sin(angle) * rotationRadius) * rand;
+        //            targetPosition = new Vector3(posX, posY, posZ);
+        //            angle += Time.deltaTime * movementSpeed / ovalWidth;
+        //            if (angle > Mathf.PI * 2f)
+        //            {
+        //                angle -= Mathf.PI * 2f;
+        //            }
+        //            setNewPosition = false;
+        //        }
+        //        direction = targetPosition - transform.position;
+        //        direction.Normalize();
+        //        rb.velocity = direction * movementSpeed;
+        //        if (direction != Vector3.zero)
+        //        {
+        //            Quaternion targetRotation = Quaternion.LookRotation(direction);
+        //            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, angularSpeed * Time.deltaTime);
+        //        }
+        //        if (Vector3.Distance(targetPosition, transform.position) < 3f)
+        //        {
+        //            rand = Random.value;
+        //            if (rand < 0.5f) //50/50 
+        //                StartVertical();
+        //            else
+        //                StartRoam();
+        //        }
 
+        //    }
+        //}
+        //else if (state == State.Vertical)
+        //{
+        //    posX = verticalCenter.x + Mathf.Cos(angle) * verticalRadius;
+        //    posZ = verticalCenter.z + Mathf.Sin(angle) * verticalRadius;
+        //    if (currY < posY)
+        //        currY += 1f;
+        //    else
+        //        currY -= 1f;
+        //    targetPosition = new Vector3(posX, currY, posZ);
+        //    angle += Time.deltaTime * angularSpeed / verticalRadius;
+        //    if (angle > Mathf.PI * 2f)
+        //    {
+        //        angle -= Mathf.PI * 2f;
+        //    }
+        //    direction = targetPosition - transform.position;
+        //    rb.velocity = direction * movementSpeed;
+        //    if (direction != Vector3.zero)
+        //    {
+        //        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        //        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, angularSpeed * Time.deltaTime);
+        //    }
+        //    if (transform.position.y - currY < 5f)
+        //        StartRoam();
+        //}
+    }
 
     private void StartRoam()
     {
