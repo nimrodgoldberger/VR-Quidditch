@@ -158,6 +158,7 @@ MonoBehaviour:
   - {fileID: 380029552}
   speed: 2
   detectionRadius: 100
+  RotationSpeed: 3
 --- !u!54 &23125396
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3805,8 +3806,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   target: {fileID: 1465371521}
-  RotationSpeed: 3
   minDistanceToRespawn: 8
+  RotationSpeed: 3
   whirrLoop: {fileID: 0}
   movementSpeed: 50
 --- !u!1 &760662333
@@ -11080,8 +11081,9 @@ MonoBehaviour:
   - {fileID: 4931573070464385248}
   oponents:
   - {fileID: 380029552}
-  speed: 2
+  speed: 10
   detectionRadius: 100
+  RotationSpeed: 3
 --- !u!54 &1481781155
 Rigidbody:
   m_ObjectHideFlags: 0

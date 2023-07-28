@@ -22,6 +22,11 @@ public class GuardianController : MonoBehaviour
     private Vector3 startingPosition;
     private eGuardianState eState;
 
+
+    //For rotation
+    [SerializeField] private float RotationSpeed = 3f;
+    private Coroutine LookCoroutine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +35,7 @@ public class GuardianController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(!isMoving)
         {
@@ -107,11 +112,35 @@ public class GuardianController : MonoBehaviour
         else
         {
             // Start moving towards the target
+            StartRotating();
             StartCoroutine(MoveToTarget());
         }
 
         movementCoroutine = StartCoroutine(MoveToTarget());
     }
+
+    private IEnumerator MoveAndRotateToTarget()
+    {
+        Vector3 initialPosition = transform.position;
+        Vector3 targetPosition = searchForCloseOponents() ? targetToTackle.transform.position : startingPosition;
+        Quaternion initialRotation = transform.rotation;
+        Quaternion lookRotation = Quaternion.LookRotation(targetToTackle.transform.position - transform.position);
+        float elapsedTime = 0f;
+        
+        while(elapsedTime < 1f)
+        {
+            // Calculate the new position using Mathf.Lerp
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime);
+            transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, elapsedTime);
+
+            // Update the elapsed time based on the speed and rotationSpeed average increase
+            // Maybe needs adjustments
+            elapsedTime +=  ((Time.deltaTime * speed)+(Time.deltaTime * RotationSpeed))/2 ;
+
+            yield return null; // Wait for the next frame
+        }
+    }
+
 
     private System.Collections.IEnumerator MoveToTarget()
     {
@@ -135,5 +164,32 @@ public class GuardianController : MonoBehaviour
         }
         eState = eGuardianState.Idle;
         isMoving = false;
+    }
+
+    private void StartRotating()
+    {
+        if(LookCoroutine != null)
+        {
+            StopCoroutine(LookCoroutine);
+        }
+
+        LookCoroutine = StartCoroutine(LookAt());
+    }
+
+    private IEnumerator LookAt()
+    {
+        Quaternion lookRotation = Quaternion.LookRotation(targetToTackle.transform.position - transform.position);
+
+        float time = 0;
+
+        Quaternion initialRotation = transform.rotation;
+        while(time < 1)
+        {
+            transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, time);
+
+            time += Time.deltaTime * RotationSpeed;
+
+            yield return null;
+        }
     }
 }

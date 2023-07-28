@@ -22,8 +22,8 @@ public class SnitchLogic : MonoBehaviour
 
     //Target Related Fields
     [SerializeField] public GameObject target;
-    [SerializeField] private float RotationSpeed = 3f;
     [SerializeField] private float minDistanceToRespawn = 8;
+    [SerializeField] private float RotationSpeed = 3f;
     private Coroutine LookCoroutine;
     private float targetTime = 5;
 
