@@ -5,17 +5,19 @@ using UnityEngine;
 public enum eGuardianState { Idle = 0, Defend = 1, GoBack = 2 }
 
 
+
 public class GuardianController : MonoBehaviour
 {
-
-    public GameObject[] targetsToDefend;
-    public GameObject[] oponents;
-    public float speed;
-    public float detectionRadius;
+    [SerializeField]
+    private float defenceRadius;
+    [SerializeField]
+    private GameObject[] targetsToDefend;
+    [SerializeField] 
+    private GameObject[] oponents;
 
     private GameObject targetToTackle;
     private Vector3 direction;
-    
+    public float speed;
     private bool isMoving = false;
     private Coroutine movementCoroutine;
 
@@ -87,7 +89,7 @@ public class GuardianController : MonoBehaviour
 
     private bool IsOponentClose(GameObject target, GameObject oponent)
     {
-        if(Vector3.Distance(oponent.transform.position, target.transform.position) < detectionRadius)
+        if(Vector3.Distance(oponent.transform.position, target.transform.position) < defenceRadius)
         {
             return true;
         }
