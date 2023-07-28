@@ -14,33 +14,43 @@ public class SnitchLogic : MonoBehaviour
     }
     public State state;
 
-    public Transform[] targets;
-    private bool setNewPosition;
-    //private Transform target;
-    [SerializeField] private GameObject target;
+    //private TargetsSpawnArea spawnAreaManager;
 
-    private float verticalTimer = 0f, sleepTimer = 0f, maxDeltaY = 20f, rand, randSleep;
+    //public Transform[] targets;
+    //private bool setNewPosition;
+    //private Transform target;
+
+    //Target Related Fields
+    [SerializeField] public GameObject target;
+    [SerializeField] private float RotationSpeed = 3f;
+    [SerializeField] private float minDistanceToRespawn = 8;
+    private Coroutine LookCoroutine;
+    private float targetTime = 5;
+
+    //private float verticalTimer = 0f, sleepTimer = 0f, maxDeltaY = 20f, rand, randSleep;
 
 
     private AudioSource audioSource;
     public AudioClip whirrLoop;
-
-    private Rigidbody rb;
+    [SerializeField] private float movementSpeed = 50f;
+    //private Rigidbody rb;
     private Vector3 direction, targetPosition, verticalCenter;
 
-    [SerializeField]
-    float posY = 10f, verticalRadius =1f, rotationRadius = 370f, angularSpeed = 3f, ovalWidth = 2.5f, movementSpeed = 50f, maxSleepTime = 6f, maxPosY = 300f, minPosY = 5f;
-    [SerializeField]
-    Transform rotationCenter;
+    //[SerializeField]
+    //float posY = 10f, verticalRadius =1f, rotationRadius = 370f, angularSpeed = 3f, ovalWidth = 2.5f, movementSpeed = 50f, maxSleepTime = 6f, maxPosY = 300f, minPosY = 5f;
+    //[SerializeField]
+    //Transform rotationCenter;
 
-    private float currY, deltaY, posX, posZ, angle = 0f;
+    //private float currY, deltaY, posX, posZ, angle = 0f;
 
 
-    private float targetTime;
 
     void Start()
     {
-        targetTime = TargetsSpawnArea.TargetManager(target, 0f);
+        RespawnTarget();
+        //targetTime = spawnAreaManager.TargetManager(target, 0);
+
+        //targetTime = TargetsSpawnArea.TargetManager(target, 0f);
         //rb = GetComponent<Rigidbody>();
         //state = State.Roam;
         //audioSource = GetComponent<AudioSource>();
@@ -53,7 +63,23 @@ public class SnitchLogic : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.deltaTime);
-        targetTime = TargetsSpawnArea.TargetManager(target, targetTime);
+        StartRotating();
+        targetTime -= Time.deltaTime;
+        if(Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn)
+        {
+            RespawnTarget();
+            //Maybe change range to 3-5 or 2-5
+            targetTime = Random.Range(2, 4);
+        }
+        else if(targetTime <= 0)
+        {
+            RespawnTarget();
+            targetTime = Random.Range(2, 4);
+        }
+
+
+
+        //targetTime = TargetsSpawnArea.TargetManager(target, targetTime);
 
         //Vector3 currentPosition = transform.position;
         //currentPosition.y = Mathf.Clamp(currentPosition.y, 0f, maxPosY);
@@ -129,36 +155,79 @@ public class SnitchLogic : MonoBehaviour
         //}
     }
 
-    private void StartRoam()
+    public void RespawnTarget()
     {
-        state = State.Roam;
-        sleepTimer = 0;
-        randSleep = Random.Range(0, maxSleepTime);
-        setNewPosition = true;
+        Vector3 targetPosition;
+        do
+        {
+            targetPosition.y = Random.Range(8f, 120f);
+            targetPosition.x = Random.Range(-72f, 72f);
+            targetPosition.z = Random.Range(-219f, 219f);
+
+        } while(!TargetsSpawnArea.IsInsidePlayableArea(targetPosition) /*|| Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn*2*/);
+
+        target.transform.position = targetPosition;
     }
 
-    private void StartVertical()
+
+    private void StartRotating()
     {
-        state = State.Vertical;
-        verticalTimer = 0f;
-        verticalCenter = transform.position;
-        currY = verticalCenter.y;
-        deltaY = Random.Range(5f, maxDeltaY); //delta y is in absolute value, will substract to go down and add to go up
-        posY = currY;
-        if (currY < 30f || currY < deltaY)
-            posY += deltaY;
-        else if (posY > maxPosY) //when too high go down
+        if(LookCoroutine != null)
         {
-            posY -= deltaY;
+            StopCoroutine(LookCoroutine);
         }
-        else
-        {
-            if (deltaY > maxDeltaY/2f) // random 50/50 coin flip OR if delta will send us underground
-                posY += deltaY;
-            else 
-                posY -= deltaY;
-        }
-        posY = Mathf.Clamp(posY, minPosY, maxPosY);
-        Debug.Log("target pos Y is " + posY.ToString() + " delta " + deltaY.ToString() + " curr " + currY.ToString());
+
+        LookCoroutine = StartCoroutine(LookAt());
     }
+
+    private IEnumerator LookAt()
+    {
+        Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+
+        float time = 0;
+
+        Quaternion initialRotation = transform.rotation;
+        while(time < 1)
+        {
+            transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, time);
+
+            time += Time.deltaTime * RotationSpeed;
+
+            yield return null;
+        }
+    }
+
+
+    //private void StartRoam()
+    //{
+    //    state = State.Roam;
+    //    sleepTimer = 0;
+    //    randSleep = Random.Range(0, maxSleepTime);
+    //    setNewPosition = true;
+    //}
+
+    //private void StartVertical()
+    //{
+    //    state = State.Vertical;
+    //    verticalTimer = 0f;
+    //    verticalCenter = transform.position;
+    //    currY = verticalCenter.y;
+    //    deltaY = Random.Range(5f, maxDeltaY); //delta y is in absolute value, will substract to go down and add to go up
+    //    posY = currY;
+    //    if (currY < 30f || currY < deltaY)
+    //        posY += deltaY;
+    //    else if (posY > maxPosY) //when too high go down
+    //    {
+    //        posY -= deltaY;
+    //    }
+    //    else
+    //    {
+    //        if (deltaY > maxDeltaY/2f) // random 50/50 coin flip OR if delta will send us underground
+    //            posY += deltaY;
+    //        else 
+    //            posY -= deltaY;
+    //    }
+    //    posY = Mathf.Clamp(posY, minPosY, maxPosY);
+    //    Debug.Log("target pos Y is " + posY.ToString() + " delta " + deltaY.ToString() + " curr " + currY.ToString());
+    //}
 }
