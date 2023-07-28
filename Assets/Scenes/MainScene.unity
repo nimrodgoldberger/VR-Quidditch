@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 432212029}
-  m_IndirectSpecularColor: {r: 0.33655208, g: 0.8161745, b: 0.9302483, a: 1}
+  m_IndirectSpecularColor: {r: 0.3366986, g: 0.8175725, b: 0.9306336, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c834665d112924c8242aadb016a684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defenceRadius: 0
   targetsToDefend:
   - {fileID: 4931573070464385254}
   - {fileID: 458657852}
@@ -157,7 +158,6 @@ MonoBehaviour:
   oponents:
   - {fileID: 380029552}
   speed: 2
-  detectionRadius: 100
 --- !u!54 &23125396
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11074,6 +11074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c834665d112924c8242aadb016a684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defenceRadius: 0
   targetsToDefend:
   - {fileID: 4931573070464385242}
   - {fileID: 4931573070464385245}
@@ -11081,7 +11082,6 @@ MonoBehaviour:
   oponents:
   - {fileID: 380029552}
   speed: 2
-  detectionRadius: 100
 --- !u!54 &1481781155
 Rigidbody:
   m_ObjectHideFlags: 0
