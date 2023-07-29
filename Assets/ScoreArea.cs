@@ -5,7 +5,8 @@ using UnityEngine;
 public class ScoreArea : MonoBehaviour
 {
     [SerializeField] private GameObject particleEffectPrefab;
-
+    [SerializeField] private int team;
+    [SerializeField] GameObject scoreManager;
     void OnTriggerEnter(Collider otherCollider)
     {
         if(otherCollider.gameObject.name == "Quaffle")
@@ -13,6 +14,7 @@ public class ScoreArea : MonoBehaviour
             ParticleSystem particleSystemInstance = Instantiate(particleEffectPrefab, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             StartCoroutine(StopParticleEffect(particleSystemInstance));
         }
+        scoreManager.GetComponent<ScoreManager>().AddScore(10, team);
     }
 
     IEnumerator StopParticleEffect(ParticleSystem particleSystem)
