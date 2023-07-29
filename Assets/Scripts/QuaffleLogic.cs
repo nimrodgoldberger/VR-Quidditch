@@ -5,6 +5,8 @@ public class QuaffleLogic : MonoBehaviour
     public GameObject holder;
     public GameObject[] team1Players;
     public GameObject[] team2Players;
+    public GameObject team1VR;
+    public GameObject team2VR; // TODO TESTING     Dan
     public float takeDistance = 2f;
     public float takeTime = 0.5f;
 
@@ -109,10 +111,26 @@ public class QuaffleLogic : MonoBehaviour
             if(CanBeTaken(newHolder))
             {
                 holder = newHolder;
+                transform.SetParent(holder.transform);
+                transform.position = new Vector3(0f, 0f, 0f);
                 //____________________________________________________________________________________________
                 //                     ADD IMPLEMENTATION OF CONNECTING TO THE HOLDER
                 //____________________________________________________________________________________________
             }
         }
+    }
+
+
+
+
+    //TODO Erase of fix     METHODS FOR TESTING
+    public void VRTakesBall()
+    {
+        holder = team1VR;
+    }
+
+    public void VRLetsBallGo()
+    {
+        holder = null;
     }
 }

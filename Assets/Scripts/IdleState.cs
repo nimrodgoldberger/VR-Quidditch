@@ -79,8 +79,22 @@ public class IdleState : PlayerState
     private PlayerState RunSeekerIdle()
     {
         PlayerState nextState = this;
-        //Implementation...
+        //Implementation___________________________________________________________
+        bool foundSnitch = IsSnitchClose();
+
+        if(foundSnitch)
+        {
+            nextState = new SeekSnitchState();
+        }
+        //_________________________________________________________________________
         return nextState;
+    }
+
+    private bool IsSnitchClose()
+    {
+        float detectionRadius = 10f;
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        return distance <= detectionRadius;
     }
 
 
@@ -100,6 +114,8 @@ public class IdleState : PlayerState
     //    //}
     //}
 
+
+    // TODO Change to CloseQuaffle in Enemy
     private bool searchForCloseOponents()
     {
         bool found = false;
