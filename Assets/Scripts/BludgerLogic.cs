@@ -27,14 +27,12 @@ public class BludgerLogic : MonoBehaviour
     private Vector3 direction, targetPosition;
 
     [SerializeField] 
-    float posY = 10f, rotationRadius = 370f, angularSpeed = 1f, ovalWidth = 3f, movementSpeed = 50f;
+    float posY = 10f, rotationRadius = 222f, angularSpeed = 1f, ovalWidth = 3f, movementSpeed = 50f;
     [SerializeField] private AudioClip hitSound, howlSound;
     [SerializeField]
     Transform rotationCenter;
 
     private float deltaY, posX, posZ, angle = 0f;
-
-
 
     private void Start()
     {
@@ -57,6 +55,7 @@ public class BludgerLogic : MonoBehaviour
         if (state == State.Attack)
         {
             state = State.Chase;
+            audioSource.PlayOneShot(howlSound);
             chaseTimer = 0f;
             target = GetClosestTarget();
             Vector3 direction = target.position - transform.position;
@@ -109,6 +108,7 @@ public class BludgerLogic : MonoBehaviour
             direction.Normalize();
             rb.velocity = direction * movementSpeed;
             chaseTimer += Time.deltaTime;
+
             if (chaseTimer >= 20f)
             {
                 state = State.Patrol;
@@ -138,12 +138,20 @@ public class BludgerLogic : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Object collided with a player!");
-            //audioSource.PlayOneShot(hitSound);
+            audioSource.PlayOneShot(hitSound);
             rb.velocity = Vector3.zero;
+            collision.gameObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.CustomMovement>().HitPlayer();
         }
+        else if (collision.gameObject.CompareTag("AI"))
+        {
+            audioSource.PlayOneShot(hitSound);
+            rb.velocity = Vector3.zero;
+            //collision.gameObject.GetComponent<CustomMovement>().HitPlayer();
+        }
+
         state = State.Patrol;
         onTrack = true;
         patrolTimer = 0f;
     }
+
 }
