@@ -62,6 +62,25 @@ public class DefendState : PlayerState
         if(isOponentClose)
         {
             StateCoroutine = StartCoroutine(MoveAndRotateToTarget());
+            // Attempt to take the ball from the opponent
+            playerLogic.StartTryTakeBall();
+            // Check if the player is holding the ball after the attempt
+            bool tookBall = playerLogic.IsHoldingBall();
+
+            if(tookBall)
+            {
+                // Successfully took the ball
+                // Handle the defending behavior here if needed
+                //_______________________________________________________________________________________
+                //                   TRY TO PASS THE BALL + MAYBE MOVE AROUND A LITTLE
+                //_______________________________________________________________________________________
+            }
+            //else
+            //{
+            // Ball not taken, either still with the opponent or on the ground
+            // Handle the defending behavior here if needed
+            //}
+
         }
         else
         {
@@ -86,28 +105,58 @@ public class DefendState : PlayerState
         return nextState;
     }
 
+    //My Implementation of MoveAndRotateToTarget
+    //private IEnumerator MoveAndRotateToTarget()
+    //{
+    //    float elapsedTime = 0f;
+    //    Vector3 initialPosition = transform.position;
+    //    Vector3 targetPosition = target.transform.position;
+    //    Quaternion initialRotation = transform.rotation;
+    //    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
 
+    //    while(elapsedTime < 1f)
+    //    {
+    //        // Calculate the new position and rotation using Mathf.Lerp
+    //        transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime);
+    //        transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, elapsedTime);
+
+    //        // Update the elapsed time based on the speed and rotationSpeed average increase
+    //        // Maybe needs adjustments
+    //        elapsedTime += ((Time.deltaTime * speed) + (Time.deltaTime * RotationSpeed)) / 2;
+
+    //        yield return null; // Wait for the next frame
+    //    }
+    //}
+
+    //ChatGPT Implementation of MoveAndRotateToTarget
     private IEnumerator MoveAndRotateToTarget()
     {
+        float totalDistance = Vector3.Distance(transform.position, target.transform.position);
+        float travelDuration = totalDistance / speed;
+
         float elapsedTime = 0f;
         Vector3 initialPosition = transform.position;
         Vector3 targetPosition = target.transform.position;
         Quaternion initialRotation = transform.rotation;
-        Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+        Quaternion lookRotation = Quaternion.LookRotation(targetPosition - initialPosition);
 
-        while(elapsedTime < 1f)
+        while(elapsedTime < travelDuration)
         {
             // Calculate the new position and rotation using Mathf.Lerp
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime);
-            transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, elapsedTime);
+            float t = elapsedTime / travelDuration;
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+            transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, t);
 
-            // Update the elapsed time based on the speed and rotationSpeed average increase
-            // Maybe needs adjustments
-            elapsedTime += ((Time.deltaTime * speed) + (Time.deltaTime * RotationSpeed)) / 2;
+            elapsedTime += Time.deltaTime;
 
             yield return null; // Wait for the next frame
         }
+
+        // Ensure the final position and rotation match the target precisely
+        transform.position = targetPosition;
+        transform.rotation = lookRotation;
     }
+
 
     private bool searchForCloseOponents()
     {

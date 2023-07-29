@@ -29,6 +29,7 @@ public abstract class PlayerState : MonoBehaviour
     //For rotation
     [SerializeField] public float RotationSpeed;
     protected Coroutine StateCoroutine;
+    protected PlayerLogic playerLogic;
 
 
 
@@ -38,6 +39,5 @@ public abstract class PlayerState : MonoBehaviour
     // Start is called before the first frame update
     public abstract PlayerState RunCurrentPlayerState();
 
-    // Update is called once per frame
 
 }

@@ -109,6 +109,9 @@ public class QuaffleLogic : MonoBehaviour
             if(CanBeTaken(newHolder))
             {
                 holder = newHolder;
+                //____________________________________________________________________________________________
+                //                     ADD IMPLEMENTATION OF CONNECTING TO THE HOLDER
+                //____________________________________________________________________________________________
             }
         }
     }
