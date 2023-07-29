@@ -10,7 +10,7 @@ public class QuaffleLogic : MonoBehaviour
 
     private float takeTimer = 0f;
 
-    private void Update()
+    private void FixedUpdate()
     {
         // Check if the ball is currently being held
         if(holder != null)

@@ -18,16 +18,13 @@ public class PlayerLogic : MonoBehaviour
     public PlayerTeam playerTeam;
 
     
-    // Your player logic and other code here...
-    
-
-
     //__________________________________________TAKING A BALL_____________________________________________________
     // Method to attempt to take the ball from the current holder or from the ground/air
     public void StartTryTakeBall()
     {
         StartCoroutine(TryTakeBall());
     }
+
     // Coroutine to attempt to take the ball from the current holder or from the ground/air
     private IEnumerator TryTakeBall()
     {
