@@ -21,6 +21,7 @@ public abstract class PlayerState : MonoBehaviour
     public Vector3 startingPosition;
     //For targeting 
     public GameObject[] targetsToDefend;
+
     public GameObject[] oponents;
     public float detectionRadius;
     public GameObject target;

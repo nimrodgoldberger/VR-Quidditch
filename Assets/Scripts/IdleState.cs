@@ -14,38 +14,38 @@ public class IdleState : PlayerState
 
     public override PlayerState RunCurrentPlayerState()
     {
-        PlayerState playerState = null;
+        PlayerState nextState = null;
 
         switch(this.playerType)
         {
             case PlayerType.Keeper:
                 {
-                    playerState = RunKeeperIdle();
+                    nextState = RunKeeperIdle();
                 }
                 break;
             case PlayerType.Beater:
                 {
-                    playerState = RunBeaterIdle();
+                    nextState = RunBeaterIdle();
                 }
                 break;
             case PlayerType.Chaser:
                 {
-                    playerState = RunChaserIdle();
+                    nextState = RunChaserIdle();
                 }
                 break;
             case PlayerType.Seeker:
                 {
-                    playerState = RunSeekerIdle();
+                    nextState = RunSeekerIdle();
                 }
                 break;
             default:
                 {
-                    playerState = this;
+                    nextState = this;
                 }
                 break;
         }
 
-        return playerState;
+        return nextState;
     }
 
     private PlayerState RunKeeperIdle()
@@ -79,14 +79,13 @@ public class IdleState : PlayerState
     private PlayerState RunSeekerIdle()
     {
         PlayerState nextState = this;
-        //Implementation___________________________________________________________
         bool foundSnitch = IsSnitchClose();
 
         if(foundSnitch)
         {
             nextState = new SeekSnitchState();
         }
-        //_________________________________________________________________________
+
         return nextState;
     }
 

@@ -7,19 +7,19 @@ public class PlayerStateManager : MonoBehaviour
     //Initialized with TeamPlayersManager too
     public PlayerTeam team;
     public PlayerType playerType;
-    public PlayerState currentState;
+    public PlayerState currentState = new IdleState();
     // TODO Check if better to initialize like those above
     private Vector3 startingPosition;
     //Unsure about these..They are here to make flying realistic
     // TODO Check if They do it
-    public float frequency = 2.0f;
-    public float amplitude = 1.0f;
-    public float startingHeight = 1.0f;
+    //public float frequency = 2.0f;
+    //public float amplitude = 1.0f;
+    //public float startingHeight = 1.0f;
 
     void Start()
     {
         startingPosition = transform.position;
-        currentState = new IdleState();
+        //currentState = new IdleState();
 
     }
 
@@ -47,10 +47,10 @@ public class PlayerStateManager : MonoBehaviour
         nextState.detectionRadius = currentState.detectionRadius;
         nextState.oponents = currentState.oponents;
         nextState.speed = currentState.speed;
-        nextState.frequency = frequency;
-        nextState.amplitude = amplitude;
         // TODO CHECK IF NEEDED
-        nextState.startingHeight = startingHeight;
+        //nextState.frequency = frequency;
+        //nextState.amplitude = amplitude;
+        //nextState.startingHeight = startingHeight;
         nextState.playerLogic.playerTeam = team;
         nextState.playerType = playerType;
         currentState = nextState;
