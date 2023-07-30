@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
@@ -12,6 +13,9 @@ namespace UnityEngine.XR.Interaction.Toolkit
     [AddComponentMenu("XR/Locomotion/Continuous Move Provider (Action-based)", 11)]
     public class CustomMovement : CustomContinuousMoveProviderBase
     {
+
+        [SerializeField] private float hitDuration = 5f;
+
         [SerializeField]
         [Tooltip("The Input System Action that will be used to read Move data from the left hand controller. Must be a Value Vector2 Control.")]
         InputActionProperty m_LeftHandMoveAction;
@@ -72,6 +76,20 @@ namespace UnityEngine.XR.Interaction.Toolkit
 
             if (Application.isPlaying && isActiveAndEnabled)
                 property.EnableDirectAction();
+        }
+
+        public void HitPlayer()
+        {
+            StartCoroutine(HitPlayerCoroutine());
+        }
+
+        private IEnumerator HitPlayerCoroutine()
+        {
+            hitByBludger = true;
+
+            yield return new WaitForSeconds(hitDuration);
+
+            hitByBludger = false;
         }
     }
 }

@@ -17,7 +17,9 @@ namespace UnityEngine.XR.Interaction.Toolkit
         [SerializeField] private float gripMultiplier = 3f;
         [SerializeField] private float downGlideAngle = 35;
         [SerializeField] private Transform forwardSourceReference;
-        [SerializeField] private float accelerationTime = 1.0f; 
+        [SerializeField] private float accelerationTime = 1.0f;
+        [SerializeField] private float bludgerSlowMoveSpeed = 5f;
+
         private PhotonView view;
 
 
@@ -35,10 +37,13 @@ namespace UnityEngine.XR.Interaction.Toolkit
         private float targetSpeed;
         private float triggerValue = 0f;
         //private float gripValue = 0f;
-        public float baseMoveSpeed;
         private Transform baseForwardSource;
         private Transform currentForwardSource;
-        private bool glidingDown = false;
+
+        public bool hitByBludger = false;
+        public float baseMoveSpeed;
+
+
 
 
 
@@ -192,6 +197,10 @@ namespace UnityEngine.XR.Interaction.Toolkit
             if (triggerValue > 0.1f)
             {
                 targetSpeed = triggerMultiplier * triggerValue * baseMoveSpeed;
+            }
+            else if (hitByBludger)
+            {
+                targetSpeed = bludgerSlowMoveSpeed;
             }
             else
             {
@@ -376,6 +385,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
                 m_AttemptedGetCharacterController = true;
             }
         }
+
         //private void Boost(InputAction.CallbackContext obj)
         //{
         //    boosting = true;
