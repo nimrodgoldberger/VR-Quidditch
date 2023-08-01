@@ -16,7 +16,8 @@ public enum PlayerTeam
     Griffindor = 0,
     Hufflepuff = 1,
     Ravenclaw = 2,
-    Slitheryn = 3
+    Slitheryn = 3,
+    None = 4
 }
 
 public class TeamPlayersManager : MonoBehaviour

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeekSnitchState : PlayerState
+public class SeekSnitchStateOld : PlayerState
 {
     public override PlayerState RunCurrentPlayerState()
     {
@@ -18,7 +18,7 @@ public class SeekSnitchState : PlayerState
                 break;
             default:
                 {
-                    playerState = new IdleState();
+                    playerState = new IdleStateOld();
                 }
                 break;
         }

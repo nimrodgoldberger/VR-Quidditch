@@ -11,7 +11,8 @@ public enum PlayerType
     Keeper = 0,
     Beater = 1,
     Chaser = 2,
-    Seeker = 3
+    Seeker = 3,
+    VRPlayer = 4
 }
 
 // Abstract PlayerState from which all states will inherit

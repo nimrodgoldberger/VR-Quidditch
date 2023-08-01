@@ -70,7 +70,7 @@ public class BackToGuardState : PlayerState
             // You can decide if you want to transition to a different state or remain in the BackToGuardState
 
             // For example, transition back to the DefendState after reaching the starting position
-            nextState = new IdleState();
+            nextState = new IdleStateOld();
         }
 
         return nextState;

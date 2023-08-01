@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : PlayerState
+public class IdleStateOld : PlayerState
 {
     private Vector3 startingPosition;
 
-    void Start()
+    private void Start()
     {
         startingPosition = transform.position;
     }
@@ -56,7 +56,7 @@ public class IdleState : PlayerState
 
         if(foundEnemy)
         {
-            nextState = new DefendState();
+            nextState = new DefendStateOld();
         }
         //_________________________________________________________________________
         return nextState;
@@ -83,7 +83,7 @@ public class IdleState : PlayerState
 
         if(foundSnitch)
         {
-            nextState = new SeekSnitchState();
+            nextState = new SeekSnitchStateOld();
         }
 
         return nextState;

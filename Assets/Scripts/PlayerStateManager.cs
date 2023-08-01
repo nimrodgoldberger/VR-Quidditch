@@ -7,7 +7,7 @@ public class PlayerStateManager : MonoBehaviour
     //Initialized with TeamPlayersManager too
     public PlayerTeam team;
     public PlayerType playerType;
-    public PlayerState currentState = new IdleState();
+    public PlayerState currentState = new IdleStateOld();
     // TODO Check if better to initialize like those above
     private Vector3 startingPosition;
     //Unsure about these..They are here to make flying realistic

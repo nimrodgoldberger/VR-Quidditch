@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefendState : PlayerState
+public class DefendStateOld : PlayerState
 {
     public override PlayerState RunCurrentPlayerState()
     {
@@ -93,14 +93,14 @@ public class DefendState : PlayerState
 
     private PlayerState RunBeaterDefend()
     {
-        PlayerState nextState = new IdleState();
+        PlayerState nextState = new IdleStateOld();
         //Implementation...
         return nextState;
     }
 
     private PlayerState RunChaserDefend()
     {
-        PlayerState nextState = new IdleState();
+        PlayerState nextState = new IdleStateOld();
         //Implementation...
         return nextState;
     }

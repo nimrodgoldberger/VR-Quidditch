@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnitchLogic : MonoBehaviour
+public class SnitchLogic : Targetable
 {
-
+    
     public enum State
     {
         Roam = 1,
@@ -24,8 +24,10 @@ public class SnitchLogic : MonoBehaviour
     [SerializeField] public GameObject target;
     [SerializeField] private float minDistanceToRespawn = 8;
     [SerializeField] private float RotationSpeed = 3f;
+    [SerializeField] private float maxDistanceToCatch = 20;// TODO adjust value just to try it 
     private Coroutine LookCoroutine;
     private float targetTime = 5;
+
 
     //private float verticalTimer = 0f, sleepTimer = 0f, maxDeltaY = 20f, rand, randSleep;
 
@@ -35,6 +37,9 @@ public class SnitchLogic : MonoBehaviour
     [SerializeField] private float movementSpeed = 50f;
     //private Rigidbody rb;
     private Vector3 direction, targetPosition, verticalCenter;
+
+    //To know if SnitchWasCaught
+    private bool wasSnitchCaught = false;
 
     //[SerializeField]
     //float posY = 10f, verticalRadius =1f, rotationRadius = 370f, angularSpeed = 3f, ovalWidth = 2.5f, movementSpeed = 50f, maxSleepTime = 6f, maxPosY = 300f, minPosY = 5f;
@@ -59,23 +64,26 @@ public class SnitchLogic : MonoBehaviour
         //audioSource.Play();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.deltaTime);
-        StartRotating();
-        targetTime -= Time.deltaTime;
-        if(Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn)
+        if(!wasSnitchCaught)
         {
-            RespawnTarget();
-            //Maybe change range to 3-5 or 2-5
-            targetTime = Random.Range(2, 4);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.deltaTime);
+            StartRotating();
+            targetTime -= Time.deltaTime;
+            if(Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn)
+            {
+                RespawnTarget();
+                //Maybe change range to 3-5 or 2-5
+                targetTime = Random.Range(2, 4);
+            }
+            else if(targetTime <= 0)
+            {
+                RespawnTarget();
+                targetTime = Random.Range(2, 4);
+            }
         }
-        else if(targetTime <= 0)
-        {
-            RespawnTarget();
-            targetTime = Random.Range(2, 4);
-        }
+
 
 
 
@@ -169,7 +177,6 @@ public class SnitchLogic : MonoBehaviour
         target.transform.position = targetPosition;
     }
 
-
     private void StartRotating()
     {
         if(LookCoroutine != null)
@@ -195,6 +202,23 @@ public class SnitchLogic : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public bool WasSnitchCaught()//Maybe unnecessary
+    {
+        return wasSnitchCaught;
+    }
+
+    public bool TryCatchSnitch(PlayerLogicManager player)
+    {
+        if(!wasSnitchCaught  && Vector3.Distance(transform.position, player.transform.position) <= maxDistanceToCatch)
+        {
+            wasSnitchCaught = true;
+            transform.SetParent(player.transform);
+            transform.position = new Vector3(2f, 0f, 0f);
+        }
+
+        return wasSnitchCaught;
     }
 
 
