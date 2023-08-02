@@ -48,16 +48,25 @@ public class QuaffleLogicNew : Targetable
     {
         if(!isQuaffleHeld && Vector3.Distance(transform.position, player.transform.position) <= takeDistance)
         {
+            Vector3 relativepos = new Vector3(0.35f, 0.35f, 0.2f);
             isQuaffleHeld = true;
             heldBy = player.PlayerTeam;
             transform.SetParent(player.transform);
-            transform.position = new Vector3(2f, 0f, 0f);
+            
+            //transform.position = player.transform.position;
+            transform.localPosition = relativepos;
+
         }
 
         return isQuaffleHeld;
     }
 
-    
-
+    public void FlyToTarget(Targetable newTarget)
+    {
+        heldBy = PlayerTeam.None;
+        transform.SetParent(null);
+        //1. FlyToTarget
+        //2. SetTheNewParent + team...
+    }
 
 }

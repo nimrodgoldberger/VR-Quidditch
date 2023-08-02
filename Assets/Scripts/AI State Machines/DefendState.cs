@@ -5,6 +5,7 @@ using UnityEngine;
 public class DefendState : State
 {
     public ReturnToStartPositionState ReturnToStartPositionState;
+    public KeeperHoldsQuaffleState KeeperHoldsQuaffleState;
     float QuaffleVisibilityRange = 30f;
 
     public override State RunCurrentState()
@@ -23,11 +24,15 @@ public class DefendState : State
             }
             else
             {
-                return ReturnToStartPositionState;
+                Logic.target = null;
+
+                return KeeperHoldsQuaffleState;
             }
         }
         else
         {
+            Logic.target = null;
+
             return ReturnToStartPositionState;
         }
     }

@@ -16,19 +16,25 @@ public class ReturnToStartPositionState : State
             Logic.SetTarget(startingPos);
         }
 
-        if(Vector3.Distance(transform.position, startingPos.transform.position) <= minDistance)
-        {
-            transform.position = startingPos.transform.position;
-            transform.rotation = startingPos.transform.rotation;
+        transform.position = startingPos.transform.position;
+        transform.rotation = startingPos.transform.rotation;
 
-            Debug.Log("I will return to my starting position");
-            return idleState;
-        }
-        else
-        {
-            Logic.MoveAndRotateToTarget();
+        Debug.Log("I will return to my starting position");
+        return idleState;
 
-            return this;
-        }
+        //if(Vector3.Distance(transform.position, startingPos.transform.position) <= minDistance)
+        //{
+        //    transform.position = startingPos.transform.position;
+        //    transform.rotation = startingPos.transform.rotation;
+
+        //    Debug.Log("I will return to my starting position");
+        //    return idleState;
+        //}
+        //else
+        //{
+        //    Logic.MoveAndRotateToTarget();
+
+        //    return this;
+        //}
     }
 }
