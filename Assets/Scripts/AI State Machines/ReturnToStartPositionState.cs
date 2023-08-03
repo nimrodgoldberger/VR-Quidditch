@@ -6,6 +6,7 @@ public class ReturnToStartPositionState : State
 {
     public IdleState idleState;
     public DefendState defendState;
+
     [SerializeField] private float minDistance = 2f;
     public Targetable startingPos;
     float QuaffleVisibilityRange = 30f;
@@ -43,6 +44,7 @@ public class ReturnToStartPositionState : State
     //    }
     //}
 
+
     public override State RunCurrentState()
     {
         if(!startingPos)
@@ -52,11 +54,13 @@ public class ReturnToStartPositionState : State
             Logic.SetTarget(startingPos);
         }
 
+
         // Calculate the distance to the startingPos position and rotation
         float distanceToPosition = Vector3.Distance(transform.position, startingPos.transform.position);
         float angleToRotation = Quaternion.Angle(transform.rotation, startingPos.transform.rotation);
 
         // Check if character has reached both the startingPos position and rotation
+
         if(distanceToPosition <= minDistance)
         {
 
@@ -99,6 +103,7 @@ public class ReturnToStartPositionState : State
 
     //    Debug.Log("I will return to my starting position");
     //    return idleState;
+
 
     //    //if(Vector3.Distance(transform.position, startingPos.transform.position) <= minDistance)
     //    //{

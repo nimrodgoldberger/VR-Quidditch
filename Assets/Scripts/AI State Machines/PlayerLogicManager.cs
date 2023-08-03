@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerLogicManager : Targetable
 {
-    //protected Targetable startingTransform;// TODO make return to starting transform.
+
     protected Vector3 startingPosition;
     protected Quaternion startingRotation;
     public DynamicPositionTarget startingPositionTarget;
 
-
-
+   
     public PlayerTeam PlayerTeam;
     public PlayerType PlayerType;
     public PlayerLogicManager[] enemies;
@@ -19,6 +18,7 @@ public class PlayerLogicManager : Targetable
     public QuaffleLogicNew Quaffle;
     public BludgerLogic[] Bludgers;
     public Targetable target;
+
     public bool isMoving = false;
     [SerializeField] protected float speed;
     [SerializeField] protected float rotationSpeed;
@@ -141,6 +141,7 @@ public class PlayerLogicManager : Targetable
         transform.position = targetPosition;
         transform.rotation = lookRotation;
 
+
         // At the end of the coroutine, reset the target and isMoving flag
         ResetTarget();
         isMoving = false;
@@ -152,6 +153,7 @@ public class PlayerLogicManager : Targetable
             return; // Return if already moving
 
         StartCoroutine(RotateToStartRotationCoroutine());
+
     }
 
     //private IEnumerator RotateToStartPositionCoroutine()
@@ -254,5 +256,32 @@ public class PlayerLogicManager : Targetable
         //return Quaffle.CanBeTaken(this);
         return Vector3.Distance(Quaffle.transform.position, transform.position) <= range;
     }
+
+    public int IsABludgerInRange(float range)
+    {
+
+        if (Vector3.Distance(Bludgers[0].transform.position, transform.position) <= range)
+            return 0;
+        else if (Vector3.Distance(Bludgers[1].transform.position, transform.position) <= range)
+            return 1;
+        else
+            return 3;//NO BLUDGERS IN RANGE
+
+    }
+
+
+    public void BudgerWasHit(int bludgerIndex)
+    {
+        // Create a new instance of Random class
+        System.Random random = new System.Random();
+
+        // Generate a random index within the bounds of the array
+        int randomIndex = random.Next(0, enemies.Length);
+
+        // New bludger target will be the new enemy
+        Bludgers[bludgerIndex].SetTarget(enemies[randomIndex].gameObject);
+        Bludgers[bludgerIndex].state = BludgerLogic.State.Chase;
+    }
+
 }
 
