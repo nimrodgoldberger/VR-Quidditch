@@ -15,16 +15,16 @@ public class QuaffleLogicNew : Targetable
     [SerializeField] private float movementSpeed = 60f;
 
 
-    private void FixedUpdate()
-    {
+    //private void FixedUpdate()
+    //{
         
-    }
+    //}
 
 
-    public bool CanBeTaken(GameObject potentialHolder)
+    public bool CanBeTaken(PlayerLogicManager potentialHolder)
     {
         // Check if the potential holder is within range of the ball
-        return Vector3.Distance(transform.position, potentialHolder.transform.position) < takeDistance;
+        return (Vector3.Distance(transform.position, potentialHolder.transform.position) < takeDistance) && (heldBy != potentialHolder.PlayerTeam);
     }
 
     public bool TryTakeQuaffle(PlayerLogicManager player)

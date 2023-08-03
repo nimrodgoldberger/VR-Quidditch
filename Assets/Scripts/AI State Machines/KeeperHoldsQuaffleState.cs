@@ -15,12 +15,17 @@ public class KeeperHoldsQuaffleState : State
         {
             // If the Keeper still holds the Quaffle, stay in this state
 
-            return this;
+            //return this;
+            Logic.target = null;
+            Logic.isMoving = false;
+            return ReturnToStartPositionState;
+
         }
         else
         {
             // If the Keeper doesn't hold the Quaffle anymore, return to the starting position
-
+            Logic.target = null;
+            Logic.isMoving = false;
             return ReturnToStartPositionState;
         }
     }
