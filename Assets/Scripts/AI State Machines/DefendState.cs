@@ -25,13 +25,15 @@ public class DefendState : State
             else // Caught Quaffle
             {
                 Logic.target = null;
-
-                return KeeperHoldsQuaffleState;
+                Logic.isMoving=false;
+                
+                return ReturnToStartPositionState;
             }
         }
         else
         {
             Logic.target = null;
+            Logic.isMoving = false;
 
             return ReturnToStartPositionState;
         }

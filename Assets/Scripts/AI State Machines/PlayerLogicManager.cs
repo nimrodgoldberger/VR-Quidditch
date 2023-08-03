@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerLogicManager : Targetable
 {
+
     protected Vector3 startingPosition;
     protected Quaternion startingRotation;
-    //public DynamicPositionTarget startingPositionTarget;
+    public DynamicPositionTarget startingPositionTarget;
 
-    protected Targetable startingTransform;// TODO make return to starting transform.
+   
     public PlayerTeam PlayerTeam;
     public PlayerType PlayerType;
     public PlayerLogicManager[] enemies;
@@ -17,19 +18,22 @@ public class PlayerLogicManager : Targetable
     public QuaffleLogicNew Quaffle;
     public BludgerLogic[] Bludgers;
     public Targetable target;
-    protected bool isMoving = false;
+
+    public bool isMoving = false;
     [SerializeField] protected float speed;
     [SerializeField] protected float rotationSpeed;
+
+    
 
     protected virtual void Start()
     {
         startingPosition = transform.position;
         startingRotation = transform.rotation;
-        //startingPositionTarget.SetTransform(startingPosition, startingRotation);
+        startingPositionTarget.SetTransform(startingPosition, startingRotation);
         //startingPositionTarget = new StartingPositionTarget(startingPosition, startingRotation);
         //startingPositionTarget.position = startingPosition;
         //startingPositionTarget.rotation = startingRotation;
-    }
+    }
 
     //private void FixedUpdate()
     //{
@@ -81,14 +85,23 @@ public class PlayerLogicManager : Targetable
         return target;
     }
 
-    public Transform GetStartingTransform()
-    {
-        return startingTransform.transform;
-    }
+    //public Transform GetStartingTransform()
+    //{
+    //    return startingTransform.transform;
+    //}
 
     public Targetable GetStartingTransformAsTargetable()
     {
-        return startingTransform;
+        //// Create a new GameObject and set its position and rotation to the starting values
+        //GameObject startingObj = new GameObject("StartingTransform");
+        //startingObj.transform.position = startingPosition;
+        //startingObj.transform.rotation = startingRotation;
+
+        //// Add a Targetable component to the new GameObject and return it
+        //Targetable targetable = startingObj.AddComponent<Targetable>();
+        //return targetable;
+        return startingPositionTarget;
+        //return new StartingPositionTarget(startingPosition, startingRotation);
     }
 
     public void MoveAndRotateToTarget()
@@ -128,8 +141,110 @@ public class PlayerLogicManager : Targetable
         transform.position = targetPosition;
         transform.rotation = lookRotation;
 
+
+        // At the end of the coroutine, reset the target and isMoving flag
+        ResetTarget();
         isMoving = false;
     }
+
+    public void RotateToStartingPosition()
+    {
+        if(isMoving)
+            return; // Return if already moving
+
+        StartCoroutine(RotateToStartRotationCoroutine());
+
+    }
+
+    //private IEnumerator RotateToStartPositionCoroutine()
+    //{
+    //    isMoving = true;
+
+    //    Vector3 directionToStartingPos = startingPositionTarget.transform.position - transform.position;
+    //    Quaternion desiredRotation = Quaternion.LookRotation(directionToStartingPos, Vector3.up);
+
+    //    float angleToRotation = Quaternion.Angle(transform.rotation, desiredRotation);
+    //    float rotationDuration = angleToRotation / rotationSpeed;
+
+    //    float elapsedTime = 0f;
+    //    while(elapsedTime < rotationDuration)
+    //    {
+    //        float t = elapsedTime / rotationDuration;
+    //        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, t);
+
+    //        // Yielding inside FixedUpdate to wait for the next FixedUpdate step
+    //        yield return new WaitForFixedUpdate();
+
+    //        elapsedTime += Time.fixedDeltaTime;
+    //    }
+
+    //    // Ensure the final rotation is set correctly
+    //    transform.rotation = desiredRotation;
+
+    //    // At the end of the coroutine, reset the target and isMoving flag
+    //    ResetTarget();
+    //    isMoving = false;
+    //}
+    private IEnumerator RotateToStartRotationCoroutine()
+    {
+        isMoving = true;
+
+        Quaternion initialRotation = transform.rotation;
+        Quaternion targetRotation = startingPositionTarget.transform.rotation;
+
+        float angleToRotation = Quaternion.Angle(initialRotation, targetRotation);
+        float rotationDuration = angleToRotation / rotationSpeed;
+
+        float elapsedTime = 0f;
+        while(elapsedTime < rotationDuration)
+        {
+            float t = elapsedTime / rotationDuration;
+            transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, t);
+
+            // Yielding inside FixedUpdate to wait for the next FixedUpdate step
+            yield return new WaitForFixedUpdate();
+
+            elapsedTime += Time.fixedDeltaTime;
+        }
+
+        // Ensure the final rotation is set correctly
+        transform.rotation = targetRotation;
+
+        // At the end of the coroutine, reset the target and isMoving flag
+        ResetTarget();
+        isMoving = false;
+    }
+    //private IEnumerator RotateToStartRotationCoroutine()
+    //{
+    //    isMoving = true;
+
+    //    Vector3 directionToStartingPos = startingPositionTarget.transform.position - transform.position;
+    //    Quaternion desiredRotation = Quaternion.LookRotation(directionToStartingPos, Vector3.up);
+
+    //    float angleToRotation = Quaternion.Angle(transform.rotation, desiredRotation);
+
+    //    float rotationDuration = angleToRotation / rotationSpeed;
+
+    //    float elapsedTime = 0f;
+    //    while(elapsedTime < rotationDuration)
+    //    {
+    //        float t = elapsedTime / rotationDuration;
+    //        transform.rotation = Quaternion.Slerp(transform.rotation, startingPositionTarget.transform.rotation, t);
+
+    //        // Yielding inside FixedUpdate to wait for the next FixedUpdate step
+    //        yield return new WaitForFixedUpdate();
+
+    //        elapsedTime += Time.fixedDeltaTime;
+    //    }
+
+    //    // Ensure the final rotation is set correctly
+    //    transform.rotation = startingPositionTarget.transform.rotation;
+
+    //    // At the end of the coroutine, reset the target and isMoving flag
+    //    ResetTarget();
+    //    isMoving = false;
+    //}
+
 
     public bool IsSnitchInRange(float range)
     {
@@ -138,6 +253,7 @@ public class PlayerLogicManager : Targetable
 
     public bool IsQuaffleInRange(float range)
     {
+        //return Quaffle.CanBeTaken(this);
         return Vector3.Distance(Quaffle.transform.position, transform.position) <= range;
     }
 

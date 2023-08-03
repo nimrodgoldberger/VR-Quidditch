@@ -25,6 +25,8 @@ public class IdleState : State
                     if(canSeeTarget)
                     {
                         Debug.Log("I Have started DefenseState seeking the Quaffle!");
+                        Logic.target = null;
+                        Logic.isMoving = false;
                         returnState = defendState;
                     }
                     else
@@ -49,6 +51,8 @@ public class IdleState : State
                     if(canSeeTarget)
                     {
                         Debug.Log("I Have started seeking the snitch!");
+                        Logic.target = null;
+                        Logic.isMoving = false;
                         returnState = seekSnitchState;
                     }
                     else
