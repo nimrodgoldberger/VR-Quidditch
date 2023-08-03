@@ -2723,7 +2723,18 @@ MonoBehaviour:
   m_DefaultActionMap: VoiceActivation
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &380029567
+--- !u!114 &380029568 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5259008784469880827, guid: ea3910f8ceaf81342bd45b592d99ca68, type: 3}
+  m_PrefabInstance: {fileID: 380029551}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380029552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a053cdb62bb414fa50eb77e049dea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &380029574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2732,11 +2743,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 380029552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7dd5f84856af5b429f8774cf79eeac4, type: 3}
+  m_Script: {fileID: 11500000, guid: 93a05a663bfcb46469aae3a0aba96497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quaffleLogic: {fileID: 0}
-  playerTeam: 0
+  PlayerTeam: 0
+  PlayerType: 2
+  enemies: []
+  friends: []
+  Snitch: {fileID: 744472423}
+  Quaffle: {fileID: 937341420}
+  Bludgers:
+  - {fileID: 468706356}
+  - {fileID: 1143367334}
+  target: {fileID: 0}
+  speed: 0
+  rotationSpeed: 0
+  m_CustomMovement: {fileID: 380029568}
 --- !u!1 &392892346
 GameObject:
   m_ObjectHideFlags: 0
@@ -19834,6 +19856,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 54500914156780484, guid: c018cee51cda5de4e8a308f4b4292b3a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 54500914156780487, guid: c018cee51cda5de4e8a308f4b4292b3a, type: 3}
       propertyPath: m_InteractionManager
       value: 
@@ -19908,79 +19934,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c018cee51cda5de4e8a308f4b4292b3a, type: 3}
---- !u!1001 &4554629361054039911
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4554629360624624161, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: Snitch
-      value: 
-      objectReference: {fileID: 744472423}
-    - target: {fileID: 4554629360624624161, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: Quaffle
-      value: 
-      objectReference: {fileID: 937341420}
-    - target: {fileID: 4554629361447464754, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_Name
-      value: AI Player Keeper Trial
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_RootOrder
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 17.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.08715578
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.9961947
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 190
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464755, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4554629361447464766, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: Snitch
-      value: 
-      objectReference: {fileID: 744472423}
-    - target: {fileID: 4554629361447464766, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
-      propertyPath: Quaffle
-      value: 
-      objectReference: {fileID: 937341420}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4d947ffde76e2a549aba0852ecf35144, type: 3}
 --- !u!1001 &4931573070464385235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20268,3 +20221,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4931573070703326161, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
   m_PrefabInstance: {fileID: 4931573070464385235}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5776180213998145010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 30.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.08715578
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9961947
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552103, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_Name
+      value: AI Player Keeper Trial
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552107, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: Snitch
+      value: 
+      objectReference: {fileID: 744472423}
+    - target: {fileID: 5776180215716552107, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: Quaffle
+      value: 
+      objectReference: {fileID: 937341420}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 72642395652e83240aa16843217efa64, type: 3}

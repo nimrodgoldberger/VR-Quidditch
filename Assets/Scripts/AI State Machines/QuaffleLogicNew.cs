@@ -12,7 +12,7 @@ public class QuaffleLogicNew : Targetable
 
     // TODO For passing and throwing
     [SerializeField] public GameObject target;
-    [SerializeField] private float movementSpeed = 50f;
+    [SerializeField] private float movementSpeed = 60f;
 
 
     private void FixedUpdate()
@@ -52,14 +52,14 @@ public class QuaffleLogicNew : Targetable
             isQuaffleHeld = true;
             heldBy = player.PlayerTeam;
             transform.SetParent(player.transform);
-            
-            //transform.position = player.transform.position;
             transform.localPosition = relativepos;
-
         }
+        // TODO add else if taken: Wait 0.5 seconds before taking it;
 
         return isQuaffleHeld;
     }
+
+    // XROrigin TakeQuaffle
 
     public void FlyToTarget(Targetable newTarget)
     {

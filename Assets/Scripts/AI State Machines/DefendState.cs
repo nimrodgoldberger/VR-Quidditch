@@ -22,7 +22,7 @@ public class DefendState : State
                 Logic.MoveAndRotateToTarget();
                 return this;
             }
-            else
+            else // Caught Quaffle
             {
                 Logic.target = null;
 

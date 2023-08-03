@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLogicManager : MonoBehaviour
+public class PlayerLogicManager : Targetable
 {
-    private Targetable startingTransform;// TODO make return to starting transform.
+    protected Targetable startingTransform;// TODO make return to starting transform.
     public PlayerTeam PlayerTeam;
     public PlayerType PlayerType;
     public PlayerLogicManager[] enemies;
@@ -13,19 +13,19 @@ public class PlayerLogicManager : MonoBehaviour
     public QuaffleLogicNew Quaffle;
     public BludgerLogic[] Bludgers;
     public Targetable target;
-    [SerializeField] private float speed;
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] protected float speed;
+    [SerializeField] protected float rotationSpeed;
 
-    private void Start()
+    protected virtual void Start()
     {
         startingTransform.transform.position = transform.position;
         startingTransform.transform.rotation = transform.rotation;
     }
 
-    private void FixedUpdate()
-    {
+    //private void FixedUpdate()
+    //{
 
-    }
+    //}
 
     //private void RunPlayerLogicByType()
     //{
