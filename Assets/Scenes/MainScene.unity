@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 432212029}
-  m_IndirectSpecularColor: {r: 0.3366986, g: 0.8175725, b: 0.9306336, a: 1}
+  m_IndirectSpecularColor: {r: 0.33655208, g: 0.8161745, b: 0.9302483, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12182,7 +12182,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321308249
 GameObject:
@@ -12220,7 +12220,7 @@ Transform:
   - {fileID: 208221889}
   - {fileID: 194386546}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1325283121
 GameObject:
@@ -20812,6 +20812,10 @@ PrefabInstance:
       propertyPath: Quaffle
       value: 
       objectReference: {fileID: 937341420}
+    - target: {fileID: 5551700733566106820, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: startingPositionTarget
+      value: 
+      objectReference: {fileID: 318314647}
     - target: {fileID: 5551700733566106824, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: m_Name
       value: 'AI Player Beater Trial '
@@ -21014,6 +21018,10 @@ PrefabInstance:
       propertyPath: Quaffle
       value: 
       objectReference: {fileID: 937341420}
+    - target: {fileID: 3532146794917354182, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+      propertyPath: startingPositionTarget
+      value: 
+      objectReference: {fileID: 194386547}
     - target: {fileID: 3532146794917354186, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
       propertyPath: m_Name
       value: AI Player Seeker Trial
