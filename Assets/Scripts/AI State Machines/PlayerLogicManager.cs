@@ -13,6 +13,7 @@ public class PlayerLogicManager : Targetable
     public QuaffleLogicNew Quaffle;
     public BludgerLogic[] Bludgers;
     public Targetable target;
+    protected bool isMoving = false;
     [SerializeField] protected float speed;
     [SerializeField] protected float rotationSpeed;
 
@@ -83,17 +84,49 @@ public class PlayerLogicManager : Targetable
     }
 
     //private IEnumerator MoveAndRotateToTarget()
+    //public void MoveAndRotateToTarget()
+    //{
+    //    float totalDistance = Vector3.Distance(transform.position, target.transform.position);
+    //    float travelDuration = totalDistance / speed;
+
+    //    float elapsedTime = 0f;
+    //    Vector3 initialPosition = transform.position;
+    //    Vector3 targetPosition = target.transform.position;
+    //    Quaternion initialRotation = transform.rotation;
+    //    Quaternion lookRotation = Quaternion.LookRotation(targetPosition - initialPosition);
+
+    //    while(elapsedTime < travelDuration)
+    //    {
+    //        // Calculate the new position and rotation using Mathf.Lerp
+    //        float t = elapsedTime / travelDuration;
+    //        transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+    //        transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, t);
+
+    //        elapsedTime += Time.deltaTime;
+
+    //        //yield return null; // Wait for the next frame
+    //    }
+    //}
     public void MoveAndRotateToTarget()
     {
+        if(isMoving)
+            return; // Return if already moving
+        StartCoroutine(MoveAndRotateCoroutine());
+    }
+
+    private IEnumerator MoveAndRotateCoroutine()
+    {
+        isMoving = true;
+
         float totalDistance = Vector3.Distance(transform.position, target.transform.position);
         float travelDuration = totalDistance / speed;
 
-        float elapsedTime = 0f;
         Vector3 initialPosition = transform.position;
         Vector3 targetPosition = target.transform.position;
         Quaternion initialRotation = transform.rotation;
         Quaternion lookRotation = Quaternion.LookRotation(targetPosition - initialPosition);
 
+        float elapsedTime = 0f;
         while(elapsedTime < travelDuration)
         {
             // Calculate the new position and rotation using Mathf.Lerp
@@ -101,10 +134,17 @@ public class PlayerLogicManager : Targetable
             transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
             transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, t);
 
-            elapsedTime += Time.deltaTime;
+            // Yielding inside FixedUpdate to wait for the next FixedUpdate step
+            yield return new WaitForFixedUpdate();
 
-            //yield return null; // Wait for the next frame
+            elapsedTime += Time.fixedDeltaTime;
         }
+
+        // Ensure the final position and rotation are set correctly
+        transform.position = targetPosition;
+        transform.rotation = lookRotation;
+
+        isMoving = false;
     }
 
     public bool IsSnitchInRange(float range)
