@@ -2890,6 +2890,7 @@ MonoBehaviour:
   - {fileID: 1143367334}
   target: {fileID: 0}
   isMoving: 0
+  isRotatingToStartingPos: 0
   speed: 0
   rotationSpeed: 0
   m_CustomMovement: {fileID: 380029568}
@@ -20304,7 +20305,7 @@ PrefabInstance:
       objectReference: {fileID: 358440356}
     - target: {fileID: 525541507990740011, guid: c018cee51cda5de4e8a308f4b4292b3a, type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 525541507990740011, guid: c018cee51cda5de4e8a308f4b4292b3a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20316,7 +20317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 525541507990740011, guid: c018cee51cda5de4e8a308f4b4292b3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.4
+      value: -18.3
       objectReference: {fileID: 0}
     - target: {fileID: 525541507990740011, guid: c018cee51cda5de4e8a308f4b4292b3a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20436,9 +20437,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'AI Player Chaser Trial '
       objectReference: {fileID: 0}
+    - target: {fileID: 5641109329051029860, guid: d6c63a3a1d9c7cb4da150c093303d258, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5641109329051029861, guid: d6c63a3a1d9c7cb4da150c093303d258, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5641109329051029861, guid: d6c63a3a1d9c7cb4da150c093303d258, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20820,6 +20825,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'AI Player Beater Trial '
       objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106824, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5551700733566106825, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -21025,6 +21034,10 @@ PrefabInstance:
     - target: {fileID: 3532146794917354186, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
       propertyPath: m_Name
       value: AI Player Seeker Trial
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532146794917354186, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3532146794917354187, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
       propertyPath: m_RootOrder
