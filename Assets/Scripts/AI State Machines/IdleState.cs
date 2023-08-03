@@ -10,6 +10,7 @@ public class IdleState : State
     float QuaffleVisibilityRange = 30f;
     public SeekSnitchState seekSnitchState;
     public DefendState defendState;
+    public DefendChaserState defendChaserState;
 
     public override State RunCurrentState()
     {
@@ -34,7 +35,7 @@ public class IdleState : State
                 break;
             case PlayerType.Beater:
                 {
-
+                    returnState = defendChaserState;
                 }
                 break;
             case PlayerType.Chaser:

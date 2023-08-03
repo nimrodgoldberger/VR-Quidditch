@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerLogicManager : Targetable
 {
+    protected Vector3 startingPosition;
+    protected Quaternion startingRotation;
+    //public DynamicPositionTarget startingPositionTarget;
+
     protected Targetable startingTransform;// TODO make return to starting transform.
     public PlayerTeam PlayerTeam;
     public PlayerType PlayerType;
@@ -13,14 +17,19 @@ public class PlayerLogicManager : Targetable
     public QuaffleLogicNew Quaffle;
     public BludgerLogic[] Bludgers;
     public Targetable target;
+    protected bool isMoving = false;
     [SerializeField] protected float speed;
     [SerializeField] protected float rotationSpeed;
 
     protected virtual void Start()
     {
-        startingTransform.transform.position = transform.position;
-        startingTransform.transform.rotation = transform.rotation;
-    }
+        startingPosition = transform.position;
+        startingRotation = transform.rotation;
+        //startingPositionTarget.SetTransform(startingPosition, startingRotation);
+        //startingPositionTarget = new StartingPositionTarget(startingPosition, startingRotation);
+        //startingPositionTarget.position = startingPosition;
+        //startingPositionTarget.rotation = startingRotation;
+    }
 
     //private void FixedUpdate()
     //{
@@ -82,18 +91,26 @@ public class PlayerLogicManager : Targetable
         return startingTransform;
     }
 
-    //private IEnumerator MoveAndRotateToTarget()
     public void MoveAndRotateToTarget()
     {
+        if(isMoving)
+            return; // Return if already moving
+        StartCoroutine(MoveAndRotateCoroutine());
+    }
+
+    private IEnumerator MoveAndRotateCoroutine()
+    {
+        isMoving = true;
+
         float totalDistance = Vector3.Distance(transform.position, target.transform.position);
         float travelDuration = totalDistance / speed;
 
-        float elapsedTime = 0f;
         Vector3 initialPosition = transform.position;
         Vector3 targetPosition = target.transform.position;
         Quaternion initialRotation = transform.rotation;
         Quaternion lookRotation = Quaternion.LookRotation(targetPosition - initialPosition);
 
+        float elapsedTime = 0f;
         while(elapsedTime < travelDuration)
         {
             // Calculate the new position and rotation using Mathf.Lerp
@@ -101,10 +118,17 @@ public class PlayerLogicManager : Targetable
             transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
             transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, t);
 
-            elapsedTime += Time.deltaTime;
+            // Yielding inside FixedUpdate to wait for the next FixedUpdate step
+            yield return new WaitForFixedUpdate();
 
-            //yield return null; // Wait for the next frame
+            elapsedTime += Time.fixedDeltaTime;
         }
+
+        // Ensure the final position and rotation are set correctly
+        transform.position = targetPosition;
+        transform.rotation = lookRotation;
+
+        isMoving = false;
     }
 
     public bool IsSnitchInRange(float range)
@@ -116,5 +140,32 @@ public class PlayerLogicManager : Targetable
     {
         return Vector3.Distance(Quaffle.transform.position, transform.position) <= range;
     }
+
+    public int IsABludgerInRange(float range)
+    {
+
+        if (Vector3.Distance(Bludgers[0].transform.position, transform.position) <= range)
+            return 0;
+        else if (Vector3.Distance(Bludgers[1].transform.position, transform.position) <= range)
+            return 1;
+        else
+            return 3;//NO BLUDGERS IN RANGE
+
+    }
+
+
+    public void BudgerWasHit(int bludgerIndex)
+    {
+        // Create a new instance of Random class
+        System.Random random = new System.Random();
+
+        // Generate a random index within the bounds of the array
+        int randomIndex = random.Next(0, enemies.Length);
+
+        // New bludger target will be the new enemy
+        Bludgers[bludgerIndex].SetTarget(enemies[randomIndex].gameObject);
+        Bludgers[bludgerIndex].state = BludgerLogic.State.Chase;
+    }
+
 }
 
