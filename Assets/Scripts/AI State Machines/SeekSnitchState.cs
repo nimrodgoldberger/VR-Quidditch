@@ -5,42 +5,47 @@ using UnityEngine;
 public class SeekSnitchState : State
 {
 
-    bool canCatchTarget;
-    float SnitchCatchingRange = 3f;
+    bool canSeeSnitch = false;
+    [SerializeField] private float SnitchCatchingRange = 5f;
+    [SerializeField] private float SnitchVisibilityRange = 50f;
 
-    public ReturnToStartPositionState ReturnToStartPositionState;
+    public IdleState idleState;
+    public ReturnToStartPositionState returnToStartPositionState;
     public HoldSnitchState holdSnitchState;
     public override State RunCurrentState()
     {
 
         State returnState = this; //just for the testing
-        Debug.Log("I am seeking the snitch");
+       
 
-        if (Logic.target != Logic.Snitch)
+        if(Logic.target != Logic.Snitch)
         {
             Logic.target = Logic.Snitch;
+            Logic.SetRotationSpeed(100.0f);
         }
 
-        canCatchTarget = Logic.IsSnitchInRange(SnitchCatchingRange);
+        canSeeSnitch = Logic.IsSnitchInRange(SnitchVisibilityRange);
 
-        if (canCatchTarget)
+        if(canSeeSnitch)
         {
-            if (!Logic.TryCatchSnitch())
-            {
+            if(!Logic.TryCatchSnitch())
+            { 
+                Debug.Log("I am seeking the snitch");
                 Logic.MoveAndRotateToTarget();
-                return this;
             }
             else // Caught Snitch
             {
                 Logic.target = null;
+                Logic.isMoving = false;
 
-                return holdSnitchState;
+                returnState = holdSnitchState;
             }
         }
         else
         {
-            //might add idle state if snitch far
-            returnState = this;
+            // TODO might add idle state if snitch far
+            Debug.Log("Returning to idleState because Snitch is too far away!?!?!?!");
+            returnState = idleState;
         }
 
         return returnState;

@@ -8,6 +8,7 @@ public class DefendState : State
     public KeeperHoldsQuaffleState KeeperHoldsQuaffleState;
     float QuaffleVisibilityRange = 30f;
 
+
     public override State RunCurrentState()
     {
         if(Logic.target != Logic.Quaffle)
@@ -25,8 +26,8 @@ public class DefendState : State
             else // Caught Quaffle
             {
                 Logic.target = null;
-                Logic.isMoving=false;
-                
+                Logic.isMoving = false;
+
                 return ReturnToStartPositionState;
             }
         }

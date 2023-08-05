@@ -6,8 +6,8 @@ public class IdleState : State
 {
     bool canSeeTarget;
     float timeToStayInIdleState = 0f;
-    float SnitchVisibilityRange = 20f;
-    float QuaffleVisibilityRange = 30f;
+    [SerializeField]private float SnitchVisibilityRange = 50f;
+    [SerializeField] private float QuaffleVisibilityRange = 30f;
     public SeekSnitchState seekSnitchState;
     public DefendState defendState;
     public DefendChaserState defendChaserState;

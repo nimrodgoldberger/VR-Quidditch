@@ -26,10 +26,10 @@ public class TeamPlayersManager : MonoBehaviour
     public List<GameObject> beaters;
     public List<GameObject> chasers;
     public List<GameObject> seekers;
-    private List<PlayerStateManager> teamKeepers;
-    private List<PlayerStateManager> teamBeaters;
-    private List<PlayerStateManager> teamChasers;
-    private List<PlayerStateManager> teamSeekers;
+    private List<StateManager> teamKeepers;
+    private List<StateManager> teamBeaters;
+    private List<StateManager> teamChasers;
+    private List<StateManager> teamSeekers;
 
     // Set the team, HAS TO SET THE COLORS OF UNIFORMS TOO
     public PlayerTeam team = PlayerTeam.Griffindor;
@@ -43,22 +43,22 @@ public class TeamPlayersManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        initPlayerStateManagers(keepers, teamKeepers, PlayerType.Keeper);
-        initPlayerStateManagers(beaters, teamBeaters, PlayerType.Beater);
-        initPlayerStateManagers(chasers, teamChasers, PlayerType.Chaser);
-        initPlayerStateManagers(seekers, teamSeekers, PlayerType.Seeker);
+        //initPlayerStateManagers(keepers, teamKeepers, PlayerType.Keeper);
+        //initPlayerStateManagers(beaters, teamBeaters, PlayerType.Beater);
+        //initPlayerStateManagers(chasers, teamChasers, PlayerType.Chaser);
+        //initPlayerStateManagers(seekers, teamSeekers, PlayerType.Seeker);
     }
 
-    private void initPlayerStateManagers(List<GameObject> gameObjects, List<PlayerStateManager> players, PlayerType type)
-    {
-        foreach(GameObject gameObject in gameObjects)
-        {
+    //private void initPlayerStateManagers(List<GameObject> gameObjects, List<StateManager> players, PlayerType type)
+    //{
+    //    foreach(GameObject gameObject in gameObjects)
+    //    {
 
-            PlayerStateManager player = new PlayerStateManager();
-            player.team = team;
-            player.playerType = type;
-            //COLOR + LOCATION
-            players.Add(player);
-        }
-    }
+            
+    //        player.team = team;
+    //        player.playerType = type;
+    //        //COLOR + LOCATION
+    //        players.Add(player);
+    //    }
+    //}
 }

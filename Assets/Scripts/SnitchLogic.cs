@@ -24,9 +24,11 @@ public class SnitchLogic : Targetable
     [SerializeField] public GameObject target;
     [SerializeField] private float minDistanceToRespawn = 8;
     [SerializeField] private float RotationSpeed = 3f;
-    [SerializeField] private float maxDistanceToCatch = 20;// TODO adjust value just to try it 
+    public float takeDistance = 5f;
+    [SerializeField] private float maxDistanceToCatch = 5;// TODO adjust value just to try it 
     private Coroutine LookCoroutine;
     private float targetTime = 5;
+    public PlayerTeam caughtBy = PlayerTeam.None;
 
 
     //private float verticalTimer = 0f, sleepTimer = 0f, maxDeltaY = 20f, rand, randSleep;
@@ -211,11 +213,19 @@ public class SnitchLogic : Targetable
 
     public bool TryCatchSnitch(PlayerLogicManager player)
     {
-        if(!wasSnitchCaught  && Vector3.Distance(transform.position, player.transform.position) <= maxDistanceToCatch)
+        if(!wasSnitchCaught  && Vector3.Distance(transform.position, player.transform.position) <= takeDistance)
         {
+            // TODO Check if it works;
+
+            //wasSnitchCaught = true;
+            //transform.SetParent(player.transform);
+            //transform.position = new Vector3(2f, 0f, 0f);
+
+            Vector3 relativepos = new Vector3(0.35f, 0.35f, 0.2f);
             wasSnitchCaught = true;
+            caughtBy = player.PlayerTeam;
             transform.SetParent(player.transform);
-            transform.position = new Vector3(2f, 0f, 0f);
+            transform.localPosition = relativepos;
         }
 
         return wasSnitchCaught;

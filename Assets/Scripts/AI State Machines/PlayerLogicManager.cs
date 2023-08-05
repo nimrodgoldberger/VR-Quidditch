@@ -12,6 +12,7 @@ public class PlayerLogicManager : Targetable
     public PlayerLogicManager[] friends;
     public SnitchLogic Snitch;
     public QuaffleLogicNew Quaffle;
+    public float quaffleTakeTime = 0f;
     public BludgerLogic[] Bludgers;
     public Targetable target;
     public bool isMoving = false;
@@ -51,6 +52,11 @@ public class PlayerLogicManager : Targetable
     public Targetable GetTarget()
     {
         return target;
+    }
+
+    public void SetRotationSpeed(float newRotationSpeed)
+    {
+        rotationSpeed = newRotationSpeed;
     }
 
     public Targetable GetStartingTransformAsTargetable()

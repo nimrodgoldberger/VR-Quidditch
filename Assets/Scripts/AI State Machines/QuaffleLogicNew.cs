@@ -6,9 +6,9 @@ public class QuaffleLogicNew : Targetable
 {
     public float takeDistance = 2f;
     public float takeTime = 0.5f;
-    private float takeTimer = 0f;
     private bool isQuaffleHeld = false;
     private PlayerTeam heldBy = PlayerTeam.None;
+    //private float[] teamTimers = {0.0f, 0.0f, 0.0f, 0.0f};
 
     // TODO For passing and throwing
     [SerializeField] public GameObject target;
@@ -17,7 +17,7 @@ public class QuaffleLogicNew : Targetable
 
     //private void FixedUpdate()
     //{
-        
+
     //}
 
 
@@ -31,14 +31,24 @@ public class QuaffleLogicNew : Targetable
     {
         bool result = false;
 
-        if(heldBy == PlayerTeam.None)
+        if(heldBy != player.PlayerTeam)
         {
-            result= TakeQuaffle(player);
+            // TODO Check if timer works
+            // 0.5 seconds pass before taking it;
+            player.quaffleTakeTime += Time.fixedDeltaTime;
+            if(player.quaffleTakeTime > takeTime)
+            {
+                result = TakeQuaffle(player);
+                player.quaffleTakeTime = 0.0f;
+            }
         }
-        else if(heldBy != player.PlayerTeam)
+        else
         {
-            // TODO Make 0.5 seconds pass before taking it;
-            result = TakeQuaffle(player);
+            player.quaffleTakeTime = 0.0f;
+            if(heldBy == PlayerTeam.None)
+            {
+                result = TakeQuaffle(player);
+            }
         }
 
         return result;
@@ -54,7 +64,6 @@ public class QuaffleLogicNew : Targetable
             transform.SetParent(player.transform);
             transform.localPosition = relativepos;
         }
-        // TODO add else if taken: Wait 0.5 seconds before taking it;
 
         return isQuaffleHeld;
     }
