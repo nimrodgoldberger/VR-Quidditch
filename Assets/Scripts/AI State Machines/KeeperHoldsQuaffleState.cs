@@ -6,28 +6,56 @@ public class KeeperHoldsQuaffleState : State
 {
     public ReturnToStartPositionState ReturnToStartPositionState;
     public bool holdsQuaffle = true;
-    public PlayerLogicManager playerToPassTo;
+    public Targetable playerToPassTo;
+    [SerializeField] private float coolDownAfterPass = 1.0f;
+    [SerializeField] private float timerAfterPass = 0f;
+
     public override State RunCurrentState()
     {
-       
+        State nextState = this;
 
-        if( holdsQuaffle )
+        if(holdsQuaffle)
         {
-            // If the Keeper still holds the Quaffle, stay in this state
 
-            //return this;
-            Logic.target = null;
-            Logic.isMoving = false;
-            return ReturnToStartPositionState;
+            //if(Logic.target == null)
+            //{
+            //    Logic.SetTarget(playerToPassTo);
+            //}
+
+            // TODO complete the method FindFriendToPassTo()
+            // for testing i set it hard coded
+            Debug.Log("I Hold the quaffle in KeeperHoldsQuaffleState");
+
+            holdsQuaffle = false;
+            PassTheQuaffle();
+
+            // TODO Check Why? row below
+            //Logic.isMoving = false;
+
 
         }
         else
         {
             // If the Keeper doesn't hold the Quaffle anymore, return to the starting position
-            Logic.target = null;
-            Logic.isMoving = false;
-            return ReturnToStartPositionState;
+            if(timerAfterPass <= coolDownAfterPass)
+            {
+                Debug.Log("In cooldown after I threw the quaffle in KeeperHoldsQuaffleState");
+
+                timerAfterPass += Time.fixedDeltaTime;
+            }
+            else
+            {
+                Debug.Log("CoolDown ENDED not returning to Starting position in KeeperHoldsQuaffleState");
+                timerAfterPass = 0f;
+                Logic.target = null;
+                Logic.isMoving = false;
+                nextState = ReturnToStartPositionState;
+            }
         }
+
+        // If the Keeper still holds the Quaffle, stay in this state
+        // else wait 1 second and then return to startingPositionState
+        return nextState;
     }
 
 
@@ -74,16 +102,17 @@ public class KeeperHoldsQuaffleState : State
         // You can use a navigation system or custom movement logic to achieve this.
 
         // For now, let's assume we directly pass the ball to the target's position for demonstration purposes.
-        Logic.Quaffle.FlyToTarget(playerToPassTo);
+        Logic.Quaffle.ThrowQuaffle(playerToPassTo);
 
     }
 
     public void PassTheQuaffle()
     {
-        Logic.Quaffle.FlyToTarget(playerToPassTo);
+        Logic.Quaffle.transform.parent = null;
+        Logic.Quaffle.ThrowQuaffle(playerToPassTo);
     }
 
-    private PlayerLogicManager GetPlayerToPassTo()
+    private Targetable GetPlayerToPassTo()
     {
         return playerToPassTo;
     }

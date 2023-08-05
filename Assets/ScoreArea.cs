@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreArea : MonoBehaviour
+public class ScoreArea : Targetable
 {
     [SerializeField] private GameObject particleEffectPrefab;
     [SerializeField] private int team;

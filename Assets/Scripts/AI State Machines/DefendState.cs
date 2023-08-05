@@ -28,7 +28,7 @@ public class DefendState : State
                 Logic.target = null;
                 Logic.isMoving = false;
 
-                return ReturnToStartPositionState;
+                return KeeperHoldsQuaffleState;
             }
         }
         else

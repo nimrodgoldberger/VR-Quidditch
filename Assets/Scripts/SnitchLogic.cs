@@ -70,9 +70,9 @@ public class SnitchLogic : Targetable
     {
         if(!wasSnitchCaught)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.fixedDeltaTime);
             StartRotating();
-            targetTime -= Time.deltaTime;
+            targetTime -= Time.fixedDeltaTime;
             if(Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn)
             {
                 RespawnTarget();

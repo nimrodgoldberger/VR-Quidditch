@@ -11,14 +11,26 @@ public class QuaffleLogicNew : Targetable
     //private float[] teamTimers = {0.0f, 0.0f, 0.0f, 0.0f};
 
     // TODO For passing and throwing
-    [SerializeField] public GameObject target;
+    private bool wasThrown = false;
+    public bool isFlying = false;
+    public Targetable target;
     [SerializeField] private float movementSpeed = 60f;
 
 
-    //private void FixedUpdate()
-    //{
-
-    //}
+    private void FixedUpdate()
+    {
+        if(isFlying)
+        {
+            Debug.Log("Quaffle Is Flying");
+            MoveAndRotateToTarget();
+        }
+        if(isFlying && heldBy!=PlayerTeam.None)
+        {
+            Debug.Log("MAYBE ERROR!! Quaffle Is Flying BUT heldBy != PlayerTeam.None");
+            isFlying = false;
+            isQuaffleHeld=false;
+        }
+    }
 
 
     public bool CanBeTaken(PlayerLogicManager potentialHolder)
@@ -59,6 +71,8 @@ public class QuaffleLogicNew : Targetable
         if(!isQuaffleHeld && Vector3.Distance(transform.position, player.transform.position) <= takeDistance)
         {
             Vector3 relativepos = new Vector3(0.35f, 0.35f, 0.2f);
+            isFlying = false;
+
             isQuaffleHeld = true;
             heldBy = player.PlayerTeam;
             transform.SetParent(player.transform);
@@ -70,12 +84,74 @@ public class QuaffleLogicNew : Targetable
 
     // XROrigin TakeQuaffle
 
-    public void FlyToTarget(Targetable newTarget)
+    private void SetQuaffleTarget(Targetable newTarget)
     {
-        heldBy = PlayerTeam.None;
-        transform.SetParent(null);
+        target = newTarget;
+    }
+
+    private void FlyToTarget()
+    {
+        //transform.SetParent(null);
+        isFlying = true;
+        wasThrown = true;
+        MoveAndRotateToTarget();
         //1. FlyToTarget
         //2. SetTheNewParent + team...
     }
 
+    public void ThrowQuaffle(Targetable newTarget)
+    {
+        heldBy = PlayerTeam.None;
+        SetQuaffleTarget(newTarget);
+        FlyToTarget();
+    }
+
+    public void MoveAndRotateToTarget()
+    {
+        //if(isFlying)
+        //    return; // Return if already moving
+        StartCoroutine(MoveAndRotateCoroutine());
+    }
+
+    private IEnumerator MoveAndRotateCoroutine()
+    {
+        if(wasThrown)
+        {
+            isFlying = true;
+            float totalDistance = Vector3.Distance(transform.position, target.transform.position);
+            float travelDuration = totalDistance / movementSpeed;
+            Vector3 initialPosition = transform.position;
+            Vector3 targetPosition = target.transform.position;
+            Quaternion initialRotation = transform.rotation;
+            Quaternion lookRotation = Quaternion.LookRotation(targetPosition - initialPosition);
+
+            float elapsedTime = 0f;
+            while(elapsedTime < travelDuration)
+            {
+                // Calculate the new position and rotation using Mathf.Lerp
+                float t = elapsedTime / travelDuration;
+                transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+                transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, t);
+
+                // Yielding inside FixedUpdate to wait for the next FixedUpdate step
+                yield return new WaitForFixedUpdate();
+
+                elapsedTime += Time.fixedDeltaTime;
+            }
+
+            // Ensure the final position and rotation are set correctly
+            transform.position = targetPosition;
+            transform.rotation = lookRotation;
+
+            // At the end of the coroutine, reset the target and isMoving flag
+            ResetTarget();
+            isFlying = false;
+            wasThrown = false;
+        }
+    }
+
+    public void ResetTarget()
+    {
+        target = null;
+    }
 }
