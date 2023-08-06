@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class TeamMenu : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class TeamMenu : MonoBehaviour
     public GameObject opponentTeamImageObject; // Reference to the GameObject with RawImage component
 
     public GameObject congratulationsMenu; // Reference to the GameObject with RawImage component
+    public GameObject HatThinkingScreen; // Reference to the GameObject with RawImage component
     public GameObject TeamSortingSection; // Reference to the GameObject with RawImage component
 
     public void OnButtonClick()
@@ -24,9 +26,25 @@ public class TeamMenu : MonoBehaviour
         //Deactivate the TeamSortingSection menu
         TeamSortingSection.SetActive(false);
 
+
+        // Activate the HatThinkingScreen
+        HatThinkingScreen.SetActive(true);
+
+
+        // Wait for 4 seconds and than moving to next scene and choosing teams
+        StartCoroutine(WaitAndShowCongratulations(4f));
+    }
+
+    private IEnumerator WaitAndShowCongratulations(float waitTime)
+    {
+        // Wait for the specified time
+        yield return new WaitForSeconds(waitTime);
+
+        // Deactivate the HatThinkingScreen
+        HatThinkingScreen.SetActive(false);
+
         // Activate the Congratulations menu
         congratulationsMenu.SetActive(true);
-
 
         // Randomly choose a team index
         int chosenTeamIndex = Random.Range(0, 4);
@@ -47,15 +65,20 @@ public class TeamMenu : MonoBehaviour
         // Set the chosen team's name and image
         teamNameText.GetComponent<TextMeshProUGUI>().text = teamNames[chosenTeamIndex];
 
-        // Set the opoonent's team's image using RawImage component
+        // Set the opponents team's image using RawImage component
         opponentTeamImageObject.GetComponent<RawImage>().texture = teamSprites[opponentTeamIndex].texture;
 
-        // Set the opponent's team's name and image
+        // Set the opponents team's name and image
         opponentTeamNameText.GetComponent<TextMeshProUGUI>().text = OpponentNames[opponentTeamIndex];
     }
+
     public void SaveTeamsData(int team1, int team2)
     {
         PlayerPrefs.SetInt("Team1", team1);
         PlayerPrefs.SetInt("Team1", team1);
     }
+
 }
+
+
+

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Snitch
+  - AI
+  - GameMusic
   layers:
   - Default
   - TransparentFX
