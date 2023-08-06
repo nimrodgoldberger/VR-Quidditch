@@ -7,13 +7,7 @@ public class PlayerLogic : MonoBehaviour
 
     public QuaffleLogic quaffleLogic;
     // Team of the player
-    public enum PlayerTeam
-    {
-        Griffindor = 0,
-        Hufflepuff = 1,
-        Ravenclaw = 2,
-        Slitheryn = 3
-    }
+    
 
     public PlayerTeam playerTeam;
 
@@ -148,4 +142,5 @@ public class PlayerLogic : MonoBehaviour
     {
         return playerTeam;
     }
+
 }

@@ -2703,13 +2703,14 @@ GameObject:
   m_Component:
   - component: {fileID: 59427685491642327}
   - component: {fileID: 529621931648935998}
+  - component: {fileID: -9092760692092947013}
   m_Layer: 0
   m_Name: AI Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &59427685491642327
 Transform:
   m_ObjectHideFlags: 0
@@ -2748,6 +2749,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-9092760692092947013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835683292349846893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f1bb74cffe37a49afdd78479c7d731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+  playerType: 0
+  currentState: {fileID: 0}
 --- !u!1 &837323044853168529
 GameObject:
   m_ObjectHideFlags: 0

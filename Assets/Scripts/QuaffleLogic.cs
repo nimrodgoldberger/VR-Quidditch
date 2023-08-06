@@ -5,6 +5,8 @@ public class QuaffleLogic : MonoBehaviour
     public GameObject holder;
     public GameObject[] team1Players;
     public GameObject[] team2Players;
+    public GameObject team1VR;
+    public GameObject team2VR; // TODO TESTING     Dan
     public float takeDistance = 2f;
     public float takeTime = 0.5f;
 
@@ -45,49 +47,49 @@ public class QuaffleLogic : MonoBehaviour
         takeTimer = 0f;
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if(holder == null && other.CompareTag("Player"))
-        {
-            // Check if the potential holder is within range of the ball
-            if(Vector3.Distance(transform.position, other.transform.position) < takeDistance)
-            {
-                // If the potential holder is from a different team,
-                // set a delay of 0.5 seconds before taking the ball.
-                if(other.GetComponent<PlayerLogic>().GetTeam() != GetComponent<PlayerLogic>().GetTeam())
-                {
-                    // Increment the take timer if the player is close enough
-                    takeTimer += Time.deltaTime;
-                    if(takeTimer >= takeTime)
-                    {
-                        // Set the holder to the potential holder
-                        holder = other.gameObject;
-                        takeTimer = 0f;
-                    }
-                }
-                else
-                {
-                    // If the potential holder is from the same team, take the ball immediately.
-                    holder = other.gameObject;
-                    takeTimer = 0f;
-                }
-            }
-            else
-            {
-                // Reset the take timer if the potential holder is out of range
-                takeTimer = 0f;
-            }
-        }
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if(holder == null && other.CompareTag("Player"))
+    //    {
+    //        // Check if the potential holder is within range of the ball
+    //        if(Vector3.Distance(transform.position, other.transform.position) < takeDistance)
+    //        {
+    //            // If the potential holder is from a different team,
+    //            // set a delay of 0.5 seconds before taking the ball.
+    //            if(other.GetComponent<PlayerLogic>().GetTeam() != GetComponent<PlayerLogic>().GetTeam())
+    //            {
+    //                // Increment the take timer if the player is close enough
+    //                takeTimer += Time.deltaTime;
+    //                if(takeTimer >= takeTime)
+    //                {
+    //                    // Set the holder to the potential holder
+    //                    holder = other.gameObject;
+    //                    takeTimer = 0f;
+    //                }
+    //            }
+    //            else
+    //            {
+    //                // If the potential holder is from the same team, take the ball immediately.
+    //                holder = other.gameObject;
+    //                takeTimer = 0f;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            // Reset the take timer if the potential holder is out of range
+    //            takeTimer = 0f;
+    //        }
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject == holder)
-        {
-            holder = null;
-            takeTimer = 0f;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if(other.gameObject == holder)
+    //    {
+    //        holder = null;
+    //        takeTimer = 0f;
+    //    }
+    //}
 
     public GameObject GetHolder()
     {
@@ -109,10 +111,27 @@ public class QuaffleLogic : MonoBehaviour
             if(CanBeTaken(newHolder))
             {
                 holder = newHolder;
+
+                transform.SetParent(holder.transform);
+                transform.position = new Vector3(1f, 0f, 0f);
                 //____________________________________________________________________________________________
                 //                     ADD IMPLEMENTATION OF CONNECTING TO THE HOLDER
                 //____________________________________________________________________________________________
             }
         }
+    }
+
+
+
+
+    //TODO Erase of fix     METHODS FOR TESTING
+    public void VRTakesBall()
+    {
+        holder = team1VR;
+    }
+
+    public void VRLetsBallGo()
+    {
+        holder = null;
     }
 }

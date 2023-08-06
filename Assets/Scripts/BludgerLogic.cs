@@ -11,9 +11,9 @@ public class BludgerLogic : MonoBehaviour
         Reset = 4
     }
 
-    public Transform[] targets;
     private bool onTrack;
-    private Transform target;
+
+    private GameObject target;
     private float chaseTimer = 0f;
     private float patrolTimer = 0f;
     private int rand;
@@ -26,11 +26,14 @@ public class BludgerLogic : MonoBehaviour
     private Rigidbody rb;
     private Vector3 direction, targetPosition;
 
-    [SerializeField] 
-    float posY = 10f, rotationRadius = 222f, angularSpeed = 1f, ovalWidth = 3f, movementSpeed = 50f;
+
+    [SerializeField]
+    float posY = 10f, rotationRadius = 370f, angularSpeed = 1f, ovalWidth = 3f, movementSpeed = 50f;
     [SerializeField] private AudioClip hitSound, howlSound;
     [SerializeField]
     Transform rotationCenter;
+    [SerializeField] private GameObject[] targets;
+
 
     private float deltaY, posX, posZ, angle = 0f;
 
@@ -46,7 +49,7 @@ public class BludgerLogic : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (state == State.Patrol && Random.Range(0, (10000 - (int)(patrolTimer*10))) == 0)
+        if (state == State.Patrol && Random.Range(0, (10000 - (int)(patrolTimer * 10))) == 0)
         {
             state = State.Attack;
             onTrack = true;
@@ -58,7 +61,7 @@ public class BludgerLogic : MonoBehaviour
             audioSource.PlayOneShot(howlSound);
             chaseTimer = 0f;
             target = GetClosestTarget();
-            Vector3 direction = target.position - transform.position;
+            Vector3 direction = target.transform.position - transform.position;
             direction.Normalize();
             rb.velocity = direction * movementSpeed;
         }
@@ -104,7 +107,7 @@ public class BludgerLogic : MonoBehaviour
         }
         else if (state == State.Chase)
         {
-            Vector3 direction = target.position - transform.position;
+            Vector3 direction = target.transform.position - transform.position;
             direction.Normalize();
             rb.velocity = direction * movementSpeed;
             chaseTimer += Time.deltaTime;
@@ -118,17 +121,17 @@ public class BludgerLogic : MonoBehaviour
         }
     }
 
-    private Transform GetClosestTarget()
+    private GameObject GetClosestTarget()
     {
-        Transform closestTarget = null;
+        GameObject closestTarget = null;
         float closestDistance = Mathf.Infinity;
-        foreach (Transform target in targets)
+        foreach (GameObject nextTarget in targets)
         {
-            float distance = Vector3.Distance(transform.position, target.position);
+            float distance = Vector3.Distance(transform.position, nextTarget.gameObject.transform.position);
             if (distance < closestDistance)
             {
                 closestDistance = distance;
-                closestTarget = target;
+                closestTarget = nextTarget.gameObject;
             }
         }
         return closestTarget;
@@ -136,7 +139,9 @@ public class BludgerLogic : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        Targetable targetableComponent = collision.gameObject.GetComponent<Targetable>();
+
+        if (targetableComponent != null)
         {
             audioSource.PlayOneShot(hitSound);
             rb.velocity = Vector3.zero;
@@ -154,4 +159,10 @@ public class BludgerLogic : MonoBehaviour
         patrolTimer = 0f;
     }
 
+
+    public void SetTarget(GameObject newTarget)
+    {
+        target = newTarget;
+    }
 }
+

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreArea : MonoBehaviour
+public class ScoreArea : Targetable
 {
     [SerializeField] private GameObject particleEffectPrefab;
-    [SerializeField] private int team;
+    //TODO get team from player scoring the point!!!
+    [SerializeField] PlayerTeam team;
     [SerializeField] GameObject scoreManager;
     void OnTriggerEnter(Collider otherCollider)
     {
@@ -14,13 +15,13 @@ public class ScoreArea : MonoBehaviour
             ParticleSystem particleSystemInstance = Instantiate(particleEffectPrefab, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             StartCoroutine(StopParticleEffect(particleSystemInstance));
         }
-        scoreManager.GetComponent<ScoreManager>().AddScore(10, team);
+        scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 10);
     }
 
     IEnumerator StopParticleEffect(ParticleSystem particleSystem)
     {
         // Wait for the specified duration.
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
         // Stop the particle system.
         particleSystem.Stop();
