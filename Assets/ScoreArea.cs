@@ -6,6 +6,7 @@ public class ScoreArea : Targetable
 {
     [SerializeField] private GameObject particleEffectPrefab;
     [SerializeField] private int team;
+    [SerializeField] private PlayerTeam theTeam;
     [SerializeField] GameObject scoreManager;
     void OnTriggerEnter(Collider otherCollider)
     {
@@ -20,7 +21,7 @@ public class ScoreArea : Targetable
     IEnumerator StopParticleEffect(ParticleSystem particleSystem)
     {
         // Wait for the specified duration.
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
         // Stop the particle system.
         particleSystem.Stop();

@@ -5,15 +5,19 @@ using TMPro;
 public class TimeTextManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private float timeRemaining = 120.0f;
+    public float totalTime = 120.0f;
+    private float timeRemaining;
     private bool timerIsRunning = false;
     private TMP_Text timerText;
+
+    public float TimeRemaining { get { return timeRemaining; } set { timeRemaining = value; } }
 
     void Start()
     {
         // Get reference to the Text component for displaying the timer
         timerText = GetComponent<TMP_Text>();
         timerIsRunning = true;
+        timeRemaining = totalTime;
     }
 
     void Update()
@@ -23,7 +27,7 @@ public class TimeTextManager : MonoBehaviour
             if(timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                
+
             }
             else
             {
@@ -37,4 +41,5 @@ public class TimeTextManager : MonoBehaviour
             timerText.text = string.Format("Time: {0:00}:{1:00}", minutes, seconds);
         }
     }
+
 }
