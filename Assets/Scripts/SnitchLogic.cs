@@ -1,69 +1,42 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SnitchLogic : Targetable
 {
-    
-    public enum State
-    {
-        Roam = 1,
-        Moving = 2,
-        Vertical = 3,
-        Run = 4
-    }
-    public State state;
-
-    //private TargetsSpawnArea spawnAreaManager;
-
-    //public Transform[] targets;
-    //private bool setNewPosition;
-    //private Transform target;
-
-    //Target Related Fields
     [SerializeField] public GameObject target;
-    [SerializeField] private float minDistanceToRespawn = 8;
+    // To make target respawn when Snitch gets too close or certain amount of time passes
+    [SerializeField] private float targetTime = 5.0f;
+    [SerializeField] private float minDistanceToRespawnFrom = 7.0f;
+    // To make target respawn far from the snitch
+    [SerializeField] private float mixDistanceToRespawnTo = 80.0f;
+    // To adjust the Snitch movement and catching distance
     [SerializeField] private float RotationSpeed = 3f;
-    public float takeDistance = 5f;
-    [SerializeField] private float maxDistanceToCatch = 5;// TODO adjust value just to try it 
-    private Coroutine LookCoroutine;
-    private float targetTime = 5;
-    public PlayerTeam caughtBy = PlayerTeam.None;
-
-
-    //private float verticalTimer = 0f, sleepTimer = 0f, maxDeltaY = 20f, rand, randSleep;
-
-
-    private AudioSource audioSource;
-    public AudioClip whirrLoop;
     [SerializeField] private float movementSpeed = 50f;
-    //private Rigidbody rb;
-    private Vector3 direction, targetPosition, verticalCenter;
-
-    //To know if SnitchWasCaught
+    [SerializeField] private float takeDistance = 5.0f;// TODO adjust value just to try it 
+    // To add score and end Match after snitch was caught
+    [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private TimeTextManager timeTextManager;
+    //To know if SnitchWasCaught and by which team
     private bool wasSnitchCaught = false;
+    public PlayerTeam caughtBy = PlayerTeam.None;
+    // To make it face the target
+    private Coroutine LookCoroutine;
+    //Flags to gradually slow down the snitch and make it easier to catch
+    private bool afterQuarter1 = false;
+    private bool afterQuarter2 = false;
+    private bool afterQuarter3 = false;
 
-    //[SerializeField]
-    //float posY = 10f, verticalRadius =1f, rotationRadius = 370f, angularSpeed = 3f, ovalWidth = 2.5f, movementSpeed = 50f, maxSleepTime = 6f, maxPosY = 300f, minPosY = 5f;
-    //[SerializeField]
-    //Transform rotationCenter;
-
-    //private float currY, deltaY, posX, posZ, angle = 0f;
-
-
+    // TODO Audio for Snitch Redo 
+    public AudioClip whirrLoop;
+    private AudioSource audioSource;
 
     void Start()
     {
         RespawnTarget();
-        //targetTime = spawnAreaManager.TargetManager(target, 0);
-
-        //targetTime = TargetsSpawnArea.TargetManager(target, 0f);
-        //rb = GetComponent<Rigidbody>();
-        //state = State.Roam;
-        //audioSource = GetComponent<AudioSource>();
-        //audioSource.clip = whirrLoop;
-        //audioSource.loop = true;
-        //audioSource.Play();
     }
 
     void FixedUpdate()
@@ -73,108 +46,33 @@ public class SnitchLogic : Targetable
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, movementSpeed * Time.fixedDeltaTime);
             StartRotating();
             targetTime -= Time.fixedDeltaTime;
-            if(Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn)
+            if(Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawnFrom)
             {
                 RespawnTarget();
-                //Maybe change range to 3-5 or 2-5
-                targetTime = Random.Range(2, 4);
+                targetTime = Random.Range(2, 4); //Maybe change range to 3-5 or 2-5
             }
             else if(targetTime <= 0)
             {
                 RespawnTarget();
                 targetTime = Random.Range(2, 4);
             }
+
+            MakeCatchingEasierGradually();
         }
-
-
-
-
-        //targetTime = TargetsSpawnArea.TargetManager(target, targetTime);
-
-        //Vector3 currentPosition = transform.position;
-        //currentPosition.y = Mathf.Clamp(currentPosition.y, 0f, maxPosY);
-
-
-        //if (state == State.Roam && Random.Range(0, (1000 - (int)(verticalTimer * 10))) == 0)
-        //{
-        //    StartVertical();
-        //}
-        //if (state == State.Roam)
-        //{
-        //    if (sleepTimer < randSleep)
-        //    {
-        //        sleepTimer += Time.deltaTime;
-        //    }
-        //    else
-        //    {
-        //        if (setNewPosition)
-        //        {
-        //            rand = Random.value;
-        //            posX = (rotationCenter.position.x + Mathf.Cos(angle) * rotationRadius / ovalWidth) * rand;
-        //            posZ = (rotationCenter.position.z + Mathf.Sin(angle) * rotationRadius) * rand;
-        //            targetPosition = new Vector3(posX, posY, posZ);
-        //            angle += Time.deltaTime * movementSpeed / ovalWidth;
-        //            if (angle > Mathf.PI * 2f)
-        //            {
-        //                angle -= Mathf.PI * 2f;
-        //            }
-        //            setNewPosition = false;
-        //        }
-        //        direction = targetPosition - transform.position;
-        //        direction.Normalize();
-        //        rb.velocity = direction * movementSpeed;
-        //        if (direction != Vector3.zero)
-        //        {
-        //            Quaternion targetRotation = Quaternion.LookRotation(direction);
-        //            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, angularSpeed * Time.deltaTime);
-        //        }
-        //        if (Vector3.Distance(targetPosition, transform.position) < 3f)
-        //        {
-        //            rand = Random.value;
-        //            if (rand < 0.5f) //50/50 
-        //                StartVertical();
-        //            else
-        //                StartRoam();
-        //        }
-
-        //    }
-        //}
-        //else if (state == State.Vertical)
-        //{
-        //    posX = verticalCenter.x + Mathf.Cos(angle) * verticalRadius;
-        //    posZ = verticalCenter.z + Mathf.Sin(angle) * verticalRadius;
-        //    if (currY < posY)
-        //        currY += 1f;
-        //    else
-        //        currY -= 1f;
-        //    targetPosition = new Vector3(posX, currY, posZ);
-        //    angle += Time.deltaTime * angularSpeed / verticalRadius;
-        //    if (angle > Mathf.PI * 2f)
-        //    {
-        //        angle -= Mathf.PI * 2f;
-        //    }
-        //    direction = targetPosition - transform.position;
-        //    rb.velocity = direction * movementSpeed;
-        //    if (direction != Vector3.zero)
-        //    {
-        //        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        //        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, angularSpeed * Time.deltaTime);
-        //    }
-        //    if (transform.position.y - currY < 5f)
-        //        StartRoam();
-        //}
     }
 
     public void RespawnTarget()
     {
         Vector3 targetPosition;
+        bool isTargetTooClose = true;
+
         do
         {
             targetPosition.y = Random.Range(8f, 120f);
             targetPosition.x = Random.Range(-72f, 72f);
             targetPosition.z = Random.Range(-219f, 219f);
-
-        } while(!TargetsSpawnArea.IsInsidePlayableArea(targetPosition) /*|| Vector3.Distance(transform.position, target.transform.position) < minDistanceToRespawn*2*/);
+            isTargetTooClose = Vector3.Distance(transform.position, targetPosition) < mixDistanceToRespawnTo;
+        } while(isTargetTooClose || !TargetsSpawnArea.IsInsidePlayableArea(targetPosition));
 
         target.transform.position = targetPosition;
     }
@@ -206,62 +104,52 @@ public class SnitchLogic : Targetable
         }
     }
 
-    public bool WasSnitchCaught()//Maybe unnecessary
+    public bool WasSnitchCaught()
     {
         return wasSnitchCaught;
     }
 
     public bool TryCatchSnitch(PlayerLogicManager player)
     {
-        if(!wasSnitchCaught  && Vector3.Distance(transform.position, player.transform.position) <= takeDistance)
+        if(!wasSnitchCaught && Vector3.Distance(transform.position, player.transform.position) <= takeDistance)
         {
-            // TODO Check if it works;
-
-            //wasSnitchCaught = true;
-            //transform.SetParent(player.transform);
-            //transform.position = new Vector3(2f, 0f, 0f);
-
-            Vector3 relativepos = new Vector3(0.35f, 0.35f, 0.2f);
             wasSnitchCaught = true;
-            caughtBy = player.PlayerTeam;
-            transform.SetParent(player.transform);
-            transform.localPosition = relativepos;
+            SnitchWasCaught(player);
         }
 
         return wasSnitchCaught;
     }
 
+    private void SnitchWasCaught(PlayerLogicManager player)
+    {
+        Vector3 relativepos = new Vector3(0.35f, 0.35f, 0.2f);
+        caughtBy = player.PlayerTeam;
+        transform.SetParent(player.transform);
+        transform.localPosition = relativepos;
+        string name = Enum.GetName(caughtBy.GetType(), caughtBy);
+        // TODO Add score to the board and stop the game
+        //scoreManager.GetComponent<ScoreManager>().AddScore(150, name);
+    }
 
-    //private void StartRoam()
-    //{
-    //    state = State.Roam;
-    //    sleepTimer = 0;
-    //    randSleep = Random.Range(0, maxSleepTime);
-    //    setNewPosition = true;
-    //}
-
-    //private void StartVertical()
-    //{
-    //    state = State.Vertical;
-    //    verticalTimer = 0f;
-    //    verticalCenter = transform.position;
-    //    currY = verticalCenter.y;
-    //    deltaY = Random.Range(5f, maxDeltaY); //delta y is in absolute value, will substract to go down and add to go up
-    //    posY = currY;
-    //    if (currY < 30f || currY < deltaY)
-    //        posY += deltaY;
-    //    else if (posY > maxPosY) //when too high go down
-    //    {
-    //        posY -= deltaY;
-    //    }
-    //    else
-    //    {
-    //        if (deltaY > maxDeltaY/2f) // random 50/50 coin flip OR if delta will send us underground
-    //            posY += deltaY;
-    //        else 
-    //            posY -= deltaY;
-    //    }
-    //    posY = Mathf.Clamp(posY, minPosY, maxPosY);
-    //    Debug.Log("target pos Y is " + posY.ToString() + " delta " + deltaY.ToString() + " curr " + currY.ToString());
-    //}
+    private void MakeCatchingEasierGradually()
+    {
+        float timeLeft = timeTextManager.TimeRemaining;
+        if(!afterQuarter1 && timeLeft < 0.75 * timeTextManager.totalTime)
+        {
+            afterQuarter1 = true;
+            movementSpeed = movementSpeed * 0.9f;
+        }
+        else if(!afterQuarter2 && timeLeft < 0.5 * timeTextManager.totalTime)
+        {
+            afterQuarter2 = true;
+            movementSpeed = movementSpeed * 0.8f;
+            minDistanceToRespawnFrom = minDistanceToRespawnFrom / 2.0f;
+        }
+        else if(!afterQuarter3 && timeLeft < 0.25 * timeTextManager.totalTime)
+        {
+            afterQuarter3 = true;
+            movementSpeed = movementSpeed * 0.8f;
+            minDistanceToRespawnFrom = 1.0f;
+        }
+    }
 }
