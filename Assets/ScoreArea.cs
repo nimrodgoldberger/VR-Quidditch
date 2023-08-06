@@ -5,8 +5,7 @@ using UnityEngine;
 public class ScoreArea : Targetable
 {
     [SerializeField] private GameObject particleEffectPrefab;
-    [SerializeField] private int team;
-    [SerializeField] private PlayerTeam theTeam;
+    [SerializeField] private PlayerTeam team;
     [SerializeField] GameObject scoreManager;
     void OnTriggerEnter(Collider otherCollider)
     {
