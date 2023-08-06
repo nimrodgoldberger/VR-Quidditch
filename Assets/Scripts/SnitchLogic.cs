@@ -127,8 +127,9 @@ public class SnitchLogic : Targetable
         transform.SetParent(player.transform);
         transform.localPosition = relativepos;
         string name = Enum.GetName(caughtBy.GetType(), caughtBy);
-        // TODO Add score to the board and stop the game
-        //scoreManager.GetComponent<ScoreManager>().AddScore(150, name);
+        // TODO Check that works
+        scoreManager.SetTeamScore(caughtBy, 150);
+        timeTextManager.TimeRemaining = 0.0f;
     }
 
     private void MakeCatchingEasierGradually()
