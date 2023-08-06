@@ -5,7 +5,8 @@ using UnityEngine;
 public class ScoreArea : Targetable
 {
     [SerializeField] private GameObject particleEffectPrefab;
-    [SerializeField] private int team;
+    //TODO get team from player scoring the point!!!
+    [SerializeField] PlayerTeam team;
     [SerializeField] GameObject scoreManager;
     void OnTriggerEnter(Collider otherCollider)
     {
@@ -14,7 +15,7 @@ public class ScoreArea : Targetable
             ParticleSystem particleSystemInstance = Instantiate(particleEffectPrefab, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             StartCoroutine(StopParticleEffect(particleSystemInstance));
         }
-        scoreManager.GetComponent<ScoreManager>().AddScore(10, team);
+        scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 10);
     }
 
     IEnumerator StopParticleEffect(ParticleSystem particleSystem)

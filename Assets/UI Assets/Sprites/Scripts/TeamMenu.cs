@@ -38,6 +38,9 @@ public class TeamMenu : MonoBehaviour
             opponentTeamIndex = Random.Range(0, 4);
         } while (opponentTeamIndex == chosenTeamIndex);
 
+        // In order to pass the teams over to the main scene
+        SaveTeamsData(chosenTeamIndex, opponentTeamIndex);
+
         // Set the chosen team's image using RawImage component
         teamImageObject.GetComponent<RawImage>().texture = teamSprites[chosenTeamIndex].texture;
 
@@ -50,5 +53,9 @@ public class TeamMenu : MonoBehaviour
         // Set the opponent's team's name and image
         opponentTeamNameText.GetComponent<TextMeshProUGUI>().text = OpponentNames[opponentTeamIndex];
     }
-
+    public void SaveTeamsData(int team1, int team2)
+    {
+        PlayerPrefs.SetInt("Team1", team1);
+        PlayerPrefs.SetInt("Team1", team1);
+    }
 }
