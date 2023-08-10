@@ -22,14 +22,14 @@ public class IdleState : State
         State returnState = this; //just for the testing
         //State returnState = null;
 
-        if (isStart.TimeRemaining == 0)
+        if(isStart.TimeRemaining == 0)
         {
-            switch (Logic.PlayerType)
+            switch(Logic.PlayerType)
             {
                 case PlayerType.Keeper:
                     {
                         canSeeTarget = Logic.IsQuaffleInRange(QuaffleVisibilityRange);
-                        if (canSeeTarget)
+                        if(canSeeTarget)
                         {
                             Debug.Log("I Have started DefenseState seeking the Quaffle!");
                             Logic.target = null;
@@ -46,22 +46,17 @@ public class IdleState : State
                     {
                         returnState = defendChaserState;
                     }
-                
-                break;
-            case PlayerType.Beater:
-                {
-                    returnState = defendChaserState;
-                }
-                break;        
-             case PlayerType.Chaser:
+
+                    break;
+                case PlayerType.Chaser:
                     {
-                     returnState = chaserGetQuaffleState;
+                        returnState = chaserGetQuaffleState;
                     }
                     break;
-             case PlayerType.Seeker:
+                case PlayerType.Seeker:
                     {
                         canSeeTarget = Logic.IsSnitchInRange(SnitchVisibilityRange);
-                        if (canSeeTarget)
+                        if(canSeeTarget)
                         {
                             Debug.Log("I Have started seeking the snitch!");
                             Logic.target = null;
