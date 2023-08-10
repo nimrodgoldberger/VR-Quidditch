@@ -108,7 +108,7 @@ public class KeeperHoldsQuaffleState : State
 
     public void PassTheQuaffle()
     {
-        Logic.Quaffle.transform.parent = null;
+        //Logic.Quaffle.transform.parent = null;
         Logic.Quaffle.ThrowQuaffle(playerToPassTo);
     }
 

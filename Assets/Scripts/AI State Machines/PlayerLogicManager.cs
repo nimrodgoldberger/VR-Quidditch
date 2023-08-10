@@ -60,6 +60,11 @@ public class PlayerLogicManager : Targetable
         return target;
     }
 
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
     public void SetRotationSpeed(float newRotationSpeed)
     {
         rotationSpeed = newRotationSpeed;
@@ -272,6 +277,57 @@ public class PlayerLogicManager : Targetable
         myTeamGoals = myGoals;
         enemyTeamGoals = enemyGoals;
     }
+
+    public ScoreArea ChooseTargetGoal()
+    {
+        int minObstructions = int.MaxValue;
+        ScoreArea selectedGoal = null;
+
+        foreach(ScoreArea goal in enemyTeamGoals)
+        {
+            int obstructions = CountObstructions(goal.transform.position);
+
+            if(obstructions < minObstructions)
+            {
+                minObstructions = obstructions;
+                selectedGoal = goal;
+            }
+        }
+
+        return selectedGoal;
+    }
+
+    private int CountObstructions(Vector3 targetPosition)
+    {
+        int obstructions = 0;
+
+        foreach(PlayerLogicManager enemy in enemies)
+        {
+            if(IsObstructed(enemy.transform.position, targetPosition))
+            {
+                obstructions++;
+            }
+        }
+
+        return obstructions;
+    }
+
+    private bool IsObstructed(Vector3 startPosition, Vector3 targetPosition)
+    {
+        Vector3 direction = targetPosition - startPosition;
+        RaycastHit[] hits = Physics.RaycastAll(startPosition, direction, direction.magnitude);
+
+        foreach(RaycastHit hit in hits)
+        {
+            if(hit.collider != null && hit.collider.gameObject != gameObject)
+            {
+                return true; // There's an obstruction
+            }
+        }
+
+        return false; // No obstructions found
+    }
+
 
     //public void SetStartingPosition(Vector3 startPos)
     //{

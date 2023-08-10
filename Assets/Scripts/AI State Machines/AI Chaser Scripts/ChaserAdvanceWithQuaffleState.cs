@@ -14,10 +14,12 @@ using UnityEngine;
 
 public class ChaserAdvanceWithQuaffleState : State
 {
-    public float stoppingDistance = 3f; // Adjust this value based on your game's needs
+    [SerializeField] private float avoidanceRadius; // Adjust this value based on game's needs
+    [SerializeField] private float stoppingDistance; // Adjust this value based on game's needs
 
     public override State RunCurrentState()
     {
+        chooseLoopToTarget();
         Vector3 targetPosition = Logic.target.transform.position; // Replace with how you get the target's position
         Vector3 chaserPosition = transform.position;
 
@@ -26,32 +28,36 @@ public class ChaserAdvanceWithQuaffleState : State
         if(distanceToTarget > stoppingDistance)
         {
             Vector3 desiredDirection = (targetPosition - chaserPosition).normalized;
-            Vector3 avoidanceDirection = CalculateAvoidanceDirection(Logic); // Implement your avoidance logic
+            Vector3 avoidanceDirection = CalculateAvoidanceDirection(); // Implement your avoidance logic
 
             Vector3 finalDirection = desiredDirection + avoidanceDirection;
             finalDirection.Normalize();
 
             // Assuming you have a reference to a Rigidbody component
             Rigidbody chaserRigidbody = GetComponent<Rigidbody>();
-            chaserRigidbody.velocity = finalDirection /** Logic.speed*/;
+            chaserRigidbody.velocity = finalDirection * Logic.GetSpeed();
         }
         else
         {
             // Stop or perform other behavior when close to the target
-            Logic.ResetTarget(); // Reset the target when you're close enough
+            Logic.Quaffle.ThrowQuaffle(Logic.target);
+
+            //Logic.ResetTarget(); // Reset the target when you're close enough
+
+
             Logic.isMoving = false; // Stop moving
         }
 
         return this; // Stay in the same state for now
     }
 
-    private Vector3 CalculateAvoidanceDirection(PlayerLogicManager chaserLogic)
+    private Vector3 CalculateAvoidanceDirection()
     {
         Vector3 avoidanceDirection = Vector3.zero;
-        foreach(PlayerLogicManager enemy in chaserLogic.enemies)
+        foreach(PlayerLogicManager enemy in Logic.enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if(distanceToEnemy < 20 /*Logic.avoidanceRadius*/)
+            if(distanceToEnemy < avoidanceRadius)
             {
                 // Calculate a direction to steer away from the enemy
                 avoidanceDirection += (transform.position - enemy.transform.position).normalized;
@@ -60,5 +66,12 @@ public class ChaserAdvanceWithQuaffleState : State
 
         return avoidanceDirection.normalized;
     }
+
+    private void chooseLoopToTarget()
+    {
+        Logic.SetTarget(Logic.ChooseTargetGoal());
+
+    }
+
 }
 

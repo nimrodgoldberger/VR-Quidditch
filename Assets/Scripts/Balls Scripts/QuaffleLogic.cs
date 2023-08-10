@@ -101,6 +101,7 @@ public class QuaffleLogic : Targetable
 
     public void ThrowQuaffle(Targetable newTarget)
     {
+        transform.parent = null;
         heldBy = PlayerTeam.None;
         SetQuaffleTarget(newTarget);
         FlyToTarget();
