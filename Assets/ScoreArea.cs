@@ -6,7 +6,7 @@ public class ScoreArea : Targetable
 {
     [SerializeField] private GameObject particleEffectPrefab;
     //TODO get team from player scoring the point!!!
-    [SerializeField] PlayerTeam team;
+    private PlayerTeam team;
     [SerializeField] GameObject scoreManager;
     void OnTriggerEnter(Collider otherCollider)
     {
@@ -16,6 +16,12 @@ public class ScoreArea : Targetable
             StartCoroutine(StopParticleEffect(particleSystemInstance));
         }
         scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 10);
+        if (otherCollider.gameObject.name == "GoldenSnitch")
+        {
+            ParticleSystem particleSystemInstance = Instantiate(particleEffectPrefab, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+            StartCoroutine(StopParticleEffect(particleSystemInstance));
+        }
+        scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 150);
     }
 
     IEnumerator StopParticleEffect(ParticleSystem particleSystem)
@@ -28,6 +34,16 @@ public class ScoreArea : Targetable
 
         // Optionally, you can destroy the GameObject after stopping the particle system.
         Destroy(particleSystem.gameObject, particleSystem.main.duration);
+    }
+    
+    public void SetTeam(PlayerTeam assignedTeam)
+    {
+        team = assignedTeam;
+    }
+
+    public PlayerTeam GetTeam()
+    {
+        return team;
     }
 }
 

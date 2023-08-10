@@ -86,7 +86,6 @@ public class ScoreManager : MonoBehaviour
     }
     public int GetScoreForTeam(PlayerTeam team)
     {
-        Debug.Log(team);
 
         if (team == team1)
             return team1Score;
