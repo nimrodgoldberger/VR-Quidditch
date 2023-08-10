@@ -51,7 +51,7 @@ public class ChaserAdvanceWithQuaffleState : State
         foreach(PlayerLogicManager enemy in chaserLogic.enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if(distanceToEnemy < 20 /*chaserLogic.avoidanceRadius*/)
+            if(distanceToEnemy < 20 /*Logic.avoidanceRadius*/)
             {
                 // Calculate a direction to steer away from the enemy
                 avoidanceDirection += (transform.position - enemy.transform.position).normalized;
