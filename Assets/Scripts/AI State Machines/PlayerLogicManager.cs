@@ -11,8 +11,8 @@ public class PlayerLogicManager : Targetable
     public PlayerLogicManager[] enemies;
     public PlayerLogicManager[] friends;
     public SnitchLogic Snitch;
-    public QuaffleLogicNew Quaffle;
-    public float quaffleTakeTime = 0f;
+    public QuaffleLogic Quaffle;
+    public float quaffleTakeTime = 0.5f;
     public BludgerLogic[] Bludgers;
     public Targetable target;
     public bool isMoving = false;
@@ -217,8 +217,6 @@ public class PlayerLogicManager : Targetable
         isRotatingToStartingPos = false;
     }
 
-
-
     public bool IsSnitchInRange(float range)
     {
         return Vector3.Distance(Snitch.transform.position, transform.position) <= range;
@@ -229,6 +227,17 @@ public class PlayerLogicManager : Targetable
         //return Quaffle.CanBeTaken(this);
         return Vector3.Distance(Quaffle.transform.position, transform.position) <= range;
     }
+
+    public bool IsQuaffleHeldByMyTeam()
+    {
+        return Quaffle.IsQuaffleHeldByTeam(PlayerTeam);
+    }
+
+    public bool IsQuaffleHeldByMe()
+    {
+        return Quaffle.IsQuaffleHeldByPlayer(this);
+    }
+
 
     public int IsABludgerInRange(float range)
     {

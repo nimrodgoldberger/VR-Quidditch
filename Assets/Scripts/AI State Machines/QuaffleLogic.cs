@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuaffleLogicNew : Targetable
+public class QuaffleLogic : Targetable
 {
     public float takeDistance = 2f;
     public float takeTime = 0.5f;
@@ -154,4 +154,15 @@ public class QuaffleLogicNew : Targetable
     {
         target = null;
     }
+
+    public bool IsQuaffleHeldByTeam(PlayerTeam team)
+    {
+        return heldBy == team;
+    }
+
+    public bool IsQuaffleHeldByPlayer(PlayerLogicManager player)
+    {
+        return heldBy == player.PlayerTeam && player == transform.parent.GetComponent<PlayerLogicManager>();
+    }
+
 }

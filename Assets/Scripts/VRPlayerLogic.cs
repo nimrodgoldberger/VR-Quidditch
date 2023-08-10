@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VRPlayerLogic : PlayerLogic
+public class VRPlayerLogic : PlayerLogicManager
 {
    
 
