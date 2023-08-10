@@ -6,9 +6,8 @@ public class HoldSnitchState : State
 {
     public override State RunCurrentState()
     {
-        
         Debug.Log("I HAVE CAUGHT THE SNITCH!!!!!!!!!!");
-        return this; //MAYBE VICTORY ANIMATION?
+        return this; //TODO MAYBE VICTORY ANIMATION? + scene +closing menu
     }
 
 }
