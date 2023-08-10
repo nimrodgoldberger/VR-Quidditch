@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaserGetQuaffle : State
+public class ChaserGetQuaffleState : State
 {
     public PlayerLogicManager Keeper;
     public PlayerLogicManager Chaser2;
     public PlayerLogicManager Chaser3;
-    public State AdvanceWithQuaffle;
+    public ChaserAdvanceWithQuaffleState AdvanceWithQuaffle;
     public State AdvanceWithOutQuaffle;
     private float QuaffleVisibilityRange = 250f;
 

@@ -11,6 +11,7 @@ public class IdleState : State
     public SeekSnitchState seekSnitchState;
     public DefendState defendState;
     public DefendChaserState defendChaserState;
+    public ChaserGetQuaffleState chaserGetQuaffleState;
 
     public override State RunCurrentState()
     {
@@ -42,7 +43,7 @@ public class IdleState : State
                 break;
             case PlayerType.Chaser:
                 {
-
+                    returnState = chaserGetQuaffleState;
                 }
                 break;
             case PlayerType.Seeker:
