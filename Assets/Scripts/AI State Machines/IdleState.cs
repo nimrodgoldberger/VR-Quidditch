@@ -11,7 +11,11 @@ public class IdleState : State
     public SeekSnitchState seekSnitchState;
     public DefendState defendState;
     public DefendChaserState defendChaserState;
+
+    public ChaserGetQuaffleState chaserGetQuaffleState;
+
     public CountdownManager isStart;
+
 
     public override State RunCurrentState()
     {
@@ -42,13 +46,19 @@ public class IdleState : State
                     {
                         returnState = defendChaserState;
                     }
-                    break;
-                case PlayerType.Chaser:
+                
+                break;
+            case PlayerType.Beater:
+                {
+                    returnState = defendChaserState;
+                }
+                break;        
+             case PlayerType.Chaser:
                     {
-
+                     returnState = chaserGetQuaffleState;
                     }
                     break;
-                case PlayerType.Seeker:
+             case PlayerType.Seeker:
                     {
                         canSeeTarget = Logic.IsSnitchInRange(SnitchVisibilityRange);
                         if (canSeeTarget)
