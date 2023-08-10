@@ -14,6 +14,9 @@ public class KeeperHoldsQuaffleState : State
     {
         State nextState = this;
 
+        // TODO check if works 
+        //holdsQuaffle = Logic.Quaffle.IsQuaffleHeldByPlayer(Logic);
+
         if(holdsQuaffle)
         {
 

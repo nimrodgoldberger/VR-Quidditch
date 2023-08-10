@@ -46,11 +46,11 @@ public class IdleState : State
                     {
                         returnState = defendChaserState;
                     }
-
                     break;
                 case PlayerType.Chaser:
                     {
                         returnState = chaserGetQuaffleState;
+                        Debug.Log("Starting to chase quaffle");
                     }
                     break;
                 case PlayerType.Seeker:
