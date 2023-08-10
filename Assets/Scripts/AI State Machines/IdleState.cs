@@ -6,76 +6,87 @@ public class IdleState : State
 {
     bool canSeeTarget;
     float timeToStayInIdleState = 0f;
-    [SerializeField]private float SnitchVisibilityRange = 50f;
+    [SerializeField] private float SnitchVisibilityRange = 50f;
     [SerializeField] private float QuaffleVisibilityRange = 30f;
     public SeekSnitchState seekSnitchState;
     public DefendState defendState;
     public DefendChaserState defendChaserState;
+    public CountdownManager isStart;
 
     public override State RunCurrentState()
     {
         State returnState = this; //just for the testing
         //State returnState = null;
 
-        switch(Logic.PlayerType)
+        if (isStart.TimeRemaining == 0)
         {
-            case PlayerType.Keeper:
-                {
-                    canSeeTarget = Logic.IsQuaffleInRange(QuaffleVisibilityRange);
-                    if(canSeeTarget)
+            switch (Logic.PlayerType)
+            {
+                case PlayerType.Keeper:
                     {
-                        Debug.Log("I Have started DefenseState seeking the Quaffle!");
-                        Logic.target = null;
-                        Logic.isMoving = false;
-                        returnState = defendState;
+                        canSeeTarget = Logic.IsQuaffleInRange(QuaffleVisibilityRange);
+                        if (canSeeTarget)
+                        {
+                            Debug.Log("I Have started DefenseState seeking the Quaffle!");
+                            Logic.target = null;
+                            Logic.isMoving = false;
+                            returnState = defendState;
+                        }
+                        else
+                        {
+                            returnState = this;
+                        }
                     }
-                    else
+                    break;
+                case PlayerType.Beater:
                     {
-                        returnState = this;
+                        returnState = defendChaserState;
                     }
-                }
-                break;
-            case PlayerType.Beater:
-                {
-                    returnState = defendChaserState;
-                }
-                break;
-            case PlayerType.Chaser:
-                {
+                    break;
+                case PlayerType.Chaser:
+                    {
 
-                }
-                break;
-            case PlayerType.Seeker:
-                {
-                    canSeeTarget = Logic.IsSnitchInRange(SnitchVisibilityRange);
-                    if(canSeeTarget)
-                    {
-                        Debug.Log("I Have started seeking the snitch!");
-                        Logic.target = null;
-                        Logic.isMoving = false;
-                        returnState = seekSnitchState;
                     }
-                    else
+                    break;
+                case PlayerType.Seeker:
                     {
-                        returnState = this;
+                        canSeeTarget = Logic.IsSnitchInRange(SnitchVisibilityRange);
+                        if (canSeeTarget)
+                        {
+                            Debug.Log("I Have started seeking the snitch!");
+                            Logic.target = null;
+                            Logic.isMoving = false;
+                            returnState = seekSnitchState;
+                        }
+                        else
+                        {
+                            returnState = this;
+                        }
                     }
-                }
-                break;
-            case PlayerType.VRPlayer:
-                {
+                    break;
+                case PlayerType.VRPlayer:
+                    {
 
-                }
-                break;
-            default:
-                {
-                    
-                }
-                break;
+                    }
+                    break;
+                default:
+                    {
+
+                    }
+                    break;
+            }
         }
 
         return returnState;
     }
 
+    private IEnumerator DelayedAction()
+    {
+        // Wait for 3 seconds
+        yield return new WaitForSeconds(3f);
 
+        // This code will execute after the delay
+        Debug.Log("Delayed action executed.");
+    }
 
 }

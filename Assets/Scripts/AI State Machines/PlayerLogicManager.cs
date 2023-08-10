@@ -1,13 +1,17 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLogicManager : Targetable
 {
-    protected Vector3 startingPosition;
+    public Vector3 startingPosition;
     protected Quaternion startingRotation;
     public DynamicPositionTarget startingPositionTarget;
     public PlayerTeam PlayerTeam;
     public PlayerType PlayerType;
+
+    [SerializeField] private List<ScoreArea> myTeamGoals;
+    [SerializeField] private List<ScoreArea> enemyTeamGoals;
 
     public PlayerLogicManager[] enemies;
     public PlayerLogicManager[] friends;
@@ -16,6 +20,7 @@ public class PlayerLogicManager : Targetable
     public float quaffleTakeTime = 0f;
     public BludgerLogic[] Bludgers;
     public Targetable target;
+    public Targetable relativePositionTarget;
     public bool isMoving = false;
     public bool isRotatingToStartingPos = false;
 
@@ -238,7 +243,7 @@ public class PlayerLogicManager : Targetable
         else if (Vector3.Distance(Bludgers[1].transform.position, transform.position) <= range)
             return 1;
         else
-            return 3;//NO BLUDGERS IN RANGE
+            return -1;//NO BLUDGERS IN RANGE
 
     }
 
@@ -252,6 +257,17 @@ public class PlayerLogicManager : Targetable
         Bludgers[bludgerIndex].SetTarget(enemies[randomIndex].gameObject);
         Bludgers[bludgerIndex].state = BludgerLogic.State.Chase;
     }
+
+    public void SetGoals(List<ScoreArea> myGoals, List<ScoreArea> enemyGoals)
+    {
+        myTeamGoals = myGoals;
+        enemyTeamGoals = enemyGoals;
+    }
+
+    //public void SetStartingPosition(Vector3 startPos)
+    //{
+    //    startingPosition = startPos;
+    //}
 
 }
 
