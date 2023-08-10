@@ -8,6 +8,7 @@ public class PlayerLogicManager : Targetable
     public DynamicPositionTarget startingPositionTarget;
     public PlayerTeam PlayerTeam;
     public PlayerType PlayerType;
+
     public PlayerLogicManager[] enemies;
     public PlayerLogicManager[] friends;
     public SnitchLogic Snitch;
@@ -232,7 +233,6 @@ public class PlayerLogicManager : Targetable
 
     public int IsABludgerInRange(float range)
     {
-
         if (Vector3.Distance(Bludgers[0].transform.position, transform.position) <= range)
             return 0;
         else if (Vector3.Distance(Bludgers[1].transform.position, transform.position) <= range)

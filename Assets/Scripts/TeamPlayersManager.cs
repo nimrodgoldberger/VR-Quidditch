@@ -26,6 +26,9 @@ public class TeamPlayersManager : MonoBehaviour
 
     public GameObject scoreText; // Reference to the Text component for displaying the team name
 
+    public List<ScoreArea> team1Goals;
+    public List<ScoreArea> team2Goals;
+
     public List<PlayerLogicManager> keepers1;
     public List<PlayerLogicManager> beaters1;
     public List<PlayerLogicManager> chasers1;
@@ -35,6 +38,16 @@ public class TeamPlayersManager : MonoBehaviour
     public List<PlayerLogicManager> beaters2;
     public List<PlayerLogicManager> chasers2;
     public List<PlayerLogicManager> seekers2;
+
+    public List<GameObject> StartingPositionsChasersTeam1;
+    public List<GameObject> StartingPositionsBeatersTeam1;
+    public List<GameObject> StartingPositionsSeekerTeam1;
+    public List<GameObject> StartingPositionsKeeperTeam1;
+
+    public List<GameObject> StartingPositionsChasersTeam2;
+    public List<GameObject> StartingPositionsBeatersTeam2;
+    public List<GameObject> StartingPositionsSeekerTeam2;
+    public List<GameObject> StartingPositionsKeeperTeam2;
 
 
     public Material gryffindorMaterial; // Reference to Gryffindor material
@@ -53,7 +66,7 @@ public class TeamPlayersManager : MonoBehaviour
     //To set the starting points of the players, Only if needed!!!!!
     public TeamType teamType = TeamType.Team1Player;
 
-
+    private bool playersInitialized = false; // Keep track if players are already initialized
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +75,7 @@ public class TeamPlayersManager : MonoBehaviour
         team1 = (PlayerTeam)PlayerPrefs.GetInt("Team1");
         team2 = (PlayerTeam)PlayerPrefs.GetInt("Team2");
 
-       
+        AssignGoalsToTeams(team1Goals, team2Goals);
 
         //TODO initialize according to XR origin team and according to multiplayer
 
@@ -78,16 +91,76 @@ public class TeamPlayersManager : MonoBehaviour
         initPlayerStateManagers(chasers2, team2, PlayerType.Chaser);
         initPlayerStateManagers(seekers2, team2, PlayerType.Seeker);
 
+        playersInitialized = true;
+
     }
 
-    private void initPlayerStateManagers(List<PlayerLogicManager> gameObjects, PlayerTeam team, PlayerType type)
+    private void initPlayerStateManagers(List<PlayerLogicManager> players, PlayerTeam team, PlayerType type)
     {
-        foreach (PlayerLogicManager player in gameObjects)
+        int chaserIndex = 0;
+        int beaterIndex = 0;
+
+        foreach (PlayerLogicManager player in players)
         {
             player.PlayerTeam = team;
             player.PlayerType = type;
             SetPlayerTeamOutfit(player);
+            switch (player.PlayerType)
+            {
+                case PlayerType.Beater:
+                    SetPlayerStartingPos(player, beaterIndex);
+                    beaterIndex++;
+                    break;
+                case PlayerType.Chaser:
+                    SetPlayerStartingPos(player, chaserIndex);
+                    chaserIndex++;
+                    break;
+                default:
+                    SetPlayerStartingPos(player, 0);
+                    break;
+            }
         }
+    }
+
+    public void SetPlayerStartingPos(PlayerLogicManager player, int typeIndex)
+    {
+        if(player.PlayerTeam == team1)
+        {
+            switch (player.PlayerType)
+            {
+                case PlayerType.Beater:
+                    player.transform.position = StartingPositionsBeatersTeam1[typeIndex].transform.position;
+                    break;
+                case PlayerType.Chaser:
+                    player.transform.position = StartingPositionsChasersTeam1[typeIndex].transform.position;
+                    break;
+                case PlayerType.Seeker:
+                    player.transform.position = StartingPositionsSeekerTeam1[typeIndex].transform.position;
+                    break;
+                case PlayerType.Keeper:
+                    player.transform.position = StartingPositionsKeeperTeam1[typeIndex].transform.position;
+                    break;
+            }
+        }
+        else if (player.PlayerTeam == team2)
+        {
+            switch (player.PlayerType)
+            {
+                case PlayerType.Beater:
+                    player.transform.position = StartingPositionsBeatersTeam2[typeIndex].transform.position;
+                    break;
+                case PlayerType.Chaser:
+                    player.transform.position = StartingPositionsChasersTeam2[typeIndex].transform.position;
+                    break;
+                case PlayerType.Seeker:
+                    player.transform.position = StartingPositionsSeekerTeam2[typeIndex].transform.position;
+                    break;
+                case PlayerType.Keeper:
+                    player.transform.position = StartingPositionsKeeperTeam2[typeIndex].transform.position;
+                    break;
+            }
+        }
+
     }
 
     // Call this method to change the material of the body based on the team
@@ -129,6 +202,19 @@ public class TeamPlayersManager : MonoBehaviour
     public PlayerTeam GetTeam2()
     {
         return team2;
+    }
+
+    public void AssignGoalsToTeams(List<ScoreArea> team1Goals, List<ScoreArea> team2Goals)
+    {
+        foreach (ScoreArea goal in team1Goals)
+        {
+            goal.SetTeam(team1);
+        }
+
+        foreach (ScoreArea goal in team2Goals)
+        {
+            goal.SetTeam(team2);
+        }
     }
 
 }
