@@ -13831,7 +13831,7 @@ GameObject:
   - component: {fileID: 1813568313}
   - component: {fileID: 1813568314}
   m_Layer: 0
-  m_Name: BroomHandler
+  m_Name: SpellsHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13864,9 +13864,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e27416ca9ff884ebd74040dca8544b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubes:
-  - {fileID: 380029552}
-  - {fileID: 0}
+  broom: {fileID: 380029552}
+  keepers2:
+  - {fileID: 1650074840}
+  beaters2:
+  - {fileID: 990855241}
+  chasers2: []
+  seekers2:
+  - {fileID: 1540136331}
+  initialSwayIntensity: 1
+  swaySpeed: 1
+  effectDuration: 5
 --- !u!1 &1819883869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5551700733566106824, guid: 01ee16493617836479eff766be6b69fd, type: 3}

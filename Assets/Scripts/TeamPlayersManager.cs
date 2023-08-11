@@ -278,6 +278,7 @@ public class TeamPlayersManager : MonoBehaviour
         foreach (PlayerLogicManager player in players)
         {
             player.GetAnimator().SetBool("Idle", false);
+            player.GetAnimator().SetBool("Stupefy", false);
             player.GetAnimator().SetBool("Winner", true);
         }
     }
@@ -286,6 +287,7 @@ public class TeamPlayersManager : MonoBehaviour
         foreach (PlayerLogicManager player in players)
         {
             player.GetAnimator().SetBool("Idle", false);
+            player.GetAnimator().SetBool("Stupefy", false);
             player.GetAnimator().SetBool("Loser", true);
         }
     }
