@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerLogicManager : Targetable
 {
+    private Animator animator;
+
     public Vector3 startingPosition;
     protected Quaternion startingRotation;
     public DynamicPositionTarget startingPositionTarget;
@@ -32,6 +34,7 @@ public class PlayerLogicManager : Targetable
         startingPosition = transform.position;
         startingRotation = transform.rotation;
         startingPositionTarget.SetTransform(startingPosition, startingRotation);
+        animator = GetComponent<Animator>();
     }
 
     public bool TryCatchQuaffle()
@@ -115,6 +118,38 @@ public class PlayerLogicManager : Targetable
         isMoving = false;
     }
 
+
+    public IEnumerator MoveAndRotateToBludger(int bludgerIndex, Vector3 relativePos)
+    {
+        isMoving = true;
+        float totalDistance = Vector3.Distance(transform.position, Bludgers[bludgerIndex].transform.position);
+        float travelDuration = totalDistance / speed;
+        Vector3 initialPosition = transform.position;
+        Vector3 bludgerPosition = Bludgers[bludgerIndex].transform.position;
+        Quaternion initialRotation = transform.rotation;
+        Quaternion lookRotation = Quaternion.LookRotation(bludgerPosition - initialPosition);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < travelDuration)
+        {
+            // Calculate the new position and rotation using Mathf.Lerp
+            float t = elapsedTime / travelDuration;
+            transform.position = Vector3.Lerp(initialPosition, bludgerPosition, t);
+            transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, t);
+
+            // Yielding inside FixedUpdate to wait for the next FixedUpdate step
+            yield return new WaitForFixedUpdate();
+
+            elapsedTime += Time.fixedDeltaTime;
+        }
+
+        // Ensure the final position and rotation are set correctly
+        transform.position = bludgerPosition + relativePos;
+        transform.rotation = lookRotation;
+
+        // At the end of the coroutine, reset the target and isMoving flag
+        isMoving = false;
+    }
     //public void RotateToStartingPosition()
     //{
     //    if(isMoving)
@@ -268,8 +303,7 @@ public class PlayerLogicManager : Targetable
         // Generate a random index within the bounds of the array
         int randomIndex = random.Next(0, enemies.Length-1);
         // New bludger target will be the new enemy
-        Bludgers[bludgerIndex].SetTarget(enemies[randomIndex].gameObject);
-        Bludgers[bludgerIndex].state = BludgerLogic.State.Chase;
+        Bludgers[bludgerIndex].GoToChaseAfterBeingHit(enemies[randomIndex].gameObject);
     }
 
     public void SetGoals(List<ScoreArea> myGoals, List<ScoreArea> enemyGoals)
@@ -334,5 +368,38 @@ public class PlayerLogicManager : Targetable
     //    startingPosition = startPos;
     //}
 
+    public Vector3 CreateRelativePositionToBewareOfBludgers()
+    {
+        int negative = 0;
+        int positive = 1;
+
+        Vector3 relativePosition = Vector3.one;
+
+        // Creates a new instance of Random class
+        System.Random random = new System.Random();
+
+        // Generates a random index within the bounds of the array
+        int value = random.Next(0, 1);
+
+        if (value == negative)
+        {
+            relativePosition.x = random.Next(-40, -35);
+            relativePosition.y = random.Next(-40, -35);
+            relativePosition.z = random.Next(-40, -35);
+        }
+
+        if (value == positive)
+        {
+            relativePosition.x = random.Next(-40, -35);
+            relativePosition.y = random.Next(-40, -35);
+            relativePosition.z = random.Next(-40, -35);
+        }
+        return relativePosition;
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
 }
 

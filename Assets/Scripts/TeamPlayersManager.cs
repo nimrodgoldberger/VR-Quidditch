@@ -240,7 +240,56 @@ public class TeamPlayersManager : MonoBehaviour
             goal.SetTeam(team2);
         }
     }
-    
+
+    public void GoalAnimations(PlayerTeam scoringTeam)
+    {
+         
+        if (scoringTeam == team1)
+        {
+            
+            LoosingAnimations(keepers2);
+            LoosingAnimations(beaters2);
+            LoosingAnimations(chasers2);
+            LoosingAnimations(seekers2);
+
+            WinningAnimations(keepers1);
+            WinningAnimations(beaters1);
+            WinningAnimations(chasers1);
+            WinningAnimations(seekers1);
+
+
+        }
+        else if (scoringTeam == team2)
+        {
+            LoosingAnimations(keepers1);
+            LoosingAnimations(beaters1);
+            LoosingAnimations(chasers1);
+            LoosingAnimations(seekers1);
+
+            WinningAnimations(keepers2);
+            WinningAnimations(beaters2);
+            WinningAnimations(chasers2);
+            WinningAnimations(seekers2);  
+        }
+    }
+
+    public void WinningAnimations(List<PlayerLogicManager> players)
+    {
+        foreach (PlayerLogicManager player in players)
+        {
+            player.GetAnimator().SetBool("Idle", false);
+            player.GetAnimator().SetBool("Winner", true);
+        }
+    }
+    public void LoosingAnimations(List<PlayerLogicManager> players)
+    {
+        foreach (PlayerLogicManager player in players)
+        {
+            player.GetAnimator().SetBool("Idle", false);
+            player.GetAnimator().SetBool("Loser", true);
+        }
+    }
+
 
     ///////NOT USING IT YET MIGHT NEED BUT DONT FORGET THAT YOU ARE NOT PART OF YOUR OWN FRIENDS LIST
     //private void SetFriendsAndEnemiesTeam1(PlayerLogicManager player)

@@ -164,5 +164,17 @@ public class BludgerLogic : MonoBehaviour
     {
         target = newTarget;
     }
+
+    public void GoToChaseAfterBeingHit(GameObject newTarget)
+    {
+        onTrack = true;
+        state = State.Chase;
+        audioSource.PlayOneShot(howlSound);
+        chaseTimer = 0f;
+        SetTarget(newTarget);
+        Vector3 direction = target.transform.position - transform.position;
+        direction.Normalize();
+        rb.velocity = direction * movementSpeed;
+    }
 }
 

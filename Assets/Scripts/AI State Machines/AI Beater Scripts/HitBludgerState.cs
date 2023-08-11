@@ -6,8 +6,11 @@ public class HitBludgerState : State
 {
 
     public IdleState idle;
-    int bludgerCloseIndex;
-    float bludgerTryHittingRange = 2f;
+    public DefendChaserState defendChaser;
+    private int bludgerCloseIndex;
+    private int bludgerChaseIndex;
+    private float bludgerClosenessRange = 15f;
+    private float bludgerTryHittingRange = 0.5f;
 
     public override State RunCurrentState()
     {
@@ -20,16 +23,15 @@ public class HitBludgerState : State
         if (bludgerCloseIndex != noBludgerIsClose) 
         {
             //TO DO Animation activation
-            Logic.BudgerWasHit(bludgerCloseIndex);
             Debug.Log("hit bludger!!");
+            Logic.BudgerWasHit(bludgerCloseIndex);
             Logic.ResetTarget();//needed in order to change the chaser that the beater defends
             returnState = idle;
         }
         else
         {
-            Logic.MoveAndRotateToTarget();
-            //TO DO make beater fly randomly around chaser it defends
-            returnState = this;
+             Logic.ResetTarget();//needed in order to change the chaser that the beater defends
+             returnState = defendChaser;
         }
 
         return returnState;

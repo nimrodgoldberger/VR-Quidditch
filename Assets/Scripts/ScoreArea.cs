@@ -8,6 +8,7 @@ public class ScoreArea : Targetable
     //TODO get team from player scoring the point!!!
     private PlayerTeam team;
     [SerializeField] GameObject scoreManager;
+    [SerializeField] TeamPlayersManager teamManager;
     void OnTriggerEnter(Collider otherCollider)
     {
         if(otherCollider.gameObject.name == "Quaffle")
@@ -22,6 +23,9 @@ public class ScoreArea : Targetable
             StartCoroutine(StopParticleEffect(particleSystemInstance));
         }
         scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 150);
+
+        //Activates winning and loosing animations
+        teamManager.GoalAnimations(team);
     }
 
     IEnumerator StopParticleEffect(ParticleSystem particleSystem)
