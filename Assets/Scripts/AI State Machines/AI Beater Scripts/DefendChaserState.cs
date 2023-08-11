@@ -5,8 +5,8 @@ using System;
 
 public class DefendChaserState : State
 {
-    int bludgerCloseIndex;
-    float bludgerClosenessRange = 5f;
+    private int bludgerCloseIndex;
+    private float bludgerClosenessRange = 15f;
     public HitBludgerState hitBludgerState;
 
 

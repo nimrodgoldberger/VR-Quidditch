@@ -95,9 +95,7 @@ public class TeamPlayersManager : MonoBehaviour
             initPlayerStateManagers(chasers2, team2, PlayerType.Chaser);
             initPlayerStateManagers(seekers2, team2, PlayerType.Seeker);
 
-            playersInitialized = true;
-
-            
+            playersInitialized = true;            
         }
 
     }
@@ -111,8 +109,12 @@ public class TeamPlayersManager : MonoBehaviour
 
         foreach (PlayerLogicManager player in players)
         {
+
+            
+            int index = 0;
             player.PlayerTeam = team;
             player.PlayerType = type;
+            
             SetPlayerTeamOutfit(player);
             switch (player.PlayerType)
             {
@@ -128,10 +130,12 @@ public class TeamPlayersManager : MonoBehaviour
                     SetPlayerStartingPos(player, 0);
                     break;
             }
+
             if(team == team1)
             {
                 player.SetGoals(team1Goals, team2Goals);
             }
+
             if(team == team2)
             {
                 player.SetGoals(team2Goals, team1Goals);
@@ -236,6 +240,52 @@ public class TeamPlayersManager : MonoBehaviour
             goal.SetTeam(team2);
         }
     }
-
     
+
+    ///////NOT USING IT YET MIGHT NEED BUT DONT FORGET THAT YOU ARE NOT PART OF YOUR OWN FRIENDS LIST
+    //private void SetFriendsAndEnemiesTeam1(PlayerLogicManager player)
+    //{
+    //    // Calculate the total number of enemies
+    //    int totalEnemies = keepers1.Count + beaters1.Count + chasers1.Count + seekers1.Count;
+
+    //    // Initialize the enemies array with the calculated size
+    //    player.enemies = new PlayerLogicManager[totalEnemies];
+
+    //    // Add PlayerLogicManager components from each list to the enemies array
+    //    int index = 0;
+
+    //    player.enemies = keepers1.ToArray();
+    //    index += keepers1.Count;
+
+    //    beaters1.CopyTo(player.enemies, index);
+    //    index += beaters1.Count;
+
+    //    chasers1.CopyTo(player.enemies, index);
+    //    index += chasers1.Count;
+
+    //    seekers1.CopyTo(player.enemies, index);
+    //}
+
+    //private void SetFriendsAndEnemiesTeam2(PlayerLogicManager player)
+    //{
+    //    // Calculate the total number of enemies
+    //    int totalEnemies = keepers2.Count + beaters2.Count + chasers2.Count + seekers2.Count;
+
+    //    // Initialize the enemies array with the calculated size
+    //    player.friends = new PlayerLogicManager[totalEnemies];
+
+    //    // Add PlayerLogicManager components from each list to the enemies array
+    //    int index = 0;
+
+    //    player.friends = keepers2.ToArray();
+    //    index += keepers2.Count;
+
+    //    beaters1.CopyTo(player.friends, index);
+    //    index += beaters2.Count;
+
+    //    chasers1.CopyTo(player.friends, index);
+    //    index += chasers2.Count;
+
+    //    seekers1.CopyTo(player.friends, index);
+    //}
 }

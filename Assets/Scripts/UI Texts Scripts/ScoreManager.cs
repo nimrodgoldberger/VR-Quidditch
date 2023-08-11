@@ -57,7 +57,7 @@ public class ScoreManager : MonoBehaviour
             team1Score = GetScoreForTeam(team1) + additionalPoints;
         }
 
-        else if (team == team1)
+        else if (team == team2)
         {
             team2Score = GetScoreForTeam(team2) + additionalPoints;
             team1Score = GetScoreForTeam(team1);

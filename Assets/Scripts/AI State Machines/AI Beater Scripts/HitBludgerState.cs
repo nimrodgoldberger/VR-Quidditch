@@ -11,13 +11,13 @@ public class HitBludgerState : State
 
     public override State RunCurrentState()
     {
-        int noBludgerIsClose = 3;
+        int noBludgerIsClose = -1;
         State returnState = this; //just for the testing
         Debug.Log("Bludger is close! might hit it!");
 
         bludgerCloseIndex = Logic.IsABludgerInRange(bludgerTryHittingRange);
 
-        if (bludgerCloseIndex != noBludgerIsClose)
+        if (bludgerCloseIndex != noBludgerIsClose) 
         {
             //TO DO Animation activation
             Logic.BudgerWasHit(bludgerCloseIndex);

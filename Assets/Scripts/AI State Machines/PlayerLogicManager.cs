@@ -266,7 +266,7 @@ public class PlayerLogicManager : Targetable
         // Create a new instance of Random class
         System.Random random = new System.Random();
         // Generate a random index within the bounds of the array
-        int randomIndex = random.Next(0, enemies.Length);
+        int randomIndex = random.Next(0, enemies.Length-1);
         // New bludger target will be the new enemy
         Bludgers[bludgerIndex].SetTarget(enemies[randomIndex].gameObject);
         Bludgers[bludgerIndex].state = BludgerLogic.State.Chase;

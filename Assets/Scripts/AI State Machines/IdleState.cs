@@ -22,7 +22,7 @@ public class IdleState : State
         State returnState = this; //just for the testing
         //State returnState = null;
 
-        if(isStart.TimeRemaining == 0)
+        if(isStart.TimeRemaining <= 0)
         {
             switch(Logic.PlayerType)
             {
