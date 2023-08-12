@@ -16,6 +16,7 @@ public class KeeperHoldsQuaffleState : State
 
         // TODO check if works 
         //holdsQuaffle = Logic.Quaffle.IsQuaffleHeldByPlayer(Logic);
+        //holdsQuaffle = Logic.IsQuaffleHeldByMe();
 
         if(holdsQuaffle)
         {
@@ -105,14 +106,14 @@ public class KeeperHoldsQuaffleState : State
         // You can use a navigation system or custom movement logic to achieve this.
 
         // For now, let's assume we directly pass the ball to the target's position for demonstration purposes.
-        Logic.Quaffle.ThrowQuaffle(playerToPassTo);
+        Logic.Quaffle.ThrowQuaffle(Logic, playerToPassTo);
 
     }
 
     public void PassTheQuaffle()
     {
         //Logic.Quaffle.transform.parent = null;
-        Logic.Quaffle.ThrowQuaffle(playerToPassTo);
+        Logic.Quaffle.ThrowQuaffle(Logic, playerToPassTo);
     }
 
     private Targetable GetPlayerToPassTo()

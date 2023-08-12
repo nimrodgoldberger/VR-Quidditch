@@ -222,7 +222,7 @@ public class ChaserAdvanceWithQuaffleState : State
             {
                 Logic.StopMoveAndRotateToTarget(); // TODO Check if works
 
-                Logic.Quaffle.ThrowQuaffle(Logic.target);
+                Logic.Quaffle.ThrowQuaffle(Logic, Logic.target);
 
                 holdsQuaffle = false;
                 Logic.isMoving = false;
@@ -264,6 +264,7 @@ public class ChaserAdvanceWithQuaffleState : State
             }
             else
             {
+                Logic.ResetSpeed();
                 timerAfterThrowOrLostQuaffle = 0f;
                 Logic.target = null;
                 Logic.isMoving = false;

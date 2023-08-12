@@ -7,6 +7,7 @@ using System;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] TMP_Text scoreText; // Reference to the UI Text component for displaying the score
+    [SerializeField] private BallsPositionManager ballsPositionManager;
     private PlayerTeam team1;
     private PlayerTeam team2;
     private int team1Score; // The current score
@@ -55,11 +56,13 @@ public class ScoreManager : MonoBehaviour
         {
             team2Score = GetScoreForTeam(team2);
             team1Score = GetScoreForTeam(team1) + additionalPoints;
+            ballsPositionManager.GoalWasScored();
         }
         else if (team == team2)
         {
             team2Score = GetScoreForTeam(team2) + additionalPoints;
             team1Score = GetScoreForTeam(team1);
+            ballsPositionManager.GoalWasScored();
         }
         else
         {

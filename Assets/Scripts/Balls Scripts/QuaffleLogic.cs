@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class QuaffleLogic : Targetable
 {
-    public float takeDistance = 2f;
-    public float takeTime = 0.2f;
+    public float takeDistance = 3f;
+    public float takeTime = 0.5f;
     private bool isQuaffleHeld = false;
     private PlayerTeam heldBy = PlayerTeam.None;
     //private float[] teamTimers = {0.0f, 0.0f, 0.0f, 0.0f};
@@ -104,6 +104,7 @@ public class QuaffleLogic : Targetable
         transform.SetParent(player.transform);
         transform.localPosition = relativepos;
         player.quaffleTakeTime = 0.0f;
+        player.CaughtQuaffle();
 
     }
 
@@ -124,8 +125,9 @@ public class QuaffleLogic : Targetable
         //2. SetTheNewParent + team...
     }
 
-    public void ThrowQuaffle(Targetable newTarget)
+    public void ThrowQuaffle(PlayerLogicManager player, Targetable newTarget)
     {
+        player.ResetSpeed();
         transform.parent = null;
         heldBy = PlayerTeam.None;
         isQuaffleHeld = false;
