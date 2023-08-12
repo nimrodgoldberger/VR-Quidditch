@@ -6507,8 +6507,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Logic: {fileID: 5776180215716552107}
+  SnitchVisibilityRange: 50
+  QuaffleVisibilityRange: 50
   seekSnitchState: {fileID: 5776180215132260599}
   defendState: {fileID: 5776180214069202169}
+  defendChaserState: {fileID: 0}
+  chaserGetQuaffleState: {fileID: 0}
+  isStart: {fileID: 0}
 --- !u!1 &5776180213998999984
 GameObject:
   m_ObjectHideFlags: 0
@@ -18316,7 +18321,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Logic: {fileID: 5776180215716552107}
   idleState: {fileID: 5776180213998171363}
+  defendState: {fileID: 0}
   minDistance: 1
+  startingPos: {fileID: 0}
 --- !u!1 &5776180214744193380
 GameObject:
   m_ObjectHideFlags: 0
@@ -24465,7 +24472,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Logic: {fileID: 5776180215716552107}
-  ReturnToStartPositionState: {fileID: 5776180214743840352}
+  SnitchCatchingRange: 5
+  SnitchVisibilityRange: 50
+  idleState: {fileID: 0}
+  returnToStartPositionState: {fileID: 0}
+  holdSnitchState: {fileID: 0}
 --- !u!1 &5776180215133267268
 GameObject:
   m_ObjectHideFlags: 0
@@ -31585,6 +31596,8 @@ MonoBehaviour:
   ReturnToStartPositionState: {fileID: 5776180214743840352}
   holdsQuaffle: 1
   playerToPassTo: {fileID: 0}
+  coolDownAfterPass: 1
+  timerAfterPass: 0
 --- !u!1 &5776180215580433703
 GameObject:
   m_ObjectHideFlags: 0
@@ -34121,14 +34134,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d420c2c41252a047baa0b1c7060f630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingPosition: {x: 0, y: 0, z: 0}
+  startingPositionTarget: {fileID: 0}
   PlayerTeam: 0
   PlayerType: 0
+  myTeamGoals: []
+  enemyTeamGoals: []
   enemies: []
   friends: []
   Snitch: {fileID: 0}
   Quaffle: {fileID: 0}
+  quaffleTakeTime: 0.5
   Bludgers: []
   target: {fileID: 0}
+  relativePositionTarget: {fileID: 0}
+  isMoving: 0
+  isRotatingToStartingPos: 0
   speed: 20
   rotationSpeed: 3
 --- !u!1 &5776180215718678040

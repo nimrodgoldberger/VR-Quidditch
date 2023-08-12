@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class QuaffleLogic : Targetable
 {
-    public float takeDistance = 2f;
-    public float takeTime = 0.5f;
+    public float takeDistance = 5f;
+    public float takeTime = 1f;
     private bool isQuaffleHeld = false;
     private PlayerTeam heldBy = PlayerTeam.None;
     //private float[] teamTimers = {0.0f, 0.0f, 0.0f, 0.0f};
@@ -21,14 +21,14 @@ public class QuaffleLogic : Targetable
     {
         if(isFlying)
         {
-            Debug.Log("Quaffle Is Flying");
+            //Debug.Log("Quaffle Is Flying");
             MoveAndRotateToTarget();
         }
-        if(isFlying && heldBy!=PlayerTeam.None)
+        if(isFlying && heldBy != PlayerTeam.None)
         {
-            Debug.Log("MAYBE ERROR!! Quaffle Is Flying BUT heldBy != PlayerTeam.None");
+            //Debug.Log("MAYBE ERROR!! Quaffle Is Flying BUT heldBy != PlayerTeam.None");
             isFlying = false;
-            isQuaffleHeld=false;
+            isQuaffleHeld = false;
         }
     }
 
@@ -43,43 +43,67 @@ public class QuaffleLogic : Targetable
     {
         bool result = false;
 
-        if(heldBy != player.PlayerTeam)
+        if(Vector3.Distance(transform.position, player.transform.position) <= takeDistance)
         {
-            // TODO Check if timer works
-            // 0.5 seconds pass before taking it;
-            player.quaffleTakeTime += Time.fixedDeltaTime;
-            if(player.quaffleTakeTime > takeTime)
-            {
-                result = TakeQuaffle(player);
-                player.quaffleTakeTime = 0.0f;
-            }
+            result = TakeQuaffle(player);
         }
-        else
-        {
-            player.quaffleTakeTime = 0.0f;
-            if(heldBy == PlayerTeam.None)
-            {
-                result = TakeQuaffle(player);
-            }
-        }
+
+        //if(heldBy != player.PlayerTeam)
+        //{
+        //    // TODO Check if timer works
+        //    // 0.5 seconds pass before taking it;
+
+        //    player.quaffleTakeTime += Time.fixedDeltaTime;
+        //    if(player.quaffleTakeTime > takeTime)
+        //    {
+        //        result = TakeQuaffle(player);
+        //        player.quaffleTakeTime = 0.0f;
+        //    }
+        //}
+        //else
+        //{
+        //    player.quaffleTakeTime = 0.0f;
+        //    if(heldBy == PlayerTeam.None)
+        //    {
+        //        result = TakeQuaffle(player);
+        //    }
+        //}
 
         return result;
     }
 
     private bool TakeQuaffle(PlayerLogicManager player)
     {
-        if(!isQuaffleHeld && Vector3.Distance(transform.position, player.transform.position) <= takeDistance)
+        if(!isQuaffleHeld) // Free to take.
         {
-            Vector3 relativepos = new Vector3(0.35f, 0.35f, 0.2f);
-            isFlying = false;
+            PlayerHoldsQuaffle(player);
+        }
+        else if(heldBy != player.PlayerTeam)
+        {
+            player.quaffleTakeTime += Time.fixedDeltaTime;
+            if(player.quaffleTakeTime > takeTime)
+            {
+                PlayerHoldsQuaffle(player);
+            }
+            //else
+            //{
 
-            isQuaffleHeld = true;
-            heldBy = player.PlayerTeam;
-            transform.SetParent(player.transform);
-            transform.localPosition = relativepos;
+            //}
         }
 
         return isQuaffleHeld;
+    }
+
+    private void PlayerHoldsQuaffle(PlayerLogicManager player)
+    {
+        Vector3 relativepos = new Vector3(0.35f, 0.35f, 0.2f);
+        isFlying = false;
+        isQuaffleHeld = true;
+        heldBy = player.PlayerTeam;
+        transform.SetParent(player.transform);
+        transform.localPosition = relativepos;
+        player.quaffleTakeTime = 0.0f;
+
     }
 
     // XROrigin TakeQuaffle
@@ -103,6 +127,7 @@ public class QuaffleLogic : Targetable
     {
         transform.parent = null;
         heldBy = PlayerTeam.None;
+        isQuaffleHeld = false;
         SetQuaffleTarget(newTarget);
         FlyToTarget();
     }
@@ -116,7 +141,7 @@ public class QuaffleLogic : Targetable
 
     private IEnumerator MoveAndRotateCoroutine()
     {
-        if(wasThrown)
+        if(wasThrown && target)
         {
             isFlying = true;
             float totalDistance = Vector3.Distance(transform.position, target.transform.position);

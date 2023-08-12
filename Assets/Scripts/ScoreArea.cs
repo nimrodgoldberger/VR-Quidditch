@@ -14,14 +14,15 @@ public class ScoreArea : Targetable
         {
             ParticleSystem particleSystemInstance = Instantiate(particleEffectPrefab, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             StartCoroutine(StopParticleEffect(particleSystemInstance));
+            scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 10);
         }
-        scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 10);
-        if (otherCollider.gameObject.name == "GoldenSnitch")
+        if(otherCollider.gameObject.name == "GoldenSnitch")
         {
             ParticleSystem particleSystemInstance = Instantiate(particleEffectPrefab, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             StartCoroutine(StopParticleEffect(particleSystemInstance));
+            scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 150);
         }
-        scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 150);
+
     }
 
     IEnumerator StopParticleEffect(ParticleSystem particleSystem)
@@ -35,7 +36,7 @@ public class ScoreArea : Targetable
         // Optionally, you can destroy the GameObject after stopping the particle system.
         Destroy(particleSystem.gameObject, particleSystem.main.duration);
     }
-    
+
     public void SetTeam(PlayerTeam assignedTeam)
     {
         team = assignedTeam;

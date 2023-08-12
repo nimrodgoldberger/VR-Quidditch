@@ -18,7 +18,7 @@ public class ChaserGetQuaffleState : State
 
         if(Logic.target != Logic.Quaffle)
         {
-            Debug.Log("Quaffle set as target");
+            //Debug.Log("Quaffle set as target");
             Logic.target = Logic.Quaffle;
         }
 
@@ -26,7 +26,7 @@ public class ChaserGetQuaffleState : State
         // Check if the Quaffle is held by you
         if(Logic.IsQuaffleHeldByMe())
         {
-            Debug.Log("I hold the quaffle, Starting Advancing with it");
+            //Debug.Log("I hold the quaffle, Starting Advancing with it");
 
             // Do something when Quaffle is held by you
             returnState = AdvanceWithQuaffle;
@@ -34,7 +34,7 @@ public class ChaserGetQuaffleState : State
         // Check if the Quaffle is held by our team
         else if(Logic.IsQuaffleHeldByMyTeam())
         {
-            Debug.Log("TeamMate holds the quaffle, Starting Advancing withOUT it");
+            //Debug.Log("TeamMate holds the quaffle, Starting Advancing withOUT it");
 
             // Do something when Quaffle is held by your team
             returnState = AdvanceWithOutQuaffle;
@@ -50,7 +50,7 @@ public class ChaserGetQuaffleState : State
             {
                 Logic.target = null;
                 Logic.isMoving = false;
-                Debug.Log("222222222222222222 I hold the quaffle, Starting Advancing with it");
+                //Debug.Log("222222222222222222 I hold the quaffle, Starting Advancing with it");
 
                 return AdvanceWithQuaffle;
             }

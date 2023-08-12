@@ -58,7 +58,7 @@ public class BludgerAI : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // The object has collided with the player
-            Debug.Log("Object collided with the player!");
+            //Debug.Log("Object collided with the player!");
             // Perform any additional actions you want here
 
             // Stop the object's movement

@@ -14,7 +14,7 @@ public class DefendChaserState : State
     {
         int noBludgerIsClose = -1;//3 means no bludger is close
         State returnState = this; //just for the testing
-        Debug.Log("I am defending the chaser");
+        //Debug.Log("I am defending the chaser");
 
         if(Logic.target == null)
             ChooseChaserToDefend();

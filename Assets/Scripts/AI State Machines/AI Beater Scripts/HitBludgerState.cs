@@ -13,7 +13,7 @@ public class HitBludgerState : State
     {
         int noBludgerIsClose = 3;
         State returnState = this; //just for the testing
-        Debug.Log("Bludger is close! might hit it!");
+        //Debug.Log("Bludger is close! might hit it!");
 
         bludgerCloseIndex = Logic.IsABludgerInRange(bludgerTryHittingRange);
 
@@ -21,7 +21,7 @@ public class HitBludgerState : State
         {
             //TO DO Animation activation
             Logic.BudgerWasHit(bludgerCloseIndex);
-            Debug.Log("hit bludger!!");
+            //Debug.Log("hit bludger!!");
             Logic.ResetTarget();//needed in order to change the chaser that the beater defends
             returnState = idle;
         }

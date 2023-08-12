@@ -7,7 +7,7 @@ public class IdleState : State
     bool canSeeTarget;
     float timeToStayInIdleState = 0f;
     [SerializeField] private float SnitchVisibilityRange = 50f;
-    [SerializeField] private float QuaffleVisibilityRange = 30f;
+    [SerializeField] private float QuaffleVisibilityRange = 120f; // TODO Adjust i think 70 is ok
     public SeekSnitchState seekSnitchState;
     public DefendState defendState;
     public DefendChaserState defendChaserState;
@@ -22,16 +22,16 @@ public class IdleState : State
         State returnState = this; //just for the testing
         //State returnState = null;
 
-        if(isStart.TimeRemaining == 0)
+        if(isStart.TimeRemaining <= 0)
         {
             switch(Logic.PlayerType)
             {
                 case PlayerType.Keeper:
                     {
-                        canSeeTarget = Logic.IsQuaffleInRange(QuaffleVisibilityRange);
+                        canSeeTarget = Logic.IsQuaffleCloseToMyTeamGoals(QuaffleVisibilityRange);
                         if(canSeeTarget)
                         {
-                            Debug.Log("I Have started DefenseState seeking the Quaffle!");
+                            //Debug.Log("I Have started DefenseState seeking the Quaffle!");
                             Logic.target = null;
                             Logic.isMoving = false;
                             returnState = defendState;
@@ -50,7 +50,7 @@ public class IdleState : State
                 case PlayerType.Chaser:
                     {
                         returnState = chaserGetQuaffleState;
-                        Debug.Log("Starting to chase quaffle");
+                        //Debug.Log("Starting to chase quaffle");
                     }
                     break;
                 case PlayerType.Seeker:
@@ -58,7 +58,7 @@ public class IdleState : State
                         canSeeTarget = Logic.IsSnitchInRange(SnitchVisibilityRange);
                         if(canSeeTarget)
                         {
-                            Debug.Log("I Have started seeking the snitch!");
+                            //Debug.Log("I Have started seeking the snitch!");
                             Logic.target = null;
                             Logic.isMoving = false;
                             returnState = seekSnitchState;
@@ -91,7 +91,7 @@ public class IdleState : State
         yield return new WaitForSeconds(3f);
 
         // This code will execute after the delay
-        Debug.Log("Delayed action executed.");
+        //Debug.Log("Delayed action executed.");
     }
 
 }
