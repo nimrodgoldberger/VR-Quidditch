@@ -15,7 +15,7 @@ public class SnitchLogic : Targetable
     [SerializeField] private float mixDistanceToRespawnTo = 80.0f;
     // To adjust the Snitch movement and catching distance
     [SerializeField] private float RotationSpeed = 3f;
-    [SerializeField] private float movementSpeed = 50f;
+    [SerializeField] private float movementSpeed = 55f;
     [SerializeField] private float takeDistance = 5.0f;// TODO adjust value just to try it 
     // To add score and end Match after snitch was caught
     [SerializeField] private ScoreManager scoreManager;

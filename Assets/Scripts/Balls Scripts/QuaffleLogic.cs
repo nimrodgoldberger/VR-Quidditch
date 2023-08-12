@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class QuaffleLogic : Targetable
 {
-    public float takeDistance = 5f;
-    public float takeTime = 1f;
+    public float takeDistance = 2f;
+    public float takeTime = 0.2f;
     private bool isQuaffleHeld = false;
     private PlayerTeam heldBy = PlayerTeam.None;
     //private float[] teamTimers = {0.0f, 0.0f, 0.0f, 0.0f};
@@ -14,7 +14,7 @@ public class QuaffleLogic : Targetable
     private bool wasThrown = false;
     public bool isFlying = false;
     public Targetable target;
-    [SerializeField] private float movementSpeed = 60f;
+    [SerializeField] private float movementSpeed = 30f;
 
 
     private void FixedUpdate()
