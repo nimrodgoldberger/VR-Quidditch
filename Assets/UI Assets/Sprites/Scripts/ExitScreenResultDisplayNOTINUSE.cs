@@ -9,9 +9,6 @@ public class ExitScreenResultDisplay : MonoBehaviour
 {
     private PlayerTeam [] teams = new PlayerTeam[2];
     private int [] scores = new int[2];
-
-    private int team1Score;
-    private int team2Score;
     public int myTeamIndex = 0; //TODO: Set right value after multiplayer - before multi the player's team is always team1. Might also need to be passed from previous scene
 
     [SerializeField] TMP_Text resultText;
@@ -43,13 +40,8 @@ public class ExitScreenResultDisplay : MonoBehaviour
 
     public void EndGame()
     {
-        SceneManager.LoadScene(sceneNameToLoad);
-
-        if (specificScreenIdentifier != null)
-        {
-            specificScreenIdentifier.SetActive(true);
-            specificScreenIdentifier.SetActive(false);
-        }
+        specificScreenIdentifier.SetActive(true);   
+        turnoffScreenIdentifier.SetActive(false);
         DisplayResultMessage();
     }
 }

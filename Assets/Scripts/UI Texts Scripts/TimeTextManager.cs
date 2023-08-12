@@ -12,7 +12,8 @@ public class TimeTextManager : MonoBehaviour
 
     public float TimeRemaining { get { return timeRemaining; } set { timeRemaining = value; } }
 
-    public ScoreManager scoreManager;
+    [SerializeField] TeamPlayersManager teamManager;
+    [SerializeField] GameObject scoreManager;
 
     void Start()
     {
@@ -37,7 +38,11 @@ public class TimeTextManager : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
-                scoreManager.GameOver();
+                PlayerTeam winningTeam = scoreManager.GetComponent<ScoreManager>().GetWinner();
+                teamManager.GoalAnimations(winningTeam);
+                int scoreTeam1 = scoreManager.GetComponent<ScoreManager>().GetScoreForTeam(teamManager.GetTeam1());
+                int scoreTeam2 = scoreManager.GetComponent<ScoreManager>().GetScoreForTeam(teamManager.GetTeam2());
+                teamManager.GameOver(scoreTeam1, scoreTeam2);
             }
 
             if (timeRemaining <= 120)

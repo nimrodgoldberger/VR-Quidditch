@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 // TODO Dan For multiplayer we need to check if we need to act differently for different teams
 public enum TeamType
@@ -59,8 +60,6 @@ public class TeamPlayersManager : MonoBehaviour
     // Set the team, HAS TO SET THE COLORS OF UNIFORMS TOO
     private PlayerTeam team1;
     private PlayerTeam team2;
-    private int team1Score;
-    private int team2Score;
 
     // TODO Check with Dan
     //To set the starting points of the players, Only if needed!!!!!
@@ -239,36 +238,96 @@ public class TeamPlayersManager : MonoBehaviour
         }
     }
 
-    public void GoalAnimations(PlayerTeam scoringTeam)
+    public IEnumerator GoalAnimations(PlayerTeam scoringTeam)
     {
-         
+        float effectDuration = 5.0f;
+        float startTime = Time.time;
+
+        while (Time.time - startTime < effectDuration)
+        {
+            if (scoringTeam == team1)
+            {
+
+                LoosingAnimations(keepers2);
+                LoosingAnimations(beaters2);
+                LoosingAnimations(chasers2);
+                LoosingAnimations(seekers2);
+
+                WinningAnimations(keepers1);
+                WinningAnimations(beaters1);
+                WinningAnimations(chasers1);
+                WinningAnimations(seekers1);
+
+
+            }
+            else if (scoringTeam == team2)
+            {
+                LoosingAnimations(keepers1);
+                LoosingAnimations(beaters1);
+                LoosingAnimations(chasers1);
+                LoosingAnimations(seekers1);
+
+                WinningAnimations(keepers2);
+                WinningAnimations(beaters2);
+                WinningAnimations(chasers2);
+                WinningAnimations(seekers2);
+            }
+            else //TIE
+            {
+                WinningAnimations(keepers1);
+                WinningAnimations(beaters1);
+                WinningAnimations(chasers1);
+                WinningAnimations(seekers1);
+
+                WinningAnimations(keepers2);
+                WinningAnimations(beaters2);
+                WinningAnimations(chasers2);
+                WinningAnimations(seekers2);
+            }
+            yield return null;
+        }
+
         if (scoringTeam == team1)
         {
-            
-            LoosingAnimations(keepers2);
-            LoosingAnimations(beaters2);
-            LoosingAnimations(chasers2);
-            LoosingAnimations(seekers2);
 
-            WinningAnimations(keepers1);
-            WinningAnimations(beaters1);
-            WinningAnimations(chasers1);
-            WinningAnimations(seekers1);
+            StopLoosingAnimations(keepers2);
+            StopLoosingAnimations(beaters2);
+            StopLoosingAnimations(chasers2);
+            StopLoosingAnimations(seekers2);
+
+            StopWinningAnimations(keepers1);
+            StopWinningAnimations(beaters1);
+            StopWinningAnimations(chasers1);
+            StopWinningAnimations(seekers1);
 
 
         }
         else if (scoringTeam == team2)
         {
-            LoosingAnimations(keepers1);
-            LoosingAnimations(beaters1);
-            LoosingAnimations(chasers1);
-            LoosingAnimations(seekers1);
+            StopLoosingAnimations(keepers1);
+            StopLoosingAnimations(beaters1);
+            StopLoosingAnimations(chasers1);
+            StopLoosingAnimations(seekers1);
 
-            WinningAnimations(keepers2);
-            WinningAnimations(beaters2);
-            WinningAnimations(chasers2);
-            WinningAnimations(seekers2);  
+            StopWinningAnimations(keepers2);
+            StopWinningAnimations(beaters2);
+            StopWinningAnimations(chasers2);
+            StopWinningAnimations(seekers2);
         }
+        else //TIE
+        {
+            StopWinningAnimations(keepers1);
+            StopWinningAnimations(beaters1);
+            StopWinningAnimations(chasers1);
+            StopWinningAnimations(seekers1);
+
+            StopWinningAnimations(keepers2);
+            StopWinningAnimations(beaters2);
+            StopWinningAnimations(chasers2);
+            StopWinningAnimations(seekers2);
+        }
+
+
     }
 
     public void WinningAnimations(List<PlayerLogicManager> players)
@@ -288,6 +347,37 @@ public class TeamPlayersManager : MonoBehaviour
             player.GetAnimator().SetBool("Stupefy", false);
             player.GetAnimator().SetBool("Loser", true);
         }
+    }
+
+    public void StopWinningAnimations(List<PlayerLogicManager> players)
+    {
+        foreach (PlayerLogicManager player in players)
+        {
+            player.GetAnimator().SetBool("Idle", true);
+            player.GetAnimator().SetBool("Stupefy", false);
+            player.GetAnimator().SetBool("Winner", false);
+        }
+    }
+    public void StopLoosingAnimations(List<PlayerLogicManager> players)
+    {
+        foreach (PlayerLogicManager player in players)
+        {
+            player.GetAnimator().SetBool("Idle", true);
+            player.GetAnimator().SetBool("Stupefy", false);
+            player.GetAnimator().SetBool("Loser", false);
+        }
+    }
+
+    public void GameOver(int team1Score, int team2Score)
+    {
+        //pass scores and teams over to next scene
+        PlayerPrefs.SetInt("Team1", (int)team1);
+        PlayerPrefs.SetInt("Team2", (int)team2);
+        PlayerPrefs.SetInt("Team1Score", team1Score);
+        PlayerPrefs.SetInt("Team2Score", team2Score);
+        PlayerPrefs.SetInt("IsOver", 1);
+
+        SceneManager.LoadScene("MenuScene");
     }
 
 

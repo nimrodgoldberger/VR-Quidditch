@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] TMP_Text scoreText; // Reference to the UI Text component for displaying the score
@@ -11,8 +12,6 @@ public class ScoreManager : MonoBehaviour
     private int team2Score; // The current score
 
     public string[] teamNames; // Array of team names (size: 4)
-
-    public ExitScreenResultDisplay exitScreenResultDisplay;
 
     void Start()
     {
@@ -83,11 +82,6 @@ public class ScoreManager : MonoBehaviour
         scoreText.text += teamNames[(int)team2];
 
         scoreText.text += ":" + team2Score;
-
-        if(additionalPoints == 150)
-        {
-            GameOver();
-        }
     }
     public int GetScoreForTeam(PlayerTeam team)
     {
@@ -113,14 +107,13 @@ public class ScoreManager : MonoBehaviour
         return team2;
     }
 
-    public void GameOver()
+    public PlayerTeam GetWinner()
     {
-        //pass scores and teams over to next scene
-        PlayerPrefs.SetInt("Team1", (int)team1);
-        PlayerPrefs.SetInt("Team2", (int)team2);
-        PlayerPrefs.SetInt("Team1Score", team1Score); 
-        PlayerPrefs.SetInt("Team2Score", team2Score);
-
-        exitScreenResultDisplay.EndGame();
+        if (team1Score > team2Score)
+            return team1;
+        else if (team2Score > team1Score)
+            return team2;
+        else
+            return PlayerTeam.None; //EQUALITY
     }
 }
