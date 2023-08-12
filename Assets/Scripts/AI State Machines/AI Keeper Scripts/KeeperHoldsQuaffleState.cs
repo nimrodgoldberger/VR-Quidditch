@@ -14,6 +14,9 @@ public class KeeperHoldsQuaffleState : State
     {
         State nextState = this;
 
+        // TODO check if works 
+        //holdsQuaffle = Logic.Quaffle.IsQuaffleHeldByPlayer(Logic);
+
         if(holdsQuaffle)
         {
 
@@ -39,13 +42,13 @@ public class KeeperHoldsQuaffleState : State
             // If the Keeper doesn't hold the Quaffle anymore, return to the starting position
             if(timerAfterPass <= coolDownAfterPass)
             {
-                Debug.Log("In cooldown after I threw the quaffle in KeeperHoldsQuaffleState");
+                //Debug.Log("In cooldown after I threw the quaffle in KeeperHoldsQuaffleState");
 
                 timerAfterPass += Time.fixedDeltaTime;
             }
             else
             {
-                Debug.Log("CoolDown ENDED not returning to Starting position in KeeperHoldsQuaffleState");
+                Debug.Log("CoolDown ENDED now returning to Starting position in KeeperHoldsQuaffleState");
                 timerAfterPass = 0f;
                 Logic.target = null;
                 Logic.isMoving = false;

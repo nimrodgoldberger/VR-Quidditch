@@ -41,7 +41,7 @@ public class ScoreArea : Targetable
         // Optionally, you can destroy the GameObject after stopping the particle system.
         Destroy(particleSystem.gameObject, particleSystem.main.duration);
     }
-    
+
     public void SetTeam(PlayerTeam assignedTeam)
     {
         team = assignedTeam;

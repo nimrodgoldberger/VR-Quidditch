@@ -35,7 +35,7 @@ public class TimeTextManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Time has run out!");
+                //Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
                 PlayerTeam winningTeam = scoreManager.GetComponent<ScoreManager>().GetWinner();

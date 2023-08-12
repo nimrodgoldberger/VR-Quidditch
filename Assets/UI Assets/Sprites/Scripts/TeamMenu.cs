@@ -21,7 +21,7 @@ public class TeamMenu : MonoBehaviour
 
     public void OnButtonClick()
     {
-        Debug.Log("Sorting hat chooses your house!");
+        //Debug.Log("Sorting hat chooses your house!");
 
         //Deactivate the TeamSortingSection menu
         TeamSortingSection.SetActive(false);

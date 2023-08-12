@@ -30,7 +30,7 @@ public class SeekSnitchState : State
         {
             if(!Logic.TryCatchSnitch())
             { 
-                Debug.Log("I am seeking the snitch");
+                //Debug.Log("I am seeking the snitch");
                 Logic.MoveAndRotateToTarget();
             }
             else // Caught Snitch
@@ -43,7 +43,7 @@ public class SeekSnitchState : State
         else
         {
             // TODO might add idle state if snitch far
-            Debug.Log("Returning to idleState because Snitch is too far away!?!?!?!");
+            //Debug.Log("Returning to idleState because Snitch is too far away!?!?!?!");
             returnState = idleState;
         }
 

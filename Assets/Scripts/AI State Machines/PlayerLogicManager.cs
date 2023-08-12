@@ -19,7 +19,7 @@ public class PlayerLogicManager : Targetable
     public PlayerLogicManager[] friends;
     public SnitchLogic Snitch;
     public QuaffleLogic Quaffle;
-    public float quaffleTakeTime = 0.5f;
+    public float quaffleTakeTime = 0f;
     public BludgerLogic[] Bludgers;
     public Targetable target;
     public Targetable relativePositionTarget;
@@ -76,6 +76,11 @@ public class PlayerLogicManager : Targetable
     public Targetable GetStartingTransformAsTargetable()
     {
         return startingPositionTarget;
+    }
+
+    public void StopMoveAndRotateToTarget() // TODO Check if works
+    {
+        StopCoroutine(MoveAndRotateCoroutine());
     }
 
     public void MoveAndRotateToTarget()
@@ -272,6 +277,22 @@ public class PlayerLogicManager : Targetable
     {
         //return Quaffle.CanBeTaken(this);
         return Vector3.Distance(Quaffle.transform.position, transform.position) <= range;
+    }
+
+    public bool IsQuaffleCloseToMyTeamGoals(float range)
+    {
+        bool isClose = false;
+
+        foreach(ScoreArea goal in myTeamGoals)
+        {
+            if(Vector3.Distance(Quaffle.transform.position, goal.transform.position) <= range)
+            {
+                isClose = true;
+                break;
+            }
+        }
+
+        return isClose;
     }
 
     public bool IsQuaffleHeldByMyTeam()

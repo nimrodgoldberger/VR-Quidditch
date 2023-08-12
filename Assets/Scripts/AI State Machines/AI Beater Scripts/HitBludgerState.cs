@@ -16,7 +16,7 @@ public class HitBludgerState : State
     {
         int noBludgerIsClose = -1;
         State returnState = this; //just for the testing
-        Debug.Log("Bludger is close! might hit it!");
+        //Debug.Log("Bludger is close! might hit it!");
 
         bludgerCloseIndex = Logic.IsABludgerInRange(bludgerTryHittingRange);
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 
 public class ScoreManager : MonoBehaviour
@@ -55,32 +56,27 @@ public class ScoreManager : MonoBehaviour
             team2Score = GetScoreForTeam(team2);
             team1Score = GetScoreForTeam(team1) + additionalPoints;
         }
-
         else if (team == team2)
         {
             team2Score = GetScoreForTeam(team2) + additionalPoints;
             team1Score = GetScoreForTeam(team1);
         }
-
         else
         {
-            Debug.Log("non existing team score requested to be set");
+            //Debug.Log("non existing team score requested to be set");
             team2Score = -1;
             team1Score = -1;
         }
 
-
         // Set the first team's name in the score text
         scoreText.text = teamNames[(int)team1];
-
         scoreText.text += ":" + team1Score;
 
         // Add a newline to separate the two teams
-        scoreText.text += "\n";
+        scoreText.text += Environment.NewLine;
 
         // Set the second team's name in the score text
         scoreText.text += teamNames[(int)team2];
-
         scoreText.text += ":" + team2Score;
     }
     public int GetScoreForTeam(PlayerTeam team)
@@ -92,7 +88,7 @@ public class ScoreManager : MonoBehaviour
             return team2Score;
         else
         {
-            Debug.Log("non existing team score requested");
+            //Debug.Log("non existing team score requested");
             return -1;
         }
     }

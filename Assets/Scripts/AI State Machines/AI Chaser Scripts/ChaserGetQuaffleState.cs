@@ -13,11 +13,12 @@ public class ChaserGetQuaffleState : State
 
 
     public override State RunCurrentState()
-    {  
+    {
         State returnState = this;
 
         if(Logic.target != Logic.Quaffle)
         {
+            //Debug.Log("Quaffle set as target");
             Logic.target = Logic.Quaffle;
         }
 
@@ -25,38 +26,33 @@ public class ChaserGetQuaffleState : State
         // Check if the Quaffle is held by you
         if(Logic.IsQuaffleHeldByMe())
         {
+            //Debug.Log("I hold the quaffle, Starting Advancing with it");
+
             // Do something when Quaffle is held by you
             returnState = AdvanceWithQuaffle;
         }
         // Check if the Quaffle is held by our team
         else if(Logic.IsQuaffleHeldByMyTeam())
         {
-            // Do something when Quaffle is held by your team
-            returnState= AdvanceWithOutQuaffle;
-        }
-        else
-        {
-            if(Logic.IsQuaffleInRange(QuaffleVisibilityRange))
-            {
-                if(!Logic.TryCatchQuaffle())
-                {
-                    Logic.MoveAndRotateToTarget();
-                    return this;
-                }
-                else // Caught Quaffle
-                {
-                    Logic.target = null;
-                    Logic.isMoving = false;
+            //Debug.Log("TeamMate holds the quaffle, Starting Advancing withOUT it");
 
-                    return AdvanceWithQuaffle;
-                }
+            // Do something when Quaffle is held by your team
+            returnState = AdvanceWithOutQuaffle;
+        }
+        else // No one in the team holds the Quaffle
+        {
+            if(!Logic.TryCatchQuaffle()) // I didn't catch the Quaffle
+            {
+                Logic.MoveAndRotateToTarget();
+                return this;
             }
-            else
+            else // I Caught the Quaffle
             {
                 Logic.target = null;
                 Logic.isMoving = false;
+                //Debug.Log("222222222222222222 I hold the quaffle, Starting Advancing with it");
 
-                //return IdleState;  // return this;
+                return AdvanceWithQuaffle;
             }
         }
 
