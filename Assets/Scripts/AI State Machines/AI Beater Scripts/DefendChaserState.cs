@@ -5,31 +5,41 @@ using System;
 
 public class DefendChaserState : State
 {
-    int bludgerCloseIndex;
-    float bludgerClosenessRange = 5f;
+    private int bludgerCloseIndex;
+    private float bludgerClosenessRange = 15f;
     public HitBludgerState hitBludgerState;
-
+    private PlayerLogicManager currentTarget;//this is in order to check if it is moving and if not just wait and not go crazy on the broom
 
     public override State RunCurrentState()
     {
         int noBludgerIsClose = -1;//3 means no bludger is close
         State returnState = this; //just for the testing
-        //Debug.Log("I am defending the chaser");
 
         if(Logic.target == null)
+        {
             ChooseChaserToDefend();
+        }
 
         bludgerCloseIndex = Logic.IsABludgerInRange(bludgerClosenessRange); //which bludger is close
 
         if (bludgerCloseIndex != noBludgerIsClose)//one of the bludger is close
         {
-            Logic.ResetTarget();
             returnState = hitBludgerState;
         }
         else //-1 means no bludger is close
         {
-            //TO DO make beater fly randomly around chaser it defends
-            Logic.MoveAndRotateToTarget(); 
+            if (currentTarget.isMoving)
+            {
+                Debug.Log("Protecting chaser");
+                Logic.MoveAndRotateToTarget();
+            }
+                
+            else
+            {
+                //StartCoroutine(Logic.MoveAndRotateToBludger(ChooseRandomBludger(), Logic.CreateRelativePositionToBewareOfBludgers()));
+                Logic.isMoving = false;
+            }
+
             returnState = this;
         }
 
@@ -85,6 +95,7 @@ public class DefendChaserState : State
         Targetable.SetRelativeTarget(relativePosition, seekerPlayers[randomIndex], Logic.relativePositionTarget);
 
         Logic.target = Logic.relativePositionTarget;
+        currentTarget = seekerPlayers[randomIndex];
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
@@ -117,4 +128,14 @@ public class DefendChaserState : State
         return relativePosition;
     }
 
+    
+
+    private int ChooseRandomBludger()
+    {
+        //Choose random bludger
+        // Creates a new instance of Random class
+        System.Random random = new System.Random();
+        int randomIndex = random.Next(0, 1);
+        return randomIndex;
+    }
 }

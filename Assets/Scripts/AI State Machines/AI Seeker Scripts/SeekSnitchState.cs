@@ -36,8 +36,7 @@ public class SeekSnitchState : State
             else // Caught Snitch
             {
                 Logic.target = null;
-                Logic.isMoving = false;
-
+                Logic.isMoving = false; //PUT THE COMMENT FOR THE ANIMATIONS TO WORK
                 returnState = holdSnitchState;
             }
         }

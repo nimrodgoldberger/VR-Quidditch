@@ -40,7 +40,6 @@ public class CountdownManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Game start");
                 timerIsRunning = false;
                 countdownText.text = string.Format("");
             }

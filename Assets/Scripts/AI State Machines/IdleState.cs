@@ -44,6 +44,9 @@ public class IdleState : State
                     break;
                 case PlayerType.Beater:
                     {
+                        Debug.Log("I am defending the chaser");
+                        Logic.target = null;
+                        Logic.isMoving = false;
                         returnState = defendChaserState;
                     }
                     break;

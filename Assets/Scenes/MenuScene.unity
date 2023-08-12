@@ -2980,8 +2980,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleEffectPrefab: {fileID: 398240980768904200, guid: 168401948662054458b2d2e21f0c2f1d, type: 3}
-  team: 0
   scoreManager: {fileID: 0}
+  teamManager: {fileID: 0}
 --- !u!65 &309834764
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3935,6 +3935,7 @@ GameObject:
   - component: {fileID: 403243659}
   - component: {fileID: 403243661}
   - component: {fileID: 403243660}
+  - component: {fileID: 403243662}
   m_Layer: 0
   m_Name: TeamMenuControler
   m_TagString: Untagged
@@ -4004,6 +4005,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd1024476cfb9b48a8d903f3969e20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &403243662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403243658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0547a0ab26e9044bc747664536165d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTeamIndex: 0
+  resultText: {fileID: 851082808}
+  scoreText: {fileID: 1113180582}
+  sceneNameToLoad: MenuScene
+  specificScreenIdentifier: {fileID: 1426256537}
+  turnoffScreenIdentifier: {fileID: 1135961503}
 --- !u!64 &415212812
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4626,8 +4645,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleEffectPrefab: {fileID: 398240980768904200, guid: 168401948662054458b2d2e21f0c2f1d, type: 3}
-  team: 0
   scoreManager: {fileID: 0}
+  teamManager: {fileID: 0}
 --- !u!65 &510473461
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6789,6 +6808,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771244200}
   m_CullTransparentMesh: 1
+--- !u!1 &783457738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 783457740}
+  - component: {fileID: 783457739}
+  m_Layer: 0
+  m_Name: SceneInitializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &783457739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783457738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e432f6f863b89940a3f374120f03364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialScreen: {fileID: 1135961503}
+  gameOverScreen: {fileID: 1426256537}
+  myTeamIndex: 0
+  resultText: {fileID: 851082808}
+  scoreText: {fileID: 1113180582}
+  sceneNameToLoad: MenuScene
+--- !u!4 &783457740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783457738}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.0106525, y: 33.557053, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &792707422
 GameObject:
   m_ObjectHideFlags: 0
@@ -10651,8 +10720,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleEffectPrefab: {fileID: 398240980768904200, guid: 168401948662054458b2d2e21f0c2f1d, type: 3}
-  team: 0
   scoreManager: {fileID: 0}
+  teamManager: {fileID: 0}
 --- !u!65 &1278575372
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11313,8 +11382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleEffectPrefab: {fileID: 398240980768904200, guid: 168401948662054458b2d2e21f0c2f1d, type: 3}
-  team: 0
   scoreManager: {fileID: 0}
+  teamManager: {fileID: 0}
 --- !u!65 &1364784591
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14678,8 +14747,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleEffectPrefab: {fileID: 398240980768904200, guid: 168401948662054458b2d2e21f0c2f1d, type: 3}
-  team: 0
   scoreManager: {fileID: 0}
+  teamManager: {fileID: 0}
 --- !u!65 &1916885230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14739,8 +14808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleEffectPrefab: {fileID: 398240980768904200, guid: 168401948662054458b2d2e21f0c2f1d, type: 3}
-  team: 0
   scoreManager: {fileID: 0}
+  teamManager: {fileID: 0}
 --- !u!65 &1930476101
 BoxCollider:
   m_ObjectHideFlags: 0

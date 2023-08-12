@@ -75,7 +75,7 @@ public class TeamMenu : MonoBehaviour
     public void SaveTeamsData(int team1, int team2)
     {
         PlayerPrefs.SetInt("Team1", team1);
-        PlayerPrefs.SetInt("Team1", team1);
+        PlayerPrefs.SetInt("Team2", team2);
     }
 
 }
