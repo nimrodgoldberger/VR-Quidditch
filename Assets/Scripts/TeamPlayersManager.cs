@@ -109,8 +109,6 @@ public class TeamPlayersManager : MonoBehaviour
 
         foreach (PlayerLogicManager player in players)
         {
-
-            
             int index = 0;
             player.PlayerTeam = team;
             player.PlayerType = type;

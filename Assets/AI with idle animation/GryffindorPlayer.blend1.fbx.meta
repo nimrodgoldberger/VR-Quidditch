@@ -182,7 +182,7 @@ ModelImporter:
       takeName: rig|Celebration animation
       internalID: -5441667541659865310
       firstFrame: 0
-      lastFrame: 179
+      lastFrame: 86
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -240,7 +240,7 @@ ModelImporter:
       takeName: rig|Loss animation
       internalID: -7686494793053397191
       firstFrame: 0
-      lastFrame: 196
+      lastFrame: 111
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

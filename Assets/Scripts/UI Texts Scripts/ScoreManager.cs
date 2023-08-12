@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
 
     public string[] teamNames; // Array of team names (size: 4)
 
-
+    public ExitScreenResultDisplay exitScreenResultDisplay;
 
     void Start()
     {
@@ -83,6 +83,11 @@ public class ScoreManager : MonoBehaviour
         scoreText.text += teamNames[(int)team2];
 
         scoreText.text += ":" + team2Score;
+
+        if(additionalPoints == 150)
+        {
+            GameOver();
+        }
     }
     public int GetScoreForTeam(PlayerTeam team)
     {
@@ -106,5 +111,16 @@ public class ScoreManager : MonoBehaviour
     public PlayerTeam GetTeam2()
     {
         return team2;
+    }
+
+    public void GameOver()
+    {
+        //pass scores and teams over to next scene
+        PlayerPrefs.SetInt("Team1", (int)team1);
+        PlayerPrefs.SetInt("Team2", (int)team2);
+        PlayerPrefs.SetInt("Team1Score", team1Score); 
+        PlayerPrefs.SetInt("Team2Score", team2Score);
+
+        exitScreenResultDisplay.EndGame();
     }
 }

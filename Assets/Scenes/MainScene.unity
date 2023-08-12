@@ -1225,6 +1225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalTime: 124
+  scoreManager: {fileID: 1356267317}
 --- !u!1 &177270314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5551700733566106824, guid: 01ee16493617836479eff766be6b69fd, type: 3}
@@ -3883,6 +3884,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704688819}
   m_Mesh: {fileID: 4300000, guid: 06bf529523edf1b42936f9ad5acaabfc, type: 3}
+--- !u!1 &715327320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715327322}
+  - component: {fileID: 715327321}
+  m_Layer: 0
+  m_Name: EndGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &715327321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715327320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0547a0ab26e9044bc747664536165d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTeamIndex: 0
+  resultText: {fileID: 0}
+  scoreText: {fileID: 0}
+  sceneNameToLoad: MenuScene
+  specificScreenIdentifier: ClosingScreen
+  turnoffScreenIdentifier: OpeneningScreen
+--- !u!4 &715327322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715327320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.0106525, y: 33.557053, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &718762422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10693,6 +10744,7 @@ MonoBehaviour:
   - Hufflepuff
   - Slytherin
   - Ravenclaw
+  exitScreenResultDisplay: {fileID: 715327321}
 --- !u!114 &1097665547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11857,6 +11909,57 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7472282, y: 0.7157805, z: 0.03807225}
   m_Center: {x: -0.0024297158, y: 0.0073364787, z: 0.016049996}
+--- !u!1 &1356267316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356267318}
+  - component: {fileID: 1356267317}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1356267317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356267316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92663e2ee78221c4dba1714c7523e559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1097665547}
+  teamNames:
+  - Gryffindor
+  - Hufflepuff
+  - Slytherin
+  - Ravenclaw
+  exitScreenResultDisplay: {fileID: 715327321}
+--- !u!4 &1356267318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356267316}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.0106525, y: 33.557053, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1381313900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3532146794917354187, guid: f87c856acf67cb442ac045ce1f204832, type: 3}

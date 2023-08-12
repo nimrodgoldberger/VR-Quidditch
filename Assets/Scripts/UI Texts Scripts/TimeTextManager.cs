@@ -12,6 +12,8 @@ public class TimeTextManager : MonoBehaviour
 
     public float TimeRemaining { get { return timeRemaining; } set { timeRemaining = value; } }
 
+    public ScoreManager scoreManager;
+
     void Start()
     {
         // Get reference to the Text component for displaying the timer
@@ -35,6 +37,7 @@ public class TimeTextManager : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
+                scoreManager.GameOver();
             }
 
             if (timeRemaining <= 120)
