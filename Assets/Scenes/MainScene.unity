@@ -13480,7 +13480,7 @@ PrefabInstance:
     - target: {fileID: 5776180215578910584, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: playerToPassTo
       value: 
-      objectReference: {fileID: 559178514}
+      objectReference: {fileID: 0}
     - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -20710,11 +20710,15 @@ PrefabInstance:
       objectReference: {fileID: 318314645}
     - target: {fileID: 5302529541926463221, guid: 6b52ef0d9c75fcb478555e1d561fad33, type: 3}
       propertyPath: takeTime
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5302529541926463221, guid: 6b52ef0d9c75fcb478555e1d561fad33, type: 3}
       propertyPath: takeDistance
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302529541926463221, guid: 6b52ef0d9c75fcb478555e1d561fad33, type: 3}
+      propertyPath: movementSpeed
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 5628628700656812312, guid: 6b52ef0d9c75fcb478555e1d561fad33, type: 3}
       propertyPath: m_RootOrder
@@ -21098,7 +21102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6773507405958063104, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: stoppingDistance
-      value: 15
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6773507405958063104, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: coolDownAfterThrow
