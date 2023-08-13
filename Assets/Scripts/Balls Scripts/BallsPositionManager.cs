@@ -21,56 +21,8 @@ public class BallsPositionManager : MonoBehaviour
         bludger2.transform.position = bludger2StartingPosition.transform.position;
     }
 
-
     public void GoalWasScored()
     {
         quaffle.transform.position = quaffleStartingPosition.transform.position;
     }
-    //public void SetPlayerStartingPos(PlayerLogicManager player, int typeIndex)
-    //{
-    //    if(player.PlayerTeam == team1)
-    //    {
-    //        switch(player.PlayerType)
-    //        {
-    //            case PlayerType.Beater:
-    //                player.startingPosition = StartingPositionsBeatersTeam1[typeIndex].transform.position;
-    //                break;
-    //            case PlayerType.Chaser:
-    //                player.startingPosition = StartingPositionsChasersTeam1[typeIndex].transform.position;
-    //                break;
-    //            case PlayerType.Seeker:
-    //                player.startingPosition = StartingPositionsSeekerTeam1[typeIndex].transform.position;
-    //                break;
-    //            case PlayerType.Keeper:
-    //                player.startingPosition = StartingPositionsKeeperTeam1[typeIndex].transform.position;
-    //                break;
-    //        }
-
-    //        player.transform.position = player.startingPosition;
-    //    }
-    //    else if(player.PlayerTeam == team2)
-    //    {
-    //        switch(player.PlayerType)
-    //        {
-    //            case PlayerType.Beater:
-    //                player.startingPosition = StartingPositionsBeatersTeam2[typeIndex].transform.position;
-    //                break;
-    //            case PlayerType.Chaser:
-    //                player.startingPosition = StartingPositionsChasersTeam2[typeIndex].transform.position;
-    //                break;
-    //            case PlayerType.Seeker:
-    //                player.startingPosition = StartingPositionsSeekerTeam2[typeIndex].transform.position;
-    //                break;
-    //            case PlayerType.Keeper:
-    //                player.startingPosition = StartingPositionsKeeperTeam2[typeIndex].transform.position;
-    //                break;
-    //        }
-
-    //        player.transform.position = player.startingPosition;
-    //    }
-    //}
-
-
-
-
 }
