@@ -97,7 +97,6 @@ public class TeamPlayersManager : MonoBehaviour
             playersInitialized = true;
             ballsPositionManager.StartingGame();
         }
-
     }
 
 
@@ -432,3 +431,8 @@ public class TeamPlayersManager : MonoBehaviour
     //    seekers1.CopyTo(player.friends, index);
     //}
 }
+
+
+
+
+

@@ -7,7 +7,7 @@ using System;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] TMP_Text scoreText; // Reference to the UI Text component for displaying the score
-    [SerializeField] private BallsPositionManager ballsPositionManager;
+    public BallsPositionManager ballsPositionManager;
     private PlayerTeam team1;
     private PlayerTeam team2;
     private int team1Score; // The current score

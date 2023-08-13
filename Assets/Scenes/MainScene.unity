@@ -10968,7 +10968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1097665547}
-  ballsPositionManager: {fileID: 0}
+  ballsPositionManager: {fileID: 398376047}
   teamNames:
   - Gryffindor
   - Hufflepuff
