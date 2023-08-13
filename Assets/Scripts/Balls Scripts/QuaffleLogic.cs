@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class QuaffleLogic : Targetable
 {
-    public float takeDistance = 3f;
-    public float takeTime = 0.5f;
+    public float takeDistance = 2.0f;
+    public float takeTime = 1.0f;
     private bool isQuaffleHeld = false;
     private PlayerTeam heldBy = PlayerTeam.None;
     //private float[] teamTimers = {0.0f, 0.0f, 0.0f, 0.0f};
@@ -97,6 +97,8 @@ public class QuaffleLogic : Targetable
 
     private void PlayerHoldsQuaffle(PlayerLogicManager player)
     {
+        SphereCollider sphereCollider = gameObject.GetComponent<SphereCollider>();
+        sphereCollider.enabled = false;
         Vector3 relativepos = new Vector3(0.35f, 0.35f, 0.2f);
         isFlying = false;
         isQuaffleHeld = true;
@@ -118,6 +120,8 @@ public class QuaffleLogic : Targetable
     private void FlyToTarget()
     {
         //transform.SetParent(null);
+        SphereCollider sphereCollider = gameObject.GetComponent<SphereCollider>();
+        sphereCollider.enabled = true;
         isFlying = true;
         wasThrown = true;
         MoveAndRotateToTarget();
@@ -194,4 +198,8 @@ public class QuaffleLogic : Targetable
         return heldBy == player.PlayerTeam && player == transform.parent.GetComponent<PlayerLogicManager>();
     }
 
+    public float Speed()
+    {
+        return movementSpeed;
+    }
 }

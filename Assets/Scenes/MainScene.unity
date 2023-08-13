@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 432212029}
-  m_IndirectSpecularColor: {r: 0.3366986, g: 0.8175725, b: 0.9306336, a: 1}
+  m_IndirectSpecularColor: {r: 0.33655208, g: 0.8161745, b: 0.9302483, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -360,11 +360,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: isStart
@@ -407,9 +407,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2063850972}
     - target: {fileID: 6773507406246538889, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+
       propertyPath: Idle
       value: 
       objectReference: {fileID: 775634743}
+      propertyPath: chaserGetQuaffleState
+      value: 
+      objectReference: {fileID: 1018541987}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
 --- !u!4 &25306381 stripped
@@ -1993,11 +1997,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: isStart
@@ -2036,9 +2040,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 656670252}
     - target: {fileID: 6773507406246538889, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+
       propertyPath: Idle
       value: 
       objectReference: {fileID: 1029793141}
+
+      propertyPath: chaserGetQuaffleState
+      value: 
+      objectReference: {fileID: 580852368}
+
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
 --- !u!4 &258249647 stripped
@@ -3662,11 +3672,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: isStart
@@ -3705,9 +3715,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 348928797}
     - target: {fileID: 6773507406246538889, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+
       propertyPath: Idle
       value: 
       objectReference: {fileID: 1995249340}
+
+      propertyPath: chaserGetQuaffleState
+      value: 
+      objectReference: {fileID: 1656797465}
+
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
 --- !u!4 &505933677 stripped
@@ -4233,6 +4249,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: isStart
       value: 
@@ -4580,11 +4600,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: isStart
@@ -4627,9 +4647,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1975801751}
     - target: {fileID: 6773507406246538889, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+
       propertyPath: Idle
       value: 
       objectReference: {fileID: 2061630919}
+
+      propertyPath: chaserGetQuaffleState
+      value: 
+      objectReference: {fileID: 1110137734}
+
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
 --- !u!4 &654785003 stripped
@@ -11021,6 +11047,10 @@ PrefabInstance:
       propertyPath: startingPositionTarget
       value: 
       objectReference: {fileID: 660715796}
+    - target: {fileID: 3532146794917354184, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3532146794917354186, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
       propertyPath: m_Name
       value: AI Player Seeker Trial 2
@@ -11589,6 +11619,10 @@ PrefabInstance:
     - target: {fileID: 5551700733566106825, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: isStart
@@ -14826,6 +14860,10 @@ PrefabInstance:
       propertyPath: playerToPassTo
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552101, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -15394,11 +15432,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: isStart
@@ -15441,9 +15479,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1129333080}
     - target: {fileID: 6773507406246538889, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+
       propertyPath: Idle
       value: 
       objectReference: {fileID: 1250937139}
+
+      propertyPath: chaserGetQuaffleState
+      value: 
+      objectReference: {fileID: 1916728142}
+
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
 --- !u!4 &1714423110 stripped
@@ -21801,6 +21845,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: isStart
       value: 
@@ -22458,7 +22506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: isStart
@@ -22495,15 +22543,19 @@ PrefabInstance:
       objectReference: {fileID: 318314645}
     - target: {fileID: 5302529541926463221, guid: 6b52ef0d9c75fcb478555e1d561fad33, type: 3}
       propertyPath: takeTime
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5302529541926463221, guid: 6b52ef0d9c75fcb478555e1d561fad33, type: 3}
       propertyPath: takeDistance
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5302529541926463221, guid: 6b52ef0d9c75fcb478555e1d561fad33, type: 3}
       propertyPath: movementSpeed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302529541926463222, guid: 6b52ef0d9c75fcb478555e1d561fad33, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5628628700656812312, guid: 6b52ef0d9c75fcb478555e1d561fad33, type: 3}
       propertyPath: m_RootOrder
@@ -22589,10 +22641,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.82622874
+  m_Radius: 0.8073021
   m_Height: 2.1049254
   m_Direction: 2
-  m_Center: {x: 0.008155704, y: 0.3754499, z: 0.052819848}
+  m_Center: {x: -0.010770917, y: 0.37545025, z: 0.05281985}
 --- !u!1001 &5776180213998145010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22615,6 +22667,10 @@ PrefabInstance:
     - target: {fileID: 5776180215578910584, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: playerToPassTo
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552101, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5776180215716552102, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: m_RootOrder
@@ -23027,11 +23083,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: isStart
@@ -23082,9 +23138,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1451786202}
     - target: {fileID: 6773507406246538889, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+
       propertyPath: Idle
       value: 
       objectReference: {fileID: 421069943}
+
+      propertyPath: chaserGetQuaffleState
+      value: 
+      objectReference: {fileID: 384754654}
+
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
 --- !u!1001 &7002439392696620455
@@ -23194,6 +23256,14 @@ PrefabInstance:
       propertyPath: startingPositionTarget
       value: 
       objectReference: {fileID: 194386547}
+    - target: {fileID: 3532146794917354184, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532146794917354184, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3532146794917354186, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
       propertyPath: m_Name
       value: AI Player Seeker Trial

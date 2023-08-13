@@ -132,6 +132,24 @@ public class PlayerLogicManager : Targetable
         isMoving = false;
     }
 
+    public List<Targetable> GetMyLoops()
+    {
+        List<Targetable> targetables = new List<Targetable>();
+        foreach (ScoreArea scoreArea in myTeamGoals)
+        {
+            targetables.Add(scoreArea);
+        }
+        return targetables;
+    }
+    public List<Targetable> GetEnemyLoops()
+    {
+        List<Targetable> targetables = new List<Targetable>();
+        foreach (ScoreArea scoreArea in enemyTeamGoals)
+        {
+            targetables.Add(scoreArea);
+        }
+        return targetables;
+    }
 
     //public virtual IEnumerator MoveAndRotateToBludger(int bludgerIndex, Vector3 relativePos)
     //{
@@ -316,13 +334,18 @@ public class PlayerLogicManager : Targetable
 
     public virtual void CaughtQuaffle()
     {
-        speed = speed * 2 / 3;
+        speed = speed * 3 / 2;
     }
 
     public virtual void ResetSpeed()
     {
         speed = startingSpeed;
     }
+
+    public float GetSpeed()
+{
+    return speed;
+}
 
     public virtual int IsABludgerInRange(float range)
     {
