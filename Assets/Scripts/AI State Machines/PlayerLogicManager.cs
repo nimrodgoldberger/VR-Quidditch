@@ -39,55 +39,55 @@ public class PlayerLogicManager : Targetable
         animator = GetComponent<Animator>();
     }
 
-    public bool TryCatchQuaffle()
+    public virtual bool TryCatchQuaffle()
     {   //TODO Add the timer to catch it
         return Quaffle.TryTakeQuaffle(this);
     }
 
     // Seeker + VRPlayer
-    public bool TryCatchSnitch()
+    public virtual bool TryCatchSnitch()
     {
         return Snitch.TryCatchSnitch(this);
     }
 
-    public void SetTarget(Targetable newTarget)
+    public virtual void SetTarget(Targetable newTarget)
     {
         target = newTarget;
     }
 
-    public void ResetTarget()
+    public virtual void ResetTarget()
     {
         target = null;
     }
 
-    public Targetable GetTarget()
-    {
-        return target;
-    }
+    //public virtual Targetable GetTarget()
+    //{
+    //    return target;
+    //}
 
-    public float GetSpeed()
-    {
-        return speed;
-    }
+    //public virtual float GetSpeed()
+    //{
+    //    return speed;
+    //}
 
-    public void SetRotationSpeed(float newRotationSpeed)
+    public virtual void SetRotationSpeed(float newRotationSpeed)
     {
         rotationSpeed = newRotationSpeed;
     }
 
-    public Targetable GetStartingTransformAsTargetable()
+    public virtual Targetable GetStartingTransformAsTargetable()
     {
         return startingPositionTarget;
     }
 
-    public void StopMoveAndRotateToTarget() // TODO Check if works
+    public virtual void StopMoveAndRotateToTarget() // TODO Check if works
     {
         StopCoroutine(MoveAndRotateCoroutine());
     }
 
-    public void MoveAndRotateToTarget()
+    public virtual void MoveAndRotateToTarget()
     {
-        if(isMoving)
+        if (isMoving)
             return; // Return if already moving
         StartCoroutine(MoveAndRotateCoroutine());
     }
@@ -103,7 +103,7 @@ public class PlayerLogicManager : Targetable
         Quaternion lookRotation = Quaternion.LookRotation(targetPosition - initialPosition);
 
         float elapsedTime = 0f;
-        while(elapsedTime < travelDuration)
+        while (elapsedTime < travelDuration)
         {
             // Calculate the new position and rotation using Mathf.Lerp
             float t = elapsedTime / travelDuration;
@@ -126,37 +126,37 @@ public class PlayerLogicManager : Targetable
     }
 
 
-    public IEnumerator MoveAndRotateToBludger(int bludgerIndex, Vector3 relativePos)
-    {
-        isMoving = true;
-        float totalDistance = Vector3.Distance(transform.position, Bludgers[bludgerIndex].transform.position);
-        float travelDuration = totalDistance / speed;
-        Vector3 initialPosition = transform.position;
-        Vector3 bludgerPosition = Bludgers[bludgerIndex].transform.position;
-        Quaternion initialRotation = transform.rotation;
-        Quaternion lookRotation = Quaternion.LookRotation(bludgerPosition - initialPosition);
+    //public virtual IEnumerator MoveAndRotateToBludger(int bludgerIndex, Vector3 relativePos)
+    //{
+    //    isMoving = true;
+    //    float totalDistance = Vector3.Distance(transform.position, Bludgers[bludgerIndex].transform.position);
+    //    float travelDuration = totalDistance / speed;
+    //    Vector3 initialPosition = transform.position;
+    //    Vector3 bludgerPosition = Bludgers[bludgerIndex].transform.position;
+    //    Quaternion initialRotation = transform.rotation;
+    //    Quaternion lookRotation = Quaternion.LookRotation(bludgerPosition - initialPosition);
 
-        float elapsedTime = 0f;
-        while(elapsedTime < travelDuration)
-        {
-            // Calculate the new position and rotation using Mathf.Lerp
-            float t = elapsedTime / travelDuration;
-            transform.position = Vector3.Lerp(initialPosition, bludgerPosition, t);
-            transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, t);
+    //    float elapsedTime = 0f;
+    //    while (elapsedTime < travelDuration)
+    //    {
+    //        // Calculate the new position and rotation using Mathf.Lerp
+    //        float t = elapsedTime / travelDuration;
+    //        transform.position = Vector3.Lerp(initialPosition, bludgerPosition, t);
+    //        transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, t);
 
-            // Yielding inside FixedUpdate to wait for the next FixedUpdate step
-            yield return new WaitForFixedUpdate();
+    //        // Yielding inside FixedUpdate to wait for the next FixedUpdate step
+    //        yield return new WaitForFixedUpdate();
 
-            elapsedTime += Time.fixedDeltaTime;
-        }
+    //        elapsedTime += Time.fixedDeltaTime;
+    //    }
 
-        // Ensure the final position and rotation are set correctly
-        transform.position = bludgerPosition + relativePos;
-        transform.rotation = lookRotation;
+    //    // Ensure the final position and rotation are set correctly
+    //    transform.position = bludgerPosition + relativePos;
+    //    transform.rotation = lookRotation;
 
-        // At the end of the coroutine, reset the target and isMoving flag
-        isMoving = false;
-    }
+    //    // At the end of the coroutine, reset the target and isMoving flag
+    //    isMoving = false;
+    //}
     //public void RotateToStartingPosition()
     //{
     //    if(isMoving)
@@ -230,9 +230,9 @@ public class PlayerLogicManager : Targetable
     //    // After the rotation is complete, also reset the isRotatingToStartingPos flag
     //    isRotatingToStartingPos = false;
     //}
-    public void RotateToStartingPosition()
+    public virtual void RotateToStartingPosition()
     {
-        if(isMoving || isRotatingToStartingPos)
+        if (isMoving || isRotatingToStartingPos)
             return; // Return if already moving or rotating
 
         StartCoroutine(RotateToStartRotationCoroutine());
@@ -248,7 +248,7 @@ public class PlayerLogicManager : Targetable
         float angleToRotation = Quaternion.Angle(initialRotation, targetRotation);
         float rotationDuration = angleToRotation / rotationSpeed;
         float elapsedTime = 0f;
-        while(elapsedTime < rotationDuration)
+        while (elapsedTime < rotationDuration)
         {
             float t = elapsedTime / rotationDuration;
             transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, t);
@@ -270,24 +270,24 @@ public class PlayerLogicManager : Targetable
         isRotatingToStartingPos = false;
     }
 
-    public bool IsSnitchInRange(float range)
+    public virtual bool IsSnitchInRange(float range)
     {
         return Vector3.Distance(Snitch.transform.position, transform.position) <= range;
     }
 
-    public bool IsQuaffleInRange(float range)
+    public virtual bool IsQuaffleInRange(float range)
     {
         //return Quaffle.CanBeTaken(this);
         return Vector3.Distance(Quaffle.transform.position, transform.position) <= range;
     }
 
-    public bool IsQuaffleCloseToMyTeamGoals(float range)
+    public virtual bool IsQuaffleCloseToMyTeamGoals(float range)
     {
         bool isClose = false;
 
-        foreach(ScoreArea goal in myTeamGoals)
+        foreach (ScoreArea goal in myTeamGoals)
         {
-            if(Vector3.Distance(Quaffle.transform.position, goal.transform.position) <= range)
+            if (Vector3.Distance(Quaffle.transform.position, goal.transform.position) <= range)
             {
                 isClose = true;
                 break;
@@ -297,38 +297,38 @@ public class PlayerLogicManager : Targetable
         return isClose;
     }
 
-    public bool IsQuaffleHeldByMyTeam()
+    public virtual bool IsQuaffleHeldByMyTeam()
     {
         return Quaffle.IsQuaffleHeldByTeam(PlayerTeam);
     }
 
-    public bool IsQuaffleHeldByMe()
+    public virtual bool IsQuaffleHeldByMe()
     {
         return Quaffle.IsQuaffleHeldByPlayer(this);
     }
 
-    public void CaughtQuaffle()
+    public virtual void CaughtQuaffle()
     {
         speed = speed * 2 / 3;
     }
 
-    public void ResetSpeed()
+    public virtual void ResetSpeed()
     {
         speed = startingSpeed;
     }
 
-    public int IsABludgerInRange(float range)
+    public virtual int IsABludgerInRange(float range)
     {
-        if(Vector3.Distance(Bludgers[0].transform.position, transform.position) <= range)
+        if (Vector3.Distance(Bludgers[0].transform.position, transform.position) <= range)
             return 0;
-        else if(Vector3.Distance(Bludgers[1].transform.position, transform.position) <= range)
+        else if (Vector3.Distance(Bludgers[1].transform.position, transform.position) <= range)
             return 1;
         else
             return -1;//NO BLUDGERS IN RANGE
 
     }
 
-    public void BudgerWasHit(int bludgerIndex)
+    public virtual void BudgerWasHit(int bludgerIndex)
     {
         // Create a new instance of Random class
         System.Random random = new System.Random();
@@ -338,22 +338,22 @@ public class PlayerLogicManager : Targetable
         Bludgers[bludgerIndex].GoToChaseAfterBeingHit(enemies[randomIndex].gameObject);
     }
 
-    public void SetGoals(List<ScoreArea> myGoals, List<ScoreArea> enemyGoals)
+    public virtual void SetGoals(List<ScoreArea> myGoals, List<ScoreArea> enemyGoals)
     {
         myTeamGoals = myGoals;
         enemyTeamGoals = enemyGoals;
     }
 
-    public ScoreArea ChooseTargetGoal()
+    public virtual ScoreArea ChooseTargetGoal()
     {
         int minObstructions = int.MaxValue;
         ScoreArea selectedGoal = null;
 
-        foreach(ScoreArea goal in enemyTeamGoals)
+        foreach (ScoreArea goal in enemyTeamGoals)
         {
             int obstructions = CountObstructions(goal.transform.position);
 
-            if(obstructions < minObstructions)
+            if (obstructions < minObstructions)
             {
                 minObstructions = obstructions;
                 selectedGoal = goal;
@@ -367,9 +367,9 @@ public class PlayerLogicManager : Targetable
     {
         int obstructions = 0;
 
-        foreach(PlayerLogicManager enemy in enemies)
+        foreach (PlayerLogicManager enemy in enemies)
         {
-            if(IsObstructed(enemy.transform.position, targetPosition))
+            if (IsObstructed(enemy.transform.position, targetPosition))
             {
                 obstructions++;
             }
@@ -383,9 +383,9 @@ public class PlayerLogicManager : Targetable
         Vector3 direction = targetPosition - startPosition;
         RaycastHit[] hits = Physics.RaycastAll(startPosition, direction, direction.magnitude);
 
-        foreach(RaycastHit hit in hits)
+        foreach (RaycastHit hit in hits)
         {
-            if(hit.collider != null && hit.collider.gameObject != gameObject)
+            if (hit.collider != null && hit.collider.gameObject != gameObject)
             {
                 return true; // There's an obstruction
             }
@@ -400,7 +400,7 @@ public class PlayerLogicManager : Targetable
     //    startingPosition = startPos;
     //}
 
-    public Vector3 CreateRelativePositionToBewareOfBludgers()
+    public virtual Vector3 CreateRelativePositionToBewareOfBludgers()
     {
         int negative = 0;
         int positive = 1;
@@ -413,14 +413,14 @@ public class PlayerLogicManager : Targetable
         // Generates a random index within the bounds of the array
         int value = random.Next(0, 1);
 
-        if(value == negative)
+        if (value == negative)
         {
             relativePosition.x = random.Next(-40, -35);
             relativePosition.y = random.Next(-40, -35);
             relativePosition.z = random.Next(-40, -35);
         }
 
-        if(value == positive)
+        if (value == positive)
         {
             relativePosition.x = random.Next(-40, -35);
             relativePosition.y = random.Next(-40, -35);
@@ -429,7 +429,7 @@ public class PlayerLogicManager : Targetable
         return relativePosition;
     }
 
-    public Animator GetAnimator()
+    public virtual Animator GetAnimator()
     {
         return animator;
     }

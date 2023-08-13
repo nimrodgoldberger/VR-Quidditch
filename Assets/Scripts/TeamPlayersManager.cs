@@ -334,39 +334,59 @@ public class TeamPlayersManager : MonoBehaviour
 
     public void WinningAnimations(List<PlayerLogicManager> players)
     {
-        foreach(PlayerLogicManager player in players)
+        Animator animator;
+        foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", false);
-            player.GetAnimator().SetBool("Stupefy", false);
-            player.GetAnimator().SetBool("Winner", true);
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", false);
+                animator.SetBool("Stupefy", false);
+                animator.SetBool("Winner", true);
+            }
         }
     }
     public void LoosingAnimations(List<PlayerLogicManager> players)
     {
-        foreach(PlayerLogicManager player in players)
+        Animator animator;
+        foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", false);
-            player.GetAnimator().SetBool("Stupefy", false);
-            player.GetAnimator().SetBool("Loser", true);
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", false);
+                animator.SetBool("Stupefy", false);
+                animator.SetBool("Loser", true);
+            }
         }
     }
 
     public void StopWinningAnimations(List<PlayerLogicManager> players)
     {
-        foreach(PlayerLogicManager player in players)
+        Animator animator;
+        foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", true);
-            player.GetAnimator().SetBool("Stupefy", false);
-            player.GetAnimator().SetBool("Winner", false);
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", true);
+                animator.SetBool("Stupefy", false);
+                animator.SetBool("Winner", false);
+            }
         }
     }
     public void StopLoosingAnimations(List<PlayerLogicManager> players)
     {
-        foreach(PlayerLogicManager player in players)
+        Animator animator;
+        foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", true);
-            player.GetAnimator().SetBool("Stupefy", false);
-            player.GetAnimator().SetBool("Loser", false);
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", true);
+                animator.SetBool("Stupefy", false);
+                animator.SetBool("Loser", false);
+            }
         }
     }
 
