@@ -15,8 +15,6 @@ public class IdleState : State
     public ChaserGetQuaffleState chaserGetQuaffleState;
 
     public CountdownManager isStart;
-
-
     public override State RunCurrentState()
     {
         State returnState = this; //just for the testing
@@ -24,7 +22,7 @@ public class IdleState : State
 
         if(isStart.TimeRemaining <= 0)
         {
-            switch(Logic.PlayerType)
+            switch (Logic.PlayerType)
             {
                 case PlayerType.Keeper:
                     {

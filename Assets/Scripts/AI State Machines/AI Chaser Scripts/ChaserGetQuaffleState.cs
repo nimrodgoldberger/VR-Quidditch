@@ -9,6 +9,8 @@ public class ChaserGetQuaffleState : State
     public PlayerLogicManager Chaser3;
     public ChaserAdvanceWithQuaffleState AdvanceWithQuaffle;
     public State AdvanceWithOutQuaffle;
+    public IdleState Idle;
+
     private float QuaffleVisibilityRange = 250f;
 
 
@@ -56,6 +58,12 @@ public class ChaserGetQuaffleState : State
             }
         }
 
+        if (Logic.collisionOccured)
+        {
+            returnState = Idle;
+            Logic.collisionOccured = false;
+        }
+
         return returnState;
     }
 
@@ -63,6 +71,4 @@ public class ChaserGetQuaffleState : State
     {
         return Logic.Quaffle.transform.parent != null && Logic.Quaffle.transform.parent.CompareTag("Logic");
     }
-
-
 }

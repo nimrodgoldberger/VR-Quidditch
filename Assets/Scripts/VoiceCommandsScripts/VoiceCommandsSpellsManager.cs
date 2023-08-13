@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 //IMPORTANT : activate the voice commands using VR pushing button, it is explained in https://www.youtube.com/watch?v=SJ96P-ZhBoc&t=213s.
 
@@ -45,6 +46,8 @@ public class VoiceCommandsSpellsManager : MonoBehaviour
     public float initialSwayIntensity = 1.0f;
     public float swaySpeed = 1.0f;
     public float effectDuration = 5.0f;
+
+    [SerializeField] TMP_Text SpellActivatedText;
     //
     public void SetDirection(string[] directionString) // type is string[] because the string is the phrase said in the voice command which we will recognise each word
     {
@@ -71,6 +74,7 @@ public class VoiceCommandsSpellsManager : MonoBehaviour
 
     private IEnumerator SpeedBoost(float duration)
     {
+        SpellActivatedText.text = "Rapidus!";
         Debug.Log("In SpeedBoost!"); // TEMPORARY
         float elapsedTime = 0.0f;
         float boost = 3f;
@@ -89,6 +93,7 @@ public class VoiceCommandsSpellsManager : MonoBehaviour
 
         moveProvider.moveSpeed = originalSpeed;
         yield return null;
+        SpellActivatedText.text = "";
     }
 
     private IEnumerator MoveBroom(Vector3 direction, float duration) //IEnumerator is the return value of a coroutine function. //A coroutine is a function that can be paused and resumed at any point during its execution.
@@ -105,10 +110,12 @@ public class VoiceCommandsSpellsManager : MonoBehaviour
             elapsedTime += Time.deltaTime; //Time.deltaTime is the time in seconds it took for the last frame to be rendered. it creates a smooth animationand the speed is independent from frame rate so it will be identical on all machines.
             yield return null; //At that point, the coroutine function will pause and allow other code to run, and then it will resume from where it left off on the next frame.
         }
+
     }
 
     private IEnumerator Stupefy(float duration)
     {
+        SpellActivatedText.text = "Stupefy!";
         Debug.Log("Stupefy enemies for 5 seconds!!"); // TEMPORARY
         float startTime = Time.time;
 
@@ -121,11 +128,13 @@ public class VoiceCommandsSpellsManager : MonoBehaviour
 
             yield return null;
         }
+        SpellActivatedText.text = "";
         StopLosingControlEffect(keepers2);
         StopLosingControlEffect(beaters2);
         StopLosingControlEffect(chasers2);
         StopLosingControlEffect(seekers2);
 
+        
         Debug.Log("Stupefy over!!"); // TEMPORARY
     }
 

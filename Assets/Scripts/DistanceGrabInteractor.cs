@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class DistanceGrabInteractor : XRBaseControllerInteractor
 {
-    List<XRBaseInteractable> m_ValidTargets = new List<XRBaseInteractable>();
+    public List<XRBaseInteractable> m_ValidTargets = new List<XRBaseInteractable>();
     XRBaseInteractable m_CurrentNearestObject;
 
     [SerializeField] private float quaffleMaxDistance = 20f;
@@ -52,12 +52,12 @@ public class DistanceGrabInteractor : XRBaseControllerInteractor
         //find the best grabbable object by using a min algorithm and the dot product
         float bestGuess = 0;
         XRBaseInteractable selectable = null;
-        foreach (XRBaseInteractable obj in m_grabbableItems)
+        foreach (XRBaseInteractable grabbableItem in m_grabbableItems)
         {
-            Vector3 dir = (obj.transform.position - m_fwdVector.position).normalized;
+            Vector3 dir = (grabbableItem.transform.position - m_fwdVector.position).normalized;
             float currentGuess = Vector3.Dot(m_fwdVector.forward, dir);
-            float distance = Vector3.Distance(obj.transform.position, m_fwdVector.position);
-            if (obj.gameObject.CompareTag(snitchTag))
+            float distance = Vector3.Distance(grabbableItem.transform.position, m_fwdVector.position);
+            if (grabbableItem.gameObject.CompareTag(snitchTag))
             {
                 maxDistance = snitchMaxDistance;
             }
@@ -69,7 +69,7 @@ public class DistanceGrabInteractor : XRBaseControllerInteractor
             if (currentGuess > m_grabbingThreshold && currentGuess > bestGuess && distance < maxDistance)
             {
                 bestGuess = currentGuess;
-                selectable = obj;
+                selectable = grabbableItem;
                 m_CurrentNearestObject = selectable;
                 //translate the center of the collider into world space (as it is in local space relative to the GameObject)
                 m_coll.center = transform.InverseTransformPoint(selectable.transform.position);

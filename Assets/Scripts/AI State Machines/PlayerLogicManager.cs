@@ -30,7 +30,7 @@ public class PlayerLogicManager : Targetable
     [SerializeField] protected float speed;
     [SerializeField] protected float rotationSpeed;
 
-
+    public bool collisionOccured = false;
     public bool hitByBludger = false;
     public float freezeBludgerDuration = 5f;
     protected virtual void Start()
@@ -449,6 +449,14 @@ public class PlayerLogicManager : Targetable
         yield return new WaitForSeconds(freezeBludgerDuration);
 
         hitByBludger = false;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("AI") || collision.gameObject.CompareTag("Player"))
+        {
+            collisionOccured = true;
+        }
     }
 }
 
