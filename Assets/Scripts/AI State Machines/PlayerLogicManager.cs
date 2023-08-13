@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerLogicManager : Targetable
@@ -42,6 +43,7 @@ public class PlayerLogicManager : Targetable
         animator = GetComponent<Animator>();
     }
 
+    [SerializeField] TMP_Text SpellActivatedText;
     public virtual bool TryCatchQuaffle()
     {   //TODO Add the timer to catch it
         return Quaffle.TryTakeQuaffle(this);
@@ -456,6 +458,10 @@ public class PlayerLogicManager : Targetable
         if (collision.gameObject.CompareTag("AI") || collision.gameObject.CompareTag("Player"))
         {
             collisionOccured = true;
+        }
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            SpellActivatedText.text = "Hit by bludger!";
         }
     }
 }

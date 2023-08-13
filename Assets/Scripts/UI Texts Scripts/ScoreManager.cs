@@ -56,13 +56,13 @@ public class ScoreManager : MonoBehaviour
         {
             team2Score = GetScoreForTeam(team2);
             team1Score = GetScoreForTeam(team1) + additionalPoints;
-            ballsPositionManager.GoalWasScored();
+            
         }
         else if (team == team2)
         {
             team2Score = GetScoreForTeam(team2) + additionalPoints;
             team1Score = GetScoreForTeam(team1);
-            ballsPositionManager.GoalWasScored();
+            
         }
         else
         {
@@ -81,6 +81,10 @@ public class ScoreManager : MonoBehaviour
         // Set the second team's name in the score text
         scoreText.text += teamNames[(int)team2];
         scoreText.text += ":" + team2Score;
+
+
+        ballsPositionManager.GoalWasScored();
+
     }
     public int GetScoreForTeam(PlayerTeam team)
     {

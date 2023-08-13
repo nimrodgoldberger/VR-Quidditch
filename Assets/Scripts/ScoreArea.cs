@@ -17,16 +17,14 @@ public class ScoreArea : Targetable
             StartCoroutine(StopParticleEffect(particleSystemInstance));
             scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 10);
             //Activates winning and loosing animations
-            teamManager.GoalAnimations(team);
+            StartCoroutine(teamManager.GoalAnimations(team));
         }
         
         if (otherCollider.gameObject.name == "GoldenSnitch")
         {
             ParticleSystem particleSystemInstance = Instantiate(particleEffectPrefab, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             StartCoroutine(StopParticleEffect(particleSystemInstance));
-            Debug.Log("here");
             scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 150);
-            
         }
     }
 

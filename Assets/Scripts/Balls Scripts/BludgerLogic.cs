@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class BludgerLogic : MonoBehaviour
@@ -34,6 +35,7 @@ public class BludgerLogic : MonoBehaviour
     Transform rotationCenter;
     [SerializeField] private GameObject[] targets;
 
+    
 
     private float deltaY, posX, posZ, angle = 0f;
 

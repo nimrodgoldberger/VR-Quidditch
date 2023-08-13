@@ -2753,7 +2753,7 @@ MonoBehaviour:
   Quaffle: {fileID: 937341420}
   quaffleTakeTime: 0
   Bludgers:
-  - {fileID: 0}
+  - {fileID: 718762424}
   - {fileID: 1143367334}
   target: {fileID: 0}
   relativePositionTarget: {fileID: 0}
@@ -2764,6 +2764,7 @@ MonoBehaviour:
   collisionOccured: 0
   hitByBludger: 0
   freezeBludgerDuration: 5
+  SpellActivatedText: {fileID: 395806189}
   m_CustomMovement: {fileID: 380029568}
 --- !u!114 &384754654 stripped
 MonoBehaviour:
