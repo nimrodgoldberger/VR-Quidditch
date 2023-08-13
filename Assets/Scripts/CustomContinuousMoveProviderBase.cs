@@ -19,8 +19,10 @@ namespace UnityEngine.XR.Interaction.Toolkit
         [SerializeField] private Transform forwardSourceReference;
         [SerializeField] private float accelerationTime = 1.0f;
         [SerializeField] private float bludgerSlowMoveSpeed = 5f;
+        [SerializeField] private DistanceGrabInteractor rightHand;
 
-        private PhotonView view;
+
+        private PhotonView photonView;
 
 
 
@@ -259,7 +261,11 @@ namespace UnityEngine.XR.Interaction.Toolkit
                     Assert.IsTrue(false, $"Unhandled {nameof(LocomotionPhase)}={locomotionPhase}");
                     break;
             }
-            //}
+            if (rightHand.isSelectActive && rightHand.selectTarget.tag == "Quaffle")
+            {
+                Debug.Log("quaffle with syrup");
+            }
+          
         }
 
         /// <summary>
