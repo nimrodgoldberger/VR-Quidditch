@@ -11,8 +11,9 @@ public class HitBludgerState : State
     private int bludgerChaseIndex;
     private float bludgerClosenessRange = 15f;
     private float bludgerTryHittingRange = 0.5f;
-
-    public override State RunCurrentState()
+    
+    public IdleState Idle;
+public override State RunCurrentState()
     {
         int noBludgerIsClose = -1;
         State returnState = this; //just for the testing
@@ -33,6 +34,13 @@ public class HitBludgerState : State
              Logic.ResetTarget();//needed in order to change the chaser that the beater defends
              returnState = defendChaser;
         }
+
+        if (Logic.goalScored)
+        {
+            returnState = Idle;
+            Logic.goalScored = false;
+        }
+        
 
         return returnState;
     }

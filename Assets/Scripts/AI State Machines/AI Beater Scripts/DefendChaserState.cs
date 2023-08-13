@@ -9,7 +9,7 @@ public class DefendChaserState : State
     private float bludgerClosenessRange = 15f;
     public HitBludgerState hitBludgerState;
     private PlayerLogicManager currentTarget;//this is in order to check if it is moving and if not just wait and not go crazy on the broom
-
+    public IdleState Idle;
     public override State RunCurrentState()
     {
         int noBludgerIsClose = -1;//3 means no bludger is close
@@ -41,6 +41,12 @@ public class DefendChaserState : State
             }
 
             returnState = this;
+        }
+
+        if(Logic.goalScored)
+        {
+            returnState = Idle;
+            Logic.goalScored = false;
         }
 
         return returnState;

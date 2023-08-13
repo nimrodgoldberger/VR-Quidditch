@@ -150,6 +150,7 @@ public class ChaserAdvanceWithQuaffleState : State
     [SerializeField] private float stoppingDistance = 20f;
     public ChaserAdvanceWithOutQuaffleState chaserAdvanceWithOutQuaffleState;
     public ChaserGetQuaffleState chaserGetQuaffleState;
+    public IdleState Idle;
 
     //public override State RunCurrentState()
     //{
@@ -270,6 +271,13 @@ public class ChaserAdvanceWithQuaffleState : State
                 Logic.isMoving = false;
                 nextState = chaserGetQuaffleState;
             }
+        }
+
+
+        if (Logic.goalScored)
+        {
+            nextState = Idle;
+            Logic.goalScored = false;
         }
 
         return nextState;

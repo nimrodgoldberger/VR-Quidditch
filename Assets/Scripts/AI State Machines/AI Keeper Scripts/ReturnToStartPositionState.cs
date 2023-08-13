@@ -110,8 +110,15 @@ public class ReturnToStartPositionState : State
                 Logic.isRotatingToStartingPos = true;
             }
 
+            if (Logic.goalScored)
+            {
+
+                Logic.goalScored = false;
+                return idleState;
+            }
+
             // Check if the character is still rotating
-            if(Logic.isMoving || Logic.isRotatingToStartingPos)
+            if (Logic.isMoving || Logic.isRotatingToStartingPos)
             {
                 return this; // Keep the state until the rotation finishes
             }

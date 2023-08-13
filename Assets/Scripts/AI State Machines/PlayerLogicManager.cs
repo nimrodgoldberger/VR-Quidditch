@@ -27,6 +27,8 @@ public class PlayerLogicManager : Targetable
     public bool isMoving = false;
     public bool isRotatingToStartingPos = false;
 
+    public bool goalScored = false;
+
     protected float startingSpeed;
     [SerializeField] protected float speed;
     [SerializeField] protected float rotationSpeed;
