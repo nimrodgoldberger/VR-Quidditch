@@ -43,7 +43,7 @@ public class TimeTextManager : MonoBehaviour
                 StartCoroutine(teamManager.GoalAnimations(winningTeam));
                 int scoreTeam1 = scoreManager.GetComponent<ScoreManager>().GetScoreForTeam(teamManager.GetTeam1());
                 int scoreTeam2 = scoreManager.GetComponent<ScoreManager>().GetScoreForTeam(teamManager.GetTeam2());
-                StartCoroutine(teamManager.GameOver(scoreTeam1, scoreTeam2));
+                teamManager.GameOver(scoreTeam1, scoreTeam2);
             }
 
             if (timeRemaining <= 120)

@@ -277,7 +277,7 @@ public class ChaserAdvanceWithQuaffleState : State
         if (Logic.goalScored)
         {
             nextState = Idle;
-            Logic.goalScored = false;
+            
         }
 
         return nextState;

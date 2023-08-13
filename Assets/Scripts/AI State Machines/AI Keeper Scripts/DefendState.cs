@@ -20,7 +20,7 @@ public class DefendState : State
         if (Logic.goalScored)
         {
             
-            Logic.goalScored = false;
+            
             return Idle;
         }
 

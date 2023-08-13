@@ -49,8 +49,6 @@ public class SeekSnitchState : State
 
         if (Logic.goalScored)
         {
-
-            Logic.goalScored = false;
             returnState = idleState;
         }
 

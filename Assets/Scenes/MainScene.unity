@@ -2499,6 +2499,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5130c4389e7fcf1438a45c2f48382342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalTime: 4
+  timerIsRunning: 0
+  gameStarted: 0
 --- !u!1001 &380029551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10902,6 +10905,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 951744596}
     m_Modifications:
+    - target: {fileID: 3532146794293153690, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+      propertyPath: idleState
+      value: 
+      objectReference: {fileID: 2012364664}
     - target: {fileID: 3532146794917354182, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
       propertyPath: Snitch
       value: 
@@ -16270,6 +16277,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4931573071167316108, guid: 22d231a4d437ae646b85630b6366b5f9, type: 3}
   m_PrefabInstance: {fileID: 4931573070464385235}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2012364664 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3532146795360154510, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+  m_PrefabInstance: {fileID: 926540254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a35c759cad9cb742bb9d36435804e4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2028872980
 GameObject:
   m_ObjectHideFlags: 0

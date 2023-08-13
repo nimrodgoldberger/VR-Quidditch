@@ -113,7 +113,7 @@ public class ReturnToStartPositionState : State
             if (Logic.goalScored)
             {
 
-                Logic.goalScored = false;
+                
                 return idleState;
             }
 

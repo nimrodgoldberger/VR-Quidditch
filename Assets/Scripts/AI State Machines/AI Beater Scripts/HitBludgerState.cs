@@ -38,7 +38,7 @@ public override State RunCurrentState()
         if (Logic.goalScored)
         {
             returnState = Idle;
-            Logic.goalScored = false;
+            
         }
         
 

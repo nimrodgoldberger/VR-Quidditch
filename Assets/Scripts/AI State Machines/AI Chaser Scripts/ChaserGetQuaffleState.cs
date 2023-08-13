@@ -67,7 +67,7 @@ public class ChaserGetQuaffleState : State
         if(Logic.goalScored)
         {
             returnState = Idle;
-            Logic.goalScored = false;
+            
         }
 
         return returnState;

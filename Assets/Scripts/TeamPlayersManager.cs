@@ -246,6 +246,7 @@ public class TeamPlayersManager : MonoBehaviour
 
     public IEnumerator GoalAnimations(PlayerTeam scoringTeam)
     {
+        SetBackAllPlayersToIdleState();
         float effectDuration = 5.0f;
         float startTime = Time.time;
 
@@ -394,9 +395,8 @@ public class TeamPlayersManager : MonoBehaviour
         }
     }
 
-    public IEnumerator GameOver(int team1Score, int team2Score)
+    public void GameOver(int team1Score, int team2Score)
     {
-        yield return new WaitForSeconds(6f);
         //pass scores and teams over to next scene
         PlayerPrefs.SetInt("Team1", (int)team1);
         PlayerPrefs.SetInt("Team2", (int)team2);
