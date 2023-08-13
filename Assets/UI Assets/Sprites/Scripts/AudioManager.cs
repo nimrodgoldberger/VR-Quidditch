@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // Prevent AudioManager from being destroyed on scene change
         }
         else
         {
@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 
     public void PlayAudio()
     {

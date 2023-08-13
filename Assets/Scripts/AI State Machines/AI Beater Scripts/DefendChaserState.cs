@@ -49,53 +49,63 @@ public class DefendChaserState : State
     {
         //TODO use the real code
 
+        Vector3 relativePosition;
+
         //THIS IS THE REAL CODE
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //List<PlayerLogicManager> chaserPlayers = new List<PlayerLogicManager>();
-        //foreach (PlayerLogicManager player in Logic.friends)
+        List<PlayerLogicManager> chaserPlayers = new List<PlayerLogicManager>();
+        foreach (PlayerLogicManager player in Logic.friends)
+        {
+            if (player.PlayerType == PlayerType.Chaser)
+                chaserPlayers.Add(player);
+        }
+        // Creates a new instance of Random class
+        System.Random random = new System.Random();
+
+        // Generates a random index within the bounds of the array
+        int randomIndex = random.Next(0, chaserPlayers.Count - 1);
+        
+        //do
         //{
-        //    if (player.PlayerType == PlayerType.Chaser)
-        //        chaserPlayers.Add(player);
-        //}
-        //// Creates a new instance of Random class
-        //System.Random random = new System.Random();
+            // Set relative position vector randomly 
+        relativePosition = CreateRelativePosition();
+            // Get the randomly chosen chaser +relative position as target 
+        Targetable.SetRelativeTarget(relativePosition, chaserPlayers[randomIndex], Logic.relativePositionTarget);
 
-        //// Generates a random index within the bounds of the array
-        //int randomIndex = random.Next(0, chaserPlayers.Count - 1);
+        //} while (!TargetsSpawnArea.IsInsidePlayableArea(Logic.relativePositionTarget.transform.position));
+        
 
-        //// Set relative position vector randomly 
-        //Vector3 relativePosition = CreateRelativePosition();
-
-        //// Get the randomly chosen chaser +relative position as target 
-        //Targetable.SetRelativeTarget(relativePosition, chaserPlayers[randomIndex], Logic.relativePositionTarget);
-
-        ////Set target
-        //Logic.target = Logic.relativePositionTarget;
+        
+        //Set target
+        Logic.target = Logic.relativePositionTarget;
+        currentTarget = chaserPlayers[randomIndex];
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
         //CODE FOR TESTING BEFORE CHASER IS READY
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        List<PlayerLogicManager> seekerPlayers = new List<PlayerLogicManager>();
-        foreach (PlayerLogicManager player in Logic.friends)
-        {
-            if (player.PlayerType == PlayerType.Seeker)
-                seekerPlayers.Add(player);
-        }
-        // Creates a new instance of Random class
-        System.Random random = new System.Random();
+        //List<PlayerLogicManager> seekerPlayers = new List<PlayerLogicManager>();
+        //foreach (PlayerLogicManager player in Logic.friends)
+        //{
+        //    if (player.PlayerType == PlayerType.Seeker)
+        //        seekerPlayers.Add(player);
+        //}
+        //// Creates a new instance of Random class
+        //System.Random random = new System.Random();
 
-        // Generates a random index within the bounds of the array
-        int randomIndex = random.Next(0, seekerPlayers.Count - 1);
+        //// Generates a random index within the bounds of the array
+        //int randomIndex = random.Next(0, seekerPlayers.Count - 1);
 
-        Vector3 relativePosition = CreateRelativePosition();
+        ////// Set relative position vector randomly
+        //Vector3 relativePosition = CreateRelativePosition();
 
-        // Get the randomly chosen chaser +relative position as target 
-        Targetable.SetRelativeTarget(relativePosition, seekerPlayers[randomIndex], Logic.relativePositionTarget);
+        //// Get the randomly chosen chaser +relative position as target 
+        //Targetable.SetRelativeTarget(relativePosition, seekerPlayers[randomIndex], Logic.relativePositionTarget);
 
-        Logic.target = Logic.relativePositionTarget;
-        currentTarget = seekerPlayers[randomIndex];
+        //////Set target
+        //Logic.target = Logic.relativePositionTarget;
+        //currentTarget = seekerPlayers[randomIndex];
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
@@ -112,7 +122,7 @@ public class DefendChaserState : State
         // Generates a random index within the bounds of the array
         int value = random.Next(0, 1);
 
-        if(value == negative)
+        if (value == negative)
         {
             relativePosition.x = random.Next(-5, -3);
             relativePosition.y = random.Next(-5, -3);
@@ -125,6 +135,8 @@ public class DefendChaserState : State
             relativePosition.y = random.Next(3, 5);
             relativePosition.z = random.Next(3, 5);
         }
+        
+
         return relativePosition;
     }
 

@@ -17,7 +17,14 @@ public class SceneInitializer : MonoBehaviour
 
     public string sceneNameToLoad = "MenuScene";
 
+    public AudioSource audioSource;
+
     void Start()
+    {
+        StartInitializations();
+    }
+
+    public void StartInitializations()
     {
         if (PlayerPrefs.HasKey("IsOver"))
         {
@@ -29,13 +36,17 @@ public class SceneInitializer : MonoBehaviour
 
             gameOverScreen.SetActive(true);
             initialScreen.SetActive(false);
+            audioSource.GetComponent<AudioManager>().StopAudio();
             DisplayResultMessage();
             PlayerPrefs.DeleteKey("IsOver");
         }
+
         else
         {
             initialScreen.SetActive(true);
             gameOverScreen.SetActive(false);
+            if(audioSource!=null)
+                audioSource.GetComponent<AudioManager>().PlayAudio();
         }
     }
 

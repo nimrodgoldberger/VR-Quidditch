@@ -133,6 +133,7 @@ public class VoiceCommandsSpellsManager : MonoBehaviour
     {
         foreach (PlayerLogicManager player in players)
         {
+            player.isMoving = false;
             player.GetAnimator().SetBool("Idle", false);
             player.GetAnimator().SetBool("Stupefy", true);
         }
@@ -142,6 +143,7 @@ public class VoiceCommandsSpellsManager : MonoBehaviour
     {
         foreach (PlayerLogicManager player in players)
         {
+            player.isMoving = true;
             player.GetAnimator().SetBool("Idle", true);
             player.GetAnimator().SetBool("Stupefy", false);
         }
