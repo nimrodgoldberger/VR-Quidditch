@@ -139,20 +139,29 @@ public class BludgerLogic : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Targetable targetableComponent = collision.gameObject.GetComponent<Targetable>();
+        PlayerLogicManager targetableComponent = collision.gameObject.GetComponent<PlayerLogicManager>();
 
         if (targetableComponent != null)
         {
             audioSource.PlayOneShot(hitSound);
             rb.velocity = Vector3.zero;
-            collision.gameObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.CustomMovement>().HitPlayer();
+            targetableComponent.HitPlayer();
+
+            //if (collision.gameObject.CompareTag("AI"))
+            //{
+
+            //}
+            //else if(collision.gameObject.CompareTag("Player"))
+            //{
+            //    collision.gameObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.CustomMovement>().HitPlayer();
+            //}
         }
-        else if (collision.gameObject.CompareTag("AI"))
-        {
-            audioSource.PlayOneShot(hitSound);
-            rb.velocity = Vector3.zero;
-            //collision.gameObject.GetComponent<CustomMovement>().HitPlayer();
-        }
+        //else if (collision.gameObject.CompareTag("AI"))
+        //{
+        //    audioSource.PlayOneShot(hitSound);
+        //    rb.velocity = Vector3.zero;
+        //    //collision.gameObject.GetComponent<CustomMovement>().HitPlayer();
+        //}
 
         state = State.Patrol;
         onTrack = true;

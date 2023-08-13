@@ -30,6 +30,9 @@ public class PlayerLogicManager : Targetable
     [SerializeField] protected float speed;
     [SerializeField] protected float rotationSpeed;
 
+
+    public bool hitByBludger = false;
+    public float freezeBludgerDuration = 5f;
     protected virtual void Start()
     {
         startingSpeed = speed;
@@ -432,6 +435,20 @@ public class PlayerLogicManager : Targetable
     public virtual Animator GetAnimator()
     {
         return animator;
+    }
+
+    public void HitPlayer()
+    {
+        StartCoroutine(HitPlayerCoroutine());
+    }
+
+    private IEnumerator HitPlayerCoroutine()
+    {
+        hitByBludger = true;
+
+        yield return new WaitForSeconds(freezeBludgerDuration);
+
+        hitByBludger = false;
     }
 }
 
