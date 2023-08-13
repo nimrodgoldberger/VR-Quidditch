@@ -86,7 +86,8 @@ public class TeamPlayersManager : MonoBehaviour
             initPlayerStateManagers(keepers1, team1, PlayerType.Keeper);
             initPlayerStateManagers(beaters1, team1, PlayerType.Beater);
             initPlayerStateManagers(chasers1, team1, PlayerType.Chaser);
-            initPlayerStateManagers(seekers1, team1, PlayerType.Seeker);
+            //TODO for multi do this for both teams
+            initPlayerStateManagers(seekers1, team1, PlayerType.VRPlayer);
 
             //INIT TEAM 2
             initPlayerStateManagers(keepers2, team2, PlayerType.Keeper);
@@ -154,6 +155,7 @@ public class TeamPlayersManager : MonoBehaviour
                     player.startingPosition = StartingPositionsChasersTeam1[typeIndex].transform.position;
                     break;
                 case PlayerType.Seeker:
+                case PlayerType.VRPlayer:
                     player.startingPosition = StartingPositionsSeekerTeam1[typeIndex].transform.position;
                     break;
                 case PlayerType.Keeper:
@@ -174,6 +176,7 @@ public class TeamPlayersManager : MonoBehaviour
                     player.startingPosition = StartingPositionsChasersTeam2[typeIndex].transform.position;
                     break;
                 case PlayerType.Seeker:
+                case PlayerType.VRPlayer:
                     player.startingPosition = StartingPositionsSeekerTeam2[typeIndex].transform.position;
                     break;
                 case PlayerType.Keeper:
@@ -188,33 +191,34 @@ public class TeamPlayersManager : MonoBehaviour
     // Call this method to change the material of the body based on the team
     public void SetPlayerTeamOutfit(PlayerLogicManager player)
     {
-
-        Transform bodyTransform = player.transform.Find("Body");
-        Renderer bodyRenderer = bodyTransform.GetComponent<Renderer>();
-
-        // Get the materials array from the Renderer
-        Material[] materials = bodyRenderer.materials;
-
-        // Check the team and assign the appropriate material
-        switch(player.PlayerTeam)
+        if(player.PlayerType!= PlayerType.VRPlayer)
         {
-            case PlayerTeam.Griffindor:
-                materials[2] = gryffindorMaterial;
-                break;
-            case PlayerTeam.Hufflepuff:
-                materials[2] = hufflepuffMaterial;
-                break;
-            case PlayerTeam.Slitheryn:
-                materials[2] = slytherinMaterial;
-                break;
-            case PlayerTeam.Ravenclaw:
-                materials[2] = ravenclawMaterial;
-                break;
+            Transform bodyTransform = player.transform.Find("Body");
+            Renderer bodyRenderer = bodyTransform.GetComponent<Renderer>();
+
+            // Get the materials array from the Renderer
+            Material[] materials = bodyRenderer.materials;
+
+            // Check the team and assign the appropriate material
+            switch (player.PlayerTeam)
+            {
+                case PlayerTeam.Griffindor:
+                    materials[2] = gryffindorMaterial;
+                    break;
+                case PlayerTeam.Hufflepuff:
+                    materials[2] = hufflepuffMaterial;
+                    break;
+                case PlayerTeam.Slitheryn:
+                    materials[2] = slytherinMaterial;
+                    break;
+                case PlayerTeam.Ravenclaw:
+                    materials[2] = ravenclawMaterial;
+                    break;
+            }
+
+            // Apply the modified materials array back to the Renderer
+            bodyRenderer.materials = materials;
         }
-
-        // Apply the modified materials array back to the Renderer
-        bodyRenderer.materials = materials;
-
     }
 
     public PlayerTeam GetTeam1()
