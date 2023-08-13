@@ -143,8 +143,8 @@ using UnityEngine;
 public class ChaserAdvanceWithQuaffleState : State
 {
     public bool holdsQuaffle = true;
-    [SerializeField] private float coolDownAfterThrow = 1.0f;
-    [SerializeField] private float timerAfterThrow = 0f;
+    [SerializeField] private float coolDownAfterThrowOrLostQuaffle = 1.0f;
+    [SerializeField] private float timerAfterThrowOrLostQuaffle = 0f;
     [SerializeField] private float avoidanceRadius;
     [SerializeField] private float desiredDistance = 10f;
     [SerializeField] private float stoppingDistance = 20f;
@@ -202,7 +202,7 @@ public class ChaserAdvanceWithQuaffleState : State
     public override State RunCurrentState()
     {
         State nextState = this;
-        holdsQuaffle = Logic.Quaffle.IsQuaffleHeldByPlayer(Logic);
+        holdsQuaffle = /*Logic.Quaffle.IsQuaffleHeldByPlayer(Logic) &&*/ Logic.IsQuaffleHeldByMe();
 
         if(holdsQuaffle)
         {
@@ -222,7 +222,7 @@ public class ChaserAdvanceWithQuaffleState : State
             {
                 Logic.StopMoveAndRotateToTarget(); // TODO Check if works
 
-                Logic.Quaffle.ThrowQuaffle(Logic.target);
+                Logic.Quaffle.ThrowQuaffle(Logic, Logic.target);
 
                 holdsQuaffle = false;
                 Logic.isMoving = false;
@@ -258,13 +258,14 @@ public class ChaserAdvanceWithQuaffleState : State
         }
         else
         {
-            if(timerAfterThrow <= coolDownAfterThrow)
+            if(timerAfterThrowOrLostQuaffle <= coolDownAfterThrowOrLostQuaffle)
             {
-                timerAfterThrow += Time.fixedDeltaTime;
+                timerAfterThrowOrLostQuaffle += Time.fixedDeltaTime;
             }
             else
             {
-                timerAfterThrow = 0f;
+                Logic.ResetSpeed();
+                timerAfterThrowOrLostQuaffle = 0f;
                 Logic.target = null;
                 Logic.isMoving = false;
                 nextState = chaserGetQuaffleState;

@@ -16,6 +16,7 @@ public class KeeperHoldsQuaffleState : State
 
         // TODO check if works 
         //holdsQuaffle = Logic.Quaffle.IsQuaffleHeldByPlayer(Logic);
+        //holdsQuaffle = Logic.IsQuaffleHeldByMe();
 
         if(holdsQuaffle)
         {
@@ -105,18 +106,39 @@ public class KeeperHoldsQuaffleState : State
         // You can use a navigation system or custom movement logic to achieve this.
 
         // For now, let's assume we directly pass the ball to the target's position for demonstration purposes.
-        Logic.Quaffle.ThrowQuaffle(playerToPassTo);
+        Logic.Quaffle.ThrowQuaffle(Logic, playerToPassTo);
 
     }
 
     public void PassTheQuaffle()
     {
         //Logic.Quaffle.transform.parent = null;
-        Logic.Quaffle.ThrowQuaffle(playerToPassTo);
+        Logic.Quaffle.ThrowQuaffle(Logic, playerToPassTo);
     }
 
     private Targetable GetPlayerToPassTo()
     {
         return playerToPassTo;
+    }
+
+
+    private void ChooseChaserToPassTo()
+    {
+        List<PlayerLogicManager> chaserPlayers = new List<PlayerLogicManager>();
+        foreach(PlayerLogicManager player in Logic.friends)
+        {
+            if(player.PlayerType == PlayerType.Chaser)
+                chaserPlayers.Add(player);
+        }
+        // Creates a new instance of Random class
+        System.Random random = new System.Random();
+
+        // Generates a random index within the bounds of the array
+        int randomIndex = random.Next(0, chaserPlayers.Count - 1);
+
+        // TODO make it random for various chasers
+        //Set target 
+        //Logic.target = chaserPlayers[randomIndex];
+        playerToPassTo = chaserPlayers[0];
     }
 }

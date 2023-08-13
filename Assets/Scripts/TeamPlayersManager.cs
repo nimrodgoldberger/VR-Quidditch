@@ -66,8 +66,8 @@ public class TeamPlayersManager : MonoBehaviour
     public TeamType teamType = TeamType.Team1Player;
 
     private bool playersInitialized = false; // Keep track if players are already initialized
+    [SerializeField] private BallsPositionManager ballsPositionManager;
 
-   
 
     // Start is called before the first frame update
     void Start()
@@ -94,25 +94,26 @@ public class TeamPlayersManager : MonoBehaviour
             initPlayerStateManagers(chasers2, team2, PlayerType.Chaser);
             initPlayerStateManagers(seekers2, team2, PlayerType.Seeker);
 
-            playersInitialized = true;            
+            playersInitialized = true;
+            ballsPositionManager.StartingGame();
         }
 
     }
 
-    
+
 
     private void initPlayerStateManagers(List<PlayerLogicManager> players, PlayerTeam team, PlayerType type)
     {
         int chaserIndex = 0;
         int beaterIndex = 0;
 
-        foreach (PlayerLogicManager player in players)
+        foreach(PlayerLogicManager player in players)
         {
             player.PlayerTeam = team;
             player.PlayerType = type;
-            
+
             SetPlayerTeamOutfit(player);
-            switch (player.PlayerType)
+            switch(player.PlayerType)
             {
                 case PlayerType.Beater:
                     SetPlayerStartingPos(player, beaterIndex);
@@ -136,7 +137,7 @@ public class TeamPlayersManager : MonoBehaviour
             {
                 player.SetGoals(team2Goals, team1Goals);
             }
-            
+
         }
     }
 
@@ -145,7 +146,7 @@ public class TeamPlayersManager : MonoBehaviour
     {
         if(player.PlayerTeam == team1)
         {
-            switch (player.PlayerType)
+            switch(player.PlayerType)
             {
                 case PlayerType.Beater:
                     player.startingPosition = StartingPositionsBeatersTeam1[typeIndex].transform.position;
@@ -160,32 +161,35 @@ public class TeamPlayersManager : MonoBehaviour
                     player.startingPosition = StartingPositionsKeeperTeam1[typeIndex].transform.position;
                     break;
             }
+
+            player.transform.position = player.startingPosition;
         }
-        else if (player.PlayerTeam == team2)
+        else if(player.PlayerTeam == team2)
         {
-            switch (player.PlayerType)
+            switch(player.PlayerType)
             {
                 case PlayerType.Beater:
-                    player.transform.position = StartingPositionsBeatersTeam2[typeIndex].transform.position;
+                    player.startingPosition = StartingPositionsBeatersTeam2[typeIndex].transform.position;
                     break;
                 case PlayerType.Chaser:
-                    player.transform.position = StartingPositionsChasersTeam2[typeIndex].transform.position;
+                    player.startingPosition = StartingPositionsChasersTeam2[typeIndex].transform.position;
                     break;
                 case PlayerType.Seeker:
-                    player.transform.position = StartingPositionsSeekerTeam2[typeIndex].transform.position;
+                    player.startingPosition = StartingPositionsSeekerTeam2[typeIndex].transform.position;
                     break;
                 case PlayerType.Keeper:
-                    player.transform.position = StartingPositionsKeeperTeam2[typeIndex].transform.position;
+                    player.startingPosition = StartingPositionsKeeperTeam2[typeIndex].transform.position;
                     break;
             }
-        }
 
+            player.transform.position = player.startingPosition;
+        }
     }
 
     // Call this method to change the material of the body based on the team
     public void SetPlayerTeamOutfit(PlayerLogicManager player)
     {
-        
+
         Transform bodyTransform = player.transform.Find("Body");
         Renderer bodyRenderer = bodyTransform.GetComponent<Renderer>();
 
@@ -193,7 +197,7 @@ public class TeamPlayersManager : MonoBehaviour
         Material[] materials = bodyRenderer.materials;
 
         // Check the team and assign the appropriate material
-        switch (player.PlayerTeam)
+        switch(player.PlayerTeam)
         {
             case PlayerTeam.Griffindor:
                 materials[2] = gryffindorMaterial;
@@ -226,12 +230,12 @@ public class TeamPlayersManager : MonoBehaviour
 
     public void AssignGoalsToTeams(List<ScoreArea> team1Goals, List<ScoreArea> team2Goals)
     {
-        foreach (ScoreArea goal in team1Goals)
+        foreach(ScoreArea goal in team1Goals)
         {
             goal.SetTeam(team1);
         }
 
-        foreach (ScoreArea goal in team2Goals)
+        foreach(ScoreArea goal in team2Goals)
         {
             goal.SetTeam(team2);
         }
@@ -242,9 +246,9 @@ public class TeamPlayersManager : MonoBehaviour
         float effectDuration = 5.0f;
         float startTime = Time.time;
 
-        while (Time.time - startTime < effectDuration)
+        while(Time.time - startTime < effectDuration)
         {
-            if (scoringTeam == team1)
+            if(scoringTeam == team1)
             {
 
                 LoosingAnimations(keepers2);
@@ -259,7 +263,7 @@ public class TeamPlayersManager : MonoBehaviour
 
 
             }
-            else if (scoringTeam == team2)
+            else if(scoringTeam == team2)
             {
                 LoosingAnimations(keepers1);
                 LoosingAnimations(beaters1);
@@ -286,7 +290,7 @@ public class TeamPlayersManager : MonoBehaviour
             yield return null;
         }
 
-        if (scoringTeam == team1)
+        if(scoringTeam == team1)
         {
 
             StopLoosingAnimations(keepers2);
@@ -301,7 +305,7 @@ public class TeamPlayersManager : MonoBehaviour
 
 
         }
-        else if (scoringTeam == team2)
+        else if(scoringTeam == team2)
         {
             StopLoosingAnimations(keepers1);
             StopLoosingAnimations(beaters1);
@@ -331,7 +335,7 @@ public class TeamPlayersManager : MonoBehaviour
 
     public void WinningAnimations(List<PlayerLogicManager> players)
     {
-        foreach (PlayerLogicManager player in players)
+        foreach(PlayerLogicManager player in players)
         {
             player.GetAnimator().SetBool("Idle", false);
             player.GetAnimator().SetBool("Stupefy", false);
@@ -340,7 +344,7 @@ public class TeamPlayersManager : MonoBehaviour
     }
     public void LoosingAnimations(List<PlayerLogicManager> players)
     {
-        foreach (PlayerLogicManager player in players)
+        foreach(PlayerLogicManager player in players)
         {
             player.GetAnimator().SetBool("Idle", false);
             player.GetAnimator().SetBool("Stupefy", false);
@@ -350,7 +354,7 @@ public class TeamPlayersManager : MonoBehaviour
 
     public void StopWinningAnimations(List<PlayerLogicManager> players)
     {
-        foreach (PlayerLogicManager player in players)
+        foreach(PlayerLogicManager player in players)
         {
             player.GetAnimator().SetBool("Idle", true);
             player.GetAnimator().SetBool("Stupefy", false);
@@ -359,7 +363,7 @@ public class TeamPlayersManager : MonoBehaviour
     }
     public void StopLoosingAnimations(List<PlayerLogicManager> players)
     {
-        foreach (PlayerLogicManager player in players)
+        foreach(PlayerLogicManager player in players)
         {
             player.GetAnimator().SetBool("Idle", true);
             player.GetAnimator().SetBool("Stupefy", false);

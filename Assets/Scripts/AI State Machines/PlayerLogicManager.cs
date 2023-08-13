@@ -26,11 +26,13 @@ public class PlayerLogicManager : Targetable
     public bool isMoving = false;
     public bool isRotatingToStartingPos = false;
 
+    protected float startingSpeed;
     [SerializeField] protected float speed;
     [SerializeField] protected float rotationSpeed;
 
     protected virtual void Start()
     {
+        startingSpeed = speed;
         startingPosition = transform.position;
         startingRotation = transform.rotation;
         startingPositionTarget.SetTransform(startingPosition, startingRotation);
@@ -135,7 +137,7 @@ public class PlayerLogicManager : Targetable
         Quaternion lookRotation = Quaternion.LookRotation(bludgerPosition - initialPosition);
 
         float elapsedTime = 0f;
-        while (elapsedTime < travelDuration)
+        while(elapsedTime < travelDuration)
         {
             // Calculate the new position and rotation using Mathf.Lerp
             float t = elapsedTime / travelDuration;
@@ -305,12 +307,21 @@ public class PlayerLogicManager : Targetable
         return Quaffle.IsQuaffleHeldByPlayer(this);
     }
 
+    public void CaughtQuaffle()
+    {
+        speed = speed * 2 / 3;
+    }
+
+    public void ResetSpeed()
+    {
+        speed = startingSpeed;
+    }
 
     public int IsABludgerInRange(float range)
     {
-        if (Vector3.Distance(Bludgers[0].transform.position, transform.position) <= range)
+        if(Vector3.Distance(Bludgers[0].transform.position, transform.position) <= range)
             return 0;
-        else if (Vector3.Distance(Bludgers[1].transform.position, transform.position) <= range)
+        else if(Vector3.Distance(Bludgers[1].transform.position, transform.position) <= range)
             return 1;
         else
             return -1;//NO BLUDGERS IN RANGE
@@ -322,7 +333,7 @@ public class PlayerLogicManager : Targetable
         // Create a new instance of Random class
         System.Random random = new System.Random();
         // Generate a random index within the bounds of the array
-        int randomIndex = random.Next(0, enemies.Length-1);
+        int randomIndex = random.Next(0, enemies.Length - 1);
         // New bludger target will be the new enemy
         Bludgers[bludgerIndex].GoToChaseAfterBeingHit(enemies[randomIndex].gameObject);
     }
@@ -402,14 +413,14 @@ public class PlayerLogicManager : Targetable
         // Generates a random index within the bounds of the array
         int value = random.Next(0, 1);
 
-        if (value == negative)
+        if(value == negative)
         {
             relativePosition.x = random.Next(-40, -35);
             relativePosition.y = random.Next(-40, -35);
             relativePosition.z = random.Next(-40, -35);
         }
 
-        if (value == positive)
+        if(value == positive)
         {
             relativePosition.x = random.Next(-40, -35);
             relativePosition.y = random.Next(-40, -35);
