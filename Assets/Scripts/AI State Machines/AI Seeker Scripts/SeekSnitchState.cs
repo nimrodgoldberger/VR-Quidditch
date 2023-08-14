@@ -12,11 +12,10 @@ public class SeekSnitchState : State
     public IdleState idleState;
     public ReturnToStartPositionState returnToStartPositionState;
     public HoldSnitchState holdSnitchState;
+
     public override State RunCurrentState()
     {
-
         State returnState = this; //just for the testing
-
 
         if(Logic.target != Logic.Snitch)
         {

@@ -8,14 +8,12 @@ public class QuaffleLogic : Targetable
     public float takeTime = 1.0f;
     private bool isQuaffleHeld = false;
     private PlayerTeam heldBy = PlayerTeam.None;
-    //private float[] teamTimers = {0.0f, 0.0f, 0.0f, 0.0f};
 
     // TODO For passing and throwing
     private bool wasThrown = false;
     public bool isFlying = false;
     public Targetable target;
     [SerializeField] private float movementSpeed = 30f;
-
 
     private void FixedUpdate()
     {
@@ -32,7 +30,6 @@ public class QuaffleLogic : Targetable
         }
     }
 
-
     public bool CanBeTaken(PlayerLogicManager potentialHolder)
     {
         // Check if the potential holder is within range of the ball
@@ -47,27 +44,6 @@ public class QuaffleLogic : Targetable
         {
             result = TakeQuaffle(player);
         }
-
-        //if(heldBy != player.PlayerTeam)
-        //{
-        //    // TODO Check if timer works
-        //    // 0.5 seconds pass before taking it;
-
-        //    player.quaffleTakeTime += Time.fixedDeltaTime;
-        //    if(player.quaffleTakeTime > takeTime)
-        //    {
-        //        result = TakeQuaffle(player);
-        //        player.quaffleTakeTime = 0.0f;
-        //    }
-        //}
-        //else
-        //{
-        //    player.quaffleTakeTime = 0.0f;
-        //    if(heldBy == PlayerTeam.None)
-        //    {
-        //        result = TakeQuaffle(player);
-        //    }
-        //}
 
         return result;
     }

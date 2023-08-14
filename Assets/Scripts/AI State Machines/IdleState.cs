@@ -22,9 +22,10 @@ public class IdleState : State
 
         if(isStart.TimeRemaining <= 0)
         {
-            if (Logic.goalScored)
+            if(Logic.goalScored)
             {
                 Logic.goalScored = false;
+
                 //isStart.TimeRemaining = 4f;
                 //isStart.timerIsRunning = true;
                 StartCoroutine(teamManager.GoalAnimations());
@@ -32,9 +33,11 @@ public class IdleState : State
             }
             if (Logic.speed == 0)
             {
+
                 return this;
             }
-            switch (Logic.PlayerType)
+
+            switch(Logic.PlayerType)
             {
                 case PlayerType.Keeper:
                     {

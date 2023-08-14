@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HitBludgerState : State
 {
-
     public IdleState idle;
     public DefendChaserState defendChaser;
     private int bludgerCloseIndex;
@@ -41,11 +40,8 @@ public class HitBludgerState : State
             Logic.target = null;
             Logic.isMoving = false;
             Logic.StopMoveAndRotateToTarget();
-
         }
-
 
         return returnState;
     }
-
 }
