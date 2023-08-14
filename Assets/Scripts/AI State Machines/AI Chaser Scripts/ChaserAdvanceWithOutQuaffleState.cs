@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 
 public class ChaserAdvanceWithOutQuaffleState : State
-    public class ChaserAdvanceWithOutQuaffleState : State
 {
 
     public IdleState Idle;
@@ -20,15 +19,15 @@ public class ChaserAdvanceWithOutQuaffleState : State
 
 
 
-        if (Logic.goalScored)
+        if(Logic.goalScored)
         {
             returnState = Idle;
-            
+
         }
-        
+
 
         // Check if the quaffle is still in your team
-        if (Logic.Quaffle.IsQuaffleHeldByTeam(Logic.PlayerTeam) == false)
+        if(Logic.Quaffle.IsQuaffleHeldByTeam(Logic.PlayerTeam) == false)
         {
             returnState = chaserGetQuaffleState;
             Logic.StopMoveAndRotateToTarget();
@@ -56,11 +55,11 @@ public class ChaserAdvanceWithOutQuaffleState : State
 
             // Create a raycast from the chaser to the straight path position
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, straightPathPosition - transform.position, out hit, minGoalDistance))
+            if(Physics.Raycast(transform.position, straightPathPosition - transform.position, out hit, minGoalDistance))
             {
                 // Check if the raycast hit an enemy
                 PlayerLogicManager enemy = hit.transform.GetComponent<PlayerLogicManager>();
-                if (enemy != null && Logic.enemies.Contains(enemy))
+                if(enemy != null && Logic.enemies.Contains(enemy))
                 {
                     // If the raycast hit an enemy, adjust the straight path position to avoid the enemy
                     straightPathPosition = hit.point + hit.normal * 2f;
@@ -79,4 +78,4 @@ public class ChaserAdvanceWithOutQuaffleState : State
 
         return returnState;
     }
-    }
+}
