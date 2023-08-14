@@ -22,18 +22,18 @@ public class DefendChaserState : State
 
         bludgerCloseIndex = Logic.IsABludgerInRange(bludgerClosenessRange); //which bludger is close
 
-        if (bludgerCloseIndex != noBludgerIsClose)//one of the bludger is close
+        if(bludgerCloseIndex != noBludgerIsClose)//one of the bludger is close
         {
             returnState = hitBludgerState;
         }
         else //-1 means no bludger is close
         {
-            if (currentTarget.isMoving)
+            if(currentTarget.isMoving)
             {
                 Debug.Log("Protecting chaser");
                 Logic.MoveAndRotateToTarget();
             }
-                
+
             else
             {
                 //StartCoroutine(Logic.MoveAndRotateToBludger(ChooseRandomBludger(), Logic.CreateRelativePositionToBewareOfBludgers()));
@@ -45,8 +45,10 @@ public class DefendChaserState : State
 
         if(Logic.goalScored)
         {
+            Logic.StopMoveAndRotateToTarget();
             returnState = Idle;
-            Logic.goalScored = false;
+            Logic.target = null;
+            Logic.isMoving = false;
         }
 
         return returnState;
@@ -60,9 +62,9 @@ public class DefendChaserState : State
         //THIS IS THE REAL CODE
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         List<PlayerLogicManager> chaserPlayers = new List<PlayerLogicManager>();
-        foreach (PlayerLogicManager player in Logic.friends)
+        foreach(PlayerLogicManager player in Logic.friends)
         {
-            if (player.PlayerType == PlayerType.Chaser)
+            if(player.PlayerType == PlayerType.Chaser)
                 chaserPlayers.Add(player);
         }
         // Creates a new instance of Random class
@@ -70,18 +72,18 @@ public class DefendChaserState : State
 
         // Generates a random index within the bounds of the array
         int randomIndex = random.Next(0, chaserPlayers.Count - 1);
-        
+
         //do
         //{
-            // Set relative position vector randomly 
+        // Set relative position vector randomly 
         relativePosition = CreateRelativePosition();
-            // Get the randomly chosen chaser +relative position as target 
+        // Get the randomly chosen chaser +relative position as target 
         Targetable.SetRelativeTarget(relativePosition, chaserPlayers[randomIndex], Logic.relativePositionTarget);
 
         //} while (!TargetsSpawnArea.IsInsidePlayableArea(Logic.relativePositionTarget.transform.position));
-        
 
-        
+
+
         //Set target
         Logic.target = Logic.relativePositionTarget;
         currentTarget = chaserPlayers[randomIndex];
@@ -128,25 +130,25 @@ public class DefendChaserState : State
         // Generates a random index within the bounds of the array
         int value = random.Next(0, 1);
 
-        if (value == negative)
+        if(value == negative)
         {
             relativePosition.x = random.Next(-5, -3);
             relativePosition.y = random.Next(-5, -3);
             relativePosition.z = random.Next(-5, -3);
         }
 
-        if (value == positive)
+        if(value == positive)
         {
             relativePosition.x = random.Next(3, 5);
             relativePosition.y = random.Next(3, 5);
             relativePosition.z = random.Next(3, 5);
         }
-        
+
 
         return relativePosition;
     }
 
-    
+
 
     private int ChooseRandomBludger()
     {

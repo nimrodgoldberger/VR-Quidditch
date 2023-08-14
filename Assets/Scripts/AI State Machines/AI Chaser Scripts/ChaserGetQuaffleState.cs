@@ -58,16 +58,19 @@ public class ChaserGetQuaffleState : State
             }
         }
 
-        if (Logic.collisionOccured)
-        {
-            returnState = Idle;
-            Logic.collisionOccured = false;
-        }
+        //if (Logic.collisionOccured)
+        //{
+        //    returnState = Idle;
+        //    //Logic.collisionOccured = false;
+        //}
 
         if(Logic.goalScored)
         {
             returnState = Idle;
-            
+            Logic.target = null;
+            Logic.isMoving = false;
+            Logic.StopMoveAndRotateToTarget();
+
         }
 
         return returnState;

@@ -69,6 +69,8 @@ public class TeamPlayersManager : MonoBehaviour
     [SerializeField] private BallsPositionManager ballsPositionManager;
 
 
+    private float effectDuration = 5.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,8 +101,6 @@ public class TeamPlayersManager : MonoBehaviour
             ballsPositionManager.StartingGame();
         }
     }
-
-
 
     private void initPlayerStateManagers(List<PlayerLogicManager> players, PlayerTeam team, PlayerType type)
     {
@@ -247,7 +247,7 @@ public class TeamPlayersManager : MonoBehaviour
     public IEnumerator GoalAnimations(PlayerTeam scoringTeam)
     {
         SetBackAllPlayersToIdleState();
-        float effectDuration = 5.0f;
+        
         float startTime = Time.time;
 
         while(Time.time - startTime < effectDuration)

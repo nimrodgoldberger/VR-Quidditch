@@ -219,6 +219,9 @@ public class ChaserAdvanceWithQuaffleState : State
         if(Logic.goalScored)
         {
             nextState = Idle;
+            Logic.target = null;
+            Logic.isMoving = false;
+            Logic.StopMoveAndRotateToTarget();
 
         }
 

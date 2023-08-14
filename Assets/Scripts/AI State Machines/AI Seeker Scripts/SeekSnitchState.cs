@@ -16,7 +16,7 @@ public class SeekSnitchState : State
     {
 
         State returnState = this; //just for the testing
-       
+
 
         if(Logic.target != Logic.Snitch)
         {
@@ -29,7 +29,7 @@ public class SeekSnitchState : State
         if(canSeeSnitch)
         {
             if(!Logic.TryCatchSnitch())
-            { 
+            {
                 //Debug.Log("I am seeking the snitch");
                 Logic.MoveAndRotateToTarget();
             }
@@ -47,8 +47,12 @@ public class SeekSnitchState : State
             returnState = idleState;
         }
 
-        if (Logic.goalScored)
+        if(Logic.goalScored)
         {
+            Logic.StopMoveAndRotateToTarget();
+
+            Logic.target = null;
+            Logic.isMoving = false;
             returnState = idleState;
         }
 

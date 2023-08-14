@@ -359,12 +359,16 @@ PrefabInstance:
       value: AI
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
@@ -1191,12 +1195,16 @@ PrefabInstance:
       value: AI
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
@@ -1329,7 +1337,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89862117}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -2331,12 +2339,16 @@ PrefabInstance:
       value: AI
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
@@ -2458,7 +2470,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247979073}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -3189,7 +3201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingPosition: {x: 0, y: 0, z: 0}
   startingPositionTarget: {fileID: 259530177}
-  PlayerTeam: 2
+  PlayerTeam: 0
   PlayerType: 2
   myTeamGoals: []
   enemyTeamGoals: []
@@ -4372,6 +4384,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
@@ -4721,12 +4741,16 @@ PrefabInstance:
       value: AI
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
@@ -4859,7 +4883,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648732334}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -11244,6 +11268,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 660715796}
     - target: {fileID: 3532146794917354184, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532146794917354184, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532146794917354184, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
@@ -11821,6 +11853,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
@@ -11957,7 +11997,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997079858}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -13851,12 +13891,20 @@ PrefabInstance:
       value: AI
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
@@ -13978,7 +14026,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408091477}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -15267,6 +15315,14 @@ PrefabInstance:
     - target: {fileID: 5776180215578910584, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: playerToPassTo
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552101, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552101, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5776180215716552101, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: m_CollisionDetection
@@ -21894,6 +21950,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
@@ -22144,12 +22208,16 @@ PrefabInstance:
       value: AI
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1173585817319590107, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_CollisionDetection
@@ -22271,7 +22339,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129146616}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -22859,6 +22927,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551700733566106826, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
@@ -22987,6 +23063,14 @@ PrefabInstance:
     - target: {fileID: 5776180215578910584, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: playerToPassTo
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552101, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776180215716552101, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5776180215716552101, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: m_CollisionDetection

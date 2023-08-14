@@ -9,9 +9,9 @@ public class KeeperHoldsQuaffleState : State
     public Targetable playerToPassTo;
     [SerializeField] private float coolDownAfterPass = 1.0f;
     [SerializeField] private float timerAfterPass = 0f;
-    
+
     public IdleState Idle;
-public override State RunCurrentState()
+    public override State RunCurrentState()
     {
         State nextState = this;
 
@@ -58,13 +58,15 @@ public override State RunCurrentState()
             }
         }
 
-        if (Logic.goalScored)
+        if(Logic.goalScored)
         {
+            Logic.target = null;
+            Logic.isMoving = false;
+            Logic.StopMoveAndRotateToTarget();
 
-            
             nextState = Idle;
         }
-        
+
 
         // If the Keeper still holds the Quaffle, stay in this state
         // else wait 1 second and then return to startingPositionState

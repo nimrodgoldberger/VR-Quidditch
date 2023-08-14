@@ -17,15 +17,17 @@ public class DefendState : State
             Logic.target = Logic.Quaffle;
         }
 
-        if (Logic.goalScored)
+        if(Logic.goalScored)
         {
-            
-            
+            Logic.target = null;
+            Logic.isMoving = false;
+            Logic.StopMoveAndRotateToTarget();
+
             return Idle;
         }
 
-        if (Logic.IsQuaffleCloseToMyTeamGoals(QuaffleVisibilityRange))
-            {
+        if(Logic.IsQuaffleCloseToMyTeamGoals(QuaffleVisibilityRange))
+        {
             if(!Logic.TryCatchQuaffle())
             {
                 Logic.MoveAndRotateToTarget();
