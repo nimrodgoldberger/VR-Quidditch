@@ -170,7 +170,7 @@ public class ChaserAdvanceWithQuaffleState : State
 
             float distanceToTarget = Vector3.Distance(chaserPosition, targetPosition);
 
-            if(!IsTargetALoop()) //
+            if(!IsTargetALoop())
             {
                 distanceToTarget = stoppingDistance;
             }
@@ -215,108 +215,16 @@ public class ChaserAdvanceWithQuaffleState : State
             }
         }
 
-
         if(Logic.goalScored)
         {
             nextState = Idle;
             Logic.target = null;
             Logic.isMoving = false;
             Logic.StopMoveAndRotateToTarget();
-
         }
 
         return nextState;
     }
-
-    //public override State RunCurrentState()
-    //{
-    //    State nextState = this;
-    //    holdsQuaffle = Logic.Quaffle.IsQuaffleHeldByPlayer(Logic);
-
-    //    if(holdsQuaffle)
-    //    {
-    //        chooseLoopToTarget();
-    //        Vector3 targetPosition = Logic.target.transform.position;
-    //        Vector3 chaserPosition = transform.position;
-
-    //        Vector3 desiredDirection = (targetPosition - chaserPosition).normalized;
-    //        Vector3 avoidanceDirection = CalculateAvoidanceDirection(); // Calculate avoidance direction
-
-    //        Vector3 finalDirection = desiredDirection + avoidanceDirection;
-    //        finalDirection.Normalize();
-
-    //        // Use MoveAndRotateToTarget() with the final direction
-    //        Logic.SetTarget(Logic.ChooseTargetGoal());
-    //        Logic.MoveAndRotateToTarget(finalDirection);
-
-    //        float distanceToTarget = Vector3.Distance(chaserPosition, targetPosition);
-
-    //        if(distanceToTarget <= stoppingDistance)
-    //        {
-    //            Logic.Quaffle.ThrowQuaffle(Logic.target); // Throw the quaffle to the target
-
-    //            holdsQuaffle = false;
-    //            Logic.isMoving = false;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        // If the Keeper doesn't hold the Quaffle anymore, return to the starting position
-    //        if(timerAfterThrow <= coolDownAfterThrow)
-    //        {
-    //            timerAfterThrow += Time.fixedDeltaTime;
-    //        }
-    //        else
-    //        {
-    //            timerAfterThrow = 0f;
-    //            Logic.target = null;
-    //            Logic.isMoving = false;
-    //            nextState = chaserGetQuaffleState;
-    //        }
-    //    }
-
-    //    return nextState;
-    //}
-
-    /*private Vector3 CalculateAvoidanceDirection()
-{
-    // Create a histogram of the enemy positions
-    int histogramSize = 10;
-    Vector3[,] histogram = new Vector3[histogramSize, histogramSize];
-    float histogramCellSize = avoidanceRadius * 2 / histogramSize;
-    foreach (PlayerLogicManager enemy in Logic.enemies)
-    {
-        Vector3 enemyPosition = enemy.transform.position;
-        int x = Mathf.FloorToInt((enemyPosition.x - transform.position.x + avoidanceRadius) / histogramCellSize);
-        int z = Mathf.FloorToInt((enemyPosition.z - transform.position.z + avoidanceRadius) / histogramCellSize);
-        if (x >= 0 && x < histogramSize && z >= 0 && z < histogramSize)
-        {
-            histogram[x, z] += (transform.position - enemyPosition).normalized;
-        }
-    }
-
-    // Calculate the avoidance direction from the histogram
-    Vector3 avoidanceDirection = Vector3.zero;
-    for (int x = 0; x < histogramSize; x++)
-    {
-        for (int z = 0; z < histogramSize; z++)
-        {
-            Vector3 histogramCellPosition = new Vector3(
-                (x + 0.5f) * histogramCellSize - avoidanceRadius,
-                0,
-                (z + 0.5f) * histogramCellSize - avoidanceRadius
-            );
-            float distanceToCell = Vector3.Distance(transform.position, histogramCellPosition);
-            if (distanceToCell < avoidanceRadius)
-            {
-                float weight = 1 - distanceToCell / avoidanceRadius;
-                avoidanceDirection += histogram[x, z] * weight;
-            }
-        }
-    }
-
-    return avoidanceDirection.normalized;
-}*/
 
     private Vector3 CalculateAvoidanceDirection()
     {
@@ -438,75 +346,6 @@ public class ChaserAdvanceWithQuaffleState : State
         // If it's safe to evade the interceptors, evade them
         return avoidanceDirection.normalized;
     }
-
-    /*private Vector3 CalculateAvoidanceDirection()
-    {
-        // Create a histogram of the enemy positions
-        int histogramSize = 10;
-        Vector3[,] histogram = new Vector3[histogramSize, histogramSize];
-        float histogramCellSize = avoidanceRadius * 2 / histogramSize;
-        List<PlayerLogicManager> interceptors = new List<PlayerLogicManager>();
-        foreach (PlayerLogicManager enemy in Logic.enemies)
-        {
-            Vector3 enemyPosition = enemy.transform.position;
-            int x = Mathf.FloorToInt((enemyPosition.x - transform.position.x + avoidanceRadius) / histogramCellSize);
-            int z = Mathf.FloorToInt((enemyPosition.z - transform.position.z + avoidanceRadius) / histogramCellSize);
-            if (x >= 0 && x < histogramSize && z >= 0 && z < histogramSize)
-            {
-                histogram[x, z] += (transform.position - enemyPosition).normalized;
-            }
-        }
-
-        // Calculate the avoidance direction from the histogram
-        Vector3 avoidanceDirection = Vector3.zero;
-        for (int x = 0; x < histogramSize; x++)
-        {
-            for (int z = 0; z < histogramSize; z++)
-            {
-                Vector3 histogramCellPosition = new Vector3(
-                    (x + 0.5f) * histogramCellSize - avoidanceRadius,
-                    0,
-                    (z + 0.5f) * histogramCellSize - avoidanceRadius
-                );
-                float distanceToCell = Vector3.Distance(transform.position, histogramCellPosition);
-                if (distanceToCell < avoidanceRadius)
-                {
-                    float weight = 1 - distanceToCell / avoidanceRadius;
-                    avoidanceDirection += histogram[x, z] * weight;
-                }
-            }
-        }
-
-        // If there are multiple interceptors, throw the quaffle to another chaser on your team
-        if (interceptors.Count > 1)
-        {
-            foreach (PlayerLogicManager teammate in Logic.friends)
-            {
-                if ((teammate.PlayerType == PlayerType.Chaser && teammate != Logic) || teammate.PlayerType == PlayerType.VRPlayer)
-                {
-                    Logic.target = teammate;
-                    return Vector3.zero;
-                }
-            }
-        }
-
-        return avoidanceDirection.normalized;
-    }*/
-    /*private Vector3 CalculateAvoidanceDirection()
-    {
-        Vector3 avoidanceDirection = Vector3.zero;
-        foreach(PlayerLogicManager enemy in Logic.enemies)
-        {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if(distanceToEnemy < avoidanceRadius)
-            {
-                // Calculate a direction to steer away from the enemy
-                avoidanceDirection += (transform.position - enemy.transform.position).normalized;
-            }
-        }
-
-        return avoidanceDirection.normalized;
-    }*/
 
     private void chooseLoopToTarget()
     {

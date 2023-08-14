@@ -12,12 +12,9 @@ public class ChaserAdvanceWithOutQuaffleState : State
 
     private float minGoalDistance = 40f;
 
-
     public override State RunCurrentState()
     {
         State returnState = this;
-
-
 
         if(Logic.goalScored)
         {
@@ -27,7 +24,6 @@ public class ChaserAdvanceWithOutQuaffleState : State
             Logic.target = null;
             Logic.isMoving = false;
         }
-
 
         // Check if the quaffle is still in your team
         if(Logic.Quaffle.IsQuaffleHeldByTeam(Logic.PlayerTeam) == false)
@@ -77,7 +73,6 @@ public class ChaserAdvanceWithOutQuaffleState : State
             Logic.MoveAndRotateToTarget();
             StartCoroutine("MoveAndRotateToTarget");
         }
-
 
         return returnState;
     }

@@ -16,7 +16,7 @@ public class HoldSnitchState : State
         teamManager.GameOver(scoreTeam1, scoreTeam2);
         Debug.Log("I HAVE CAUGHT THE SNITCH!!!!!!!!!!");
         //Activates winning and loosing animations
+
         return this; //TODO MAYBE VICTORY ANIMATION? + scene +closing menu
     }
-
 }

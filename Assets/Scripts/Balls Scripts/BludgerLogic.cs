@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BludgerLogic : MonoBehaviour
 {
-
     public enum State
     {
         Patrol = 1,
@@ -35,8 +34,6 @@ public class BludgerLogic : MonoBehaviour
     Transform rotationCenter;
     [SerializeField] private GameObject[] targets;
 
-    
-
     private float deltaY, posX, posZ, angle = 0f;
 
     private void Start()
@@ -51,13 +48,13 @@ public class BludgerLogic : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (state == State.Patrol && Random.Range(0, (10000 - (int)(patrolTimer * 10))) == 0)
+        if(state == State.Patrol && Random.Range(0, (10000 - (int)(patrolTimer * 10))) == 0)
         {
             state = State.Attack;
             onTrack = true;
         }
 
-        if (state == State.Attack)
+        if(state == State.Attack)
         {
             state = State.Chase;
             audioSource.PlayOneShot(howlSound);
@@ -67,24 +64,24 @@ public class BludgerLogic : MonoBehaviour
             direction.Normalize();
             rb.velocity = direction * movementSpeed;
         }
-        else if (state == State.Patrol)
+        else if(state == State.Patrol)
         {
 
-            if (onTrack)
+            if(onTrack)
             {
                 rand = Random.Range(0, 10);
                 deltaY = Random.Range(0f, 20f);
-                if (rand == 0) // change height at random
+                if(rand == 0) // change height at random
                 {
-                    if (posY < 25f)
+                    if(posY < 25f)
                         posY += deltaY;
-                    else if (posY > 250f)
+                    else if(posY > 250f)
                     {
                         posY -= deltaY;
                     }
                     else
                     {
-                        if (rand >= 25)
+                        if(rand >= 25)
                             posY += deltaY;
                         else
                             posY -= deltaY;
@@ -94,7 +91,7 @@ public class BludgerLogic : MonoBehaviour
                 posZ = rotationCenter.position.z + Mathf.Sin(angle) * rotationRadius;
                 targetPosition = new Vector3(posX, posY, posZ);
                 angle += Time.deltaTime * movementSpeed / ovalWidth;
-                if (angle > Mathf.PI * 2f)
+                if(angle > Mathf.PI * 2f)
                 {
                     angle -= Mathf.PI * 2f;
                 }
@@ -103,18 +100,15 @@ public class BludgerLogic : MonoBehaviour
             direction = targetPosition - transform.position;
             direction.Normalize();
             rb.velocity = direction * movementSpeed;
-
             patrolTimer += Time.deltaTime;
-
         }
-        else if (state == State.Chase)
+        else if(state == State.Chase)
         {
             Vector3 direction = target.transform.position - transform.position;
             direction.Normalize();
             rb.velocity = direction * movementSpeed;
             chaseTimer += Time.deltaTime;
-
-            if (chaseTimer >= 20f)
+            if(chaseTimer >= 20f)
             {
                 state = State.Patrol;
                 onTrack = true;
@@ -127,15 +121,17 @@ public class BludgerLogic : MonoBehaviour
     {
         GameObject closestTarget = null;
         float closestDistance = Mathf.Infinity;
-        foreach (GameObject nextTarget in targets)
+
+        foreach(GameObject nextTarget in targets)
         {
             float distance = Vector3.Distance(transform.position, nextTarget.gameObject.transform.position);
-            if (distance < closestDistance)
+            if(distance < closestDistance)
             {
                 closestDistance = distance;
                 closestTarget = nextTarget.gameObject;
             }
         }
+
         return closestTarget;
     }
 
@@ -143,33 +139,17 @@ public class BludgerLogic : MonoBehaviour
     {
         PlayerLogicManager targetableComponent = collision.gameObject.GetComponent<PlayerLogicManager>();
 
-        if (targetableComponent != null)
+        if(targetableComponent != null)
         {
             audioSource.PlayOneShot(hitSound);
             rb.velocity = Vector3.zero;
             targetableComponent.HitPlayer();
-
-            //if (collision.gameObject.CompareTag("AI"))
-            //{
-
-            //}
-            //else if(collision.gameObject.CompareTag("Player"))
-            //{
-            //    collision.gameObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.CustomMovement>().HitPlayer();
-            //}
         }
-        //else if (collision.gameObject.CompareTag("AI"))
-        //{
-        //    audioSource.PlayOneShot(hitSound);
-        //    rb.velocity = Vector3.zero;
-        //    //collision.gameObject.GetComponent<CustomMovement>().HitPlayer();
-        //}
 
         state = State.Patrol;
         onTrack = true;
         patrolTimer = 0f;
     }
-
 
     public void SetTarget(GameObject newTarget)
     {
@@ -188,4 +168,3 @@ public class BludgerLogic : MonoBehaviour
         rb.velocity = direction * movementSpeed;
     }
 }
-

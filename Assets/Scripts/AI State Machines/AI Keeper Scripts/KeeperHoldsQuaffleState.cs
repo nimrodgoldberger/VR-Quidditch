@@ -66,10 +66,9 @@ public class KeeperHoldsQuaffleState : State
 
             nextState = Idle;
         }
-
-
         // If the Keeper still holds the Quaffle, stay in this state
         // else wait 1 second and then return to startingPositionState
+
         return nextState;
     }
 
@@ -118,7 +117,6 @@ public class KeeperHoldsQuaffleState : State
 
         // For now, let's assume we directly pass the ball to the target's position for demonstration purposes.
         Logic.Quaffle.ThrowQuaffle(Logic, playerToPassTo);
-
     }
 
     public void PassTheQuaffle()
@@ -131,7 +129,6 @@ public class KeeperHoldsQuaffleState : State
     {
         return playerToPassTo;
     }
-
 
     private void ChooseChaserToPassTo()
     {

@@ -18,7 +18,6 @@ public class ScoreArea : Targetable
             scoreManager.GetComponent<ScoreManager>().SetTeamScore(team, 10);
             //Activates winning and loosing animations
             StartCoroutine(teamManager.GoalAnimations(team));
-            teamManager.SetBackAllPlayersToIdleState();
         }
         
         if (otherCollider.gameObject.name == "GoldenSnitch")

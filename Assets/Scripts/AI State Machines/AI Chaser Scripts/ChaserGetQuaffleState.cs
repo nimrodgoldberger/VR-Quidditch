@@ -10,9 +10,7 @@ public class ChaserGetQuaffleState : State
     public ChaserAdvanceWithQuaffleState AdvanceWithQuaffle;
     public State AdvanceWithOutQuaffle;
     public IdleState Idle;
-
     private float QuaffleVisibilityRange = 250f;
-
 
     public override State RunCurrentState()
     {
@@ -46,6 +44,7 @@ public class ChaserGetQuaffleState : State
             if(!Logic.TryCatchQuaffle()) // I didn't catch the Quaffle
             {
                 Logic.MoveAndRotateToTarget();
+
                 return this;
             }
             else // I Caught the Quaffle
@@ -57,12 +56,6 @@ public class ChaserGetQuaffleState : State
                 return AdvanceWithQuaffle;
             }
         }
-
-        //if (Logic.collisionOccured)
-        //{
-        //    returnState = Idle;
-        //    //Logic.collisionOccured = false;
-        //}
 
         if(Logic.goalScored)
         {
