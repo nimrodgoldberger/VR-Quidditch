@@ -157,7 +157,14 @@ public class ChaserAdvanceWithQuaffleState : State
         State nextState = this;
         holdsQuaffle = /*Logic.Quaffle.IsQuaffleHeldByPlayer(Logic) &&*/ Logic.IsQuaffleHeldByMe();
 
-        if(holdsQuaffle)
+        if (Logic.goalScored)
+        {
+            Logic.target = null;
+            Logic.isMoving = false;
+            return Idle;
+        }
+
+        if (holdsQuaffle)
         {
             chooseLoopToTarget();
             Vector3 targetPosition = Logic.target.transform.position;
@@ -216,14 +223,6 @@ public class ChaserAdvanceWithQuaffleState : State
         }
 
 
-        if(Logic.goalScored)
-        {
-            nextState = Idle;
-            Logic.target = null;
-            Logic.isMoving = false;
-            Logic.StopMoveAndRotateToTarget();
-
-        }
 
         return nextState;
     }

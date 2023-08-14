@@ -41,6 +41,8 @@ public class TeamPlayersManager : MonoBehaviour
     public List<PlayerLogicManager> chasers2;
     public List<PlayerLogicManager> seekers2;
 
+    private List<PlayerLogicManager> allPlayers = new List<PlayerLogicManager>();
+
     public List<GameObject> StartingPositionsChasersTeam1;
     public List<GameObject> StartingPositionsBeatersTeam1;
     public List<GameObject> StartingPositionsSeekerTeam1;
@@ -61,6 +63,9 @@ public class TeamPlayersManager : MonoBehaviour
     private PlayerTeam team1;
     private PlayerTeam team2;
 
+    private PlayerTeam scoringTeam;
+    private float effectDuration = 5.0f;
+
     // TODO Check with Dan
     //To set the starting points of the players, Only if needed!!!!!
     public TeamType teamType = TeamType.Team1Player;
@@ -68,8 +73,6 @@ public class TeamPlayersManager : MonoBehaviour
     private bool playersInitialized = false; // Keep track if players are already initialized
     [SerializeField] private BallsPositionManager ballsPositionManager;
 
-
-    private float effectDuration = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -101,6 +104,8 @@ public class TeamPlayersManager : MonoBehaviour
             ballsPositionManager.StartingGame();
         }
     }
+
+
 
     private void initPlayerStateManagers(List<PlayerLogicManager> players, PlayerTeam team, PlayerType type)
     {
@@ -244,9 +249,9 @@ public class TeamPlayersManager : MonoBehaviour
         }
     }
 
-    public IEnumerator GoalAnimations(PlayerTeam scoringTeam)
+    public IEnumerator GoalAnimations()
     {
-        SetBackAllPlayersToIdleState();
+        //SetBackAllPlayersToIdleState();
         
         float startTime = Time.time;
 
@@ -254,7 +259,6 @@ public class TeamPlayersManager : MonoBehaviour
         {
             if(scoringTeam == team1)
             {
-
                 LoosingAnimations(keepers2);
                 LoosingAnimations(beaters2);
                 LoosingAnimations(chasers2);
@@ -264,8 +268,6 @@ public class TeamPlayersManager : MonoBehaviour
                 WinningAnimations(beaters1);
                 WinningAnimations(chasers1);
                 WinningAnimations(seekers1);
-
-
             }
             else if(scoringTeam == team2)
             {
@@ -342,6 +344,7 @@ public class TeamPlayersManager : MonoBehaviour
         Animator animator;
         foreach (PlayerLogicManager player in players)
         {
+            player.speed = 0;
             animator = player.GetAnimator();
             if (animator != null)
             {
@@ -356,6 +359,7 @@ public class TeamPlayersManager : MonoBehaviour
         Animator animator;
         foreach (PlayerLogicManager player in players)
         {
+            player.speed = 0;
             animator = player.GetAnimator();
             if (animator != null)
             {
@@ -378,6 +382,7 @@ public class TeamPlayersManager : MonoBehaviour
                 animator.SetBool("Stupefy", false);
                 animator.SetBool("Winner", false);
             }
+            player.speed = 15;
         }
     }
     public void StopLoosingAnimations(List<PlayerLogicManager> players)
@@ -392,6 +397,7 @@ public class TeamPlayersManager : MonoBehaviour
                 animator.SetBool("Stupefy", false);
                 animator.SetBool("Loser", false);
             }
+            player.speed = 15;
         }
     }
 
@@ -407,8 +413,10 @@ public class TeamPlayersManager : MonoBehaviour
         SceneManager.LoadScene("MenuScene");
     }
 
-    public void SetBackAllPlayersToIdleState()
+    public void SetBackAllPlayersToIdleState(PlayerTeam currScoringTeam)
     {
+        scoringTeam = currScoringTeam;
+
         SetPlayerListToIdleState(keepers1);
         SetPlayerListToIdleState(beaters1);
         SetPlayerListToIdleState(chasers1);
@@ -418,6 +426,8 @@ public class TeamPlayersManager : MonoBehaviour
         SetPlayerListToIdleState(beaters2);
         SetPlayerListToIdleState(chasers2);
         SetPlayerListToIdleState(seekers2);
+
+        //WaitForAllPlayersToBeInIdle();
     }
 
 
@@ -425,11 +435,37 @@ public class TeamPlayersManager : MonoBehaviour
     {
         foreach (PlayerLogicManager player in players)
         {
-            if(player.PlayerType != PlayerType.VRPlayer)
+            if(player.PlayerType != PlayerType.VRPlayer)//?
             {
                 player.goalScored = true;
+                player.scoringTeam = scoringTeam;
             }
         }
+    }
+
+    private void WaitForAllPlayersToBeInIdle()
+    {
+        CombineLists();
+        foreach (PlayerLogicManager player in allPlayers)
+        {
+            if (player.PlayerType != PlayerType.VRPlayer)
+            {
+                while (player.goalScored);
+            }
+        }
+    }
+
+    private void CombineLists()
+    {
+        allPlayers.AddRange(keepers1);
+        allPlayers.AddRange(beaters1);
+        allPlayers.AddRange(chasers1);
+        allPlayers.AddRange(seekers1);
+
+        allPlayers.AddRange(keepers2);
+        allPlayers.AddRange(beaters2);
+        allPlayers.AddRange(chasers2);
+        allPlayers.AddRange(seekers2);
     }
 }
 

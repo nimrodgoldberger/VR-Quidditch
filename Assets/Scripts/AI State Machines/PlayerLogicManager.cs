@@ -13,6 +13,7 @@ public class PlayerLogicManager : Targetable
     public PlayerTeam PlayerTeam;
     public PlayerType PlayerType;
 
+
     [SerializeField] private List<ScoreArea> myTeamGoals;
     [SerializeField] private List<ScoreArea> enemyTeamGoals;
 
@@ -30,12 +31,14 @@ public class PlayerLogicManager : Targetable
     public bool goalScored = false;
 
     protected float startingSpeed;
-    [SerializeField] protected float speed;
+    [SerializeField] public float speed;
     [SerializeField] protected float rotationSpeed;
 
     public bool collisionOccured = false;
     public bool hitByBludger = false;
     public float freezeBludgerDuration = 5f;
+
+    public PlayerTeam scoringTeam;
     protected virtual void Start()
     {
         startingSpeed = speed;

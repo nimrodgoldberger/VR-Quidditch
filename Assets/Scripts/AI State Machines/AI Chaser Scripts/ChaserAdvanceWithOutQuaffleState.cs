@@ -19,18 +19,16 @@ public class ChaserAdvanceWithOutQuaffleState : State
 
 
 
-        if(Logic.goalScored)
+        if (Logic.goalScored)
         {
-            Logic.StopMoveAndRotateToTarget();
-
-            returnState = Idle;
             Logic.target = null;
             Logic.isMoving = false;
+            return Idle;
         }
 
 
         // Check if the quaffle is still in your team
-        if(Logic.Quaffle.IsQuaffleHeldByTeam(Logic.PlayerTeam) == false)
+        if (Logic.Quaffle.IsQuaffleHeldByTeam(Logic.PlayerTeam) == false)
         {
             returnState = chaserGetQuaffleState;
             Logic.StopMoveAndRotateToTarget();

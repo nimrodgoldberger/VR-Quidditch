@@ -39,8 +39,8 @@ public class TimeTextManager : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
                 PlayerTeam winningTeam = scoreManager.GetComponent<ScoreManager>().GetWinner();
-
-                StartCoroutine(teamManager.GoalAnimations(winningTeam));
+                teamManager.SetBackAllPlayersToIdleState(winningTeam);
+                //StartCoroutine(teamManager.GoalAnimations(winningTeam));
                 int scoreTeam1 = scoreManager.GetComponent<ScoreManager>().GetScoreForTeam(teamManager.GetTeam1());
                 int scoreTeam2 = scoreManager.GetComponent<ScoreManager>().GetScoreForTeam(teamManager.GetTeam2());
                 teamManager.GameOver(scoreTeam1, scoreTeam2);

@@ -11,7 +11,7 @@ public class IdleState : State
     public SeekSnitchState seekSnitchState;
     public DefendState defendState;
     public DefendChaserState defendChaserState;
-
+    public TeamPlayersManager teamManager;
     public ChaserGetQuaffleState chaserGetQuaffleState;
 
     public CountdownManager isStart;
@@ -25,8 +25,13 @@ public class IdleState : State
             if (Logic.goalScored)
             {
                 Logic.goalScored = false;
-                isStart.TimeRemaining = 4f;
-                isStart.timerIsRunning = true;
+                //isStart.TimeRemaining = 4f;
+                //isStart.timerIsRunning = true;
+                StartCoroutine(teamManager.GoalAnimations());
+                return this;
+            }
+            if (Logic.speed == 0)
+            {
                 return this;
             }
             switch (Logic.PlayerType)

@@ -18,7 +18,17 @@ public class ChaserGetQuaffleState : State
     {
         State returnState = this;
 
-        if(Logic.target != Logic.Quaffle)
+        if (Logic.goalScored)
+        {
+            
+            Logic.target = null;
+            Logic.isMoving = false;
+
+            return Idle;
+
+        }
+
+        if (Logic.target != Logic.Quaffle)
         {
             //Debug.Log("Quaffle set as target");
             Logic.target = Logic.Quaffle;
@@ -64,14 +74,7 @@ public class ChaserGetQuaffleState : State
         //    //Logic.collisionOccured = false;
         //}
 
-        if(Logic.goalScored)
-        {
-            returnState = Idle;
-            Logic.target = null;
-            Logic.isMoving = false;
-            Logic.StopMoveAndRotateToTarget();
-
-        }
+        
 
         return returnState;
     }

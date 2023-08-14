@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 432212029}
-  m_IndirectSpecularColor: {r: 0.33655208, g: 0.8161745, b: 0.9302483, a: 1}
+  m_IndirectSpecularColor: {r: 0.3366986, g: 0.8175725, b: 0.9306336, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -378,6 +378,10 @@ PrefabInstance:
       propertyPath: isStart
       value: 
       objectReference: {fileID: 365593201}
+    - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
     - target: {fileID: 1173585817763772957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
@@ -1214,6 +1218,10 @@ PrefabInstance:
       propertyPath: isStart
       value: 
       objectReference: {fileID: 365593201}
+    - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
     - target: {fileID: 1173585817763772957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
@@ -1337,7 +1345,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89862117}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -2358,6 +2366,10 @@ PrefabInstance:
       propertyPath: isStart
       value: 
       objectReference: {fileID: 365593201}
+    - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
     - target: {fileID: 1173585817763772957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
@@ -2470,7 +2482,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247979073}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -3223,6 +3235,7 @@ MonoBehaviour:
   collisionOccured: 0
   hitByBludger: 0
   freezeBludgerDuration: 5
+  scoringTeam: 0
   SpellActivatedText: {fileID: 395806189}
   m_CustomMovement: {fileID: 380029568}
 --- !u!1 &395806187
@@ -4400,6 +4413,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 365593201}
     - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
+    - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: seekSnitchState
       value: 
       objectReference: {fileID: 5776180213998145011}
@@ -4760,6 +4777,10 @@ PrefabInstance:
       propertyPath: isStart
       value: 
       objectReference: {fileID: 365593201}
+    - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
     - target: {fileID: 1173585817763772957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
@@ -4883,7 +4904,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648732334}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -11351,6 +11372,10 @@ PrefabInstance:
       propertyPath: isStart
       value: 
       objectReference: {fileID: 365593201}
+    - target: {fileID: 3532146795360154510, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f87c856acf67cb442ac045ce1f204832, type: 3}
 --- !u!4 &926540255 stripped
@@ -11869,6 +11894,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 365593201}
     - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
+    - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: seekSnitchState
       value: 
       objectReference: {fileID: 1650074838}
@@ -11997,7 +12026,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997079858}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -13914,6 +13943,10 @@ PrefabInstance:
       propertyPath: isStart
       value: 
       objectReference: {fileID: 365593201}
+    - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
     - target: {fileID: 1173585817763772957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
@@ -14026,7 +14059,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408091477}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -15292,6 +15325,10 @@ PrefabInstance:
       propertyPath: isStart
       value: 
       objectReference: {fileID: 365593201}
+    - target: {fileID: 5776180213998171363, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
     - target: {fileID: 5776180213998171363, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: QuaffleVisibilityRange
       value: 120
@@ -21966,6 +22003,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 365593201}
     - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
+    - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: seekSnitchState
       value: 
       objectReference: {fileID: 5776180213998145011}
@@ -22227,6 +22268,10 @@ PrefabInstance:
       propertyPath: isStart
       value: 
       objectReference: {fileID: 365593201}
+    - target: {fileID: 1173585817686892957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
     - target: {fileID: 1173585817763772957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
@@ -22339,7 +22384,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129146616}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -22943,6 +22988,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 365593201}
     - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
+    - target: {fileID: 5551700733928609164, guid: 01ee16493617836479eff766be6b69fd, type: 3}
       propertyPath: seekSnitchState
       value: 
       objectReference: {fileID: 5776180213998145011}
@@ -23044,6 +23093,10 @@ PrefabInstance:
       propertyPath: isStart
       value: 
       objectReference: {fileID: 365593201}
+    - target: {fileID: 5776180213998171363, guid: 72642395652e83240aa16843217efa64, type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 32632522}
     - target: {fileID: 5776180214069202169, guid: 72642395652e83240aa16843217efa64, type: 3}
       propertyPath: Idle
       value: 

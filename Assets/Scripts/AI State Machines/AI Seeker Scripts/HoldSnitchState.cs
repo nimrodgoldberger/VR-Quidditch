@@ -10,7 +10,8 @@ public class HoldSnitchState : State
     {
         //Activates winning and loosing animations
         PlayerTeam winningTeam = scoreManager.GetComponent<ScoreManager>().GetWinner();
-        StartCoroutine(teamManager.GoalAnimations(winningTeam));
+        //StartCoroutine(teamManager.GoalAnimations(winningTeam));
+        teamManager.SetBackAllPlayersToIdleState(winningTeam);
         int scoreTeam1 = scoreManager.GetComponent<ScoreManager>().GetScoreForTeam(teamManager.GetTeam1());
         int scoreTeam2 = scoreManager.GetComponent<ScoreManager>().GetScoreForTeam(teamManager.GetTeam2());
         teamManager.GameOver(scoreTeam1, scoreTeam2);
