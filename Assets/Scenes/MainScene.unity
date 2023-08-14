@@ -1337,7 +1337,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89862117}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -2361,7 +2361,7 @@ PrefabInstance:
     - target: {fileID: 1173585817763772957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 00c553f2cb5d12749b22973dca257c86, type: 2}
+      objectReference: {fileID: 2100000, guid: 0fa435510cf10cd4bb78f241aa447c76, type: 2}
     - target: {fileID: 6773507405565403994, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: Idle
       value: 
@@ -2470,7 +2470,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247979073}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -4883,7 +4883,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648732334}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -11997,7 +11997,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997079858}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -13917,7 +13917,7 @@ PrefabInstance:
     - target: {fileID: 1173585817763772957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 00c553f2cb5d12749b22973dca257c86, type: 2}
+      objectReference: {fileID: 2100000, guid: 0fa435510cf10cd4bb78f241aa447c76, type: 2}
     - target: {fileID: 6773507405565403994, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: Idle
       value: 
@@ -14026,7 +14026,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408091477}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
@@ -22230,7 +22230,7 @@ PrefabInstance:
     - target: {fileID: 1173585817763772957, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 00c553f2cb5d12749b22973dca257c86, type: 2}
+      objectReference: {fileID: 2100000, guid: 0fa435510cf10cd4bb78f241aa447c76, type: 2}
     - target: {fileID: 6773507405565403994, guid: e7a8082da15812f419b36a193b1226b2, type: 3}
       propertyPath: Idle
       value: 
@@ -22339,7 +22339,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129146616}
-  m_Material: {fileID: 13400000, guid: 20b27a2b09cf5470e866c2708f9f9dc8, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.82622874
