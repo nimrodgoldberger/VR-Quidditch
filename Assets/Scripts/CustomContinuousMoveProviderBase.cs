@@ -1,6 +1,7 @@
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 namespace UnityEngine.XR.Interaction.Toolkit
 {
@@ -20,7 +21,8 @@ namespace UnityEngine.XR.Interaction.Toolkit
         [SerializeField] private float accelerationTime = 1.0f;
         [SerializeField] private float bludgerSlowMoveSpeed = 5f;
 
-        private PhotonView view;
+        private PhotonView photonView;
+        private bool online = false;
 
 
 
@@ -161,38 +163,18 @@ namespace UnityEngine.XR.Interaction.Toolkit
         void Start()
         {
             baseMoveSpeed = m_MoveSpeed;
-            //view = GetComponent<PhotonView>();
+            if (SceneManager.GetActiveScene().name == "Online")
+            {
+                photonView = GetComponent<PhotonView>();
+                online = true;
+            }
+           
         }
         protected void FixedUpdate()
         {
-            //if (boosting)
-            //{
-            //    boostTimer += Time.deltaTime;
-            //    if (boostTimer >= boostDuration)
-            //    {
-            //        boosting = false;
-            //        boostTimer = 0f;
-            //        cooldownTimer = 0f;
-            //        moveSpeed /= boostMultiplier;
-            //    }
-            //}
-            //else
-            //{
-            //    if (cooldownTimer >= boostCooldown && boosting == false)
-            //    {
-            //        float trigval = triggerPull.action.ReadValue<float>();
-            //        if (trigval > 0f)
-            //        {
-            //            boosting = true;
-            //            // Multiply the speed by the boost multiplier
-            //            moveSpeed *= boostMultiplier;
-            //        }
-            //    }
-            //    else
-            //        cooldownTimer += Time.deltaTime;
-            //}
-            //if (view.IsMine)
-            //{
+            if (online && !photonView.IsMine) //only update and act if online is true and this is your character.
+                return;
+
             triggerValue = triggerPull.action.ReadValue<float>();
             if (triggerValue > 0.1f)
             {
@@ -207,18 +189,6 @@ namespace UnityEngine.XR.Interaction.Toolkit
                 targetSpeed = baseMoveSpeed;
             }
             moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, Time.deltaTime / accelerationTime);
-            //gripValue = gripPull.action.ReadValue<float>();
-            //if (gripValue > 0.1f && glidingDown == false)
-            //{
-            //    Quaternion targetRotation = Quaternion.Euler(downGlideAngle, 0f, 0f) * forwardSourceReference.rotation;
-            //    currentForwardSource.rotation = targetRotation;
-            //}
-            //else
-            //{
-            //    glidingDown = false;
-            //    currentForwardSource = forwardSourceReference;
-            //    forwardSource = forwardSourceReference;
-            //}
             m_IsMovingXROrigin = false;
             var xrOrigin = system.xrOrigin;
             if (xrOrigin == null)
