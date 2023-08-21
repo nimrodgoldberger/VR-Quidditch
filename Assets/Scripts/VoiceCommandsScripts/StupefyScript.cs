@@ -51,19 +51,29 @@ public class StupefyScript : MonoBehaviour
 
     private void ApplyLosingControlEffect(List<PlayerLogicManager> players) //IEnumerator is the return value of a coroutine function. //A coroutine is a function that can be paused and resumed at any point during its execution.
     {
-        foreach(PlayerLogicManager player in players)
+        Animator animator;
+        foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", false);
-            player.GetAnimator().SetBool("Stupefy", true);
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", false);
+                animator.SetBool("Stupefy", true);
+            }
         }
     }
 
     private void StopLosingControlEffect(List<PlayerLogicManager> players) //IEnumerator is the return value of a coroutine function. //A coroutine is a function that can be paused and resumed at any point during its execution.
     {
+        Animator animator;
         foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", true);
-            player.GetAnimator().SetBool("Stupefy", false);
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", true);
+                animator.SetBool("Stupefy", false);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ public class DefendState : State
     public ReturnToStartPositionState ReturnToStartPositionState;
     public KeeperHoldsQuaffleState KeeperHoldsQuaffleState;
     float QuaffleVisibilityRange = 120f; // TODO Adjust I think 70 should be okay
-
+    public IdleState Idle;
 
     public override State RunCurrentState()
     {
@@ -17,8 +17,17 @@ public class DefendState : State
             Logic.target = Logic.Quaffle;
         }
 
+        if(Logic.goalScored)
+        {
+            Logic.target = null;
+            Logic.isMoving = false;
+            Logic.StopMoveAndRotateToTarget();
+
+            return Idle;
+        }
+
         if(Logic.IsQuaffleCloseToMyTeamGoals(QuaffleVisibilityRange))
-            {
+        {
             if(!Logic.TryCatchQuaffle())
             {
                 Logic.MoveAndRotateToTarget();

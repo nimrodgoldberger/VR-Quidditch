@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HitBludgerState : State
 {
-
     public IdleState idle;
     public DefendChaserState defendChaser;
     private int bludgerCloseIndex;
@@ -12,6 +11,7 @@ public class HitBludgerState : State
     private float bludgerClosenessRange = 15f;
     private float bludgerTryHittingRange = 0.5f;
 
+    public IdleState Idle;
     public override State RunCurrentState()
     {
         int noBludgerIsClose = -1;
@@ -20,7 +20,7 @@ public class HitBludgerState : State
 
         bludgerCloseIndex = Logic.IsABludgerInRange(bludgerTryHittingRange);
 
-        if (bludgerCloseIndex != noBludgerIsClose) 
+        if(bludgerCloseIndex != noBludgerIsClose)
         {
             //TO DO Animation activation
             Debug.Log("hit bludger!!");
@@ -30,11 +30,18 @@ public class HitBludgerState : State
         }
         else
         {
-             Logic.ResetTarget();//needed in order to change the chaser that the beater defends
-             returnState = defendChaser;
+            Logic.ResetTarget();//needed in order to change the chaser that the beater defends
+            returnState = defendChaser;
+        }
+
+        if(Logic.goalScored)
+        {
+            returnState = Idle;
+            Logic.target = null;
+            Logic.isMoving = false;
+            Logic.StopMoveAndRotateToTarget();
         }
 
         return returnState;
     }
-
 }

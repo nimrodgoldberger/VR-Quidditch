@@ -41,6 +41,8 @@ public class TeamPlayersManager : MonoBehaviour
     public List<PlayerLogicManager> chasers2;
     public List<PlayerLogicManager> seekers2;
 
+    private List<PlayerLogicManager> allPlayers = new List<PlayerLogicManager>();
+
     public List<GameObject> StartingPositionsChasersTeam1;
     public List<GameObject> StartingPositionsBeatersTeam1;
     public List<GameObject> StartingPositionsSeekerTeam1;
@@ -60,6 +62,9 @@ public class TeamPlayersManager : MonoBehaviour
     // Set the team, HAS TO SET THE COLORS OF UNIFORMS TOO
     private PlayerTeam team1;
     private PlayerTeam team2;
+
+    private PlayerTeam scoringTeam;
+    private float effectDuration = 5.0f;
 
     // TODO Check with Dan
     //To set the starting points of the players, Only if needed!!!!!
@@ -86,7 +91,8 @@ public class TeamPlayersManager : MonoBehaviour
             initPlayerStateManagers(keepers1, team1, PlayerType.Keeper);
             initPlayerStateManagers(beaters1, team1, PlayerType.Beater);
             initPlayerStateManagers(chasers1, team1, PlayerType.Chaser);
-            initPlayerStateManagers(seekers1, team1, PlayerType.Seeker);
+            //TODO for multi do this for both teams
+            initPlayerStateManagers(seekers1, team1, PlayerType.VRPlayer);
 
             //INIT TEAM 2
             initPlayerStateManagers(keepers2, team2, PlayerType.Keeper);
@@ -108,7 +114,6 @@ public class TeamPlayersManager : MonoBehaviour
 
         foreach(PlayerLogicManager player in players)
         {
-            int index = 0;
             player.PlayerTeam = team;
             player.PlayerType = type;
 
@@ -155,6 +160,7 @@ public class TeamPlayersManager : MonoBehaviour
                     player.startingPosition = StartingPositionsChasersTeam1[typeIndex].transform.position;
                     break;
                 case PlayerType.Seeker:
+                case PlayerType.VRPlayer:
                     player.startingPosition = StartingPositionsSeekerTeam1[typeIndex].transform.position;
                     break;
                 case PlayerType.Keeper:
@@ -175,6 +181,7 @@ public class TeamPlayersManager : MonoBehaviour
                     player.startingPosition = StartingPositionsChasersTeam2[typeIndex].transform.position;
                     break;
                 case PlayerType.Seeker:
+                case PlayerType.VRPlayer:
                     player.startingPosition = StartingPositionsSeekerTeam2[typeIndex].transform.position;
                     break;
                 case PlayerType.Keeper:
@@ -189,33 +196,34 @@ public class TeamPlayersManager : MonoBehaviour
     // Call this method to change the material of the body based on the team
     public void SetPlayerTeamOutfit(PlayerLogicManager player)
     {
-
-        Transform bodyTransform = player.transform.Find("Body");
-        Renderer bodyRenderer = bodyTransform.GetComponent<Renderer>();
-
-        // Get the materials array from the Renderer
-        Material[] materials = bodyRenderer.materials;
-
-        // Check the team and assign the appropriate material
-        switch(player.PlayerTeam)
+        if(player.PlayerType!= PlayerType.VRPlayer)
         {
-            case PlayerTeam.Griffindor:
-                materials[2] = gryffindorMaterial;
-                break;
-            case PlayerTeam.Hufflepuff:
-                materials[2] = hufflepuffMaterial;
-                break;
-            case PlayerTeam.Slitheryn:
-                materials[2] = slytherinMaterial;
-                break;
-            case PlayerTeam.Ravenclaw:
-                materials[2] = ravenclawMaterial;
-                break;
+            Transform bodyTransform = player.transform.Find("Body");
+            Renderer bodyRenderer = bodyTransform.GetComponent<Renderer>();
+
+            // Get the materials array from the Renderer
+            Material[] materials = bodyRenderer.materials;
+
+            // Check the team and assign the appropriate material
+            switch (player.PlayerTeam)
+            {
+                case PlayerTeam.Griffindor:
+                    materials[2] = gryffindorMaterial;
+                    break;
+                case PlayerTeam.Hufflepuff:
+                    materials[2] = hufflepuffMaterial;
+                    break;
+                case PlayerTeam.Slitheryn:
+                    materials[2] = slytherinMaterial;
+                    break;
+                case PlayerTeam.Ravenclaw:
+                    materials[2] = ravenclawMaterial;
+                    break;
+            }
+
+            // Apply the modified materials array back to the Renderer
+            bodyRenderer.materials = materials;
         }
-
-        // Apply the modified materials array back to the Renderer
-        bodyRenderer.materials = materials;
-
     }
 
     public PlayerTeam GetTeam1()
@@ -241,16 +249,16 @@ public class TeamPlayersManager : MonoBehaviour
         }
     }
 
-    public IEnumerator GoalAnimations(PlayerTeam scoringTeam)
+    public IEnumerator GoalAnimations()
     {
-        float effectDuration = 5.0f;
+        //SetBackAllPlayersToIdleState();
+        
         float startTime = Time.time;
 
         while(Time.time - startTime < effectDuration)
         {
             if(scoringTeam == team1)
             {
-
                 LoosingAnimations(keepers2);
                 LoosingAnimations(beaters2);
                 LoosingAnimations(chasers2);
@@ -260,8 +268,6 @@ public class TeamPlayersManager : MonoBehaviour
                 WinningAnimations(beaters1);
                 WinningAnimations(chasers1);
                 WinningAnimations(seekers1);
-
-
             }
             else if(scoringTeam == team2)
             {
@@ -335,39 +341,63 @@ public class TeamPlayersManager : MonoBehaviour
 
     public void WinningAnimations(List<PlayerLogicManager> players)
     {
-        foreach(PlayerLogicManager player in players)
+        Animator animator;
+        foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", false);
-            player.GetAnimator().SetBool("Stupefy", false);
-            player.GetAnimator().SetBool("Winner", true);
+            player.speed = 0;
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", false);
+                animator.SetBool("Stupefy", false);
+                animator.SetBool("Winner", true);
+            }
         }
     }
     public void LoosingAnimations(List<PlayerLogicManager> players)
     {
-        foreach(PlayerLogicManager player in players)
+        Animator animator;
+        foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", false);
-            player.GetAnimator().SetBool("Stupefy", false);
-            player.GetAnimator().SetBool("Loser", true);
+            player.speed = 0;
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", false);
+                animator.SetBool("Stupefy", false);
+                animator.SetBool("Loser", true);
+            }
         }
     }
 
     public void StopWinningAnimations(List<PlayerLogicManager> players)
     {
-        foreach(PlayerLogicManager player in players)
+        Animator animator;
+        foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", true);
-            player.GetAnimator().SetBool("Stupefy", false);
-            player.GetAnimator().SetBool("Winner", false);
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", true);
+                animator.SetBool("Stupefy", false);
+                animator.SetBool("Winner", false);
+            }
+            player.speed = 15;
         }
     }
     public void StopLoosingAnimations(List<PlayerLogicManager> players)
     {
-        foreach(PlayerLogicManager player in players)
+        Animator animator;
+        foreach (PlayerLogicManager player in players)
         {
-            player.GetAnimator().SetBool("Idle", true);
-            player.GetAnimator().SetBool("Stupefy", false);
-            player.GetAnimator().SetBool("Loser", false);
+            animator = player.GetAnimator();
+            if (animator != null)
+            {
+                animator.SetBool("Idle", true);
+                animator.SetBool("Stupefy", false);
+                animator.SetBool("Loser", false);
+            }
+            player.speed = 15;
         }
     }
 
@@ -383,53 +413,60 @@ public class TeamPlayersManager : MonoBehaviour
         SceneManager.LoadScene("MenuScene");
     }
 
+    public void SetBackAllPlayersToIdleState(PlayerTeam currScoringTeam)
+    {
+        scoringTeam = currScoringTeam;
 
-    ///////NOT USING IT YET MIGHT NEED BUT DONT FORGET THAT YOU ARE NOT PART OF YOUR OWN FRIENDS LIST
-    //private void SetFriendsAndEnemiesTeam1(PlayerLogicManager player)
-    //{
-    //    // Calculate the total number of enemies
-    //    int totalEnemies = keepers1.Count + beaters1.Count + chasers1.Count + seekers1.Count;
+        SetPlayerListToIdleState(keepers1);
+        SetPlayerListToIdleState(beaters1);
+        SetPlayerListToIdleState(chasers1);
+        SetPlayerListToIdleState(seekers1);
 
-    //    // Initialize the enemies array with the calculated size
-    //    player.enemies = new PlayerLogicManager[totalEnemies];
+        SetPlayerListToIdleState(keepers2);
+        SetPlayerListToIdleState(beaters2);
+        SetPlayerListToIdleState(chasers2);
+        SetPlayerListToIdleState(seekers2);
 
-    //    // Add PlayerLogicManager components from each list to the enemies array
-    //    int index = 0;
+        //WaitForAllPlayersToBeInIdle();
+    }
 
-    //    player.enemies = keepers1.ToArray();
-    //    index += keepers1.Count;
 
-    //    beaters1.CopyTo(player.enemies, index);
-    //    index += beaters1.Count;
+    private void SetPlayerListToIdleState(List<PlayerLogicManager> players)
+    {
+        foreach (PlayerLogicManager player in players)
+        {
+            if(player.PlayerType != PlayerType.VRPlayer)//?
+            {
+                player.goalScored = true;
+                player.scoringTeam = scoringTeam;
+            }
+        }
+    }
 
-    //    chasers1.CopyTo(player.enemies, index);
-    //    index += chasers1.Count;
+    private void WaitForAllPlayersToBeInIdle()
+    {
+        CombineLists();
+        foreach (PlayerLogicManager player in allPlayers)
+        {
+            if (player.PlayerType != PlayerType.VRPlayer)
+            {
+                while (player.goalScored);
+            }
+        }
+    }
 
-    //    seekers1.CopyTo(player.enemies, index);
-    //}
+    private void CombineLists()
+    {
+        allPlayers.AddRange(keepers1);
+        allPlayers.AddRange(beaters1);
+        allPlayers.AddRange(chasers1);
+        allPlayers.AddRange(seekers1);
 
-    //private void SetFriendsAndEnemiesTeam2(PlayerLogicManager player)
-    //{
-    //    // Calculate the total number of enemies
-    //    int totalEnemies = keepers2.Count + beaters2.Count + chasers2.Count + seekers2.Count;
-
-    //    // Initialize the enemies array with the calculated size
-    //    player.friends = new PlayerLogicManager[totalEnemies];
-
-    //    // Add PlayerLogicManager components from each list to the enemies array
-    //    int index = 0;
-
-    //    player.friends = keepers2.ToArray();
-    //    index += keepers2.Count;
-
-    //    beaters1.CopyTo(player.friends, index);
-    //    index += beaters2.Count;
-
-    //    chasers1.CopyTo(player.friends, index);
-    //    index += chasers2.Count;
-
-    //    seekers1.CopyTo(player.friends, index);
-    //}
+        allPlayers.AddRange(keepers2);
+        allPlayers.AddRange(beaters2);
+        allPlayers.AddRange(chasers2);
+        allPlayers.AddRange(seekers2);
+    }
 }
 
 

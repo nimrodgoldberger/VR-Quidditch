@@ -18,7 +18,7 @@ public class GameMenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (showButton.action.WasPressedThisFrame())
+        if(showButton.action.WasPressedThisFrame())
         {
             menu.SetActive(!menu.activeSelf);
         }

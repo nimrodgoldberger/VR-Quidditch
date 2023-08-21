@@ -12,11 +12,10 @@ public class SeekSnitchState : State
     public IdleState idleState;
     public ReturnToStartPositionState returnToStartPositionState;
     public HoldSnitchState holdSnitchState;
+
     public override State RunCurrentState()
     {
-
         State returnState = this; //just for the testing
-       
 
         if(Logic.target != Logic.Snitch)
         {
@@ -29,7 +28,7 @@ public class SeekSnitchState : State
         if(canSeeSnitch)
         {
             if(!Logic.TryCatchSnitch())
-            { 
+            {
                 //Debug.Log("I am seeking the snitch");
                 Logic.MoveAndRotateToTarget();
             }
@@ -44,6 +43,15 @@ public class SeekSnitchState : State
         {
             // TODO might add idle state if snitch far
             //Debug.Log("Returning to idleState because Snitch is too far away!?!?!?!");
+            returnState = idleState;
+        }
+
+        if(Logic.goalScored)
+        {
+            Logic.StopMoveAndRotateToTarget();
+
+            Logic.target = null;
+            Logic.isMoving = false;
             returnState = idleState;
         }
 

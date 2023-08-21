@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerLogicManager : Targetable
@@ -11,6 +12,7 @@ public class PlayerLogicManager : Targetable
     public DynamicPositionTarget startingPositionTarget;
     public PlayerTeam PlayerTeam;
     public PlayerType PlayerType;
+
 
     [SerializeField] private List<ScoreArea> myTeamGoals;
     [SerializeField] private List<ScoreArea> enemyTeamGoals;
@@ -26,10 +28,17 @@ public class PlayerLogicManager : Targetable
     public bool isMoving = false;
     public bool isRotatingToStartingPos = false;
 
+    public bool goalScored = false;
+
     protected float startingSpeed;
-    [SerializeField] protected float speed;
+    [SerializeField] public float speed;
     [SerializeField] protected float rotationSpeed;
 
+    public bool collisionOccured = false;
+    public bool hitByBludger = false;
+    public float freezeBludgerDuration = 5f;
+
+    public PlayerTeam scoringTeam;
     protected virtual void Start()
     {
         startingSpeed = speed;
@@ -39,53 +48,44 @@ public class PlayerLogicManager : Targetable
         animator = GetComponent<Animator>();
     }
 
-    public bool TryCatchQuaffle()
+    [SerializeField] TMP_Text SpellActivatedText;
+    public virtual bool TryCatchQuaffle()
     {   //TODO Add the timer to catch it
         return Quaffle.TryTakeQuaffle(this);
     }
 
     // Seeker + VRPlayer
-    public bool TryCatchSnitch()
+    public virtual bool TryCatchSnitch()
     {
         return Snitch.TryCatchSnitch(this);
     }
 
-    public void SetTarget(Targetable newTarget)
+    public virtual void SetTarget(Targetable newTarget)
     {
         target = newTarget;
     }
 
-    public void ResetTarget()
+    public virtual void ResetTarget()
     {
         target = null;
     }
 
-    public Targetable GetTarget()
-    {
-        return target;
-    }
-
-    public float GetSpeed()
-    {
-        return speed;
-    }
-
-    public void SetRotationSpeed(float newRotationSpeed)
+    public virtual void SetRotationSpeed(float newRotationSpeed)
     {
         rotationSpeed = newRotationSpeed;
     }
 
-    public Targetable GetStartingTransformAsTargetable()
+    public virtual Targetable GetStartingTransformAsTargetable()
     {
         return startingPositionTarget;
     }
 
-    public void StopMoveAndRotateToTarget() // TODO Check if works
+    public virtual void StopMoveAndRotateToTarget() // TODO Check if works
     {
         StopCoroutine(MoveAndRotateCoroutine());
     }
 
-    public void MoveAndRotateToTarget()
+    public virtual void MoveAndRotateToTarget()
     {
         if(isMoving)
             return; // Return if already moving
@@ -125,112 +125,27 @@ public class PlayerLogicManager : Targetable
         isMoving = false;
     }
 
-
-    public IEnumerator MoveAndRotateToBludger(int bludgerIndex, Vector3 relativePos)
+    public List<Targetable> GetMyLoops()
     {
-        isMoving = true;
-        float totalDistance = Vector3.Distance(transform.position, Bludgers[bludgerIndex].transform.position);
-        float travelDuration = totalDistance / speed;
-        Vector3 initialPosition = transform.position;
-        Vector3 bludgerPosition = Bludgers[bludgerIndex].transform.position;
-        Quaternion initialRotation = transform.rotation;
-        Quaternion lookRotation = Quaternion.LookRotation(bludgerPosition - initialPosition);
-
-        float elapsedTime = 0f;
-        while(elapsedTime < travelDuration)
+        List<Targetable> targetables = new List<Targetable>();
+        foreach(ScoreArea scoreArea in myTeamGoals)
         {
-            // Calculate the new position and rotation using Mathf.Lerp
-            float t = elapsedTime / travelDuration;
-            transform.position = Vector3.Lerp(initialPosition, bludgerPosition, t);
-            transform.rotation = Quaternion.Slerp(initialRotation, lookRotation, t);
-
-            // Yielding inside FixedUpdate to wait for the next FixedUpdate step
-            yield return new WaitForFixedUpdate();
-
-            elapsedTime += Time.fixedDeltaTime;
+            targetables.Add(scoreArea);
         }
-
-        // Ensure the final position and rotation are set correctly
-        transform.position = bludgerPosition + relativePos;
-        transform.rotation = lookRotation;
-
-        // At the end of the coroutine, reset the target and isMoving flag
-        isMoving = false;
+        return targetables;
     }
-    //public void RotateToStartingPosition()
-    //{
-    //    if(isMoving)
-    //        return; // Return if already moving
 
-    //    StartCoroutine(RotateToStartRotationCoroutine());
-    //}
+    public List<Targetable> GetEnemyLoops()
+    {
+        List<Targetable> targetables = new List<Targetable>();
+        foreach(ScoreArea scoreArea in enemyTeamGoals)
+        {
+            targetables.Add(scoreArea);
+        }
+        return targetables;
+    }
 
-    //private IEnumerator RotateToStartRotationCoroutine()
-    //{
-    //    isMoving = true; // Set the isMoving flag to true before starting the rotation
-
-    //    Quaternion initialRotation = transform.rotation;
-    //    Quaternion targetRotation = startingPositionTarget.transform.rotation;
-    //    float angleToRotation = Quaternion.Angle(initialRotation, targetRotation);
-    //    float rotationDuration = angleToRotation / rotationSpeed;
-    //    float elapsedTime = 0f;
-    //    while(elapsedTime < rotationDuration)
-    //    {
-    //        float t = elapsedTime / rotationDuration;
-    //        transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, t);
-
-    //        // Yielding inside FixedUpdate to wait for the next FixedUpdate step
-    //        yield return new WaitForFixedUpdate();
-
-    //        elapsedTime += Time.fixedDeltaTime;
-    //    }
-
-    //    // Ensure the final rotation is set correctly
-    //    transform.rotation = targetRotation;
-    //    // At the end of the coroutine, reset the target and isMoving flag
-    //    ResetTarget();
-    //    isMoving = false; // Set the isMoving flag to false after the rotation is complete
-    //}
-
-    //public void RotateToStartingPosition()
-    //{
-    //    if(isMoving)
-    //        return; // Return if already moving
-
-    //    StartCoroutine(RotateToStartRotationCoroutine());
-    //}
-
-    //private IEnumerator RotateToStartRotationCoroutine()
-    //{
-    //    isMoving = true; // Set the isMoving flag to true before starting the rotation
-
-    //    Quaternion initialRotation = transform.rotation;
-    //    Quaternion targetRotation = startingPositionTarget.transform.rotation;
-    //    float angleToRotation = Quaternion.Angle(initialRotation, targetRotation);
-    //    float rotationDuration = angleToRotation / rotationSpeed;
-    //    float elapsedTime = 0f;
-    //    while(elapsedTime < rotationDuration)
-    //    {
-    //        float t = elapsedTime / rotationDuration;
-    //        transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, t);
-
-    //        // Yielding inside FixedUpdate to wait for the next FixedUpdate step
-    //        yield return new WaitForFixedUpdate();
-
-    //        elapsedTime += Time.fixedDeltaTime;
-    //    }
-
-    //    // Ensure the final rotation is set correctly
-    //    transform.rotation = targetRotation;
-
-    //    // At the end of the coroutine, reset the target and isMoving flag
-    //    ResetTarget();
-    //    isMoving = false; // Set the isMoving flag to false after the rotation is complete
-
-    //    // After the rotation is complete, also reset the isRotatingToStartingPos flag
-    //    isRotatingToStartingPos = false;
-    //}
-    public void RotateToStartingPosition()
+    public virtual void RotateToStartingPosition()
     {
         if(isMoving || isRotatingToStartingPos)
             return; // Return if already moving or rotating
@@ -270,18 +185,18 @@ public class PlayerLogicManager : Targetable
         isRotatingToStartingPos = false;
     }
 
-    public bool IsSnitchInRange(float range)
+    public virtual bool IsSnitchInRange(float range)
     {
         return Vector3.Distance(Snitch.transform.position, transform.position) <= range;
     }
 
-    public bool IsQuaffleInRange(float range)
+    public virtual bool IsQuaffleInRange(float range)
     {
         //return Quaffle.CanBeTaken(this);
         return Vector3.Distance(Quaffle.transform.position, transform.position) <= range;
     }
 
-    public bool IsQuaffleCloseToMyTeamGoals(float range)
+    public virtual bool IsQuaffleCloseToMyTeamGoals(float range)
     {
         bool isClose = false;
 
@@ -297,27 +212,32 @@ public class PlayerLogicManager : Targetable
         return isClose;
     }
 
-    public bool IsQuaffleHeldByMyTeam()
+    public virtual bool IsQuaffleHeldByMyTeam()
     {
         return Quaffle.IsQuaffleHeldByTeam(PlayerTeam);
     }
 
-    public bool IsQuaffleHeldByMe()
+    public virtual bool IsQuaffleHeldByMe()
     {
         return Quaffle.IsQuaffleHeldByPlayer(this);
     }
 
-    public void CaughtQuaffle()
+    public virtual void CaughtQuaffle()
     {
-        speed = speed * 2 / 3;
+        speed = speed * 3 / 2;
     }
 
-    public void ResetSpeed()
+    public virtual void ResetSpeed()
     {
         speed = startingSpeed;
     }
 
-    public int IsABludgerInRange(float range)
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public virtual int IsABludgerInRange(float range)
     {
         if(Vector3.Distance(Bludgers[0].transform.position, transform.position) <= range)
             return 0;
@@ -325,10 +245,9 @@ public class PlayerLogicManager : Targetable
             return 1;
         else
             return -1;//NO BLUDGERS IN RANGE
-
     }
 
-    public void BudgerWasHit(int bludgerIndex)
+    public virtual void BudgerWasHit(int bludgerIndex)
     {
         // Create a new instance of Random class
         System.Random random = new System.Random();
@@ -338,13 +257,13 @@ public class PlayerLogicManager : Targetable
         Bludgers[bludgerIndex].GoToChaseAfterBeingHit(enemies[randomIndex].gameObject);
     }
 
-    public void SetGoals(List<ScoreArea> myGoals, List<ScoreArea> enemyGoals)
+    public virtual void SetGoals(List<ScoreArea> myGoals, List<ScoreArea> enemyGoals)
     {
         myTeamGoals = myGoals;
         enemyTeamGoals = enemyGoals;
     }
 
-    public ScoreArea ChooseTargetGoal()
+    public virtual ScoreArea ChooseTargetGoal()
     {
         int minObstructions = int.MaxValue;
         ScoreArea selectedGoal = null;
@@ -394,13 +313,7 @@ public class PlayerLogicManager : Targetable
         return false; // No obstructions found
     }
 
-
-    //public void SetStartingPosition(Vector3 startPos)
-    //{
-    //    startingPosition = startPos;
-    //}
-
-    public Vector3 CreateRelativePositionToBewareOfBludgers()
+    public virtual Vector3 CreateRelativePositionToBewareOfBludgers()
     {
         int negative = 0;
         int positive = 1;
@@ -429,9 +342,35 @@ public class PlayerLogicManager : Targetable
         return relativePosition;
     }
 
-    public Animator GetAnimator()
+    public virtual Animator GetAnimator()
     {
         return animator;
     }
-}
 
+    public void HitPlayer()
+    {
+        StartCoroutine(HitPlayerCoroutine());
+    }
+
+    private IEnumerator HitPlayerCoroutine()
+    {
+        hitByBludger = true;
+
+        yield return new WaitForSeconds(freezeBludgerDuration);
+
+        hitByBludger = false;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("AI") || collision.gameObject.CompareTag("Player"))
+        {
+            collisionOccured = true;
+        }
+
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            SpellActivatedText.text = "Hit by bludger!";
+        }
+    }
+}

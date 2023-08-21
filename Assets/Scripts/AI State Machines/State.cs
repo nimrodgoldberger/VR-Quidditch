@@ -15,7 +15,6 @@ public enum PlayerType
     VRPlayer = 4
 }
 
-
 public abstract class State : MonoBehaviour
 {
     public PlayerLogicManager Logic;

@@ -9,14 +9,24 @@ public class ChaserGetQuaffleState : State
     public PlayerLogicManager Chaser3;
     public ChaserAdvanceWithQuaffleState AdvanceWithQuaffle;
     public State AdvanceWithOutQuaffle;
+    public IdleState Idle;
     private float QuaffleVisibilityRange = 250f;
-
 
     public override State RunCurrentState()
     {
         State returnState = this;
 
-        if(Logic.target != Logic.Quaffle)
+        if (Logic.goalScored)
+        {
+            
+            Logic.target = null;
+            Logic.isMoving = false;
+
+            return Idle;
+
+        }
+
+        if (Logic.target != Logic.Quaffle)
         {
             //Debug.Log("Quaffle set as target");
             Logic.target = Logic.Quaffle;
@@ -44,6 +54,7 @@ public class ChaserGetQuaffleState : State
             if(!Logic.TryCatchQuaffle()) // I didn't catch the Quaffle
             {
                 Logic.MoveAndRotateToTarget();
+
                 return this;
             }
             else // I Caught the Quaffle
@@ -56,6 +67,17 @@ public class ChaserGetQuaffleState : State
             }
         }
 
+
+        if(Logic.goalScored)
+        {
+            returnState = Idle;
+            Logic.target = null;
+            Logic.isMoving = false;
+            Logic.StopMoveAndRotateToTarget();
+
+        }
+
+
         return returnState;
     }
 
@@ -63,6 +85,4 @@ public class ChaserGetQuaffleState : State
     {
         return Logic.Quaffle.transform.parent != null && Logic.Quaffle.transform.parent.CompareTag("Logic");
     }
-
-
 }

@@ -7,10 +7,11 @@ public class CountdownManager : MonoBehaviour
 {
 
     // Start is called before the first frame update
-    private float totalTime = 4f;
+    public float totalTime = 4f;
     private float timeRemaining;
-    private bool timerIsRunning = false;
+    public bool timerIsRunning = false;
     private TMP_Text countdownText;
+    public bool gameStarted = false;
 
     public float TimeRemaining { get { return timeRemaining; } set { timeRemaining = value; } }
 
@@ -31,12 +32,15 @@ public class CountdownManager : MonoBehaviour
             {
                 int seconds = Mathf.FloorToInt(timeRemaining % 60f);
                 timeRemaining -= Time.fixedDeltaTime;
-                countdownText.text = string.Format("{0:0}", seconds);
+                if (!gameStarted)
+                    countdownText.text = string.Format("{0:0}", seconds);
             }
             else if (timeRemaining > 0)
             {
                 timeRemaining -= Time.fixedDeltaTime;
-                countdownText.text = string.Format("GO!");
+                if(!gameStarted)
+                    countdownText.text = string.Format("GO!");
+                gameStarted = true;
             }
             else
             {

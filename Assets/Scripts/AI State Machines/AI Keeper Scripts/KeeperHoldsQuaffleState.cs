@@ -10,6 +10,7 @@ public class KeeperHoldsQuaffleState : State
     [SerializeField] private float coolDownAfterPass = 1.0f;
     [SerializeField] private float timerAfterPass = 0f;
 
+    public IdleState Idle;
     public override State RunCurrentState()
     {
         State nextState = this;
@@ -57,8 +58,17 @@ public class KeeperHoldsQuaffleState : State
             }
         }
 
+        if(Logic.goalScored)
+        {
+            Logic.target = null;
+            Logic.isMoving = false;
+            Logic.StopMoveAndRotateToTarget();
+
+            nextState = Idle;
+        }
         // If the Keeper still holds the Quaffle, stay in this state
         // else wait 1 second and then return to startingPositionState
+
         return nextState;
     }
 
@@ -107,7 +117,6 @@ public class KeeperHoldsQuaffleState : State
 
         // For now, let's assume we directly pass the ball to the target's position for demonstration purposes.
         Logic.Quaffle.ThrowQuaffle(Logic, playerToPassTo);
-
     }
 
     public void PassTheQuaffle()
@@ -120,7 +129,6 @@ public class KeeperHoldsQuaffleState : State
     {
         return playerToPassTo;
     }
-
 
     private void ChooseChaserToPassTo()
     {

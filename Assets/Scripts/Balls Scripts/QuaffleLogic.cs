@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class QuaffleLogic : Targetable
 {
-    public float takeDistance = 3f;
-    public float takeTime = 0.5f;
+    public float takeDistance = 2.0f;
+    public float takeTime = 1.0f;
     private bool isQuaffleHeld = false;
     private PlayerTeam heldBy = PlayerTeam.None;
-    //private float[] teamTimers = {0.0f, 0.0f, 0.0f, 0.0f};
 
     // TODO For passing and throwing
     private bool wasThrown = false;
     public bool isFlying = false;
     public Targetable target;
     [SerializeField] private float movementSpeed = 30f;
-
 
     private void FixedUpdate()
     {
@@ -32,7 +30,6 @@ public class QuaffleLogic : Targetable
         }
     }
 
-
     public bool CanBeTaken(PlayerLogicManager potentialHolder)
     {
         // Check if the potential holder is within range of the ball
@@ -47,27 +44,6 @@ public class QuaffleLogic : Targetable
         {
             result = TakeQuaffle(player);
         }
-
-        //if(heldBy != player.PlayerTeam)
-        //{
-        //    // TODO Check if timer works
-        //    // 0.5 seconds pass before taking it;
-
-        //    player.quaffleTakeTime += Time.fixedDeltaTime;
-        //    if(player.quaffleTakeTime > takeTime)
-        //    {
-        //        result = TakeQuaffle(player);
-        //        player.quaffleTakeTime = 0.0f;
-        //    }
-        //}
-        //else
-        //{
-        //    player.quaffleTakeTime = 0.0f;
-        //    if(heldBy == PlayerTeam.None)
-        //    {
-        //        result = TakeQuaffle(player);
-        //    }
-        //}
 
         return result;
     }
@@ -97,6 +73,8 @@ public class QuaffleLogic : Targetable
 
     private void PlayerHoldsQuaffle(PlayerLogicManager player)
     {
+        SphereCollider sphereCollider = gameObject.GetComponent<SphereCollider>();
+        sphereCollider.enabled = false;
         Vector3 relativepos = new Vector3(0.35f, 0.35f, 0.2f);
         isFlying = false;
         isQuaffleHeld = true;
@@ -118,6 +96,8 @@ public class QuaffleLogic : Targetable
     private void FlyToTarget()
     {
         //transform.SetParent(null);
+        SphereCollider sphereCollider = gameObject.GetComponent<SphereCollider>();
+        sphereCollider.enabled = true;
         isFlying = true;
         wasThrown = true;
         MoveAndRotateToTarget();
@@ -194,4 +174,8 @@ public class QuaffleLogic : Targetable
         return heldBy == player.PlayerTeam && player == transform.parent.GetComponent<PlayerLogicManager>();
     }
 
+    public float Speed()
+    {
+        return movementSpeed;
+    }
 }

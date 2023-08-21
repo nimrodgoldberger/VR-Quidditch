@@ -29,40 +29,18 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    //public void AddScore(int value, int team)
-    //{
-    //    switch (team)
-    //    {
-    //        case 1:
-    //            team1Score += value;
-    //            break;
-    //        case 2:
-    //            team2Score += value;
-    //            break;
-    //    }
-    //    UpdateScoreText();
-    //}
-
-    //void UpdateScoreText()
-    //{
-    //    string scoreString = team1 + ": " + team1Score.ToString() + "\n" + team2 + ": " + team2Score.ToString();
-    //    scoreText.text = scoreString;
-    //}
-
     public void SetTeamScore(PlayerTeam team, int additionalPoints)
     {
 
-        if (team == team1)
+        if(team == team1)
         {
             team2Score = GetScoreForTeam(team2);
             team1Score = GetScoreForTeam(team1) + additionalPoints;
-            ballsPositionManager.GoalWasScored();
         }
-        else if (team == team2)
+        else if(team == team2)
         {
             team2Score = GetScoreForTeam(team2) + additionalPoints;
             team1Score = GetScoreForTeam(team1);
-            ballsPositionManager.GoalWasScored();
         }
         else
         {
@@ -81,13 +59,14 @@ public class ScoreManager : MonoBehaviour
         // Set the second team's name in the score text
         scoreText.text += teamNames[(int)team2];
         scoreText.text += ":" + team2Score;
+
+        ballsPositionManager.GoalWasScored();
     }
     public int GetScoreForTeam(PlayerTeam team)
     {
-
-        if (team == team1)
+        if(team == team1)
             return team1Score;
-        else if (team == team2)
+        else if(team == team2)
             return team2Score;
         else
         {
@@ -108,9 +87,9 @@ public class ScoreManager : MonoBehaviour
 
     public PlayerTeam GetWinner()
     {
-        if (team1Score > team2Score)
+        if(team1Score > team2Score)
             return team1;
-        else if (team2Score > team1Score)
+        else if(team2Score > team1Score)
             return team2;
         else
             return PlayerTeam.None; //EQUALITY
