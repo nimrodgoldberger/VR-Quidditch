@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -73,36 +72,45 @@ public class TeamPlayersManager : MonoBehaviour
     private bool playersInitialized = false; // Keep track if players are already initialized
     [SerializeField] private BallsPositionManager ballsPositionManager;
 
+    public static int onlinePlayerCount = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
-        if(!playersInitialized)
-        {
-            // Load the saved teams data from PlayerPrefs
-            team1 = (PlayerTeam)PlayerPrefs.GetInt("Team1");
-            team2 = (PlayerTeam)PlayerPrefs.GetInt("Team2");
+        //if (!(SceneManager.GetActiveScene().name == "Online"))
+        //{
+            if (!playersInitialized)
+            {
+                // Load the saved teams data from PlayerPrefs
+                team1 = (PlayerTeam)PlayerPrefs.GetInt("Team1");
+                team2 = (PlayerTeam)PlayerPrefs.GetInt("Team2");
 
-            AssignGoalsToTeams(team1Goals, team2Goals);
+                if (team1 == team2)
+                {
+                    team2 = (PlayerTeam)(((int)team2 + 1) % 3); //modulo 3 to get another team every time
+                }
 
-            //TODO initialize according to XR origin team and according to multiplayer
+                AssignGoalsToTeams(team1Goals, team2Goals);
 
-            //INIT TEAM 1
-            initPlayerStateManagers(keepers1, team1, PlayerType.Keeper);
-            initPlayerStateManagers(beaters1, team1, PlayerType.Beater);
-            initPlayerStateManagers(chasers1, team1, PlayerType.Chaser);
-            //TODO for multi do this for both teams
-            initPlayerStateManagers(seekers1, team1, PlayerType.VRPlayer);
+                //TODO initialize according to XR origin team and according to multiplayer
 
-            //INIT TEAM 2
-            initPlayerStateManagers(keepers2, team2, PlayerType.Keeper);
-            initPlayerStateManagers(beaters2, team2, PlayerType.Beater);
-            initPlayerStateManagers(chasers2, team2, PlayerType.Chaser);
-            initPlayerStateManagers(seekers2, team2, PlayerType.Seeker);
+                //INIT TEAM 1
+                initPlayerStateManagers(keepers1, team1, PlayerType.Keeper);
+                initPlayerStateManagers(beaters1, team1, PlayerType.Beater);
+                initPlayerStateManagers(chasers1, team1, PlayerType.Chaser);
+                initPlayerStateManagers(seekers1, team1, PlayerType.VRPlayer);
 
-            playersInitialized = true;
-            ballsPositionManager.StartingGame();
-        }
+                //TODO for multi do this for both teams
+
+                //INIT TEAM 2
+                initPlayerStateManagers(keepers2, team2, PlayerType.Keeper);
+                initPlayerStateManagers(beaters2, team2, PlayerType.Beater);
+                initPlayerStateManagers(chasers2, team2, PlayerType.Chaser);
+                initPlayerStateManagers(seekers2, team2, PlayerType.Seeker);
+
+                playersInitialized = true;
+                ballsPositionManager.StartingGame();
+            }
+        //}
     }
 
 
@@ -193,6 +201,13 @@ public class TeamPlayersManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        //if (onlinePlayerCount == 2 && playersInitialized == false && seekers2.Count == 1)
+        //{
+        //    initializeOnline();
+        //}
+    }
     // Call this method to change the material of the body based on the team
     public void SetPlayerTeamOutfit(PlayerLogicManager player)
     {
@@ -466,6 +481,42 @@ public class TeamPlayersManager : MonoBehaviour
         allPlayers.AddRange(beaters2);
         allPlayers.AddRange(chasers2);
         allPlayers.AddRange(seekers2);
+    }
+
+    public void initializeOnline()
+    {
+        if (!playersInitialized)
+        {
+            // Load the saved teams data from PlayerPrefs
+            team1 = (PlayerTeam)PlayerPrefs.GetInt("Team1");
+            team2 = (PlayerTeam)PlayerPrefs.GetInt("Team2");
+
+            if (team1 == team2)
+            {
+                team2 = (PlayerTeam)(((int)team2 + 1) % 3); //modulo 3 to get another team every time
+            }
+
+            AssignGoalsToTeams(team1Goals, team2Goals);
+
+            //TODO initialize according to XR origin team and according to multiplayer
+
+            //INIT TEAM 1
+            initPlayerStateManagers(keepers1, team1, PlayerType.Keeper);
+            initPlayerStateManagers(beaters1, team1, PlayerType.Beater);
+            initPlayerStateManagers(chasers1, team1, PlayerType.Chaser);
+            initPlayerStateManagers(seekers1, team1, PlayerType.VRPlayer);
+
+            //TODO for multi do this for both teams
+
+            //INIT TEAM 2
+            initPlayerStateManagers(keepers2, team2, PlayerType.Keeper);
+            initPlayerStateManagers(beaters2, team2, PlayerType.Beater);
+            initPlayerStateManagers(chasers2, team2, PlayerType.Chaser);
+            initPlayerStateManagers(seekers2, team2, PlayerType.VRPlayer);
+
+            playersInitialized = true;
+            ballsPositionManager.StartingGame();
+        }
     }
 }
 

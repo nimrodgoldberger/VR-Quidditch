@@ -278,6 +278,11 @@ public class PlayerLogicManager : Targetable
                 selectedGoal = goal;
             }
         }
+        if (selectedGoal == null)
+        {
+            Debug.Log("Selectedgoal is null, Enemy goals: " + enemyTeamGoals.Count);
+        }
+
 
         return selectedGoal;
     }
