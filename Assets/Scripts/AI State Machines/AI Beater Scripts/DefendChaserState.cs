@@ -30,7 +30,7 @@ public class DefendChaserState : State
         {
             if(currentTarget.isMoving)
             {
-                Debug.Log("Protecting chaser");
+                //Debug.Log("Protecting chaser");
                 Logic.MoveAndRotateToTarget();
             }
 

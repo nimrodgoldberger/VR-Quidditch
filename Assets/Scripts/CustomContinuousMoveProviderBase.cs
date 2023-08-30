@@ -163,17 +163,17 @@ namespace UnityEngine.XR.Interaction.Toolkit
         void Start()
         {
             baseMoveSpeed = m_MoveSpeed;
-            if (SceneManager.GetActiveScene().name == "Online")
-            {
-                photonView = GetComponent<PhotonView>();
-                online = true;
-            }
+            //if (SceneManager.GetActiveScene().name == "Online")
+            //{
+            //    photonView = GetComponent<PhotonView>();
+            //    online = true;
+            //}
            
         }
         protected void FixedUpdate()
         {
-            if (online && !photonView.IsMine) //only update and act if online is true and this is your character.
-                return;
+            //if (online && !photonView.IsMine) //only update and act if online is true and this is your character.
+            //    return;
 
             triggerValue = triggerPull.action.ReadValue<float>();
             if (triggerValue > 0.1f)
