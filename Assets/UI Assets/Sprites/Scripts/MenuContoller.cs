@@ -21,4 +21,9 @@ public class MenuContoller : MonoBehaviour
     {
         SceneManager.LoadScene("MainScene");
     }
+
+    public void StartOnlineGame()
+    {
+        SceneManager.LoadScene("Online");
+    }
 }
