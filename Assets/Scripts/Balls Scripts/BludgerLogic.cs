@@ -167,4 +167,12 @@ public class BludgerLogic : MonoBehaviour
         direction.Normalize();
         rb.velocity = direction * movementSpeed;
     }
+
+    //private bool TargetOnlinePlayers()
+    //{
+    //    if (SceneManager.GetActiveScene().name == onlineSceneName)
+    //    {
+    //        GameObject[] prefabInstances = GameObject.FindGameObjectsWithTag(prefab.tag);
+    //    }
+    //}
 }

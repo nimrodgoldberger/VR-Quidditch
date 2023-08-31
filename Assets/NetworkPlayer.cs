@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using Photon.Pun;
+
 
 public class NetworkPlayer : MonoBehaviour
 {
@@ -14,8 +16,10 @@ public class NetworkPlayer : MonoBehaviour
     public Transform leftHand;
     public Transform rightHand;
 
+    private PhotonView photonView;
     private void Start()
     {
+        photonView = GetComponent<PhotonView>();
         // Find the XR Origin GameObject in the scene
         xrOrigin = GameObject.Find("XR Origin").transform;
         xrOrigin = xrOrigin.Find("Camera Offset");
@@ -50,6 +54,17 @@ public class NetworkPlayer : MonoBehaviour
 
     private void Update()
     {
+        if (!photonView.IsMine) //Update your avatar only
+        {
+            return;
+        }
+        else
+        {
+            head.gameObject.SetActive(false);
+            leftHand.gameObject.SetActive(false);
+            rightHand.gameObject.SetActive(false);
+        }
+
         if (xrOrigin == null)
         {
             Debug.LogError("NO XR Origin");
