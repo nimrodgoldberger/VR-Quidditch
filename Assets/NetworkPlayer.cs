@@ -58,12 +58,16 @@ public class NetworkPlayer : MonoBehaviour
         {
             return;
         }
-
-        if (xrOrigin == null)
+        else if (xrOrigin == null)
         {
             Debug.LogError("NO XR Origin");
             return;
         }
+
+        head.gameObject.SetActive(false);
+        leftHand.gameObject.SetActive(false);
+        rightHand.gameObject.SetActive(false);
+
         Vector3 newHeadPosition = xrOrigin.Find("Main Camera").position;
         Quaternion newHeadRotation = xrOrigin.Find("Main Camera").rotation;
 
