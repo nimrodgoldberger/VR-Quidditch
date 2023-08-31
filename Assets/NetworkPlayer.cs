@@ -58,12 +58,6 @@ public class NetworkPlayer : MonoBehaviour
         {
             return;
         }
-        else
-        {
-            head.gameObject.SetActive(false);
-            leftHand.gameObject.SetActive(false);
-            rightHand.gameObject.SetActive(false);
-        }
 
         if (xrOrigin == null)
         {
