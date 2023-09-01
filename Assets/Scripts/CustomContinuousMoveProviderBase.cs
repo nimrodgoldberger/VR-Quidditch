@@ -1,7 +1,5 @@
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
-using Photon.Pun;
-using UnityEngine.SceneManagement;
 
 namespace UnityEngine.XR.Interaction.Toolkit
 {
@@ -14,17 +12,16 @@ namespace UnityEngine.XR.Interaction.Toolkit
         [Header("Input")]
         [SerializeField] private InputActionReference triggerPull;
         [SerializeField] private InputActionReference gripPull;
+        [SerializeField] private InputActionReference rightThumbstickPress;
+        [SerializeField] private GameObject debugQuaffle;
+
+
         [SerializeField] private float triggerMultiplier = 2f;
         [SerializeField] private float gripMultiplier = 3f;
         [SerializeField] private float downGlideAngle = 35;
         [SerializeField] private Transform forwardSourceReference;
         [SerializeField] private float accelerationTime = 1.0f;
         [SerializeField] private float bludgerSlowMoveSpeed = 5f;
-
-        private PhotonView photonView;
-        private bool online = false;
-
-
 
         [SerializeField] private Transform playerTransform;
 
@@ -163,18 +160,9 @@ namespace UnityEngine.XR.Interaction.Toolkit
         void Start()
         {
             baseMoveSpeed = m_MoveSpeed;
-            //if (SceneManager.GetActiveScene().name == "Online")
-            //{
-            //    photonView = GetComponent<PhotonView>();
-            //    online = true;
-            //}
-           
         }
         protected void FixedUpdate()
         {
-            //if (online && !photonView.IsMine) //only update and act if online is true and this is your character.
-            //    return;
-
             triggerValue = triggerPull.action.ReadValue<float>();
             if (triggerValue > 0.1f)
             {
@@ -229,7 +217,14 @@ namespace UnityEngine.XR.Interaction.Toolkit
                     Assert.IsTrue(false, $"Unhandled {nameof(LocomotionPhase)}={locomotionPhase}");
                     break;
             }
-            //}
+            if (rightThumbstickPress != null && rightThumbstickPress.action.triggered)
+            {
+                Debug.Log("Right thumbstick is pressed.");
+                Vector3 currentPosition = transform.position;
+                Vector3 forwardPoint = forwardSource.forward * 5f;
+                Vector3 spawnPoint = forwardPoint + currentPosition;
+                Instantiate(debugQuaffle, spawnPoint, transform.rotation);
+            }
         }
 
         /// <summary>

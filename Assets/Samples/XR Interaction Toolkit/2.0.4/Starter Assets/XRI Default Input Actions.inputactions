@@ -693,6 +693,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ThumbstickPress",
+                    "type": "Button",
+                    "id": "31b94238-49c1-400c-bf63-83af78132a26",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -836,6 +845,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "UI_Switcher",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "834e6779-b949-45ab-93ed-d491d1943797",
+                    "path": "<XRController>{RightHand}/thumbstickClicked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThumbstickPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
