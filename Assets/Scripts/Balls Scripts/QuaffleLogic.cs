@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class QuaffleLogic : Targetable
 {
+    public static float ElipseValueOfA = 219f, ElipseValueOfB = 72f, minHeight = 8f, maxHeight = 120f;
+
     public float takeDistance = 2.0f;
     public float takeTime = 1.0f;
     private bool isQuaffleHeld = false;
@@ -119,7 +121,14 @@ public class QuaffleLogic : Targetable
     {
         //if(isFlying)
         //    return; // Return if already moving
-        StartCoroutine(MoveAndRotateCoroutine());
+        if(!IsInsidePlayableArea())
+        {
+            isFlying = false;
+        }
+        else
+        {
+            StartCoroutine(MoveAndRotateCoroutine());
+        }
     }
 
     private IEnumerator MoveAndRotateCoroutine()
@@ -177,5 +186,34 @@ public class QuaffleLogic : Targetable
     public float Speed()
     {
         return movementSpeed;
+    }
+
+    public bool DoesItNeedToStopMovement()
+    {
+        bool isOutOfBounds = false;
+        if(transform.position.y > 120)
+        {
+            ResetTarget();
+            isOutOfBounds = true;
+        }
+
+        return isOutOfBounds;
+    }
+
+    public bool IsInsidePlayableArea()
+    {
+        bool inside = true;
+        float distanceFromCenter = Mathf.Sqrt(Mathf.Pow(transform.position.z, 2) + Mathf.Pow(transform.position.x, 2));
+
+        if(transform.position.y < minHeight || transform.position.y > maxHeight)
+        {
+            inside = false;
+        }
+        else if((Mathf.Pow(distanceFromCenter, 2) / Mathf.Pow(ElipseValueOfA, 2)) + (Mathf.Pow(distanceFromCenter, 2) / Mathf.Pow(ElipseValueOfB, 2)) >= 1f)
+        {
+            inside = false;
+        }
+
+        return inside;
     }
 }
